@@ -1,0 +1,382 @@
+<!doctype html>
+<html lang="en" data-bs-theme="dark">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="icon" href="/favicon-32.png" sizes="32x32" type="image/png" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <style>
+      /* Critical: the arriving transition panel covers before any CSS loads,
+         so it also masks the dev server JS-injected-CSS flash. */
+      .leonard-pt-arriving .leonard-pt { position: fixed; inset: 0; z-index: 3000; background: #ffdb00; }
+    </style>
+    <script>
+      // Page transition: if we arrived via an in-site link, cover before first
+      // paint so the new page does not flash before the reveal (main.js).
+      try {
+        if (sessionStorage.getItem("leonard-pt") === "1") {
+          document.documentElement.classList.add("leonard-pt-arriving");
+        }
+      } catch (e) {}
+    </script>
+    <title>Case Studies — Leonard</title>
+    <link rel="preload" href="/fonts/gilroy-heavy.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preconnect" href="https://use.typekit.net" crossorigin />
+    <link rel="stylesheet" href="https://use.typekit.net/djc8uke.css" />
+    <script src="https://kit.fontawesome.com/462bc6ee41.js" crossorigin="anonymous"></script>
+  </head>
+  <body>
+    <!-- #include partials/header.html -->
+
+    <main>
+      <!-- ============================================================== -->
+      <!-- Hero                                                            -->
+      <!-- ============================================================== -->
+      <section class="container-xxl pt-4">
+        <div class="ratio leonard-hero-ratio overflow-hidden">
+          <img
+            class="w-100 h-100 object-fit-cover"
+            src="/img/v2-casestudies-hero.png"
+            alt="Aerial view of a Leonard project on an industrial power plant site"
+            width="1685"
+            height="966"
+          />
+          <div
+            class="leonard-scrim d-flex flex-column justify-content-end align-items-start p-4 p-lg-5"
+          >
+            <p
+              class="leonard-eyebrow fw-light fs-8 ls-label text-light text-uppercase mb-4"
+            >
+              Case studies
+            </p>
+            <h1 class="display-h1 lh-snug text-primary text-uppercase mw-hl mb-4">
+              Proven outcomes, engineered confidence
+            </h1>
+            <p class="fw-normal fs-8 lh-body text-white mw-body-lg mb-0">
+              Discover how Leonard delivers safe, efficient, and reliable
+              solutions for some of the industry's most demanding projects. Our
+              case studies showcase the expertise, innovation, and proven results
+              that help clients minimise downtime, protect critical
+              infrastructure, and keep operations running with confidence.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============================================================== -->
+      <!-- Filter bar (visual — filtering not wired)                        -->
+      <!-- ============================================================== -->
+      <section class="container-xxl pt-section">
+        <div class="d-flex flex-wrap align-items-center gap-3 gap-lg-4">
+          <p class="fw-normal fs-8 lh-body text-body-secondary mb-0 me-lg-2">Filter by</p>
+          <div class="d-flex flex-wrap gap-3">
+            <button class="btn btn-primary fw-light text-uppercase" type="button">View all</button>
+            <button class="btn btn-outline-light fw-light text-uppercase" type="button">Cement</button>
+            <button class="btn btn-outline-light fw-light text-uppercase" type="button">Metals</button>
+            <button class="btn btn-outline-light fw-light text-uppercase" type="button">Energy</button>
+            <button class="btn btn-outline-light fw-light text-uppercase" type="button">Robotics</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============================================================== -->
+      <!-- Case study list                                                 -->
+      <!-- ============================================================== -->
+      <section class="container-xxl pt-4">
+        <ul class="list-unstyled mb-0">
+          <li>
+            <a
+              class="leonard-case d-flex flex-column flex-lg-row align-items-lg-center gap-4 gap-lg-5 py-5 text-decoration-none"
+              href="/case-study.html"
+            >
+              <div class="flex-grow-1 order-lg-1">
+                <p class="leonard-eyebrow fw-normal fs-9 ls-label text-light text-uppercase mb-4">
+                  Case study 01
+                </p>
+                <h2 class="display-h3 lh-flat text-primary text-uppercase mb-4">
+                  BWSC, Lisahally Power Plant
+                </h2>
+                <div class="row g-3 mw-body-lg">
+                  <div class="col-6 col-sm-4">
+                    <p class="fw-normal fs-11 lh-body text-body-secondary text-uppercase mb-1">Type</p>
+                    <p class="fw-normal fs-8 lh-body text-primary text-uppercase mb-0">Energy</p>
+                  </div>
+                  <div class="col-6 col-sm-8">
+                    <p class="fw-normal fs-11 lh-body text-body-secondary text-uppercase mb-1">Solution</p>
+                    <p class="fw-normal fs-8 lh-body text-primary text-uppercase mb-0">
+                      Axis &ndash; Vertical Access
+                    </p>
+                  </div>
+                </div>
+              </div>
+              <div class="order-lg-2 flex-shrink-0">
+                <div class="leonard-case__media ratio ratio-1x1">
+                  <img
+                    class="w-100 h-100 object-fit-cover"
+                    src="/img/casestudy-thumb.png"
+                    alt="BWSC Lisahally power plant project"
+                    width="316"
+                    height="316"
+                    loading="lazy"
+                  />
+                </div>
+              </div>
+            </a>
+          </li>
+          <li>
+            <a
+              class="leonard-case d-flex flex-column flex-lg-row align-items-lg-center gap-4 gap-lg-5 py-5 text-decoration-none"
+              href="/case-study.html"
+            >
+              <div class="flex-grow-1 order-lg-1">
+                <p class="leonard-eyebrow fw-normal fs-9 ls-label text-light text-uppercase mb-4">
+                  Case study 02
+                </p>
+                <h2 class="display-h3 lh-flat text-primary text-uppercase mb-4">
+                  Second case study title
+                </h2>
+                <div class="row g-3 mw-body-lg">
+                  <div class="col-6 col-sm-4">
+                    <p class="fw-normal fs-11 lh-body text-body-secondary text-uppercase mb-1">Type</p>
+                    <p class="fw-normal fs-8 lh-body text-primary text-uppercase mb-0">Energy</p>
+                  </div>
+                  <div class="col-6 col-sm-8">
+                    <p class="fw-normal fs-11 lh-body text-body-secondary text-uppercase mb-1">Solution</p>
+                    <p class="fw-normal fs-8 lh-body text-primary text-uppercase mb-0">
+                      Axis &ndash; Vertical Access
+                    </p>
+                  </div>
+                </div>
+              </div>
+              <div class="order-lg-2 flex-shrink-0">
+                <div class="leonard-case__media ratio ratio-1x1">
+                  <img
+                    class="w-100 h-100 object-fit-cover"
+                    src="/img/casestudy-thumb.png"
+                    alt=""
+                    width="316"
+                    height="316"
+                    loading="lazy"
+                  />
+                </div>
+              </div>
+            </a>
+          </li>
+          <li>
+            <a
+              class="leonard-case d-flex flex-column flex-lg-row align-items-lg-center gap-4 gap-lg-5 py-5 text-decoration-none"
+              href="/case-study.html"
+            >
+              <div class="flex-grow-1 order-lg-1">
+                <p class="leonard-eyebrow fw-normal fs-9 ls-label text-light text-uppercase mb-4">
+                  Case study 03
+                </p>
+                <h2 class="display-h3 lh-flat text-primary text-uppercase mb-4">
+                  This is the third case study title
+                </h2>
+                <div class="row g-3 mw-body-lg">
+                  <div class="col-6 col-sm-4">
+                    <p class="fw-normal fs-11 lh-body text-body-secondary text-uppercase mb-1">Type</p>
+                    <p class="fw-normal fs-8 lh-body text-primary text-uppercase mb-0">Energy</p>
+                  </div>
+                  <div class="col-6 col-sm-8">
+                    <p class="fw-normal fs-11 lh-body text-body-secondary text-uppercase mb-1">Solution</p>
+                    <p class="fw-normal fs-8 lh-body text-primary text-uppercase mb-0">
+                      Axis &ndash; Vertical Access
+                    </p>
+                  </div>
+                </div>
+              </div>
+              <div class="order-lg-2 flex-shrink-0">
+                <div class="leonard-case__media ratio ratio-1x1">
+                  <img
+                    class="w-100 h-100 object-fit-cover"
+                    src="/img/casestudy-thumb.png"
+                    alt=""
+                    width="316"
+                    height="316"
+                    loading="lazy"
+                  />
+                </div>
+              </div>
+            </a>
+          </li>
+        </ul>
+      </section>
+
+      <!-- ============================================================== -->
+      <!-- Stats                                                           -->
+      <!-- ============================================================== -->
+      <section class="bg-primary text-dark mt-section">
+        <div class="container-xxl py-7 py-lg-8">
+          <h2 class="display-5 lh-flat ls-tight text-uppercase mb-2">
+            Putting safety and efficiency in your hands.
+          </h2>
+          <p class="fw-light fs-8 lh-body ls-tight mb-7">
+            Our solutions are proven to be safer and more efficient.
+          </p>
+
+          <div class="row gy-5">
+            <div class="col-12 col-sm-6 col-xl-3">
+              <span data-countup="18" class="d-block display-stat lh-tight ls-tight">18</span>
+              <p class="fw-light fs-7 lh-body ls-tight text-uppercase mt-3 mb-0">
+                Saving up to 18hrs through reduced deployment time
+              </p>
+            </div>
+            <div class="col-12 col-sm-6 col-xl-3">
+              <span data-countup="24" class="d-block display-stat lh-tight ls-tight">24</span>
+              <p class="fw-light fs-7 lh-body ls-tight text-uppercase mt-3 mb-0">
+                Installation 24hrs after burner off
+              </p>
+            </div>
+            <div class="col-12 col-sm-6 col-xl-3">
+              <span data-countup="50" class="d-block display-stat lh-tight ls-tight">50</span>
+              <p class="fw-light fs-7 lh-body ls-tight text-uppercase mt-3 mb-0">
+                50% time saving vs. manual methods
+              </p>
+            </div>
+            <div class="col-12 col-sm-6 col-xl-3">
+              <span data-countup="100" class="d-block display-stat lh-tight ls-tight">100</span>
+              <p class="fw-light fs-7 lh-body ls-tight text-uppercase mt-3 mb-0">
+                Can operate at 100&deg;C+ / 212&deg;F+
+              </p>
+            </div>
+          </div>
+
+          <a
+            class="btn btn-dark leonard-btn-lt btn-lg d-inline-flex align-items-center gap-2 fw-light text-uppercase mt-6"
+            href="/health-safety.html"
+          >
+            Safety
+            <i class="fa-solid fa-caret-right fs-11" aria-hidden="true"></i>
+          </a>
+        </div>
+      </section>
+
+      <!-- ============================================================== -->
+      <!-- Testimonials                                                    -->
+      <!-- ============================================================== -->
+      <section class="container-xxl pt-section">
+        <div class="text-center mb-7">
+          <p
+            class="leonard-eyebrow d-inline-flex fw-light fs-8 ls-label text-primary text-uppercase mb-4"
+          >
+            Customer testimonials
+          </p>
+          <h2 class="display-h3 lh-flat text-uppercase mw-hl mx-auto mb-0">
+            Trusted by the engineers who keep heavy industry running.
+          </h2>
+        </div>
+
+        <div class="row gy-4">
+          <div class="col-12 col-lg-4">
+            <figure class="leonard-quote h-100 d-flex flex-column p-4 p-lg-5 mb-0">
+              <div class="leonard-quote__stars text-primary fs-7 mb-4" aria-hidden="true">
+                <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i
+                ><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i
+                ><i class="fa-solid fa-star"></i>
+              </div>
+              <blockquote class="fw-light fs-8 lh-body mb-4">
+                "The unit did not stop. Fourteen days of continuous demolition in
+                a confined preheater tower and it never missed a beat."
+              </blockquote>
+              <figcaption class="mt-auto">
+                <p class="fw-normal fs-8 lh-body mb-0">Marcus Thorne</p>
+                <p class="fw-light fs-10 lh-body ls-tight text-body-secondary text-uppercase mb-0">
+                  Maintenance Manager, Holcim
+                </p>
+              </figcaption>
+            </figure>
+          </div>
+          <div class="col-12 col-lg-4">
+            <figure class="leonard-quote h-100 d-flex flex-column p-4 p-lg-5 mb-0">
+              <div class="leonard-quote__stars text-primary fs-7 mb-4" aria-hidden="true">
+                <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i
+                ><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i
+                ><i class="fa-solid fa-star"></i>
+              </div>
+              <blockquote class="fw-light fs-8 lh-body mb-4">
+                "We cut three days from our planned shutdown. The precision of
+                the grading system meant we were back in production ahead of
+                schedule."
+              </blockquote>
+              <figcaption class="mt-auto">
+                <p class="fw-normal fs-8 lh-body mb-0">Elena Rossi</p>
+                <p class="fw-light fs-10 lh-body ls-tight text-body-secondary text-uppercase mb-0">
+                  Shutdown Coordinator, ArcelorMittal
+                </p>
+              </figcaption>
+            </figure>
+          </div>
+          <div class="col-12 col-lg-4">
+            <figure class="leonard-quote h-100 d-flex flex-column p-4 p-lg-5 mb-0">
+              <div class="leonard-quote__stars text-primary fs-7 mb-4" aria-hidden="true">
+                <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i
+                ><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i
+                ><i class="fa-solid fa-star"></i>
+              </div>
+              <blockquote class="fw-light fs-8 lh-body mb-4">
+                "Safety is non-negotiable for us. Leonard's remote demolition
+                equipment kept my crew out of the danger zone entirely."
+              </blockquote>
+              <figcaption class="mt-auto">
+                <p class="fw-normal fs-8 lh-body mb-0">David Chen</p>
+                <p class="fw-light fs-10 lh-body ls-tight text-body-secondary text-uppercase mb-0">
+                  Operations Director, Vattenfall
+                </p>
+              </figcaption>
+            </figure>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============================================================== -->
+      <!-- CTA — talk to our engineering team                              -->
+      <!-- ============================================================== -->
+      <section class="container-xxl pt-section">
+        <div class="ratio leonard-band-ratio overflow-hidden">
+          <img
+            class="w-100 h-100 object-fit-cover"
+            src="/img/v2-products-cta.png"
+            alt="Leonard engineer on site in protective equipment"
+            width="1685"
+            height="720"
+            loading="lazy"
+          />
+          <div
+            class="leonard-scrim d-flex flex-column justify-content-center align-items-center text-center p-4 p-lg-5"
+          >
+            <h2 class="display-h2 lh-snug text-primary text-uppercase mw-hl mb-4">
+              Talk to our engineering team
+            </h2>
+            <p class="fw-normal fs-8 lh-body text-white mw-body mb-5">
+              Every shutdown is different. Discuss your specific refractory or
+              demolition requirements with a specialist engineer.
+            </p>
+            <div class="d-flex flex-wrap justify-content-center gap-3">
+              <a
+                class="btn btn-primary btn-lg d-inline-flex align-items-center gap-2 fw-light text-uppercase"
+                href="/contact.html"
+              >
+                <i class="fa-solid fa-envelope fs-11" aria-hidden="true"></i>
+                Contact us
+              </a>
+              <a
+                class="btn btn-outline-light btn-lg d-inline-flex align-items-center gap-2 fw-light text-uppercase"
+                href="/products.html"
+              >
+                Our products
+                <i class="fa-solid fa-caret-right fs-11" aria-hidden="true"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- #include partials/footer.html -->
+
+    <script type="module" src="/js/main.js"></script>
+  </body>
+</html>

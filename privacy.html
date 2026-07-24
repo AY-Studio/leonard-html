@@ -1,0 +1,189 @@
+<!doctype html>
+<html lang="en" data-bs-theme="dark">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="icon" href="/favicon-32.png" sizes="32x32" type="image/png" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <style>
+      /* Critical: the arriving transition panel covers before any CSS loads,
+         so it also masks the dev server JS-injected-CSS flash. */
+      .leonard-pt-arriving .leonard-pt { position: fixed; inset: 0; z-index: 3000; background: #ffdb00; }
+    </style>
+    <script>
+      // Page transition: if we arrived via an in-site link, cover before first
+      // paint so the new page does not flash before the reveal (main.js).
+      try {
+        if (sessionStorage.getItem("leonard-pt") === "1") {
+          document.documentElement.classList.add("leonard-pt-arriving");
+        }
+      } catch (e) {}
+    </script>
+    <title>Privacy Policy — Leonard</title>
+    <link rel="preload" href="/fonts/gilroy-heavy.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preconnect" href="https://use.typekit.net" crossorigin />
+    <link rel="stylesheet" href="https://use.typekit.net/djc8uke.css" />
+    <script src="https://kit.fontawesome.com/462bc6ee41.js" crossorigin="anonymous"></script>
+  </head>
+  <body>
+    <!-- #include partials/header.html -->
+
+    <!--
+      Privacy Policy — a plain text/legal page. The body uses .leonard-prose
+      (the WYSIWYG style) so it stays legible and on brand. The copy below is a
+      standard template; it is NOT legal advice and should be reviewed by the
+      client's solicitor before launch.
+    -->
+    <main>
+      <!-- ============================================================== -->
+      <!-- Title                                                           -->
+      <!-- ============================================================== -->
+      <!-- Full-bleed corner-ticked band, centred (shared with the search page). -->
+      <section class="bg-dark-deep mt-4">
+        <div class="container-xxl position-relative overflow-hidden py-6 py-lg-7">
+          <div class="leonard-corners text-primary fs-1 fw-thin" aria-hidden="true">
+            <span></span><span></span><span></span><span></span>
+          </div>
+          <div class="position-relative text-center">
+            <p class="leonard-eyebrow d-inline-flex fw-light fs-8 ls-label text-light text-uppercase mb-4">
+              Legal
+            </p>
+            <h1 class="display-h2 lh-snug text-primary text-uppercase text-break mw-hl mx-auto mb-4">
+              Privacy Policy
+            </h1>
+            <p class="fw-light fs-9 lh-body ls-tight text-body-secondary text-uppercase mb-0">
+              Last updated 23 July 2026
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============================================================== -->
+      <!-- Body                                                            -->
+      <!-- ============================================================== -->
+      <section class="container-xxl pt-section pb-4">
+        <div class="row justify-content-center">
+          <div class="col-12 col-lg-10 col-xxl-8">
+            <div class="leonard-prose">
+              <p>
+                This privacy policy ("Policy") explains how G Leonard ("Leonard",
+                "we", "us", or "our") collects, uses, and protects the personal
+                information you provide when you use our website, contact us, or
+                submit an enquiry (together, the "Site"). We are committed to
+                handling your data lawfully, fairly, and transparently in line with
+                the UK GDPR and the Data Protection Act 2018.
+              </p>
+
+              <h2>1. Who we are</h2>
+              <p>
+                Leonard is a refractory installation and robotic demolition
+                specialist based in Cookstown, County Tyrone, Northern Ireland. For
+                the purposes of data protection law, we are the "data controller"
+                for the personal information described in this Policy.
+              </p>
+
+              <h2>2. Information we collect</h2>
+              <p>We may collect and process the following information:</p>
+              <ul>
+                <li><strong>Contact details</strong> — your name, company, email address, and phone number, when you complete an enquiry form or email us.</li>
+                <li><strong>Enquiry content</strong> — the details of the project or question you send us.</li>
+                <li><strong>Technical data</strong> — anonymised information such as your browser type, device, and pages visited, collected through standard analytics.</li>
+              </ul>
+
+              <h2>3. How we use your information</h2>
+              <p>We use your information to:</p>
+              <ol>
+                <li>respond to your enquiry and provide the information or quotation you request;</li>
+                <li>manage our relationship with you and your organisation;</li>
+                <li>improve the Site and understand how it is used;</li>
+                <li>comply with our legal and regulatory obligations.</li>
+              </ol>
+
+              <h2>4. Legal basis for processing</h2>
+              <p>
+                We process your personal data on the basis of our legitimate
+                interest in responding to enquiries and operating our business, and,
+                where relevant, to take steps at your request before entering into a
+                contract. Where required, we rely on your consent, which you may
+                withdraw at any time.
+              </p>
+
+              <h2>5. Sharing your information</h2>
+              <p>
+                We do not sell your personal data. We may share it with trusted
+                service providers who help us operate the Site and our business
+                (for example, hosting and email providers), and with regulators or
+                authorities where we are required to do so by law. All such parties
+                are bound to protect your data.
+              </p>
+
+              <h2>6. Data retention</h2>
+              <p>
+                We keep your personal information only for as long as necessary to
+                fulfil the purposes described in this Policy, including to satisfy
+                any legal, accounting, or reporting requirements, after which it is
+                securely deleted.
+              </p>
+
+              <h2>7. Your rights</h2>
+              <p>Under data protection law you have the right to:</p>
+              <ul>
+                <li>access the personal data we hold about you;</li>
+                <li>request correction of inaccurate or incomplete data;</li>
+                <li>request erasure of your data in certain circumstances;</li>
+                <li>object to or restrict our processing of your data;</li>
+                <li>request the transfer of your data to another provider.</li>
+              </ul>
+              <p>
+                To exercise any of these rights, please contact us using the details
+                below. You also have the right to lodge a complaint with the
+                Information Commissioner's Office (ICO) at
+                <a href="https://ico.org.uk" target="_blank" rel="noopener">ico.org.uk</a>.
+              </p>
+
+              <h2>8. Cookies</h2>
+              <p>
+                The Site uses a small number of cookies to function correctly and to
+                measure usage anonymously. You can control or delete cookies through
+                your browser settings; disabling them may affect how parts of the
+                Site work.
+              </p>
+
+              <h2>9. Data security</h2>
+              <p>
+                We use appropriate technical and organisational measures to protect
+                your personal information against unauthorised access, loss, or
+                misuse. No transmission over the internet can be guaranteed to be
+                completely secure, but we take reasonable steps to safeguard your
+                data.
+              </p>
+
+              <h2>10. Changes to this Policy</h2>
+              <p>
+                We may update this Policy from time to time. The current version
+                will always be posted on this page with its "last updated" date.
+              </p>
+
+              <h2>11. Contact us</h2>
+              <p>
+                If you have any questions about this Policy or how we handle your
+                data, please contact us:
+              </p>
+              <p>
+                G Leonard<br />
+                2nd Floor, Gortalowry House, 94 Church Street, Cookstown,<br />
+                County Tyrone, Northern Ireland, BT80 8HX.<br />
+                <a href="mailto:info@leonard.co.uk">info@leonard.co.uk</a>
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- #include partials/footer.html -->
+
+    <script type="module" src="/js/main.js"></script>
+  </body>
+</html>

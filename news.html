@@ -1,0 +1,345 @@
+<!doctype html>
+<html lang="en" data-bs-theme="dark">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="icon" href="/favicon-32.png" sizes="32x32" type="image/png" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <style>
+      /* Critical: the arriving transition panel covers before any CSS loads,
+         so it also masks the dev server JS-injected-CSS flash. */
+      .leonard-pt-arriving .leonard-pt { position: fixed; inset: 0; z-index: 3000; background: #ffdb00; }
+    </style>
+    <script>
+      // Page transition: if we arrived via an in-site link, cover before first
+      // paint so the new page does not flash before the reveal (main.js).
+      try {
+        if (sessionStorage.getItem("leonard-pt") === "1") {
+          document.documentElement.classList.add("leonard-pt-arriving");
+        }
+      } catch (e) {}
+    </script>
+    <title>Latest News — Leonard</title>
+    <link rel="preload" href="/fonts/gilroy-heavy.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preconnect" href="https://use.typekit.net" crossorigin />
+    <link rel="stylesheet" href="https://use.typekit.net/djc8uke.css" />
+    <script src="https://kit.fontawesome.com/462bc6ee41.js" crossorigin="anonymous"></script>
+  </head>
+  <body>
+    <!-- #include partials/header.html -->
+
+    <main>
+      <!-- ============================================================== -->
+      <!-- Hero — no photo. A dark band that fills ~one screen (copy pinned  -->
+      <!-- bottom-left, --screen modifier), so the page opens on the hero    -->
+      <!-- and the filters sit below the fold.                               -->
+      <!-- ============================================================== -->
+      <section class="container-xxl pt-4">
+        <div class="ratio leonard-hero-ratio leonard-hero-ratio--screen overflow-hidden bg-dark">
+          <div
+            class="d-flex flex-column justify-content-end align-items-start p-4 p-lg-5"
+          >
+            <p
+              class="leonard-eyebrow fw-light fs-8 ls-label text-light text-uppercase mb-4"
+            >
+              Latest news &amp; insights
+            </p>
+            <h1 class="display-h1 lh-snug text-primary text-uppercase mw-hl mb-4">
+              Knowledge. Innovation. Performance.
+            </h1>
+            <p class="fw-normal fs-8 lh-body text-white mw-body mb-0">
+              Stay up to date with the latest company news, industry
+              developments, project highlights, and technical insights from
+              Leonard and the sectors we serve.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============================================================== -->
+      <!-- Filter bar (visual — filtering not wired)                        -->
+      <!-- pt-7: a clear gap below the full-height hero before the filters. -->
+      <!-- ============================================================== -->
+      <section class="container-xxl pt-7">
+        <div class="d-flex flex-wrap gap-3">
+          <button class="btn btn-primary fw-light text-uppercase" type="button">View all</button>
+          <button class="btn btn-outline-light fw-light text-uppercase" type="button">Category one</button>
+          <button class="btn btn-outline-light fw-light text-uppercase" type="button">Category two</button>
+          <button class="btn btn-outline-light fw-light text-uppercase" type="button">Category three</button>
+          <button class="btn btn-outline-light fw-light text-uppercase" type="button">Category four</button>
+        </div>
+      </section>
+
+      <!-- ============================================================== -->
+      <!-- Article grid (Bootstrap row-cols block grid)                    -->
+      <!-- ============================================================== -->
+      <section class="container-xxl pt-section">
+        <div class="row row-cols-1 row-cols-sm-2 row-cols-lg-3 g-4 g-lg-5">
+          <div class="col">
+            <a class="leonard-card d-flex flex-column h-100 text-light text-decoration-none" href="/article.html">
+              <div class="leonard-card-media ratio ratio-4x3 mb-4">
+                <img class="w-100 h-100 object-fit-cover" src="/img/news-1.png" alt="" loading="lazy" />
+              </div>
+              <div class="d-flex align-items-center gap-3 mb-3">
+                <span class="leonard-tag">News</span>
+                <span class="fw-light fs-11 lh-body ls-tight text-body-secondary">26 July 26</span>
+              </div>
+              <h2 class="display-6 fs-4 lh-snug ls-tight text-uppercase mb-3">
+                The home safe, every day initiative
+              </h2>
+              <span
+                class="d-inline-flex align-items-center gap-2 fw-light fs-9 ls-wide text-primary text-uppercase mt-auto"
+              >
+                Read more
+                <i class="fa-solid fa-caret-right fs-11" aria-hidden="true"></i>
+              </span>
+            </a>
+          </div>
+          <div class="col">
+            <a class="leonard-card d-flex flex-column h-100 text-light text-decoration-none" href="/article.html">
+              <div class="leonard-card-media ratio ratio-4x3 mb-4">
+                <img class="w-100 h-100 object-fit-cover" src="/img/news-2.png" alt="" loading="lazy" />
+              </div>
+              <div class="d-flex align-items-center gap-3 mb-3">
+                <span class="leonard-tag">Case study</span>
+                <span class="fw-light fs-11 lh-body ls-tight text-body-secondary">26 July 26</span>
+              </div>
+              <h2 class="display-6 fs-4 lh-snug ls-tight text-uppercase mb-3">
+                New case study now live on site
+              </h2>
+              <span
+                class="d-inline-flex align-items-center gap-2 fw-light fs-9 ls-wide text-primary text-uppercase mt-auto"
+              >
+                Read more
+                <i class="fa-solid fa-caret-right fs-11" aria-hidden="true"></i>
+              </span>
+            </a>
+          </div>
+          <div class="col">
+            <a class="leonard-card d-flex flex-column h-100 text-light text-decoration-none" href="/article.html">
+              <div class="leonard-card-media ratio ratio-4x3 mb-4">
+                <img class="w-100 h-100 object-fit-cover" src="/img/news-3.png" alt="" loading="lazy" />
+              </div>
+              <div class="d-flex align-items-center gap-3 mb-3">
+                <span class="leonard-tag">Insights</span>
+                <span class="fw-light fs-11 lh-body ls-tight text-body-secondary">26 July 26</span>
+              </div>
+              <h2 class="display-6 fs-4 lh-snug ls-tight text-uppercase mb-3">
+                Report: the power of remote robotics
+              </h2>
+              <span
+                class="d-inline-flex align-items-center gap-2 fw-light fs-9 ls-wide text-primary text-uppercase mt-auto"
+              >
+                Read more
+                <i class="fa-solid fa-caret-right fs-11" aria-hidden="true"></i>
+              </span>
+            </a>
+          </div>
+          <div class="col">
+            <a class="leonard-card d-flex flex-column h-100 text-light text-decoration-none" href="/article.html">
+              <div class="leonard-card-media ratio ratio-4x3 mb-4">
+                <img class="w-100 h-100 object-fit-cover" src="/img/news-2.png" alt="" loading="lazy" />
+              </div>
+              <div class="d-flex align-items-center gap-3 mb-3">
+                <span class="leonard-tag">Case study</span>
+                <span class="fw-light fs-11 lh-body ls-tight text-body-secondary">26 July 26</span>
+              </div>
+              <h2 class="display-6 fs-4 lh-snug ls-tight text-uppercase mb-3">
+                New case study now live on site
+              </h2>
+              <span
+                class="d-inline-flex align-items-center gap-2 fw-light fs-9 ls-wide text-primary text-uppercase mt-auto"
+              >
+                Read more
+                <i class="fa-solid fa-caret-right fs-11" aria-hidden="true"></i>
+              </span>
+            </a>
+          </div>
+          <div class="col">
+            <a class="leonard-card d-flex flex-column h-100 text-light text-decoration-none" href="/article.html">
+              <div class="leonard-card-media ratio ratio-4x3 mb-4">
+                <img class="w-100 h-100 object-fit-cover" src="/img/news-3.png" alt="" loading="lazy" />
+              </div>
+              <div class="d-flex align-items-center gap-3 mb-3">
+                <span class="leonard-tag">Insights</span>
+                <span class="fw-light fs-11 lh-body ls-tight text-body-secondary">26 July 26</span>
+              </div>
+              <h2 class="display-6 fs-4 lh-snug ls-tight text-uppercase mb-3">
+                Report: the power of remote robotics
+              </h2>
+              <span
+                class="d-inline-flex align-items-center gap-2 fw-light fs-9 ls-wide text-primary text-uppercase mt-auto"
+              >
+                Read more
+                <i class="fa-solid fa-caret-right fs-11" aria-hidden="true"></i>
+              </span>
+            </a>
+          </div>
+          <div class="col">
+            <a class="leonard-card d-flex flex-column h-100 text-light text-decoration-none" href="/article.html">
+              <div class="leonard-card-media ratio ratio-4x3 mb-4">
+                <img class="w-100 h-100 object-fit-cover" src="/img/news-1.png" alt="" loading="lazy" />
+              </div>
+              <div class="d-flex align-items-center gap-3 mb-3">
+                <span class="leonard-tag">News</span>
+                <span class="fw-light fs-11 lh-body ls-tight text-body-secondary">26 July 26</span>
+              </div>
+              <h2 class="display-6 fs-4 lh-snug ls-tight text-uppercase mb-3">
+                The home safe, every day initiative
+              </h2>
+              <span
+                class="d-inline-flex align-items-center gap-2 fw-light fs-9 ls-wide text-primary text-uppercase mt-auto"
+              >
+                Read more
+                <i class="fa-solid fa-caret-right fs-11" aria-hidden="true"></i>
+              </span>
+            </a>
+          </div>
+          <div class="col">
+            <a class="leonard-card d-flex flex-column h-100 text-light text-decoration-none" href="/article.html">
+              <div class="leonard-card-media ratio ratio-4x3 mb-4">
+                <img class="w-100 h-100 object-fit-cover" src="/img/news-3.png" alt="" loading="lazy" />
+              </div>
+              <div class="d-flex align-items-center gap-3 mb-3">
+                <span class="leonard-tag">Insights</span>
+                <span class="fw-light fs-11 lh-body ls-tight text-body-secondary">26 July 26</span>
+              </div>
+              <h2 class="display-6 fs-4 lh-snug ls-tight text-uppercase mb-3">
+                Report: the power of remote robotics
+              </h2>
+              <span
+                class="d-inline-flex align-items-center gap-2 fw-light fs-9 ls-wide text-primary text-uppercase mt-auto"
+              >
+                Read more
+                <i class="fa-solid fa-caret-right fs-11" aria-hidden="true"></i>
+              </span>
+            </a>
+          </div>
+          <div class="col">
+            <a class="leonard-card d-flex flex-column h-100 text-light text-decoration-none" href="/article.html">
+              <div class="leonard-card-media ratio ratio-4x3 mb-4">
+                <img class="w-100 h-100 object-fit-cover" src="/img/news-1.png" alt="" loading="lazy" />
+              </div>
+              <div class="d-flex align-items-center gap-3 mb-3">
+                <span class="leonard-tag">News</span>
+                <span class="fw-light fs-11 lh-body ls-tight text-body-secondary">26 July 26</span>
+              </div>
+              <h2 class="display-6 fs-4 lh-snug ls-tight text-uppercase mb-3">
+                The home safe, every day initiative
+              </h2>
+              <span
+                class="d-inline-flex align-items-center gap-2 fw-light fs-9 ls-wide text-primary text-uppercase mt-auto"
+              >
+                Read more
+                <i class="fa-solid fa-caret-right fs-11" aria-hidden="true"></i>
+              </span>
+            </a>
+          </div>
+          <div class="col">
+            <a class="leonard-card d-flex flex-column h-100 text-light text-decoration-none" href="/article.html">
+              <div class="leonard-card-media ratio ratio-4x3 mb-4">
+                <img class="w-100 h-100 object-fit-cover" src="/img/news-2.png" alt="" loading="lazy" />
+              </div>
+              <div class="d-flex align-items-center gap-3 mb-3">
+                <span class="leonard-tag">Case study</span>
+                <span class="fw-light fs-11 lh-body ls-tight text-body-secondary">26 July 26</span>
+              </div>
+              <h2 class="display-6 fs-4 lh-snug ls-tight text-uppercase mb-3">
+                New case study now live on site
+              </h2>
+              <span
+                class="d-inline-flex align-items-center gap-2 fw-light fs-9 ls-wide text-primary text-uppercase mt-auto"
+              >
+                Read more
+                <i class="fa-solid fa-caret-right fs-11" aria-hidden="true"></i>
+              </span>
+            </a>
+          </div>
+        </div>
+
+        <!-- Pagination (visual — one page of results) -->
+        <nav class="d-flex align-items-center justify-content-between mt-7" aria-label="Article pages">
+          <a
+            class="btn btn-outline-light d-inline-flex align-items-center gap-2 fw-light text-uppercase"
+            href="#prev"
+          >
+            <i class="fa-solid fa-caret-left fs-11" aria-hidden="true"></i>
+            Prev
+          </a>
+          <ul class="leonard-pages list-unstyled d-flex align-items-center gap-2 mb-0">
+            <li><a class="is-active" href="#page-1" aria-current="page">1</a></li>
+            <li><a href="#page-2">2</a></li>
+            <li><a href="#page-3">3</a></li>
+          </ul>
+          <a
+            class="btn btn-outline-light d-inline-flex align-items-center gap-2 fw-light text-uppercase"
+            href="#next"
+          >
+            Next
+            <i class="fa-solid fa-caret-right fs-11" aria-hidden="true"></i>
+          </a>
+        </nav>
+      </section>
+
+      <!-- ============================================================== -->
+      <!-- Newsletter                                                      -->
+      <!-- ============================================================== -->
+      <section class="container-xxl pt-section">
+        <div class="leonard-newsletter position-relative px-4 px-lg-8 py-7">
+          <div
+            class="leonard-corners text-primary fs-1 fw-thin"
+            aria-hidden="true"
+          >
+            <span></span><span></span><span></span><span></span>
+          </div>
+          <div class="row align-items-center gy-5 position-relative">
+            <div class="col-12 col-lg-6">
+              <p
+                class="leonard-eyebrow fw-light fs-8 ls-label text-uppercase mb-4"
+              >
+                Sign up for updates
+              </p>
+              <h2 class="display-h3 lh-flat text-primary text-uppercase mb-4">
+                Get the news<br />from the front line
+              </h2>
+              <p class="fw-normal fs-8 lh-body mb-0">
+                Project stories, technical insights, and industry news. No
+                noise, just substance.
+              </p>
+            </div>
+            <div class="col-12 col-lg-5 offset-lg-1">
+              <form class="d-flex flex-column flex-sm-row gap-3" novalidate>
+                <label class="visually-hidden" for="newsletterEmail"
+                  >Email address</label
+                >
+                <input
+                  class="form-control leonard-newsletter__input"
+                  type="email"
+                  id="newsletterEmail"
+                  name="email"
+                  placeholder="Enter your email"
+                  autocomplete="email"
+                />
+                <button
+                  class="btn btn-primary btn-lg flex-shrink-0 fw-light text-nowrap text-uppercase"
+                  type="submit"
+                >
+                  Sign up
+                </button>
+              </form>
+              <p class="fw-normal fs-11 lh-body mt-3 mb-0">
+                By clicking Sign Up you're confirming that you agree with our
+                Terms and Conditions.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- #include partials/footer.html -->
+
+    <script type="module" src="/js/main.js"></script>
+  </body>
+</html>

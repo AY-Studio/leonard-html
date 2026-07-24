@@ -1,0 +1,367 @@
+<!doctype html>
+<html lang="en" data-bs-theme="dark">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="icon" href="/favicon-32.png" sizes="32x32" type="image/png" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <style>
+      /* Critical: the arriving transition panel covers before any CSS loads,
+         so it also masks the dev server JS-injected-CSS flash. */
+      .leonard-pt-arriving .leonard-pt { position: fixed; inset: 0; z-index: 3000; background: #ffdb00; }
+    </style>
+    <script>
+      // Page transition: if we arrived via an in-site link, cover before first
+      // paint so the new page does not flash before the reveal (main.js).
+      try {
+        if (sessionStorage.getItem("leonard-pt") === "1") {
+          document.documentElement.classList.add("leonard-pt-arriving");
+        }
+      } catch (e) {}
+    </script>
+    <title>BWSC, Lisahally Power Plant — Leonard</title>
+    <link rel="preload" href="/fonts/gilroy-heavy.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preconnect" href="https://use.typekit.net" crossorigin />
+    <link rel="stylesheet" href="https://use.typekit.net/djc8uke.css" />
+    <script src="https://kit.fontawesome.com/462bc6ee41.js" crossorigin="anonymous"></script>
+  </head>
+  <body>
+    <!-- #include partials/header.html -->
+
+    <!--
+      Case-study detail template (relume 10204:118064), populated with the BWSC
+      Lisahally Power Plant story. Body copy is Lorem ipsum in the source and is
+      reproduced as such. Duplicate per case study and swap the title, meta,
+      hero/section imagery, copy and the pull quote.
+    -->
+    <main>
+      <!-- ============================================================== -->
+      <!-- Hero — no photo, fills ~one screen (copy pinned bottom-left), the  -->
+      <!-- news-page hero pattern (--screen). The project photo follows below. -->
+      <!-- ============================================================== -->
+      <section class="container-xxl pt-4">
+        <div class="ratio leonard-hero-ratio leonard-hero-ratio--screen overflow-hidden bg-dark">
+          <div
+            class="d-flex flex-column justify-content-end align-items-start p-4 p-lg-5"
+          >
+            <p class="leonard-eyebrow fw-light fs-8 ls-label text-light text-uppercase mb-4">
+              Case study 01
+            </p>
+            <h1 class="display-h2 lh-snug text-primary text-uppercase text-break mw-hl mb-5">
+              BWSC, Lisahally Power Plant
+            </h1>
+            <div class="row g-4 mw-body-lg mb-5">
+              <div class="col-6 col-sm-4">
+                <p class="fw-normal fs-11 lh-body text-body-secondary text-uppercase mb-1">Type</p>
+                <p class="fw-normal fs-8 lh-body text-primary text-uppercase mb-0">Energy</p>
+              </div>
+              <div class="col-6 col-sm-8">
+                <p class="fw-normal fs-11 lh-body text-body-secondary text-uppercase mb-1">Solution</p>
+                <p class="fw-normal fs-8 lh-body text-primary text-uppercase mb-0">
+                  Axis &ndash; Vertical Access
+                </p>
+              </div>
+            </div>
+            <p class="fw-light fs-8 lh-body text-white mw-body-lg mb-0">
+              Leonard partnered with BWSC at the Lisahally Power Plant to deliver
+              specialist refractory solutions, safely and efficiently supporting
+              critical maintenance works to minimise downtime, enhance
+              operational reliability, and keep the plant performing at its best.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Hero image -->
+      <section class="container-xxl pt-section">
+        <div class="ratio leonard-band-ratio overflow-hidden">
+          <img
+            class="w-100 h-100 object-fit-cover leonard-media-round"
+            src="/img/cs-hero.png"
+            alt="Aerial view of the Lisahally Power Plant"
+            width="1685"
+            height="720"
+          />
+        </div>
+      </section>
+
+      <!-- ============================================================== -->
+      <!-- Article body                                                    -->
+      <!-- ============================================================== -->
+
+      <!-- Block 1 — with the project detail list -->
+      <section class="container-xxl pt-section">
+        <div class="row gy-5">
+          <div class="col-12 col-lg-4">
+            <h2 class="display-h3 lh-flat text-uppercase mb-4">
+              Key insight about the project goes here
+            </h2>
+            <dl class="leonard-detail fw-normal fs-9 lh-body ls-tight">
+              <div><dt>Client</dt><dd>Full name</dd></div>
+              <div><dt>Date</dt><dd>March 2023</dd></div>
+              <div><dt>Role</dt><dd>Role name</dd></div>
+              <div>
+                <dt>Website</dt>
+                <dd><a class="link-light" href="#website">Website</a></dd>
+              </div>
+            </dl>
+          </div>
+          <div class="col-12 col-lg-7 offset-lg-1">
+            <p class="fw-light fs-8 lh-body mb-4">
+              Morbi sed imperdiet in ipsum, adipiscing elit dui lectus. Tellus id
+              scelerisque est ultricies ultricies. Duis est sit sed leo nisl,
+              blandit elit sagittis. Quisque tristique consequat quam sed. Nisl
+              at scelerisque amet nulla purus habitasse.
+            </p>
+            <p class="fw-light fs-8 lh-body mb-4">
+              Nunc sed faucibus bibendum feugiat sed interdum. Ipsum egestas
+              condimentum mi massa. In tincidunt pharetra consectetur sed duis
+              facilisis metus. Etiam egestas in nec sed et. Quis lobortis at sit
+              dictum eget nibh tortor commodo cursus.
+            </p>
+            <p class="fw-light fs-8 lh-body mb-0">
+              Odio felis sagittis, morbi feugiat tortor vitae feugiat fusce
+              aliquet. Nam elementum urna nisi aliquet erat dolor enim. Ornare id
+              morbi eget ipsum. Aliquam senectus neque ut id eget consectetur
+              dictum. Donec posuere pharetra odio consequat scelerisque et, nunc
+              tortor.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Image -->
+      <section class="container-xxl pt-section">
+        <div class="ratio leonard-band-ratio overflow-hidden">
+          <img
+            class="w-100 h-100 object-fit-cover leonard-media-round"
+            src="/img/cs-img-1.png"
+            alt="Robotic demolition underway inside the plant"
+            width="1685"
+            height="720"
+            loading="lazy"
+          />
+        </div>
+      </section>
+
+      <!-- Block 2 -->
+      <section class="container-xxl pt-section">
+        <div class="row gy-4">
+          <div class="col-12 col-lg-4">
+            <h2 class="display-h3 lh-flat text-uppercase mb-0">
+              Key heading about the project goes here
+            </h2>
+          </div>
+          <div class="col-12 col-lg-7 offset-lg-1">
+            <p class="fw-light fs-8 lh-body mb-4">
+              Morbi sed imperdiet in ipsum, adipiscing elit dui lectus. Tellus id
+              scelerisque est ultricies ultricies. Duis est sit sed leo nisl,
+              blandit elit sagittis. Quisque tristique consequat quam sed. Nisl
+              at scelerisque amet nulla purus habitasse.
+            </p>
+            <p class="fw-light fs-8 lh-body mb-4">
+              Nunc sed faucibus bibendum feugiat sed interdum. Ipsum egestas
+              condimentum mi massa. In tincidunt pharetra consectetur sed duis
+              facilisis metus. Etiam egestas in nec sed et. Quis lobortis at sit
+              dictum eget nibh tortor commodo cursus.
+            </p>
+            <p class="fw-light fs-8 lh-body mb-0">
+              Odio felis sagittis, morbi feugiat tortor vitae feugiat fusce
+              aliquet. Nam elementum urna nisi aliquet erat dolor enim. Ornare id
+              morbi eget ipsum. Aliquam senectus neque ut id eget consectetur
+              dictum.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Gallery -->
+      <section class="container-xxl pt-section">
+        <div class="row g-4">
+          <div class="col-12 col-md-6">
+            <div class="ratio ratio-4x3 overflow-hidden">
+              <img
+                class="w-100 h-100 object-fit-cover leonard-media-round"
+                src="/img/cs-img-2.png"
+                alt="Site crew preparing the robotic arm"
+                width="820"
+                height="615"
+                loading="lazy"
+              />
+            </div>
+          </div>
+          <div class="col-12 col-md-6">
+            <div class="ratio ratio-4x3 overflow-hidden">
+              <img
+                class="w-100 h-100 object-fit-cover leonard-media-round"
+                src="/img/cs-img-3.png"
+                alt="Refractory removal in progress"
+                width="820"
+                height="615"
+                loading="lazy"
+              />
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Block 3 -->
+      <section class="container-xxl pt-section">
+        <div class="row gy-4">
+          <div class="col-12 col-lg-4">
+            <h2 class="display-h3 lh-flat text-uppercase mb-0">
+              Key heading about the project goes here
+            </h2>
+          </div>
+          <div class="col-12 col-lg-7 offset-lg-1">
+            <p class="fw-light fs-8 lh-body mb-4">
+              Morbi sed imperdiet in ipsum, adipiscing elit dui lectus. Tellus id
+              scelerisque est ultricies ultricies. Duis est sit sed leo nisl,
+              blandit elit sagittis. Quisque tristique consequat quam sed. Nisl
+              at scelerisque amet nulla purus habitasse.
+            </p>
+            <p class="fw-light fs-8 lh-body mb-0">
+              Odio felis sagittis, morbi feugiat tortor vitae feugiat fusce
+              aliquet. Nam elementum urna nisi aliquet erat dolor enim. Ornare id
+              morbi eget ipsum. Aliquam senectus neque ut id eget consectetur
+              dictum. Donec posuere pharetra odio consequat scelerisque et, nunc
+              tortor. Nulla adipiscing erat a erat.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Image -->
+      <section class="container-xxl pt-section">
+        <div class="ratio leonard-band-ratio overflow-hidden">
+          <img
+            class="w-100 h-100 object-fit-cover leonard-media-round"
+            src="/img/cs-img-4.png"
+            alt="The completed works at the Lisahally Power Plant"
+            width="1685"
+            height="720"
+            loading="lazy"
+          />
+        </div>
+      </section>
+
+      <!-- ============================================================== -->
+      <!-- Pull quote                                                      -->
+      <!-- ============================================================== -->
+      <section class="container-xxl pt-section">
+        <figure class="bg-dark text-light position-relative overflow-hidden px-3 px-lg-8 py-7 py-lg-9 mb-0">
+          <div
+            class="leonard-corners text-primary fs-1 fw-thin"
+            aria-hidden="true"
+          >
+            <span></span><span></span><span></span><span></span>
+          </div>
+          <blockquote class="display-h3 lh-snug text-uppercase text-center mw-stmt mx-auto mb-5">
+            "Leonard demolished our preheater cyclone roof without putting a
+            single man inside. The job that used to take a week of dangerous
+            manual work was done in 48 hours. Zero incidents, zero delays."
+          </blockquote>
+          <figcaption class="text-center">
+            <p class="fw-normal fs-8 lh-body text-uppercase mb-0">Martin Rogan</p>
+            <p class="fw-light fs-10 lh-body ls-tight text-body-secondary text-uppercase mb-0">
+              Plant Manager, Lisahally Power Plant
+            </p>
+          </figcaption>
+        </figure>
+      </section>
+
+      <!-- ============================================================== -->
+      <!-- Enquiry form                                                    -->
+      <!-- ============================================================== -->
+      <!-- data-bs-theme="light" flips Bootstrap's form control colours for this
+           band only; the document as a whole stays dark. -->
+      <section class="container-xxl pt-section" data-bs-theme="light">
+        <div class="bg-light text-dark px-3 px-lg-5 py-7">
+          <div class="row justify-content-center">
+            <div class="col-12 col-lg-9 col-xxl-7">
+              <div class="text-center mb-6">
+                <h2 class="display-2 lh-snug ls-tight text-uppercase mb-4">
+                  Enquire about<br />this project
+                </h2>
+                <p class="fw-light fs-8 lh-body mb-0">
+                  Contact the Leonard team to learn more about this solution and
+                  how it can support your operation.
+                </p>
+              </div>
+
+              <form class="leonard-form" novalidate>
+                <div class="row g-4">
+                  <div class="col-12 col-md-6">
+                    <label class="form-label" for="firstName">First name</label>
+                    <input class="form-control" type="text" id="firstName" name="firstName" autocomplete="given-name" />
+                  </div>
+                  <div class="col-12 col-md-6">
+                    <label class="form-label" for="lastName">Last name</label>
+                    <input class="form-control" type="text" id="lastName" name="lastName" autocomplete="family-name" />
+                  </div>
+                  <div class="col-12 col-md-6">
+                    <label class="form-label" for="jobTitle">Job title</label>
+                    <input class="form-control" type="text" id="jobTitle" name="jobTitle" autocomplete="organization-title" />
+                  </div>
+                  <div class="col-12 col-md-6">
+                    <label class="form-label" for="company">Company</label>
+                    <input class="form-control" type="text" id="company" name="company" autocomplete="organization" />
+                  </div>
+                  <div class="col-12 col-md-6">
+                    <label class="form-label" for="email">Email</label>
+                    <input class="form-control" type="email" id="email" name="email" autocomplete="email" />
+                  </div>
+                  <div class="col-12 col-md-6">
+                    <label class="form-label" for="phone">Phone number</label>
+                    <input class="form-control" type="tel" id="phone" name="phone" autocomplete="tel" />
+                  </div>
+                  <div class="col-12">
+                    <label class="form-label" for="topic">Choose a topic</label>
+                    <select class="form-select" id="topic" name="topic">
+                      <option value="" selected>Select one...</option>
+                      <option>Purchasing</option>
+                      <option>Technical specification</option>
+                      <option>Service and support</option>
+                      <option>Something else</option>
+                    </select>
+                  </div>
+                  <div class="col-12">
+                    <label class="form-label" for="message">Message</label>
+                    <textarea
+                      class="form-control"
+                      id="message"
+                      name="message"
+                      rows="6"
+                      placeholder="Type your message..."
+                    ></textarea>
+                  </div>
+                  <div class="col-12">
+                    <div class="form-check">
+                      <input class="form-check-input" type="checkbox" id="terms" name="terms" />
+                      <label class="form-check-label fw-light ls-label text-uppercase" for="terms">
+                        I accept the <a class="link-dark" href="/terms.html">Terms</a>
+                      </label>
+                    </div>
+                  </div>
+                  <div class="col-12 text-center">
+                    <button
+                      class="btn btn-dark minw-176 minh-37 fw-light ls-wide text-uppercase"
+                      type="submit"
+                    >
+                      Submit
+                    </button>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- #include partials/footer.html -->
+
+    <script type="module" src="/js/main.js"></script>
+  </body>
+</html>

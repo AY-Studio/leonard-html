@@ -1,0 +1,46 @@
+// Leonard — Bootstrap 5.3 Sass entry point.
+// Import order follows Bootstrap's "Include parts of Bootstrap" guidance:
+// https://getbootstrap.com/docs/5.3/customize/sass/
+
+// 1. Functions first, so we can manipulate colors and maps below
+@import "bootstrap/scss/functions";
+
+// 2. Our variable overrides
+@import "tokens";
+
+// 3. Required Bootstrap stylesheets
+@import "bootstrap/scss/variables";
+@import "bootstrap/scss/variables-dark";
+@import "bootstrap/scss/maps";
+@import "bootstrap/scss/mixins";
+@import "bootstrap/scss/root";
+
+// 4. Optional components — only what the page actually uses
+@import "bootstrap/scss/utilities";
+
+// 4a. Our additions to the $utilities map, before the API generates classes
+@import "utilities-custom";
+
+@import "bootstrap/scss/reboot";
+@import "bootstrap/scss/type";
+@import "bootstrap/scss/images";
+@import "bootstrap/scss/containers";
+@import "bootstrap/scss/grid";
+@import "bootstrap/scss/tables"; // product spec sheet
+@import "bootstrap/scss/forms"; // product inquiry form
+@import "bootstrap/scss/buttons";
+@import "bootstrap/scss/transitions";
+@import "bootstrap/scss/dropdown"; // the Products/Services mega-menus
+@import "bootstrap/scss/nav";
+@import "bootstrap/scss/navbar";
+@import "bootstrap/scss/offcanvas"; // the full-screen mobile menu
+@import "bootstrap/scss/close"; // its close (X) button
+@import "bootstrap/scss/helpers";
+
+// 5. Utilities API last, so it picks up the map overrides above
+@import "bootstrap/scss/utilities/api";
+
+// 6. Our own styles — kept deliberately small; anything expressible as a
+//    Bootstrap variable or utility should not appear here.
+@import "fonts";
+@import "custom";

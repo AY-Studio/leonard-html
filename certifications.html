@@ -1,0 +1,153 @@
+<!doctype html>
+<html lang="en" data-bs-theme="dark">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="icon" href="/favicon-32.png" sizes="32x32" type="image/png" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <style>
+      /* Critical: the arriving transition panel covers before any CSS loads,
+         so it also masks the dev server JS-injected-CSS flash. */
+      .leonard-pt-arriving .leonard-pt { position: fixed; inset: 0; z-index: 3000; background: #ffdb00; }
+    </style>
+    <script>
+      // Page transition: if we arrived via an in-site link, cover before first
+      // paint so the new page does not flash before the reveal (main.js).
+      try {
+        if (sessionStorage.getItem("leonard-pt") === "1") {
+          document.documentElement.classList.add("leonard-pt-arriving");
+        }
+      } catch (e) {}
+    </script>
+    <title>Certifications — Leonard</title>
+    <link rel="preload" href="/fonts/gilroy-heavy.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preconnect" href="https://use.typekit.net" crossorigin />
+    <link rel="stylesheet" href="https://use.typekit.net/djc8uke.css" />
+    <script src="https://kit.fontawesome.com/462bc6ee41.js" crossorigin="anonymous"></script>
+  </head>
+  <body>
+    <!-- #include partials/header.html -->
+
+    <main>
+      <!-- ============================================================== -->
+      <!-- Title                                                           -->
+      <!-- ============================================================== -->
+      <!-- Full-bleed corner-ticked band, centred (shared with the search /
+           terms / privacy pages). No photo. -->
+      <section class="bg-dark-deep mt-4">
+        <div class="container-xxl position-relative overflow-hidden py-6 py-lg-7">
+          <div class="leonard-corners text-primary fs-1 fw-thin" aria-hidden="true">
+            <span></span><span></span><span></span><span></span>
+          </div>
+          <div class="position-relative text-center">
+            <p class="leonard-eyebrow d-inline-flex fw-light fs-8 ls-label text-light text-uppercase mb-4">
+              Accreditations
+            </p>
+            <h1 class="display-h2 lh-snug text-primary text-uppercase text-break mw-hl mx-auto mb-4">
+              Certifications
+            </h1>
+            <p class="fw-light fs-8 lh-body text-white mw-body-lg mx-auto mb-0">
+              Our certifications and registrations are how we prove what we
+              promise: safe, compliant, and quality-assured work on every site.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============================================================== -->
+      <!-- Certification cards                                             -->
+      <!-- ============================================================== -->
+      <section class="container-xxl pt-section">
+        <div class="row row-cols-1 row-cols-sm-2 row-cols-lg-3 g-4">
+          <div class="col">
+            <div class="leonard-quote h-100 p-4 p-lg-5">
+              <i class="fa-solid fa-award fs-2 text-primary mb-4" aria-hidden="true"></i>
+              <h2 class="display-6 fs-4 lh-flat ls-tight text-uppercase mb-2">ISO 9001</h2>
+              <p class="fw-light fs-8 lh-body mb-0">
+                Quality management. Our processes are documented, measured, and
+                continually improved to deliver consistent results.
+              </p>
+            </div>
+          </div>
+          <div class="col">
+            <div class="leonard-quote h-100 p-4 p-lg-5">
+              <i class="fa-solid fa-leaf fs-2 text-primary mb-4" aria-hidden="true"></i>
+              <h2 class="display-6 fs-4 lh-flat ls-tight text-uppercase mb-2">ISO 14001</h2>
+              <p class="fw-light fs-8 lh-body mb-0">
+                Environmental management. We identify and control the
+                environmental impact of our operations across every project.
+              </p>
+            </div>
+          </div>
+          <div class="col">
+            <div class="leonard-quote h-100 p-4 p-lg-5">
+              <i class="fa-solid fa-helmet-safety fs-2 text-primary mb-4" aria-hidden="true"></i>
+              <h2 class="display-6 fs-4 lh-flat ls-tight text-uppercase mb-2">
+                MSHA Certified Contractor
+              </h2>
+              <p class="fw-light fs-8 lh-body mb-0">
+                Certified to the Mine Safety and Health Administration standard
+                for work in demanding industrial environments.
+              </p>
+            </div>
+          </div>
+          <div class="col">
+            <div class="leonard-quote h-100 p-4 p-lg-5">
+              <i class="fa-solid fa-user-shield fs-2 text-primary mb-4" aria-hidden="true"></i>
+              <h2 class="display-6 fs-4 lh-flat ls-tight text-uppercase mb-2">
+                Construction Skills Registered
+              </h2>
+              <p class="fw-light fs-8 lh-body mb-0">
+                Our teams hold recognised construction-skills registration,
+                evidencing competence and site readiness.
+              </p>
+            </div>
+          </div>
+          <div class="col">
+            <div class="leonard-quote h-100 p-4 p-lg-5">
+              <i class="fa-solid fa-circle-check fs-2 text-primary mb-4" aria-hidden="true"></i>
+              <h2 class="display-6 fs-4 lh-flat ls-tight text-uppercase mb-2">
+                Avetta Registered
+              </h2>
+              <p class="fw-light fs-8 lh-body mb-0">
+                Prequalified through Avetta's supply-chain platform, so clients
+                can onboard us with confidence.
+              </p>
+            </div>
+          </div>
+          <div class="col">
+            <div class="leonard-quote h-100 p-4 p-lg-5">
+              <i class="fa-solid fa-clipboard-check fs-2 text-primary mb-4" aria-hidden="true"></i>
+              <h2 class="display-6 fs-4 lh-flat ls-tight text-uppercase mb-2">
+                Independently audited
+              </h2>
+              <p class="fw-light fs-8 lh-body mb-0">
+                Our management systems are reviewed by external auditors to keep
+                every accreditation current.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Badge strip -->
+      <section class="container-xxl pt-section">
+        <p class="leonard-eyebrow fw-light fs-10 ls-label text-uppercase mb-4">
+          Independently verified
+        </p>
+        <div class="d-flex flex-wrap align-items-center gap-4 gap-lg-5">
+          <img src="/img/avetta.webp" alt="Avetta member" width="70" height="70" loading="lazy" />
+          <img src="/img/iso-9001-dark.svg" alt="ISO 9001 certified" width="118" height="70" loading="lazy" />
+          <img src="/img/iso-14001-dark.svg" alt="ISO 14001 certified" width="118" height="70" loading="lazy" />
+        </div>
+      </section>
+
+      <!-- #include partials/cta.html -->
+    </main>
+
+    <!-- #include partials/footer.html -->
+
+    <script type="module" src="/js/main.js"></script>
+  </body>
+</html>

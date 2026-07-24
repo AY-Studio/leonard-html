@@ -1,0 +1,147 @@
+<!doctype html>
+<html lang="en" data-bs-theme="dark">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="icon" href="/favicon-32.png" sizes="32x32" type="image/png" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <style>
+      /* Critical: the arriving transition panel covers before any CSS loads,
+         so it also masks the dev server JS-injected-CSS flash. */
+      .leonard-pt-arriving .leonard-pt { position: fixed; inset: 0; z-index: 3000; background: #ffdb00; }
+    </style>
+    <script>
+      // Page transition: if we arrived via an in-site link, cover before first
+      // paint so the new page does not flash before the reveal (main.js).
+      try {
+        if (sessionStorage.getItem("leonard-pt") === "1") {
+          document.documentElement.classList.add("leonard-pt-arriving");
+        }
+      } catch (e) {}
+    </script>
+    <title>Health &amp; Safety — Leonard</title>
+    <link rel="preload" href="/fonts/gilroy-heavy.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preconnect" href="https://use.typekit.net" crossorigin />
+    <link rel="stylesheet" href="https://use.typekit.net/djc8uke.css" />
+    <script src="https://kit.fontawesome.com/462bc6ee41.js" crossorigin="anonymous"></script>
+  </head>
+  <body>
+    <!-- #include partials/header.html -->
+
+    <main>
+      <!-- ============================================================== -->
+      <!-- Hero — no photo, fills ~one screen (copy pinned bottom-left), the  -->
+      <!-- news / case-study hero pattern (--screen).                         -->
+      <!-- ============================================================== -->
+      <section class="container-xxl pt-4">
+        <div class="ratio leonard-hero-ratio leonard-hero-ratio--screen overflow-hidden bg-dark">
+          <div
+            class="d-flex flex-column justify-content-end align-items-start p-4 p-lg-5"
+          >
+            <p class="leonard-eyebrow fw-light fs-8 ls-label text-light text-uppercase mb-4">
+              Our commitment
+            </p>
+            <h1 class="display-h2 lh-snug text-primary text-uppercase text-break mw-hl mb-4">
+              Health &amp; Safety
+            </h1>
+            <p class="fw-light fs-8 lh-body text-white mw-body-lg mb-0">
+              Safety is the reason our business exists. Every method we engineer
+              starts from a single question: how do we get our people, and yours,
+              home safe, every day.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============================================================== -->
+      <!-- Home safe, every day                                            -->
+      <!-- ============================================================== -->
+      <section class="bg-primary text-dark mt-section">
+        <div class="container-xxl py-7 py-lg-8">
+          <div class="row align-items-center gy-5">
+            <div class="col-12 col-lg-6">
+              <h2 class="display-h2 lh-snug text-uppercase mb-4">
+                Home safe,<br />every day
+              </h2>
+              <p class="fw-light fs-8 lh-body mw-body mb-2">
+                Health, safety, and welfare of employees and customers are our
+                top priority.
+              </p>
+              <p class="fw-light fs-8 lh-body mw-body mb-4">
+                This commitment is reflected in our certifications and
+                registrations:
+              </p>
+              <ul class="list-unstyled fw-light fs-8 lh-body mb-0">
+                <li class="leonard-eyebrow ls-tight text-uppercase mb-2">
+                  MSHA Certified Contractor
+                </li>
+                <li class="leonard-eyebrow ls-tight text-uppercase mb-2">
+                  Construction Skills Registered Team
+                </li>
+                <li class="leonard-eyebrow ls-tight text-uppercase mb-0">
+                  Avetta Registered
+                </li>
+              </ul>
+            </div>
+            <div class="col-12 col-lg-6">
+              <div class="ratio ratio-1x1">
+                <img
+                  class="w-100 h-100 object-fit-cover leonard-media-round"
+                  src="/img/service-safety.png"
+                  alt="Site worker holding a Leonard-branded safety helmet"
+                  width="1200"
+                  height="1200"
+                  loading="lazy"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============================================================== -->
+      <!-- Approach                                                        -->
+      <!-- ============================================================== -->
+      <section class="container-xxl pt-section">
+        <div class="row justify-content-center">
+          <div class="col-12 col-lg-10 col-xxl-8">
+            <div class="leonard-prose">
+              <h2>Removing people from the danger zone</h2>
+              <p>
+                Traditional refractory demolition puts crews inside confined,
+                hot, and structurally unpredictable vessels. Our remote robotic
+                methods change that entirely: operators command the machine from
+                a safe distance, so no one is exposed to falling linings, dust, or
+                heat. On a decade of confined space demolition, that has meant
+                <strong>zero lost-time injuries</strong>.
+              </p>
+
+              <h2>Planned like an operation, not a task</h2>
+              <p>
+                Every shutdown is surveyed, sequenced, and staged before work
+                begins. Exclusion zones are established and enforced, the shell is
+                protected throughout, and each scope ends with a verified surface
+                handed back to the reline crew — safely and on schedule.
+              </p>
+
+              <h2>Trained, registered, audited</h2>
+              <p>
+                Our teams are trained and registered to recognised industry
+                standards, and our management systems are independently audited.
+                You can review the detail on our
+                <a href="/certifications.html">certifications</a> page.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- #include partials/cta.html -->
+    </main>
+
+    <!-- #include partials/footer.html -->
+
+    <script type="module" src="/js/main.js"></script>
+  </body>
+</html>

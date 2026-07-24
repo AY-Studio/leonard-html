@@ -1,0 +1,649 @@
+<!-- Page-transition panel: a yellow screen that slides up from the bottom to
+     cover on leaving, then continues up and out through the top on the next
+     page to reveal it. Body-level (fixed). See initPageTransition() in main.js. -->
+<div class="leonard-pt" aria-hidden="true"></div>
+
+<header class="leonard-header container-xxl pt-4">
+  <nav class="navbar navbar-expand-xl minh-78 px-3">
+    <a class="navbar-brand py-0 me-3" href="/" aria-label="Leonard — home">
+      <img
+        class="img-fluid d-block"
+        src="/img/logo-yellow.svg"
+        alt="Leonard"
+        width="260"
+        height="40"
+      />
+    </a>
+
+    <button
+      class="navbar-toggler ms-auto border-0"
+      type="button"
+      data-bs-toggle="offcanvas"
+      data-bs-target="#leonardMobileNav"
+      aria-controls="leonardMobileNav"
+      aria-label="Open menu"
+    >
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="leonardNav">
+      <ul class="leonard-nav navbar-nav mx-auto gap-2 gap-xl-4 fs-9 fw-normal ls-wide">
+        <!-- Products mega-menu -->
+        <li class="nav-item dropdown">
+          <a
+            class="nav-link dropdown-toggle"
+            href="/products.html"
+            role="button"
+            data-bs-toggle="dropdown"
+            data-bs-display="static"
+            aria-expanded="false"
+            >Products</a
+          >
+          <div class="dropdown-menu leonard-mega">
+            <div class="p-4 p-lg-5">
+              <div class="d-flex flex-wrap justify-content-between align-items-center gap-3 mb-3">
+                <p class="fs-7 fw-light ls-wide text-uppercase mb-0">
+                  <span class="fw-normal">Our products</span> — robotic arm solutions
+                </p>
+                <div class="d-flex flex-wrap align-items-center gap-3">
+                  <a
+                    class="btn btn-outline-dark minh-37 py-2 fw-light ls-wide text-uppercase"
+                    href="/products.html"
+                    >View all products <i class="fa-solid fa-caret-right" aria-hidden="true"></i></a
+                  >
+                  <a
+                    class="btn btn-primary minh-37 py-2 fw-light ls-wide text-uppercase"
+                    href="/health-safety.html"
+                    >+ Safety First</a
+                  >
+                </div>
+              </div>
+              <hr class="border-top border-dark opacity-25 my-0" />
+              <div class="row row-cols-2 row-cols-md-3 row-cols-lg-5 g-4 pt-4">
+                <div class="col">
+                  <a class="leonard-card d-block text-dark text-decoration-none" href="/products.html#axis">
+                    <div class="leonard-card-media ratio" style="--bs-aspect-ratio: 82%">
+                      <img
+                        src="/img/product-axis.webp"
+                        alt="Axis robotic arm"
+                        class="w-100 h-100 object-fit-contain"
+                        loading="lazy"
+                      />
+                    </div>
+                    <h3 class="leonard-card__title font-display fs-2 lh-snug ls-tight text-uppercase mt-3 mb-1">
+                      Axis
+                    </h3>
+                    <p class="fs-9 fw-light ls-tight mb-0">Horizontal Access</p>
+                  </a>
+                </div>
+                <div class="col">
+                  <a class="leonard-card d-block text-dark text-decoration-none" href="/products.html#nano">
+                    <div class="leonard-card-media ratio" style="--bs-aspect-ratio: 82%">
+                      <img
+                        src="/img/product-nano.webp"
+                        alt="Nano robotic arm"
+                        class="w-100 h-100 object-fit-contain"
+                        loading="lazy"
+                      />
+                    </div>
+                    <h3 class="leonard-card__title font-display fs-2 lh-snug ls-tight text-uppercase mt-3 mb-1">
+                      Nano
+                    </h3>
+                    <p class="fs-9 fw-light ls-tight mb-0">Confined Space Access</p>
+                  </a>
+                </div>
+                <div class="col">
+                  <a class="leonard-card d-block text-dark text-decoration-none" href="/products.html#descender">
+                    <div class="leonard-card-media ratio" style="--bs-aspect-ratio: 82%">
+                      <img
+                        src="/img/descender-robot.webp"
+                        alt="Descender robotic arm"
+                        class="w-100 h-100 object-fit-contain"
+                        loading="lazy"
+                      />
+                    </div>
+                    <h3 class="leonard-card__title font-display fs-2 lh-snug ls-tight text-uppercase mt-3 mb-1">
+                      Descender
+                    </h3>
+                    <p class="fs-9 fw-light ls-tight mb-0">Vertical Access</p>
+                  </a>
+                </div>
+                <div class="col">
+                  <a class="leonard-card d-block text-dark text-decoration-none" href="/products.html#charger">
+                    <div class="leonard-card-media ratio" style="--bs-aspect-ratio: 82%">
+                      <img
+                        src="/img/product-charger.webp"
+                        alt="Charger robotic arm"
+                        class="w-100 h-100 object-fit-contain"
+                        loading="lazy"
+                      />
+                    </div>
+                    <h3 class="leonard-card__title font-display fs-2 lh-snug ls-tight text-uppercase mt-3 mb-1">
+                      Charger
+                    </h3>
+                    <p class="fs-9 fw-light ls-tight mb-0">Cement Mill Media-Recharging</p>
+                  </a>
+                </div>
+                <div class="col">
+                  <a class="leonard-card d-block text-dark text-decoration-none" href="/products.html#calibre">
+                    <div class="leonard-card-media ratio" style="--bs-aspect-ratio: 82%">
+                      <img
+                        src="/img/product-calibre.webp"
+                        alt="Calibre media grading unit"
+                        class="w-100 h-100 object-fit-contain"
+                        loading="lazy"
+                      />
+                    </div>
+                    <h3 class="leonard-card__title font-display fs-2 lh-snug ls-tight text-uppercase mt-3 mb-1">
+                      Calibre
+                    </h3>
+                    <p class="fs-9 fw-light ls-tight mb-0">Media grading</p>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </li>
+
+        <!-- Services mega-menu -->
+        <li class="nav-item dropdown">
+          <a
+            class="nav-link dropdown-toggle"
+            href="/services.html"
+            role="button"
+            data-bs-toggle="dropdown"
+            data-bs-display="static"
+            aria-expanded="false"
+            >Services</a
+          >
+          <div class="dropdown-menu leonard-mega">
+            <div class="p-4 p-lg-5">
+              <div class="d-flex flex-wrap justify-content-between align-items-center gap-3 mb-3">
+                <p class="fs-7 fw-normal ls-wide text-uppercase mb-0">Our services</p>
+                <div class="d-flex flex-wrap align-items-center gap-3">
+                  <a
+                    class="btn btn-outline-dark minh-37 py-2 fw-light ls-wide text-uppercase"
+                    href="/services.html"
+                    >View all services <i class="fa-solid fa-caret-right" aria-hidden="true"></i></a
+                  >
+                  <a
+                    class="btn btn-primary minh-37 py-2 fw-light ls-wide text-uppercase"
+                    href="/health-safety.html"
+                    >+ Safety First</a
+                  >
+                </div>
+              </div>
+              <hr class="border-top border-dark opacity-25 my-0" />
+              <div class="row row-cols-2 row-cols-md-3 row-cols-lg-6 g-4 pt-4">
+                <div class="col">
+                  <a class="leonard-card d-block text-dark text-decoration-none" href="/services.html#refractory-installation">
+                    <div class="leonard-card-media ratio" style="--bs-aspect-ratio: 90%">
+                      <img
+                        src="/img/service-1.webp"
+                        alt="Refractory installation services"
+                        class="w-100 h-100 object-fit-cover"
+                        loading="lazy"
+                      />
+                    </div>
+                    <h3 class="leonard-card__title font-display fs-3 lh-snug ls-tight text-uppercase mt-3 mb-0">
+                      Refactory Installation Services
+                    </h3>
+                  </a>
+                </div>
+                <div class="col">
+                  <a class="leonard-card d-block text-dark text-decoration-none" href="/services.html#robotic-arm-demolition">
+                    <div class="leonard-card-media ratio" style="--bs-aspect-ratio: 90%">
+                      <img
+                        src="/img/service-2.webp"
+                        alt="Robotic arm demolition"
+                        class="w-100 h-100 object-fit-cover"
+                        loading="lazy"
+                      />
+                    </div>
+                    <h3 class="leonard-card__title font-display fs-3 lh-snug ls-tight text-uppercase mt-3 mb-0">
+                      Robotic Arm Demolition
+                    </h3>
+                  </a>
+                </div>
+                <div class="col">
+                  <a class="leonard-card d-block text-dark text-decoration-none" href="/services.html#confined-space">
+                    <div class="leonard-card-media ratio" style="--bs-aspect-ratio: 90%">
+                      <img
+                        src="/img/service-3.webp"
+                        alt="Confined space robotic demolition"
+                        class="w-100 h-100 object-fit-cover"
+                        loading="lazy"
+                      />
+                    </div>
+                    <h3 class="leonard-card__title font-display fs-3 lh-snug ls-tight text-uppercase mt-3 mb-0">
+                      Confined Space Robotic Demolition
+                    </h3>
+                  </a>
+                </div>
+                <div class="col">
+                  <a class="leonard-card d-block text-dark text-decoration-none" href="/services.html#media-grading">
+                    <div class="leonard-card-media ratio" style="--bs-aspect-ratio: 90%">
+                      <img
+                        src="/img/service-4.webp"
+                        alt="Media grading"
+                        class="w-100 h-100 object-fit-cover"
+                        loading="lazy"
+                      />
+                    </div>
+                    <h3 class="leonard-card__title font-display fs-3 lh-snug ls-tight text-uppercase mt-3 mb-0">
+                      Media Grading
+                    </h3>
+                  </a>
+                </div>
+                <div class="col">
+                  <a class="leonard-card d-block text-dark text-decoration-none" href="/services.html#refractory-installation">
+                    <div class="leonard-card-media ratio" style="--bs-aspect-ratio: 90%">
+                      <img
+                        src="/img/service-5.webp"
+                        alt="Refractory installation services"
+                        class="w-100 h-100 object-fit-cover"
+                        loading="lazy"
+                      />
+                    </div>
+                    <h3 class="leonard-card__title font-display fs-3 lh-snug ls-tight text-uppercase mt-3 mb-0">
+                      Refactory Installation Services
+                    </h3>
+                  </a>
+                </div>
+                <div class="col">
+                  <a class="leonard-card d-block text-dark text-decoration-none" href="/services.html#refractory-installation">
+                    <div class="leonard-card-media ratio" style="--bs-aspect-ratio: 90%">
+                      <img
+                        src="/img/service-6.webp"
+                        alt="Refractory installation services"
+                        class="w-100 h-100 object-fit-cover"
+                        loading="lazy"
+                      />
+                    </div>
+                    <h3 class="leonard-card__title font-display fs-3 lh-snug ls-tight text-uppercase mt-3 mb-0">
+                      Refactory Installation Services
+                    </h3>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </li>
+
+        <!-- Industries mega-menu -->
+        <li class="nav-item dropdown">
+          <a
+            class="nav-link dropdown-toggle"
+            href="/industries.html"
+            role="button"
+            data-bs-toggle="dropdown"
+            data-bs-display="static"
+            aria-expanded="false"
+            >Industries</a
+          >
+          <div class="dropdown-menu leonard-mega">
+            <div class="p-4 p-lg-5">
+              <div class="d-flex flex-wrap justify-content-between align-items-center gap-3 mb-3">
+                <p class="fs-7 fw-light ls-wide text-uppercase mb-0">
+                  <span class="fw-normal">Industries</span> — key industries we support
+                </p>
+                <div class="d-flex flex-wrap align-items-center gap-3">
+                  <a
+                    class="btn btn-outline-dark minh-37 py-2 fw-light ls-wide text-uppercase"
+                    href="/industries.html"
+                    >View all industries <i class="fa-solid fa-caret-right" aria-hidden="true"></i></a
+                  >
+                  <a
+                    class="btn btn-primary minh-37 py-2 fw-light ls-wide text-uppercase"
+                    href="/health-safety.html"
+                    >+ Safety First</a
+                  >
+                </div>
+              </div>
+              <hr class="border-top border-dark opacity-25 my-0" />
+              <div class="row row-cols-2 row-cols-md-3 row-cols-lg-6 g-4 pt-4">
+                <div class="col">
+                  <a class="leonard-card d-block text-dark text-decoration-none" href="/industries.html#cement-lime">
+                    <div class="leonard-card-media ratio" style="--bs-aspect-ratio: 90%">
+                      <img
+                        src="/img/industry-1.webp"
+                        alt="Cement and lime plant"
+                        class="w-100 h-100 object-fit-cover"
+                        loading="lazy"
+                      />
+                    </div>
+                    <h3
+                      class="leonard-card__title font-display fs-12 lh-snug ls-tight text-uppercase mt-3 mb-0"
+                    >
+                      Cement &amp; Lime
+                    </h3>
+                  </a>
+                </div>
+                <div class="col">
+                  <a class="leonard-card d-block text-dark text-decoration-none" href="/industries.html#aluminium">
+                    <div class="leonard-card-media ratio" style="--bs-aspect-ratio: 90%">
+                      <img
+                        src="/img/industry-2.webp"
+                        alt="Aluminium smelting plant"
+                        class="w-100 h-100 object-fit-cover"
+                        loading="lazy"
+                      />
+                    </div>
+                    <h3
+                      class="leonard-card__title font-display fs-12 lh-snug ls-tight text-uppercase mt-3 mb-0"
+                    >
+                      Aluminium
+                    </h3>
+                  </a>
+                </div>
+                <div class="col">
+                  <a class="leonard-card d-block text-dark text-decoration-none" href="/industries.html#waste-to-energy">
+                    <div class="leonard-card-media ratio" style="--bs-aspect-ratio: 90%">
+                      <img
+                        src="/img/service-3.webp"
+                        alt="Waste-to-energy vessel interior"
+                        class="w-100 h-100 object-fit-cover"
+                        loading="lazy"
+                      />
+                    </div>
+                    <h3
+                      class="leonard-card__title font-display fs-12 lh-snug ls-tight text-uppercase mt-3 mb-0"
+                    >
+                      Waste-to-Energy
+                    </h3>
+                  </a>
+                </div>
+                <div class="col">
+                  <a class="leonard-card d-block text-dark text-decoration-none" href="/industries.html#power-generation">
+                    <div class="leonard-card-media ratio" style="--bs-aspect-ratio: 90%">
+                      <img
+                        src="/img/industry-4.webp"
+                        alt="Power station cooling towers"
+                        class="w-100 h-100 object-fit-cover"
+                        loading="lazy"
+                      />
+                    </div>
+                    <h3
+                      class="leonard-card__title font-display fs-12 lh-snug ls-tight text-uppercase mt-3 mb-0"
+                    >
+                      Power Generation (Power Plants)
+                    </h3>
+                  </a>
+                </div>
+                <div class="col">
+                  <a class="leonard-card d-block text-dark text-decoration-none" href="/industries.html">
+                    <div class="leonard-card-media ratio" style="--bs-aspect-ratio: 90%">
+                      <img
+                        src="/img/industry-5.webp"
+                        alt="Biomass energy facility"
+                        class="w-100 h-100 object-fit-cover"
+                        loading="lazy"
+                      />
+                    </div>
+                    <h3
+                      class="leonard-card__title font-display fs-12 lh-snug ls-tight text-uppercase mt-3 mb-0"
+                    >
+                      Biomass
+                    </h3>
+                  </a>
+                </div>
+                <div class="col">
+                  <a class="leonard-card d-block text-dark text-decoration-none" href="/industries.html">
+                    <div class="leonard-card-media ratio" style="--bs-aspect-ratio: 90%">
+                      <img
+                        src="/img/industry-6.webp"
+                        alt="Tunnel infrastructure inspection"
+                        class="w-100 h-100 object-fit-cover"
+                        loading="lazy"
+                      />
+                    </div>
+                    <h3
+                      class="leonard-card__title font-display fs-12 lh-snug ls-tight text-uppercase mt-3 mb-0"
+                    >
+                      Civil &amp; Infrastructure
+                    </h3>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </li>
+        <!-- Case Studies mega-menu.
+             Imagery is shared with the Industries panel and does not match
+             these titles in the Figma source (placeholder art), so the
+             images are marked decorative and the heading names each link. -->
+        <li class="nav-item dropdown">
+          <a
+            class="nav-link dropdown-toggle"
+            href="/case-studies.html"
+            role="button"
+            data-bs-toggle="dropdown"
+            data-bs-display="static"
+            aria-expanded="false"
+            >Case Studies</a
+          >
+          <div class="dropdown-menu leonard-mega">
+            <div class="p-4 p-lg-5">
+              <div class="d-flex flex-wrap justify-content-between align-items-center gap-3 mb-3">
+                <p class="fs-7 fw-normal ls-wide text-uppercase mb-0">Case studies</p>
+                <div class="d-flex flex-wrap align-items-center gap-3">
+                  <a
+                    class="btn btn-outline-dark minh-37 py-2 fw-light ls-wide text-uppercase"
+                    href="/case-studies.html"
+                    >View all case studies <i class="fa-solid fa-caret-right" aria-hidden="true"></i></a
+                  >
+                  <a
+                    class="btn btn-primary minh-37 py-2 fw-light ls-wide text-uppercase"
+                    href="/health-safety.html"
+                    >+ Safety First</a
+                  >
+                </div>
+              </div>
+              <hr class="border-top border-dark opacity-25 my-0" />
+              <div class="row row-cols-2 row-cols-md-3 row-cols-lg-6 g-4 pt-4">
+                <div class="col">
+                  <a class="leonard-card d-block text-dark text-decoration-none" href="/case-study.html">
+                    <div class="leonard-card-media ratio" style="--bs-aspect-ratio: 90%">
+                      <img
+                        src="/img/industry-1.webp"
+                        alt=""
+                        class="w-100 h-100 object-fit-cover"
+                        loading="lazy"
+                      />
+                    </div>
+                    <h3
+                      class="leonard-card__title font-display fs-12 lh-snug ls-tight text-uppercase mt-3 mb-0"
+                    >
+                      Waste-to-Energy Robotic Demolition
+                    </h3>
+                  </a>
+                </div>
+                <div class="col">
+                  <a class="leonard-card d-block text-dark text-decoration-none" href="/case-study.html">
+                    <div class="leonard-card-media ratio" style="--bs-aspect-ratio: 90%">
+                      <img
+                        src="/img/industry-2.webp"
+                        alt=""
+                        class="w-100 h-100 object-fit-cover"
+                        loading="lazy"
+                      />
+                    </div>
+                    <h3
+                      class="leonard-card__title font-display fs-12 lh-snug ls-tight text-uppercase mt-3 mb-0"
+                    >
+                      CRH Irish Cement &ndash; Preheater Tower Shutdown
+                    </h3>
+                  </a>
+                </div>
+                <div class="col">
+                  <a class="leonard-card d-block text-dark text-decoration-none" href="/case-study.html">
+                    <div class="leonard-card-media ratio" style="--bs-aspect-ratio: 90%">
+                      <img
+                        src="/img/service-3.webp"
+                        alt=""
+                        class="w-100 h-100 object-fit-cover"
+                        loading="lazy"
+                      />
+                    </div>
+                    <h3
+                      class="leonard-card__title font-display fs-12 lh-snug ls-tight text-uppercase mt-3 mb-0"
+                    >
+                      World's First Robotic Arm Project in the USA
+                    </h3>
+                  </a>
+                </div>
+                <div class="col">
+                  <a class="leonard-card d-block text-dark text-decoration-none" href="/case-study.html">
+                    <div class="leonard-card-media ratio" style="--bs-aspect-ratio: 90%">
+                      <img
+                        src="/img/industry-4.webp"
+                        alt=""
+                        class="w-100 h-100 object-fit-cover"
+                        loading="lazy"
+                      />
+                    </div>
+                    <h3
+                      class="leonard-card__title font-display fs-12 lh-snug ls-tight text-uppercase mt-3 mb-0"
+                    >
+                      Power Generation (Power Plants)
+                    </h3>
+                  </a>
+                </div>
+                <div class="col">
+                  <a class="leonard-card d-block text-dark text-decoration-none" href="/case-study.html">
+                    <div class="leonard-card-media ratio" style="--bs-aspect-ratio: 90%">
+                      <img
+                        src="/img/industry-5.webp"
+                        alt=""
+                        class="w-100 h-100 object-fit-cover"
+                        loading="lazy"
+                      />
+                    </div>
+                    <h3
+                      class="leonard-card__title font-display fs-12 lh-snug ls-tight text-uppercase mt-3 mb-0"
+                    >
+                      Biomass
+                    </h3>
+                  </a>
+                </div>
+                <div class="col">
+                  <a class="leonard-card d-block text-dark text-decoration-none" href="/case-study.html">
+                    <div class="leonard-card-media ratio" style="--bs-aspect-ratio: 90%">
+                      <img
+                        src="/img/industry-6.webp"
+                        alt=""
+                        class="w-100 h-100 object-fit-cover"
+                        loading="lazy"
+                      />
+                    </div>
+                    <h3
+                      class="leonard-card__title font-display fs-12 lh-snug ls-tight text-uppercase mt-3 mb-0"
+                    >
+                      Civil &amp; Infrastructure
+                    </h3>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </li>
+        <li class="nav-item"><a class="nav-link" href="/news.html">Latest News</a></li>
+      </ul>
+
+      <div class="d-flex align-items-center gap-3 py-3 py-xl-0">
+        <a class="btn btn-link text-primary p-2 lh-1" href="/search-results.html" aria-label="Search">
+          <i class="fa-light fa-magnifying-glass" aria-hidden="true"></i>
+        </a>
+
+        <a
+          class="btn btn-primary d-inline-flex align-items-center justify-content-center gap-2 minw-210 minh-54 ls-wide text-uppercase"
+          href="/contact.html"
+        >
+          Make an inquiry
+          <img src="/img/arrow-dark.svg" alt="" width="14" height="14" />
+        </a>
+      </div>
+    </div>
+  </nav>
+</header>
+
+<!--
+  Mobile menu — a full-screen light panel (Bootstrap Offcanvas), shown below xl
+  in place of the desktop mega-menus. Sits OUTSIDE .leonard-header on purpose:
+  the header takes a transform when it hides on scroll, which would otherwise
+  become the containing block for this position:fixed panel and trap it.
+  Products expands to its child pages via a Collapse accordion; the rest are
+  direct links to their listing pages.
+-->
+<div
+  class="offcanvas offcanvas-start leonard-mobile-nav d-xl-none"
+  tabindex="-1"
+  id="leonardMobileNav"
+  aria-label="Menu"
+>
+  <div class="offcanvas-header align-items-center px-4 pt-4 pb-0">
+    <a class="navbar-brand py-0 me-0" href="/" aria-label="Leonard — home">
+      <img class="img-fluid d-block" src="/img/logo-dark.svg" alt="Leonard" width="200" height="31" />
+    </a>
+    <button
+      class="btn-close"
+      type="button"
+      data-bs-dismiss="offcanvas"
+      aria-label="Close menu"
+    ></button>
+  </div>
+  <div class="offcanvas-body d-flex flex-column px-4 pt-5 pb-0">
+    <ul class="leonard-mnav list-unstyled mb-0">
+      <li class="leonard-mnav__item">
+        <button
+          class="leonard-mnav__toggle"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#mnavProducts"
+          aria-expanded="false"
+          aria-controls="mnavProducts"
+        >
+          Products
+        </button>
+        <div class="collapse" id="mnavProducts">
+          <ul class="leonard-mnav__children list-unstyled">
+            <li><a href="/products.html#axis">Axis</a></li>
+            <li><a href="/products.html#nano">Nano</a></li>
+            <li><a href="/products.html#descender">Descender</a></li>
+            <li><a href="/products.html#calibre">Calibre</a></li>
+            <li><a href="/products.html#charger">Charger</a></li>
+          </ul>
+        </div>
+      </li>
+      <li class="leonard-mnav__item">
+        <a href="/services.html">Services</a>
+      </li>
+      <li class="leonard-mnav__item">
+        <a href="/industries.html">Industries</a>
+      </li>
+      <li class="leonard-mnav__item">
+        <a href="/case-studies.html">Case Studies</a>
+      </li>
+      <li class="leonard-mnav__item">
+        <a href="/news.html">Latest News</a>
+      </li>
+      <li class="leonard-mnav__item">
+        <a class="fw-normal" href="/health-safety.html">Safety First</a>
+      </li>
+    </ul>
+
+    <ul class="leonard-mnav__secondary list-unstyled fw-light fs-9 ls-tight text-uppercase mt-auto pt-5 mb-4">
+      <li><a class="link-dark" href="#linkedin">LinkedIn</a></li>
+      <li><a class="link-dark" href="/faqs.html">FAQs</a></li>
+      <li><a class="link-dark" href="/privacy.html">Privacy Policy</a></li>
+      <li><a class="link-dark" href="/terms.html">Terms</a></li>
+    </ul>
+  </div>
+  <a
+    class="leonard-mobile-nav__cta btn btn-primary d-flex align-items-center justify-content-center gap-2 minh-54 ls-wide text-uppercase"
+    href="/contact.html"
+  >
+    Make an inquiry
+    <img src="/img/arrow-dark.svg" alt="" width="14" height="14" />
+  </a>
+</div>

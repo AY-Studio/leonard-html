@@ -1,0 +1,383 @@
+<!doctype html>
+<html lang="en" data-bs-theme="dark">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="icon" href="/favicon-32.png" sizes="32x32" type="image/png" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <style>
+      /* Critical: the arriving transition panel covers before any CSS loads,
+         so it also masks the dev server JS-injected-CSS flash. */
+      .leonard-pt-arriving .leonard-pt { position: fixed; inset: 0; z-index: 3000; background: #ffdb00; }
+    </style>
+    <script>
+      // Page transition: if we arrived via an in-site link, cover before first
+      // paint so the new page does not flash before the reveal (main.js).
+      try {
+        if (sessionStorage.getItem("leonard-pt") === "1") {
+          document.documentElement.classList.add("leonard-pt-arriving");
+        }
+      } catch (e) {}
+    </script>
+    <title>The clean break of robotic demolition in confined spaces — Leonard</title>
+    <link rel="preload" href="/fonts/gilroy-heavy.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preconnect" href="https://use.typekit.net" crossorigin />
+    <link rel="stylesheet" href="https://use.typekit.net/djc8uke.css" />
+    <script src="https://kit.fontawesome.com/462bc6ee41.js" crossorigin="anonymous"></script>
+  </head>
+  <body>
+    <!-- #include partials/header.html -->
+
+    <!--
+      Article template (relume 10204:124285). The .leonard-prose column renders
+      raw, class-less HTML the way a WordPress WYSIWYG emits it — the example
+      body below exercises every block the editor can produce (headings, lists,
+      blockquote, table, code, and left/centre/right/wide aligned images).
+    -->
+    <main>
+      <!-- ============================================================== -->
+      <!-- Article header                                                  -->
+      <!-- ============================================================== -->
+      <section class="container-xxl pt-4">
+        <div class="row justify-content-center">
+          <div class="col-12 col-lg-10 col-xxl-8">
+            <a
+              class="d-inline-flex align-items-center gap-2 fw-light fs-9 ls-wide text-uppercase link-light mb-5"
+              href="/news.html"
+            >
+              <i class="fa-solid fa-caret-left fs-11" aria-hidden="true"></i>
+              All news
+            </a>
+            <div class="d-flex flex-wrap align-items-center gap-3 mb-4">
+              <span class="leonard-tag">Engineering</span>
+              <span class="fw-light fs-11 lh-body ls-tight text-body-secondary">5 min read</span>
+            </div>
+            <h1 class="display-h2 lh-snug text-primary text-uppercase text-break mb-4">
+              The clean break of robotic demolition in confined spaces
+            </h1>
+            <p class="fw-light fs-9 lh-body ls-tight text-body-secondary text-uppercase mb-0">
+              Published on 22 January 2026
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Hero image -->
+      <section class="container-xxl pt-section">
+        <div class="ratio leonard-band-ratio overflow-hidden">
+          <img
+            class="w-100 h-100 object-fit-cover leonard-media-round"
+            src="/img/article-hero.png"
+            alt="Robotic demolition arm at work inside a confined industrial vessel"
+            width="1685"
+            height="720"
+          />
+        </div>
+      </section>
+
+      <!-- ============================================================== -->
+      <!-- Article body (WYSIWYG prose)                                    -->
+      <!-- ============================================================== -->
+      <section class="container-xxl pt-section">
+        <div class="row justify-content-center">
+          <div class="col-12 col-lg-10 col-xxl-8">
+            <div class="leonard-prose">
+              <h2>Introduction</h2>
+              <p>
+                Removing spent refractory from a preheater tower or a boiler
+                throat used to mean sending people into the most hostile place on
+                site — <strong>confined, hot, and structurally unpredictable</strong>.
+                Remote robotic demolition changes that calculus entirely. This
+                article looks at how a <em>clean break</em> is planned, executed,
+                and verified, and why it consistently
+                <a href="/services.html">beats manual methods</a> on both safety
+                and schedule.
+              </p>
+
+              <figure class="alignright">
+                <img
+                  src="/img/article-body.png"
+                  alt="Operator controlling a robotic arm from a safe distance"
+                  width="600"
+                  height="600"
+                  loading="lazy"
+                />
+                <figcaption>
+                  A single operator controls the arm from outside the danger
+                  zone.
+                </figcaption>
+              </figure>
+
+              <p>
+                The principle is simple: keep the crew out of the vessel and let
+                the machine take the punishment. A right-aligned image like the
+                one here lets the body copy wrap naturally around it, exactly as
+                an editor would place it. Everything that follows demonstrates the
+                blocks a content team can drop in without touching the markup.
+              </p>
+
+              <h3>What a controlled break involves</h3>
+              <p>
+                Every scope is different, but the sequence is broadly the same.
+                An unordered list captures the phases:
+              </p>
+              <ul>
+                <li>Survey the lining and map the anchor pattern.</li>
+                <li>
+                  Stage the arm and establish exclusion zones — no personnel past
+                  the barrier.
+                </li>
+                <li>
+                  Break down the lining in sequence, protecting the shell beneath.
+                </li>
+                <li>Clear, inspect, and hand back a verified surface.</li>
+              </ul>
+
+              <p>And the decision criteria, in priority order:</p>
+              <ol>
+                <li>Can we remove people from the hot zone entirely?</li>
+                <li>Will the shell be protected throughout?</li>
+                <li>Does the method shorten the critical path?</li>
+              </ol>
+
+              <figure class="alignleft">
+                <img
+                  src="/img/news-1.png"
+                  alt="Crew reviewing the demolition plan on site"
+                  width="480"
+                  height="360"
+                  loading="lazy"
+                />
+                <figcaption>Planning the exclusion zones before the break.</figcaption>
+              </figure>
+
+              <p>
+                A left-aligned image sits on the other edge and the text flows to
+                its right. This is the classic-editor <code>alignleft</code>
+                behaviour, and it holds up on any screen — below the small
+                breakpoint the image simply stacks full width so nothing is
+                squeezed. Pariatur cupidatat officia consequat ea aute dolor sit,
+                proident in labore. Excepteur sint occaecat cupidatat non proident.
+              </p>
+
+              <blockquote>
+                "Leonard demolished our preheater cyclone roof without putting a
+                single man inside. The job that used to take a week of dangerous
+                manual work was done in 48 hours."
+                <cite>Martin Rogan — Plant Manager, Lisahally Power Plant</cite>
+              </blockquote>
+
+              <h3>The numbers behind a shutdown</h3>
+              <p>
+                Tables carry across from the editor too, wrapped so they scroll
+                rather than overflow on a phone:
+              </p>
+              <div class="table-wrap">
+                <table>
+                  <thead>
+                    <tr>
+                      <th scope="col">Metric</th>
+                      <th scope="col">Manual</th>
+                      <th scope="col">Robotic</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <th scope="row">Personnel in the vessel</th>
+                      <td>4–6</td>
+                      <td>0</td>
+                    </tr>
+                    <tr>
+                      <th scope="row">Duration</th>
+                      <td>~7 days</td>
+                      <td>~48 hours</td>
+                    </tr>
+                    <tr>
+                      <th scope="row">Lost-time incidents</th>
+                      <td>Variable</td>
+                      <td>Zero</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+
+              <figure class="aligncenter">
+                <img
+                  src="/img/news-2.png"
+                  alt="Wide view of the plant during a planned shutdown"
+                  width="960"
+                  height="540"
+                  loading="lazy"
+                />
+                <figcaption>A centred image breaks up a long read.</figcaption>
+              </figure>
+
+              <p>
+                Centred media (<code>aligncenter</code>) sits in the measure and
+                is captioned beneath. For a full-bleed moment, a wide image pushes
+                past the reading column on either side:
+              </p>
+
+              <figure class="alignwide">
+                <img
+                  src="/img/news-3.png"
+                  alt="Robotic demolition inside a high-temperature vessel"
+                  width="1280"
+                  height="480"
+                  loading="lazy"
+                />
+                <figcaption>An <code>alignwide</code> image breaks the measure.</figcaption>
+              </figure>
+
+              <hr />
+
+              <h2>Conclusion</h2>
+              <p>
+                The clean break is not just a safer way to demolish — it is a
+                faster, more predictable one. By removing people from the vessel
+                and letting a remotely operated arm do the work, plants recover
+                thermal efficiency sooner and hand a verified surface back to the
+                reline crew. If you are planning a shutdown, we can help you scope
+                it. <a href="/contact.html">Talk to an engineer</a>.
+              </p>
+
+              <p>
+                Share this post
+                <span class="d-inline-flex align-items-center gap-3 ms-2">
+                  <a class="link-light" href="#linkedin" aria-label="Share on LinkedIn"
+                    ><i class="fa-brands fa-linkedin" aria-hidden="true"></i
+                  ></a>
+                  <a class="link-light" href="#x" aria-label="Share on X"
+                    ><i class="fa-brands fa-x-twitter" aria-hidden="true"></i
+                  ></a>
+                  <a class="link-light" href="#facebook" aria-label="Share on Facebook"
+                    ><i class="fa-brands fa-facebook" aria-hidden="true"></i
+                  ></a>
+                </span>
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============================================================== -->
+      <!-- Related news                                                    -->
+      <!-- ============================================================== -->
+      <section class="container-xxl pt-section">
+        <p class="leonard-eyebrow fw-light fs-8 ls-label text-primary text-uppercase mb-5">
+          Related news
+        </p>
+        <div class="row row-cols-1 row-cols-sm-2 row-cols-lg-3 g-4 g-lg-5">
+          <div class="col">
+            <a class="leonard-card d-flex flex-column h-100 text-light text-decoration-none" href="/article.html">
+              <div class="leonard-card-media ratio ratio-4x3 mb-4">
+                <img class="w-100 h-100 object-fit-cover" src="/img/news-1.png" alt="" loading="lazy" />
+              </div>
+              <div class="d-flex align-items-center gap-3 mb-3">
+                <span class="leonard-tag">News</span>
+                <span class="fw-light fs-11 lh-body ls-tight text-body-secondary">26 July 26</span>
+              </div>
+              <h2 class="display-6 fs-4 lh-snug ls-tight text-uppercase mb-3">
+                The home safe, every day initiative
+              </h2>
+              <span
+                class="d-inline-flex align-items-center gap-2 fw-light fs-9 ls-wide text-primary text-uppercase mt-auto"
+              >
+                Read more
+                <i class="fa-solid fa-caret-right fs-11" aria-hidden="true"></i>
+              </span>
+            </a>
+          </div>
+          <div class="col">
+            <a class="leonard-card d-flex flex-column h-100 text-light text-decoration-none" href="/article.html">
+              <div class="leonard-card-media ratio ratio-4x3 mb-4">
+                <img class="w-100 h-100 object-fit-cover" src="/img/news-2.png" alt="" loading="lazy" />
+              </div>
+              <div class="d-flex align-items-center gap-3 mb-3">
+                <span class="leonard-tag">Case study</span>
+                <span class="fw-light fs-11 lh-body ls-tight text-body-secondary">26 July 26</span>
+              </div>
+              <h2 class="display-6 fs-4 lh-snug ls-tight text-uppercase mb-3">
+                New case study now live on site
+              </h2>
+              <span
+                class="d-inline-flex align-items-center gap-2 fw-light fs-9 ls-wide text-primary text-uppercase mt-auto"
+              >
+                Read more
+                <i class="fa-solid fa-caret-right fs-11" aria-hidden="true"></i>
+              </span>
+            </a>
+          </div>
+          <div class="col">
+            <a class="leonard-card d-flex flex-column h-100 text-light text-decoration-none" href="/article.html">
+              <div class="leonard-card-media ratio ratio-4x3 mb-4">
+                <img class="w-100 h-100 object-fit-cover" src="/img/news-3.png" alt="" loading="lazy" />
+              </div>
+              <div class="d-flex align-items-center gap-3 mb-3">
+                <span class="leonard-tag">Insights</span>
+                <span class="fw-light fs-11 lh-body ls-tight text-body-secondary">26 July 26</span>
+              </div>
+              <h2 class="display-6 fs-4 lh-snug ls-tight text-uppercase mb-3">
+                Report: the power of remote robotics
+              </h2>
+              <span
+                class="d-inline-flex align-items-center gap-2 fw-light fs-9 ls-wide text-primary text-uppercase mt-auto"
+              >
+                Read more
+                <i class="fa-solid fa-caret-right fs-11" aria-hidden="true"></i>
+              </span>
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============================================================== -->
+      <!-- CTA                                                             -->
+      <!-- ============================================================== -->
+      <section class="container-xxl pt-section">
+        <div class="ratio leonard-band-ratio overflow-hidden">
+          <img
+            class="w-100 h-100 object-fit-cover"
+            src="/img/v2-products-cta.png"
+            alt="Leonard engineer on site in protective equipment"
+            width="1685"
+            height="720"
+            loading="lazy"
+          />
+          <div
+            class="leonard-scrim d-flex flex-column justify-content-center align-items-center text-center p-4 p-lg-5"
+          >
+            <h2 class="display-h2 lh-snug text-primary text-uppercase mw-hl mb-4">
+              Engineer your next shutdown with confidence
+            </h2>
+            <p class="fw-normal fs-8 lh-body text-white mw-body mb-5">
+              Tell us about your operational challenges and we will build a
+              maintenance plan that keeps your plant producing.
+            </p>
+            <div class="d-flex flex-wrap justify-content-center gap-3">
+              <a
+                class="btn btn-primary btn-lg d-inline-flex align-items-center gap-2 fw-light text-uppercase"
+                href="/contact.html"
+              >
+                <i class="fa-solid fa-envelope fs-11" aria-hidden="true"></i>
+                Contact us
+              </a>
+              <a
+                class="btn btn-outline-light btn-lg d-inline-flex align-items-center gap-2 fw-light text-uppercase"
+                href="/services.html"
+              >
+                Our services
+                <i class="fa-solid fa-caret-right fs-11" aria-hidden="true"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- #include partials/footer.html -->
+
+    <script type="module" src="/js/main.js"></script>
+  </body>
+</html>

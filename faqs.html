@@ -1,0 +1,212 @@
+<!doctype html>
+<html lang="en" data-bs-theme="dark">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="icon" href="/favicon-32.png" sizes="32x32" type="image/png" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <style>
+      /* Critical: the arriving transition panel covers before any CSS loads,
+         so it also masks the dev server JS-injected-CSS flash. */
+      .leonard-pt-arriving .leonard-pt { position: fixed; inset: 0; z-index: 3000; background: #ffdb00; }
+    </style>
+    <script>
+      // Page transition: if we arrived via an in-site link, cover before first
+      // paint so the new page does not flash before the reveal (main.js).
+      try {
+        if (sessionStorage.getItem("leonard-pt") === "1") {
+          document.documentElement.classList.add("leonard-pt-arriving");
+        }
+      } catch (e) {}
+    </script>
+    <title>FAQs — Leonard</title>
+    <link rel="preload" href="/fonts/gilroy-heavy.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preconnect" href="https://use.typekit.net" crossorigin />
+    <link rel="stylesheet" href="https://use.typekit.net/djc8uke.css" />
+    <script src="https://kit.fontawesome.com/462bc6ee41.js" crossorigin="anonymous"></script>
+  </head>
+  <body>
+    <!-- #include partials/header.html -->
+
+    <main>
+      <!-- ============================================================== -->
+      <!-- Title                                                           -->
+      <!-- ============================================================== -->
+      <section class="container-xxl pt-4">
+        <div class="row justify-content-center">
+          <div class="col-12 col-lg-10 col-xxl-8">
+            <p class="leonard-eyebrow fw-normal fs-9 ls-label text-light text-uppercase mb-4">
+              Support
+            </p>
+            <h1 class="display-h2 lh-snug text-primary text-uppercase text-break mb-4">
+              Frequently asked questions
+            </h1>
+            <p class="fw-light fs-8 lh-body mw-body-lg mb-0">
+              Answers to the questions we hear most often. Can't find what you're
+              looking for? <a class="link-light" href="/contact.html">Get in touch</a>
+              and a specialist will help.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============================================================== -->
+      <!-- FAQ accordion                                                   -->
+      <!-- ============================================================== -->
+      <section class="container-xxl pt-section">
+        <div class="row justify-content-center">
+          <div class="col-12 col-lg-10 col-xxl-8">
+            <div class="leonard-faq">
+              <div class="leonard-faq__item">
+                <button
+                  class="leonard-faq__q"
+                  type="button"
+                  data-bs-toggle="collapse"
+                  data-bs-target="#faq1"
+                  aria-expanded="false"
+                  aria-controls="faq1"
+                >
+                  What services does Leonard provide?
+                </button>
+                <div class="collapse" id="faq1">
+                  <div class="leonard-faq__a fw-light fs-8 lh-body mw-body-lg">
+                    We deliver end-to-end industrial maintenance: refractory
+                    installation, remote robotic demolition, confined space
+                    demolition, and media grading for grinding circuits — across
+                    the cement, metal processing, and energy sectors.
+                  </div>
+                </div>
+              </div>
+              <div class="leonard-faq__item">
+                <button
+                  class="leonard-faq__q"
+                  type="button"
+                  data-bs-toggle="collapse"
+                  data-bs-target="#faq2"
+                  aria-expanded="false"
+                  aria-controls="faq2"
+                >
+                  How does robotic demolition keep my crew safe?
+                </button>
+                <div class="collapse" id="faq2">
+                  <div class="leonard-faq__a fw-light fs-8 lh-body mw-body-lg">
+                    Our arms are operated remotely from outside the vessel, so we
+                    remove your people from the most dangerous tasks on site —
+                    eliminating exposure to falling linings, dust, and heat while
+                    the machine takes the punishment.
+                  </div>
+                </div>
+              </div>
+              <div class="leonard-faq__item">
+                <button
+                  class="leonard-faq__q"
+                  type="button"
+                  data-bs-toggle="collapse"
+                  data-bs-target="#faq3"
+                  aria-expanded="false"
+                  aria-controls="faq3"
+                >
+                  Which industries do you work with?
+                </button>
+                <div class="collapse" id="faq3">
+                  <div class="leonard-faq__a fw-light fs-8 lh-body mw-body-lg">
+                    Cement &amp; lime, aluminium, waste-to-energy, and power
+                    generation — anywhere high-temperature infrastructure needs
+                    maintaining safely and efficiently. See our
+                    <a class="link-light" href="/industries.html">industries</a>.
+                  </div>
+                </div>
+              </div>
+              <div class="leonard-faq__item">
+                <button
+                  class="leonard-faq__q"
+                  type="button"
+                  data-bs-toggle="collapse"
+                  data-bs-target="#faq4"
+                  aria-expanded="false"
+                  aria-controls="faq4"
+                >
+                  Can your machines operate at high temperature?
+                </button>
+                <div class="collapse" id="faq4">
+                  <div class="leonard-faq__a fw-light fs-8 lh-body mw-body-lg">
+                    Yes. Our equipment is rated to operate at 100&deg;C+ / 212&deg;F+,
+                    letting us start work sooner after a burner-off and shorten
+                    the critical path of a shutdown.
+                  </div>
+                </div>
+              </div>
+              <div class="leonard-faq__item">
+                <button
+                  class="leonard-faq__q"
+                  type="button"
+                  data-bs-toggle="collapse"
+                  data-bs-target="#faq5"
+                  aria-expanded="false"
+                  aria-controls="faq5"
+                >
+                  How quickly can you mobilise for a shutdown?
+                </button>
+                <div class="collapse" id="faq5">
+                  <div class="leonard-faq__a fw-light fs-8 lh-body mw-body-lg">
+                    We plan every shutdown like a military operation. Timelines
+                    depend on scope and location, but our teams are structured to
+                    deploy rapidly — talk to us early and we'll build a plan
+                    around your window.
+                  </div>
+                </div>
+              </div>
+              <div class="leonard-faq__item">
+                <button
+                  class="leonard-faq__q"
+                  type="button"
+                  data-bs-toggle="collapse"
+                  data-bs-target="#faq6"
+                  aria-expanded="false"
+                  aria-controls="faq6"
+                >
+                  What certifications and registrations do you hold?
+                </button>
+                <div class="collapse" id="faq6">
+                  <div class="leonard-faq__a fw-light fs-8 lh-body mw-body-lg">
+                    We are an MSHA Certified Contractor, a Construction Skills
+                    Registered Team, and Avetta Registered, and we operate to ISO
+                    9001 and ISO 14001. See
+                    <a class="link-light" href="/certifications.html">certifications</a>.
+                  </div>
+                </div>
+              </div>
+              <div class="leonard-faq__item">
+                <button
+                  class="leonard-faq__q"
+                  type="button"
+                  data-bs-toggle="collapse"
+                  data-bs-target="#faq7"
+                  aria-expanded="false"
+                  aria-controls="faq7"
+                >
+                  How do I request a quote or start a project?
+                </button>
+                <div class="collapse" id="faq7">
+                  <div class="leonard-faq__a fw-light fs-8 lh-body mw-body-lg">
+                    Send us your requirements through the
+                    <a class="link-light" href="/contact.html">contact form</a>
+                    and a specialist will respond within one business day to scope
+                    the work with you.
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- #include partials/cta.html -->
+    </main>
+
+    <!-- #include partials/footer.html -->
+
+    <script type="module" src="/js/main.js"></script>
+  </body>
+</html>

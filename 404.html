@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="en" data-bs-theme="dark">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="icon" href="/favicon-32.png" sizes="32x32" type="image/png" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <style>
+      /* Critical: the arriving transition panel covers before any CSS loads,
+         so it also masks the dev server JS-injected-CSS flash. */
+      .leonard-pt-arriving .leonard-pt { position: fixed; inset: 0; z-index: 3000; background: #ffdb00; }
+    </style>
+    <script>
+      // Page transition: if we arrived via an in-site link, cover before first
+      // paint so the new page does not flash before the reveal (main.js).
+      try {
+        if (sessionStorage.getItem("leonard-pt") === "1") {
+          document.documentElement.classList.add("leonard-pt-arriving");
+        }
+      } catch (e) {}
+    </script>
+    <title>Page not found — Leonard</title>
+    <link rel="preload" href="/fonts/gilroy-heavy.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preconnect" href="https://use.typekit.net" crossorigin />
+    <link rel="stylesheet" href="https://use.typekit.net/djc8uke.css" />
+    <script src="https://kit.fontawesome.com/462bc6ee41.js" crossorigin="anonymous"></script>
+  </head>
+  <body>
+    <!-- #include partials/header.html -->
+
+    <main>
+      <!-- ============================================================== -->
+      <!-- 404                                                             -->
+      <!-- ============================================================== -->
+      <section class="container-xxl py-8 py-lg-9">
+        <div class="row justify-content-center text-center">
+          <div class="col-12 col-lg-9">
+            <p
+              class="leonard-eyebrow d-inline-flex fw-light fs-8 ls-label text-light text-uppercase mb-4"
+            >
+              Error 404
+            </p>
+            <p class="display-stat lh-tight ls-tight text-primary mb-3">404</p>
+            <h1 class="display-h2 lh-snug text-uppercase mb-4">Page not found</h1>
+            <p class="fw-normal fs-8 lh-body text-white mw-body mx-auto mb-6">
+              The page you're looking for has moved, been renamed, or never
+              existed. Let's get you back on solid ground.
+            </p>
+            <div class="d-flex flex-wrap justify-content-center gap-3">
+              <a
+                class="btn btn-primary btn-lg d-inline-flex align-items-center gap-2 fw-light text-uppercase"
+                href="/"
+              >
+                Back to home
+                <i class="fa-solid fa-caret-right fs-11" aria-hidden="true"></i>
+              </a>
+              <a
+                class="btn btn-outline-light btn-lg d-inline-flex align-items-center gap-2 fw-light text-uppercase"
+                href="/contact.html"
+              >
+                Contact us
+                <i class="fa-solid fa-caret-right fs-11" aria-hidden="true"></i>
+              </a>
+            </div>
+
+            <div class="d-flex flex-wrap justify-content-center gap-3 gap-lg-4 mt-8">
+              <a class="link-light fw-light fs-9 ls-wide text-uppercase" href="/products.html">Products</a>
+              <a class="link-light fw-light fs-9 ls-wide text-uppercase" href="/services.html">Services</a>
+              <a class="link-light fw-light fs-9 ls-wide text-uppercase" href="/industries.html">Industries</a>
+              <a class="link-light fw-light fs-9 ls-wide text-uppercase" href="/case-studies.html">Case Studies</a>
+              <a class="link-light fw-light fs-9 ls-wide text-uppercase" href="/news.html">Latest News</a>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- #include partials/footer.html -->
+
+    <script type="module" src="/js/main.js"></script>
+  </body>
+</html>

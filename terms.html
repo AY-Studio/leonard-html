@@ -1,0 +1,195 @@
+<!doctype html>
+<html lang="en" data-bs-theme="dark">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="icon" href="/favicon-32.png" sizes="32x32" type="image/png" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <style>
+      /* Critical: the arriving transition panel covers before any CSS loads,
+         so it also masks the dev server JS-injected-CSS flash. */
+      .leonard-pt-arriving .leonard-pt { position: fixed; inset: 0; z-index: 3000; background: #ffdb00; }
+    </style>
+    <script>
+      // Page transition: if we arrived via an in-site link, cover before first
+      // paint so the new page does not flash before the reveal (main.js).
+      try {
+        if (sessionStorage.getItem("leonard-pt") === "1") {
+          document.documentElement.classList.add("leonard-pt-arriving");
+        }
+      } catch (e) {}
+    </script>
+    <title>Terms &amp; Conditions — Leonard</title>
+    <link rel="preload" href="/fonts/gilroy-heavy.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preconnect" href="https://use.typekit.net" crossorigin />
+    <link rel="stylesheet" href="https://use.typekit.net/djc8uke.css" />
+    <script src="https://kit.fontawesome.com/462bc6ee41.js" crossorigin="anonymous"></script>
+  </head>
+  <body>
+    <!-- #include partials/header.html -->
+
+    <!--
+      Terms & Conditions — a plain text/legal page. The body uses .leonard-prose
+      (the WYSIWYG style) so it stays legible and on brand. The copy below is a
+      standard template; it is NOT legal advice and should be reviewed by the
+      client's solicitor before launch.
+    -->
+    <main>
+      <!-- ============================================================== -->
+      <!-- Title                                                           -->
+      <!-- ============================================================== -->
+      <!-- Full-bleed corner-ticked band, centred (shared with the search page). -->
+      <section class="bg-dark-deep mt-4">
+        <div class="container-xxl position-relative overflow-hidden py-6 py-lg-7">
+          <div class="leonard-corners text-primary fs-1 fw-thin" aria-hidden="true">
+            <span></span><span></span><span></span><span></span>
+          </div>
+          <div class="position-relative text-center">
+            <p class="leonard-eyebrow d-inline-flex fw-light fs-8 ls-label text-light text-uppercase mb-4">
+              Legal
+            </p>
+            <h1 class="display-h2 lh-snug text-primary text-uppercase text-break mw-hl mx-auto mb-4">
+              Terms &amp; Conditions
+            </h1>
+            <p class="fw-light fs-9 lh-body ls-tight text-body-secondary text-uppercase mb-0">
+              Last updated 22 July 2026
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============================================================== -->
+      <!-- Body                                                            -->
+      <!-- ============================================================== -->
+      <section class="container-xxl pt-section pb-4">
+        <div class="row justify-content-center">
+          <div class="col-12 col-lg-10 col-xxl-8">
+            <div class="leonard-prose">
+              <p>
+                These terms and conditions ("Terms") govern your use of the
+                Leonard website and any related content, services, and enquiry
+                forms (together, the "Site"), operated by G Leonard ("Leonard",
+                "we", "us", or "our"). By accessing or using the Site you agree to
+                be bound by these Terms. If you do not agree, please do not use
+                the Site.
+              </p>
+
+              <h2>1. Definitions</h2>
+              <p>In these Terms:</p>
+              <ul>
+                <li>"Content" means all text, images, graphics, and material published on the Site.</li>
+                <li>"Services" means the industrial maintenance, refractory installation, and robotic demolition services we describe on the Site.</li>
+                <li>"You" and "your" refer to the person accessing the Site.</li>
+              </ul>
+
+              <h2>2. Use of the Site</h2>
+              <p>
+                You may use the Site for lawful purposes only. You agree not to
+                use it in any way that breaches applicable law, infringes the
+                rights of others, or disrupts the Site's operation. In particular,
+                you must not:
+              </p>
+              <ol>
+                <li>attempt to gain unauthorised access to the Site or its servers;</li>
+                <li>introduce malicious code, or scrape the Site by automated means without consent;</li>
+                <li>reproduce, resell, or exploit any part of the Site for commercial purposes without our written permission.</li>
+              </ol>
+
+              <h2>3. Intellectual property</h2>
+              <p>
+                All Content on the Site, including the Leonard name, logo, product
+                names, and imagery, is owned by or licensed to us and is protected
+                by intellectual property laws. You may view and print Content for
+                your own reference, but you may not otherwise copy, modify, or
+                distribute it without our prior written consent.
+              </p>
+
+              <h2>4. Products and services</h2>
+              <p>
+                Descriptions of our products and Services are provided for general
+                information. Specifications, availability, and technical details
+                may change, and nothing on the Site constitutes a binding offer.
+                Any engagement for Services is subject to a separate written
+                agreement between you and Leonard.
+              </p>
+
+              <h2>5. Enquiries and submissions</h2>
+              <p>
+                When you submit an enquiry through the Site, you confirm that the
+                information you provide is accurate and that you are authorised to
+                provide it. We use the details you submit to respond to your
+                enquiry in accordance with our
+                <a href="/privacy.html">Privacy Policy</a>.
+              </p>
+
+              <h2>6. Third-party links</h2>
+              <p>
+                The Site may contain links to third-party websites. We do not
+                control and are not responsible for the content, accuracy, or
+                availability of those sites, and a link does not imply our
+                endorsement of them.
+              </p>
+
+              <h2>7. Disclaimers</h2>
+              <p>
+                The Site and its Content are provided "as is" and "as available".
+                To the fullest extent permitted by law, we make no warranties,
+                express or implied, regarding the accuracy, completeness, or
+                fitness for a particular purpose of the Content, and we do not
+                warrant that the Site will be uninterrupted or error-free.
+              </p>
+
+              <h2>8. Limitation of liability</h2>
+              <p>
+                To the fullest extent permitted by law, Leonard shall not be
+                liable for any indirect, incidental, or consequential loss, or for
+                any loss of profit, revenue, or data, arising out of or in
+                connection with your use of the Site. Nothing in these Terms
+                excludes or limits our liability for death or personal injury
+                caused by negligence, for fraud, or for any liability that cannot
+                be excluded by law.
+              </p>
+
+              <h2>9. Indemnity</h2>
+              <p>
+                You agree to indemnify us against any claims, losses, or expenses
+                arising from your breach of these Terms or your misuse of the Site.
+              </p>
+
+              <h2>10. Changes to these Terms</h2>
+              <p>
+                We may update these Terms from time to time. The current version
+                will always be posted on this page with its "last updated" date.
+                Your continued use of the Site after any change constitutes
+                acceptance of the revised Terms.
+              </p>
+
+              <h2>11. Governing law</h2>
+              <p>
+                These Terms are governed by the laws of Northern Ireland, and any
+                disputes will be subject to the exclusive jurisdiction of the
+                courts of Northern Ireland.
+              </p>
+
+              <h2>12. Contact us</h2>
+              <p>
+                If you have any questions about these Terms, please contact us:
+              </p>
+              <p>
+                G Leonard<br />
+                2nd Floor, Gortalowry House, 94 Church Street, Cookstown,<br />
+                County Tyrone, Northern Ireland, BT80 8HX.<br />
+                <a href="mailto:info@leonard.co.uk">info@leonard.co.uk</a>
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- #include partials/footer.html -->
+
+    <script type="module" src="/js/main.js"></script>
+  </body>
+</html>

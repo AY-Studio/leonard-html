@@ -1,0 +1,16 @@
+// Webfonts.
+//
+// gilroy-heavy.woff2 — the display face, converted with fontTools from the
+// licensed Gilroy-Heavy.otf. Only the Heavy weight is used, so only Heavy is
+// shipped.
+//
+// Input Mono / Input Mono Narrow come from the Adobe Fonts kit linked in each
+// page <head> (use.typekit.net/djc8uke.css) — nothing to self-host.
+
+@font-face {
+  font-family: "Gilroy";
+  src: url("/fonts/gilroy-heavy.woff2") format("woff2");
+  font-weight: 800;
+  font-style: normal;
+  font-display: swap;
+}

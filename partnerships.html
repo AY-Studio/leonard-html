@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="en" data-bs-theme="dark">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="icon" href="/favicon-32.png" sizes="32x32" type="image/png" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <style>
+      /* Critical: the arriving transition panel covers before any CSS loads,
+         so it also masks the dev server JS-injected-CSS flash. */
+      .leonard-pt-arriving .leonard-pt { position: fixed; inset: 0; z-index: 3000; background: #ffdb00; }
+    </style>
+    <script>
+      // Page transition: if we arrived via an in-site link, cover before first
+      // paint so the new page does not flash before the reveal (main.js).
+      try {
+        if (sessionStorage.getItem("leonard-pt") === "1") {
+          document.documentElement.classList.add("leonard-pt-arriving");
+        }
+      } catch (e) {}
+    </script>
+    <title>Partnerships — Leonard</title>
+    <link rel="preload" href="/fonts/gilroy-heavy.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preconnect" href="https://use.typekit.net" crossorigin />
+    <link rel="stylesheet" href="https://use.typekit.net/djc8uke.css" />
+    <script src="https://kit.fontawesome.com/462bc6ee41.js" crossorigin="anonymous"></script>
+  </head>
+  <body>
+    <!-- #include partials/header.html -->
+
+    <main>
+      <!-- ============================================================== -->
+      <!-- Title                                                           -->
+      <!-- ============================================================== -->
+      <!-- Full-bleed corner-ticked band, centred (shared with the search /
+           terms / privacy pages). No photo. -->
+      <section class="bg-dark-deep mt-4">
+        <div class="container-xxl position-relative overflow-hidden py-6 py-lg-7">
+          <div class="leonard-corners text-primary fs-1 fw-thin" aria-hidden="true">
+            <span></span><span></span><span></span><span></span>
+          </div>
+          <div class="position-relative text-center">
+            <p class="leonard-eyebrow d-inline-flex fw-light fs-8 ls-label text-light text-uppercase mb-4">
+              Working together
+            </p>
+            <h1 class="display-h2 lh-snug text-primary text-uppercase text-break mw-hl mx-auto mb-4">
+              Partnerships
+            </h1>
+            <p class="fw-light fs-8 lh-body text-white mw-body-lg mx-auto mb-0">
+              We work alongside the engineers, operators, and suppliers who keep
+              heavy industry running — building long-term relationships, not
+              one-off transactions.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============================================================== -->
+      <!-- Trusted partners marquee                                        -->
+      <!-- ============================================================== -->
+      <section class="bg-neutral text-dark py-4 mt-section">
+        <div class="container-xxl">
+          <p class="leonard-eyebrow fw-light fs-10 ls-tight text-uppercase mb-3">
+            Trusted by the world's most demanding industries
+          </p>
+        </div>
+        <div class="leonard-marquee">
+          <div class="leonard-marquee__track">
+            <div class="leonard-marquee__group">
+              <img src="/img/partner-logos.webp" alt="Logos of Leonard's partner organisations" />
+              <img src="/img/partner-logos.webp" alt="" aria-hidden="true" />
+              <img src="/img/partner-logos.webp" alt="" aria-hidden="true" />
+            </div>
+            <div class="leonard-marquee__group" aria-hidden="true">
+              <img src="/img/partner-logos.webp" alt="" />
+              <img src="/img/partner-logos.webp" alt="" />
+              <img src="/img/partner-logos.webp" alt="" />
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============================================================== -->
+      <!-- How we partner                                                  -->
+      <!-- ============================================================== -->
+      <section class="container-xxl pt-section">
+        <div class="row justify-content-center">
+          <div class="col-12 col-lg-10 col-xxl-8">
+            <div class="leonard-prose">
+              <h2>Built on trust</h2>
+              <p>
+                From global cement producers to metal processors and power
+                generators, our clients return to us because we deliver: safely,
+                on schedule, and with a verified result. Those relationships are
+                the foundation of everything we do.
+              </p>
+
+              <h2>Who we work with</h2>
+              <ul>
+                <li><strong>Plant operators</strong> planning refractory shutdowns and emergency works.</li>
+                <li><strong>Engineering and maintenance partners</strong> who need a specialist demolition and installation capability.</li>
+                <li><strong>Suppliers and OEMs</strong> integrating robotic solutions into wider maintenance programmes.</li>
+              </ul>
+
+              <h2>Partner with Leonard</h2>
+              <p>
+                Whether you're scoping a single shutdown or building a long-term
+                maintenance programme, we'd like to hear from you.
+                <a href="/contact.html">Start the conversation</a> and a
+                specialist will be in touch.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- #include partials/cta.html -->
+    </main>
+
+    <!-- #include partials/footer.html -->
+
+    <script type="module" src="/js/main.js"></script>
+  </body>
+</html>

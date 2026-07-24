@@ -1,0 +1,412 @@
+<!doctype html>
+<html lang="en" data-bs-theme="dark">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="icon" href="/favicon-32.png" sizes="32x32" type="image/png" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <style>
+      /* Critical: the arriving transition panel covers before any CSS loads,
+         so it also masks the dev server JS-injected-CSS flash. */
+      .leonard-pt-arriving .leonard-pt { position: fixed; inset: 0; z-index: 3000; background: #ffdb00; }
+    </style>
+    <script>
+      // Page transition: if we arrived via an in-site link, cover before first
+      // paint so the new page does not flash before the reveal (main.js).
+      try {
+        if (sessionStorage.getItem("leonard-pt") === "1") {
+          document.documentElement.classList.add("leonard-pt-arriving");
+        }
+      } catch (e) {}
+    </script>
+    <title>Waste-to-Energy — Leonard</title>
+    <link rel="preload" href="/fonts/gilroy-heavy.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preconnect" href="https://use.typekit.net" crossorigin />
+    <link rel="stylesheet" href="https://use.typekit.net/djc8uke.css" />
+    <script src="https://kit.fontawesome.com/462bc6ee41.js" crossorigin="anonymous"></script>
+  </head>
+  <body>
+    <!-- #include partials/header.html -->
+
+    <!--
+      Industry detail template (relume 10204:121873), populated with Cement &
+      Lime. Duplicate per industry and swap the title, hero/section imagery, the
+      challenge/feature copy, the service cards, the outcomes and the quote.
+    -->
+    <main>
+      <!-- ============================================================== -->
+      <!-- Hero                                                            -->
+      <!-- ============================================================== -->
+      <section class="container-xxl pt-4">
+        <div class="ratio leonard-hero-ratio overflow-hidden">
+          <img
+            class="w-100 h-100 object-fit-cover"
+            src="/img/industry-waste.png"
+            alt="Waste-to-energy plant served by Leonard"
+            width="1685"
+            height="966"
+          />
+          <div
+            class="leonard-scrim d-flex flex-column justify-content-end align-items-start p-4 p-lg-5"
+          >
+            <p
+              class="leonard-eyebrow fw-light fs-8 ls-label text-light text-uppercase mb-4"
+            >
+              Industries we serve
+            </p>
+            <h1 class="display-h1 lh-snug text-primary text-uppercase mw-hl mb-4">
+              Waste-to-Energy industry solutions
+            </h1>
+            <p class="fw-normal fs-8 lh-body text-white mw-body mb-0">
+              Leonard provides specialist refractory maintenance, robotic demolition, and industrial services for waste-to-energy facilities, supporting the reliable operation of high-temperature combustion systems.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============================================================== -->
+      <!-- Challenges — feature list + photo                               -->
+      <!-- ============================================================== -->
+      <section class="container-xxl pt-section">
+        <div class="row gy-5">
+          <div class="col-12 col-lg-6">
+            <p
+              class="leonard-eyebrow fw-normal fs-9 ls-label text-primary text-uppercase mb-4"
+            >
+              Challenges
+            </p>
+            <h2 class="display-h3 lh-flat text-uppercase mb-4">
+              Mastering extreme heat, abrasion, and unrelenting production
+              demands
+            </h2>
+            <p class="fw-light fs-8 lh-body mw-body mb-0">
+              Cement manufacturing punishes equipment. We engineer maintenance
+              solutions that withstand the inferno inside your kiln and the
+              relentless wear in your mills.
+            </p>
+          </div>
+          <div class="col-12 col-lg-6">
+            <ul class="list-unstyled mb-0">
+              <li class="d-flex gap-4 mb-5">
+                <i class="fa-solid fa-temperature-high fs-2 text-primary mt-1" aria-hidden="true"></i>
+                <div>
+                  <h3 class="display-6 lh-flat ls-tight text-uppercase mb-2">
+                    Thermal shock resistance
+                  </h3>
+                  <p class="fw-light fs-8 lh-body mb-0">
+                    Our refractory installations combat spalling and cracking
+                    caused by rapid temperature cycling, extending lining life in
+                    your preheater and cooler.
+                  </p>
+                </div>
+              </li>
+              <li class="d-flex gap-4 mb-5">
+                <i class="fa-solid fa-layer-group fs-2 text-primary mt-1" aria-hidden="true"></i>
+                <div>
+                  <h3 class="display-6 lh-flat ls-tight text-uppercase mb-2">
+                    Abrasive material handling
+                  </h3>
+                  <p class="fw-light fs-8 lh-body mb-0">
+                    We apply wear-resistant linings and precise media grading to
+                    protect chutes, ducts, and mills from raw meal and clinker
+                    abrasion.
+                  </p>
+                </div>
+              </li>
+              <li class="d-flex gap-4 mb-0">
+                <i class="fa-solid fa-arrows-spin fs-2 text-primary mt-1" aria-hidden="true"></i>
+                <div>
+                  <h3 class="display-6 lh-flat ls-tight text-uppercase mb-2">
+                    Continuous process integrity
+                  </h3>
+                  <p class="fw-light fs-8 lh-body mb-0">
+                    Our robotic demolition and rapid installation teams execute
+                    shutdown scopes that minimise lost production hours and
+                    restore thermal efficiency.
+                  </p>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- Furnace image -->
+      <section class="container-xxl pt-section">
+        <div class="ratio leonard-band-ratio overflow-hidden">
+          <img
+            class="w-100 h-100 object-fit-cover leonard-media-round"
+            src="/img/industry-furnace.png"
+            alt="High-temperature furnace inside a cement plant"
+            width="1685"
+            height="720"
+            loading="lazy"
+          />
+        </div>
+      </section>
+
+      <!-- ============================================================== -->
+      <!-- Specialist maintenance — three cards                            -->
+      <!-- ============================================================== -->
+      <section class="container-xxl pt-section">
+        <div class="text-center mb-7">
+          <h2 class="display-h3 lh-flat text-uppercase mw-hl mx-auto mb-3">
+            Specialist maintenance for Waste-to-Energy
+          </h2>
+          <p class="fw-light fs-8 lh-body mw-body mx-auto mb-0">
+            Precision engineering that withstands the harshest operating
+            conditions on earth.
+          </p>
+        </div>
+
+        <div class="row gy-4">
+          <div class="col-12 col-lg-4">
+            <div class="h-100">
+              <div class="leonard-card-media ratio ratio-16x9 mb-4">
+                <img
+                  class="w-100 h-100 object-fit-cover leonard-media-round"
+                  src="/img/ind-card-1.png"
+                  alt="Refractory installation in a cement kiln"
+                  width="720"
+                  height="405"
+                  loading="lazy"
+                />
+              </div>
+              <h3 class="display-6 fs-4 lh-snug ls-tight text-uppercase mb-2">
+                Refractory installation for kilns and preheaters
+              </h3>
+              <p class="fw-light fs-8 lh-body mb-0">
+                Durable lining systems engineered to resist thermal shock and
+                alkali attack.
+              </p>
+            </div>
+          </div>
+          <div class="col-12 col-lg-4">
+            <div class="h-100">
+              <div class="leonard-card-media ratio ratio-16x9 mb-4">
+                <img
+                  class="w-100 h-100 object-fit-cover leonard-media-round"
+                  src="/img/ind-card-2.png"
+                  alt="Robotic arm demolition during a plant shutdown"
+                  width="720"
+                  height="405"
+                  loading="lazy"
+                />
+              </div>
+              <h3 class="display-6 fs-4 lh-snug ls-tight text-uppercase mb-2">
+                Robotic arm demolition for shutdown efficiency
+              </h3>
+              <p class="fw-light fs-8 lh-body mb-0">
+                Remote-controlled removal that accelerates reline schedules and
+                protects your crew.
+              </p>
+            </div>
+          </div>
+          <div class="col-12 col-lg-4">
+            <div class="h-100">
+              <div class="leonard-card-media ratio ratio-16x9 mb-4">
+                <img
+                  class="w-100 h-100 object-fit-cover leonard-media-round"
+                  src="/img/ind-card-3.png"
+                  alt="Grinding media grading equipment"
+                  width="720"
+                  height="405"
+                  loading="lazy"
+                />
+              </div>
+              <h3 class="display-6 fs-4 lh-snug ls-tight text-uppercase mb-2">
+                Media grading for grinding circuit performance
+              </h3>
+              <p class="fw-light fs-8 lh-body mb-0">
+                Optimised ball charges that reduce energy consumption and
+                increase throughput.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="d-flex flex-wrap justify-content-center gap-3 mt-7">
+          <a
+            class="btn btn-primary btn-lg d-inline-flex align-items-center gap-2 fw-light text-uppercase"
+            href="/services.html"
+          >
+            Our services
+            <i class="fa-solid fa-caret-right fs-11" aria-hidden="true"></i>
+          </a>
+          <a
+            class="btn btn-outline-light btn-lg d-inline-flex align-items-center gap-2 fw-light text-uppercase"
+            href="/contact.html"
+          >
+            Contact us
+            <i class="fa-solid fa-caret-right fs-11" aria-hidden="true"></i>
+          </a>
+        </div>
+      </section>
+
+      <!-- ============================================================== -->
+      <!-- What you gain                                                   -->
+      <!-- ============================================================== -->
+      <section class="bg-primary text-dark mt-section">
+        <div class="container-xxl py-7 py-lg-8">
+          <div class="mb-6">
+            <p class="leonard-eyebrow fw-normal fs-9 ls-label text-uppercase mb-4">
+              Outcomes
+            </p>
+            <h2 class="display-h3 lh-flat text-uppercase mb-3">What you gain</h2>
+            <p class="fw-light fs-8 lh-body mw-body mb-0">
+              Measurable improvements in safety, speed, and asset longevity.
+            </p>
+          </div>
+
+          <div class="row gy-5">
+            <div class="col-12 col-lg-5">
+              <ul class="leonard-outcomes list-unstyled fw-normal fs-4 lh-snug ls-tight text-uppercase mb-0">
+                <li class="is-active">Faster shutdowns</li>
+                <li>Extended campaigns</li>
+                <li>Lower costs</li>
+                <li>Certain delivery</li>
+              </ul>
+            </div>
+            <div class="col-12 col-lg-6 offset-lg-1">
+              <p class="leonard-eyebrow fw-normal fs-10 ls-label text-uppercase mb-4">
+                Safety
+              </p>
+              <h3 class="display-5 lh-flat ls-tight text-uppercase mb-4">
+                Zero personnel entry in confined demolition zones
+              </h3>
+              <p class="fw-light fs-8 lh-body mw-body mb-5">
+                We remove your people from the most dangerous tasks on site,
+                eliminating exposure to falling linings, dust, and heat.
+              </p>
+              <a
+                class="btn btn-dark leonard-btn-lt btn-lg d-inline-flex align-items-center gap-2 fw-light text-uppercase"
+                href="/contact.html"
+              >
+                Explore
+                <i class="fa-solid fa-caret-right fs-11" aria-hidden="true"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============================================================== -->
+      <!-- Pull quote                                                      -->
+      <!-- ============================================================== -->
+      <section class="container-xxl pt-section">
+        <figure class="bg-dark text-light position-relative overflow-hidden px-3 px-lg-8 py-7 py-lg-9 mb-0">
+          <div
+            class="leonard-corners text-primary fs-1 fw-thin"
+            aria-hidden="true"
+          >
+            <span></span><span></span><span></span><span></span>
+          </div>
+          <blockquote class="display-h3 lh-snug text-uppercase text-center mw-stmt mx-auto mb-5">
+            "Leonard demolished our preheater cyclone roof without putting a
+            single man inside. The job that used to take a week of dangerous
+            manual work was done in 48 hours. Zero incidents, zero delays."
+          </blockquote>
+          <figcaption class="text-center">
+            <p class="fw-normal fs-8 lh-body text-uppercase mb-0">Martin Rogan</p>
+            <p class="fw-light fs-10 lh-body ls-tight text-body-secondary text-uppercase mb-0">
+              Plant Manager, Lisahally Power Plant
+            </p>
+          </figcaption>
+        </figure>
+      </section>
+
+      <!-- ============================================================== -->
+      <!-- Enquiry form                                                    -->
+      <!-- ============================================================== -->
+      <!-- data-bs-theme="light" flips Bootstrap's form control colours for this
+           band only; the document as a whole stays dark. -->
+      <section class="container-xxl pt-section" data-bs-theme="light">
+        <div class="bg-light text-dark px-3 px-lg-5 py-7">
+          <div class="row justify-content-center">
+            <div class="col-12 col-lg-9 col-xxl-7">
+              <div class="text-center mb-6">
+                <h2 class="display-2 lh-snug ls-tight text-uppercase mb-4">
+                  Enquire about<br />Waste-to-Energy
+                </h2>
+                <p class="fw-light fs-8 lh-body mb-0">
+                  Contact the Leonard team to learn more about this solution and
+                  how it can support your operation.
+                </p>
+              </div>
+
+              <form class="leonard-form" novalidate>
+                <div class="row g-4">
+                  <div class="col-12 col-md-6">
+                    <label class="form-label" for="firstName">First name</label>
+                    <input class="form-control" type="text" id="firstName" name="firstName" autocomplete="given-name" />
+                  </div>
+                  <div class="col-12 col-md-6">
+                    <label class="form-label" for="lastName">Last name</label>
+                    <input class="form-control" type="text" id="lastName" name="lastName" autocomplete="family-name" />
+                  </div>
+                  <div class="col-12 col-md-6">
+                    <label class="form-label" for="jobTitle">Job title</label>
+                    <input class="form-control" type="text" id="jobTitle" name="jobTitle" autocomplete="organization-title" />
+                  </div>
+                  <div class="col-12 col-md-6">
+                    <label class="form-label" for="company">Company</label>
+                    <input class="form-control" type="text" id="company" name="company" autocomplete="organization" />
+                  </div>
+                  <div class="col-12 col-md-6">
+                    <label class="form-label" for="email">Email</label>
+                    <input class="form-control" type="email" id="email" name="email" autocomplete="email" />
+                  </div>
+                  <div class="col-12 col-md-6">
+                    <label class="form-label" for="phone">Phone number</label>
+                    <input class="form-control" type="tel" id="phone" name="phone" autocomplete="tel" />
+                  </div>
+                  <div class="col-12">
+                    <label class="form-label" for="topic">Choose a topic</label>
+                    <select class="form-select" id="topic" name="topic">
+                      <option value="" selected>Select one...</option>
+                      <option>Purchasing</option>
+                      <option>Technical specification</option>
+                      <option>Service and support</option>
+                      <option>Something else</option>
+                    </select>
+                  </div>
+                  <div class="col-12">
+                    <label class="form-label" for="message">Message</label>
+                    <textarea
+                      class="form-control"
+                      id="message"
+                      name="message"
+                      rows="6"
+                      placeholder="Type your message..."
+                    ></textarea>
+                  </div>
+                  <div class="col-12">
+                    <div class="form-check">
+                      <input class="form-check-input" type="checkbox" id="terms" name="terms" />
+                      <label class="form-check-label fw-light ls-label text-uppercase" for="terms">
+                        I accept the <a class="link-dark" href="/terms.html">Terms</a>
+                      </label>
+                    </div>
+                  </div>
+                  <div class="col-12 text-center">
+                    <button
+                      class="btn btn-dark minw-176 minh-37 fw-light ls-wide text-uppercase"
+                      type="submit"
+                    >
+                      Submit
+                    </button>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- #include partials/footer.html -->
+
+    <script type="module" src="/js/main.js"></script>
+  </body>
+</html>

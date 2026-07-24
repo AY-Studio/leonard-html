@@ -1,0 +1,1987 @@
+// Leonard — the bits Bootstrap can't express.
+//
+// Everything else (palette, type scale, spacing, grid, buttons, navbar,
+// line-heights, tracking) lives in _tokens.scss / _utilities-custom.scss and
+// is applied as plain Bootstrap classes in the markup. Only genuinely bespoke
+// behaviour belongs here: the ■ eyebrow marker, the hero crop, the logo
+// marquee, the DESCENDER watermark, and the feature rail.
+
+// ---------------------------------------------------------------------------
+// "■ LABEL" eyebrow
+// ---------------------------------------------------------------------------
+// The square is a literal glyph in Figma, but U+25A0 is outside the latin
+// subset we ship, so it's drawn rather than typed.
+
+.leonard-eyebrow {
+  display: flex;
+  gap: 0.75em;
+  align-items: flex-start;
+
+  &::before {
+    flex: none;
+    width: 0.5em;
+    height: 0.5em;
+    margin-top: 0.35em; // fallback where `lh` is unsupported
+    margin-top: calc((1lh - 0.5em) / 2); // centre on the FIRST line when wrapped
+    content: "";
+    background: currentcolor;
+  }
+}
+
+// ---------------------------------------------------------------------------
+// Cursor
+// ---------------------------------------------------------------------------
+// The pointer is the brand mark — the notched square from the "Make an inquiry"
+// button (the shape of the wordmark's O) — rendered as a DOM element that
+// follows the mouse, with `mix-blend-mode: difference` so it inverts against
+// whatever is behind it. That is the whole point: a fixed colour could not stay
+// legible over both the dark bands and the light ones (partners, Descender, the
+// mega panels), where the earlier yellow/white image cursor washed out. Being
+// an inversion it is always the opposite of its backdrop, so it responds
+// everywhere.
+//
+// A DOM element, not a CSS `cursor:` image, because CSS cursors cannot carry a
+// blend mode. The mark is inlined by main.js (from arrow-dark.svg, filled white
+// so difference gives a clean invert); this only positions and styles it. See
+// initCursor() for the mouse tracking and the interactive/text states.
+//
+// The hole in the mark sits on the hotspot, so the exact point is never covered.
+
+// Native cursor is hidden only once JS has taken over (this class is added by
+// initCursor), so with no JS the ordinary pointer stays — progressive
+// enhancement. Text fields keep the I-beam: its shape is the "type here"
+// affordance and no invert replaces that; the custom cursor hides over them.
+.leonard-has-cursor {
+  cursor: none;
+
+  input:not([type="checkbox"], [type="radio"], [type="submit"], [type="button"]),
+  textarea {
+    cursor: text;
+  }
+}
+
+.leonard-cursor {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: $zindex-tooltip + 10; // above everything, including the sticky nav
+  width: 18px;
+  height: 18px;
+  pointer-events: none;
+  mix-blend-mode: difference;
+  opacity: 0; // until the first move places it
+  transition:
+    opacity 0.2s ease,
+    width 0.15s ease,
+    height 0.15s ease;
+
+  svg {
+    display: block;
+    width: 100%;
+    height: 100%;
+    fill: #fff; // difference against white == invert of the backdrop
+  }
+}
+
+// Shown once positioned; grows a little over anything interactive as feedback
+// on top of the colour inversion; hidden over text fields so the I-beam shows.
+.leonard-cursor.is-visible {
+  opacity: 1;
+}
+
+.leonard-cursor.is-active {
+  width: 26px;
+  height: 26px;
+}
+
+.leonard-cursor.is-text {
+  opacity: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .leonard-cursor {
+    transition: opacity 0.2s ease;
+  }
+}
+
+// ---------------------------------------------------------------------------
+// Header — mega-menu dropdowns (Products, Services)
+// ---------------------------------------------------------------------------
+// Built on Bootstrap's Dropdown: it owns show/hide, click-outside, ESC and
+// aria. This only restyles the menu into a full-width panel and adds the two
+// active-state flourishes the design shows (numbered nav + highlighted item),
+// which Bootstrap can't express on its own.
+
+// ---------------------------------------------------------------------------
+// Sticky nav
+// ---------------------------------------------------------------------------
+// The bar locks where it starts: `top: 0` pins the header itself, and the
+// header's own pt-4 keeps the 24px of page above the bar, so the gap you see on
+// load is the gap you keep. (An earlier pass used a negative `top` to pull that
+// padding off-screen and sit the bar flush against the viewport edge — that is
+// not the behaviour wanted.) Sticky rather than fixed, so nothing below shifts
+// when it pins.
+//
+// The bar (`.navbar`) is opaque so content scrolling under it stays hidden; at
+// rest it reads as dark only because the page behind is. The header wrapper
+// itself is left transparent — its 24px pt-4 strip sits over the page-green top
+// and needs no fill of its own.
+
+.leonard-header {
+  position: sticky;
+  top: 0;
+  z-index: $zindex-sticky;
+}
+
+.leonard-header .navbar {
+  background: $leonard-dk-grey;
+}
+
+// Hidden on the way down, restored on the way up — toggled from main.js
+.leonard-header--hidden {
+  transform: translateY(-100%);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .leonard-header {
+    transition: transform 0.3s ease;
+  }
+}
+
+// No dropdown caret — the design has none
+.leonard-nav .dropdown-toggle::after {
+  display: none;
+}
+
+// Uppercase the nav links only. Putting text-uppercase on the <ul> would
+// cascade into the mega panels and shout the product descriptors, which are
+// title case in the design.
+//
+// Hover / keyboard focus: the label goes yellow and a yellow rule wipes in
+// beneath it — the same idiom as the footer links and the mega-menu cards. The
+// rule is a `::before` because the toggle's `::after` is the (hidden) caret.
+// The open item (`.show`) keeps its light box instead, so it is excluded.
+.leonard-nav > .nav-item > .nav-link {
+  position: relative;
+  font-family: $font-family-mono-narrow;
+  text-transform: uppercase;
+
+  &::before {
+    position: absolute;
+    // Inset by the nav-link's own inline padding (Bootstrap's
+    // `--bs-navbar-nav-link-padding-x`, 0.75rem at xl+) so the rule matches the
+    // label width, not the padded box — `0` each side overhangs the text.
+    // Bottom 0.35rem sits it just under the label (padding-y is 0.5rem).
+    inset: auto var(--bs-navbar-nav-link-padding-x, 0) 0.35rem;
+    height: 2px;
+    background: $leonard-yellow;
+    transform: scaleX(0);
+    transform-origin: left;
+    content: "";
+  }
+
+  &:not(.show):hover,
+  &:not(.show):focus-visible {
+    color: $leonard-yellow;
+
+    &::before {
+      transform: scaleX(1);
+    }
+  }
+
+  // Open item shows the light box, not the rule.
+  &.show::before {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .leonard-nav > .nav-item > .nav-link {
+    transition: color 0.2s ease-out;
+  }
+
+  .leonard-nav > .nav-item > .nav-link::before {
+    transition: transform 0.3s ease-out;
+  }
+}
+
+// The nav is never numbered. (The Figma nav-state frames show "1. PRODUCTS"
+// etc. while a panel is open, but that is an artefact of those frames, not
+// intended behaviour — confirmed with the designer.)
+
+// Highlight the open item, as the design boxes the active nav entry.
+// Bootstrap 5 puts .show on the toggle itself (not the parent <li>, which is
+// the Bootstrap 4 behaviour), so target the link.
+.leonard-nav .nav-link.show {
+  color: $leonard-dk-grey;
+  background: $leonard-lt-grey;
+}
+
+.leonard-mega {
+  --bs-dropdown-min-width: 0;
+
+  padding: 0;
+  margin: 0;
+  color: $leonard-dk-grey;
+  background: $leonard-lt-grey;
+  border: 0;
+}
+
+// Desktop: the panel is a full-container-width sheet dropping below the bar and
+// floating over the hero. The nav-item goes position:static so the absolutely
+// positioned menu anchors to the position-relative header (= container width),
+// not to the item.
+@include media-breakpoint-up(xl) {
+  // NB: no `position: relative` here — .leonard-header is already sticky, which
+  // is a positioned ancestor, so the mega panel still anchors to it. Setting
+  // relative would undo the sticky.
+  .leonard-nav .nav-item.dropdown {
+    position: static;
+  }
+
+  .leonard-mega {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    left: 0;
+    z-index: $zindex-dropdown;
+    border-top: 1px solid rgba($leonard-dk-grey, 0.15);
+  }
+
+  // Bootstrap toggles display:none/block, which can't transition — but an
+  // animation does run on the frame the element becomes visible.
+  @media (prefers-reduced-motion: no-preference) {
+    .leonard-mega.show {
+      animation: leonard-mega-in 0.18s ease-out;
+    }
+  }
+
+  // Dim the hero while a panel is open, as drawn
+  .leonard-header:has(.leonard-mega.show) ~ main .leonard-hero-ratio > img {
+    filter: brightness(0.4);
+  }
+}
+
+@keyframes leonard-mega-in {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .leonard-hero-ratio > img {
+    transition: filter 0.2s ease;
+  }
+}
+
+// ---------------------------------------------------------------------------
+// Mobile menu (full-screen offcanvas)
+// ---------------------------------------------------------------------------
+// A light panel replacing the desktop mega-menus below xl. Uppercase mono nav
+// with dashed rules; Products expands (Collapse) to its child pages set in the
+// display face; secondary links and a full-width yellow CTA anchor the foot.
+
+.leonard-mobile-nav {
+  --bs-offcanvas-width: 100%;
+  --bs-offcanvas-max-width: 100%;
+
+  color: $leonard-dk-grey;
+  background-color: $leonard-neutral-lightest;
+}
+
+// The primary nav rows.
+.leonard-mnav__item {
+  border-bottom: 1px dashed rgba($leonard-dk-grey, 0.3);
+}
+
+.leonard-mnav__item:first-child {
+  border-top: 1px dashed rgba($leonard-dk-grey, 0.3);
+}
+
+.leonard-mnav__item > a,
+.leonard-mnav__toggle {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 1.1rem 0;
+  font-family: $font-family-mono-narrow;
+  font-size: 1.75rem;
+  font-weight: 300;
+  color: $leonard-dk-grey;
+  text-align: left;
+  text-transform: uppercase;
+  letter-spacing: $leonard-tracking-ui;
+  text-decoration: none;
+  background: none;
+  border: 0;
+}
+
+// +/− affordance on the expandable row, driven by the Collapse aria state.
+.leonard-mnav__toggle::after {
+  font-family: $font-family-mono-ui;
+  font-weight: 100;
+  font-size: 2rem;
+  line-height: 1;
+  content: "+";
+}
+
+.leonard-mnav__toggle[aria-expanded="true"]::after {
+  content: "\2212"; // minus sign
+}
+
+// Child pages — the display face, big and bold, as drawn.
+.leonard-mnav__children {
+  padding-bottom: 1rem;
+  margin: 0;
+}
+
+.leonard-mnav__children a {
+  display: block;
+  padding: 0.35rem 0;
+  font-family: $font-family-display;
+  font-size: 2.5rem;
+  font-weight: 800;
+  line-height: 1.1;
+  color: $leonard-dk-grey;
+  text-transform: uppercase;
+  letter-spacing: $leonard-tracking-display;
+  text-decoration: none;
+}
+
+// Secondary links, pushed to the foot of the scrolling body.
+.leonard-mnav__secondary a {
+  display: block;
+  padding: 0.3rem 0;
+  color: rgba($leonard-dk-grey, 0.7);
+  text-decoration: none;
+}
+
+// The CTA is a flex child after the body, so it pins to the bottom edge.
+.leonard-mobile-nav__cta {
+  flex: none;
+}
+
+// Mega-menu cards ---------------------------------------------------------
+// The product renders are transparent cutouts on the light panel; the service
+// cards are photos that fill their box. Both share the hover treatment: the
+// image eases up slightly and a yellow rule wipes in beneath it.
+//
+// The rule sits under the media rather than under the title because service
+// titles run to three lines — a text underline would land in different places
+// card to card, whereas the media edge is a consistent baseline.
+
+.leonard-card-media {
+  position: relative;
+  overflow: hidden;
+
+  // `.ratio` positions real children absolutely (`.ratio > *`), which does not
+  // match a pseudo-element, so this is safe to layer on top.
+  &::after {
+    position: absolute;
+    inset: auto 0 0;
+    z-index: 2;
+    height: 3px;
+    content: "";
+    background: $leonard-yellow;
+    transform: scaleX(0);
+    transform-origin: left center;
+  }
+}
+
+.leonard-card img {
+  transform-origin: center;
+}
+
+.leonard-card:hover .leonard-card-media::after,
+.leonard-card:focus-visible .leonard-card-media::after {
+  transform: scaleX(1);
+}
+
+.leonard-card:hover img,
+.leonard-card:focus-visible img {
+  transform: scale(1.05);
+}
+
+.leonard-card:focus-visible {
+  outline: 2px solid $leonard-dk-grey;
+  outline-offset: 4px;
+}
+
+// Cards on the dark page (news, projects) carry `.text-light` on the link and
+// the title inherits it. On hover the title lifts to white, alongside the image
+// zoom and the yellow rule. `.text-light` sets colour with `!important`, so the
+// override matches it — and it is scoped to `.text-light` so the light-panel
+// mega-menu cards (which are `.text-dark`) are untouched.
+.leonard-card.text-light:hover,
+.leonard-card.text-light:focus-visible {
+  color: #fff !important;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .leonard-card img {
+    transition: transform 0.45s cubic-bezier(0.2, 0.6, 0.2, 1);
+  }
+
+  .leonard-card-media::after {
+    transition: transform 0.35s cubic-bezier(0.2, 0.6, 0.2, 1);
+  }
+
+  .leonard-card__title,
+  .leonard-card.text-light,
+  .leonard-card.text-light :is(h2, h3) {
+    transition: color 0.2s ease;
+  }
+}
+
+// ---------------------------------------------------------------------------
+// Hero
+// ---------------------------------------------------------------------------
+// Drives Bootstrap's .ratio helper. A `min-height` here would be transferred
+// back into the width by `aspect-ratio` and blow the page out sideways, so the
+// crop changes per breakpoint instead.
+
+.leonard-hero-ratio {
+  --bs-aspect-ratio: 125%; // 4:5 on phones, so the overlay has room
+
+  @include media-breakpoint-up(md) {
+    --bs-aspect-ratio: 75%;
+  }
+
+  @include media-breakpoint-up(lg) {
+    --bs-aspect-ratio: 52.84%; // 1685 x 890.396, as drawn
+  }
+}
+
+// Homepage: a full-viewport, high-impact open. Drops the .ratio aspect-ratio
+// spacer and sizes to the screen instead. `svh` keeps it stable while a mobile
+// URL bar shows (with a `vh` fallback for browsers without it).
+.leonard-hero-ratio--full {
+  // Mobile: a fixed ~70svh — a full-height hero reads awkwardly tall in
+  // portrait. The min-height stops a short landscape screen crushing the copy.
+  height: 70vh;
+  height: 70svh;
+  min-height: 24rem;
+
+  &::before {
+    content: none;
+  }
+
+  // Desktop: near-full viewport. 100svh less the sticky header (102px) and the
+  // section's pt-4 + pb-4 (24px each) = 150px, so a thin page-green edge shows
+  // above and below the image.
+  @include media-breakpoint-up(lg) {
+    height: calc(100vh - 150px);
+    height: calc(100svh - 150px);
+    min-height: 32rem;
+  }
+}
+
+// News / case-study hero: fills roughly one screen so it reads as the opening
+// view (copy pinned bottom-left), leaving the filter bar / article body below
+// the fold. Unlike --full (a fixed height) this is a min-height, so a tall copy
+// block on a short screen grows it rather than clipping. 8rem ≈ the sticky
+// header (102px) + the section's pt-4 (24px), so it lands at the viewport
+// bottom with a thin page-green edge above.
+.leonard-hero-ratio--screen {
+  min-height: calc(100vh - 8rem);
+  min-height: calc(100svh - 8rem);
+
+  &::before {
+    content: none;
+  }
+}
+
+// ---------------------------------------------------------------------------
+// Homepage (relume file)
+// ---------------------------------------------------------------------------
+
+// Full-bleed photo band between the stats and solution sections
+.leonard-band-ratio {
+  --bs-aspect-ratio: 100%;
+
+  @include media-breakpoint-up(md) {
+    --bs-aspect-ratio: 75%;
+  }
+
+  @include media-breakpoint-up(lg) {
+    --bs-aspect-ratio: 59.1%; // 1728 x 1021, as drawn
+  }
+}
+
+// The statement headline is neutral-lightest, a shade lighter than the body
+// colour it would otherwise inherit. A plain rule rather than a utility: the
+// heading has no competing colour declaration, so this needs no !important.
+.leonard-statement__title {
+  color: $leonard-neutral-lightest;
+}
+
+// ---------------------------------------------------------------------------
+// Reveal: the photo band pins while the next section rides up over it
+// ---------------------------------------------------------------------------
+// Pure CSS — the media is sticky and sits *behind*, the section after it is
+// opaque and stacks in front, so scrolling slides it up over the held image.
+//
+// The wrapper is what bounds it: sticky releases at its containing block's
+// edge, so the image is pinned exactly for as long as the covering section
+// takes to pass, then lets go. Without the wrapper it would stay pinned behind
+// the entire rest of the page.
+
+.leonard-reveal {
+  position: relative;
+}
+
+.leonard-reveal__media {
+  position: sticky;
+  top: 0;
+  z-index: 0;
+}
+
+// The covering section's own background is transparent — the page shows
+// through its gutters — so it needs an opaque fill of the page colour, or the
+// pinned image is visible down either side of it.
+.leonard-reveal > :not(.leonard-reveal__media) {
+  position: relative;
+  z-index: 1;
+  background: $leonard-dk-grey;
+}
+
+// Scroll-linked movement can be disorienting; fall back to a normal stack.
+@media (prefers-reduced-motion: reduce) {
+  .leonard-reveal__media {
+    position: static;
+  }
+}
+
+// Decorative mark in the top-right of the statement band, rotated as drawn
+.leonard-statement__mark {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: clamp(280px, 37vw, 635px);
+  height: auto;
+  pointer-events: none;
+  transform: rotate(180deg);
+}
+
+// Feature-list intro travels with the list as you scroll, releasing at the
+// last item. That comes for free from the grid: Bootstrap's `.row` is flex with
+// `align-items: stretch`, so the column is as tall as the feature list and the
+// sticky child stops where the column ends. Nothing above it may clip, or
+// sticky silently degrades to static.
+@include media-breakpoint-up(lg) {
+  .leonard-sticky {
+    position: sticky;
+    top: 2rem;
+  }
+}
+
+// The stats CTA is solid clinker with a lt-grey label. Bootstrap's .btn-dark
+// derives its label from color-contrast(), which lands on pure white — this
+// only overrides that one variable, so the rest of the button variant stands.
+.leonard-btn-lt {
+  --bs-btn-color: #{$leonard-lt-grey};
+  --bs-btn-hover-color: #{$leonard-lt-grey};
+}
+
+// Yellow CTAs go near-white on hover. Bootstrap's default is shade-color() on
+// the fill — a muddier yellow — and there is no Sass variable that changes the
+// hover of one variant alone, so this overrides the variant's own custom
+// properties. $btn-transition already animates all three.
+//
+// The border goes dark rather than matching the fill: several of these sit on
+// the lt-grey band (the Descender CTA, the four mega-menu buttons), where a
+// near-white fill on its own would lose the button's outline entirely.
+.btn-primary {
+  --bs-btn-hover-bg: #{$leonard-neutral-lightest};
+  --bs-btn-hover-border-color: #{$leonard-dk-grey};
+  --bs-btn-hover-color: #{$leonard-dk-grey};
+  --bs-btn-active-bg: #{$leonard-neutral-lightest};
+  --bs-btn-active-border-color: #{$leonard-dk-grey};
+  --bs-btn-active-color: #{$leonard-dk-grey};
+}
+
+// Newsletter sits on a 50% black scrim over the page background
+.leonard-newsletter {
+  color: $leonard-lt-grey;
+  background: rgba(#000, 0.5);
+}
+
+// Its email field is an outline in brand yellow rather than a filled control
+.leonard-newsletter__input {
+  color: $leonard-lt-grey;
+  text-transform: uppercase;
+  background: transparent;
+  border-color: $leonard-yellow;
+
+  &::placeholder {
+    color: rgba($leonard-lt-grey, 0.8);
+    text-transform: uppercase;
+  }
+
+  &:focus {
+    color: $leonard-lt-grey;
+    background: transparent;
+    border-color: $leonard-yellow;
+  }
+}
+
+// ---------------------------------------------------------------------------
+// Corner "+" ticks on the statement and solution bands
+// ---------------------------------------------------------------------------
+
+.leonard-corners {
+  // How far in from the panel edge the ticks sit. A custom property so a
+  // full-bleed panel can push them in without restating all four corners.
+  --leonard-corner-inline: 0.6rem;
+
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+
+  // Each tick was a "+" glyph. It is now two bars in a 1em box — the box keeps
+  // the glyph's exact footprint, so placement is unchanged, but the horizontal
+  // and vertical strokes are separate elements that can draw in independently.
+  span {
+    position: absolute;
+    width: 1em;
+    height: 1em;
+    color: currentcolor;
+  }
+
+  // The two strokes. Sized in em so they track the tick's font-size (fs-1, which
+  // RFS makes fluid) rather than drifting from it. Arm length matches the old
+  // glyph's ~0.62em; 0.06em is the thin stroke, floored at 1px so it never
+  // vanishes. Grown from the centre out, which reads as a line being drawn.
+  span::before,
+  span::after {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    background: currentcolor;
+    content: "";
+  }
+
+  span::before {
+    // horizontal — the "-"
+    width: 0.62em;
+    height: max(1px, 0.06em);
+    transform: translate(-50%, -50%) scaleX(1);
+    transform-origin: center;
+  }
+
+  span::after {
+    // vertical — the "|"
+    width: max(1px, 0.06em);
+    height: 0.62em;
+    transform: translate(-50%, -50%) scaleY(1);
+    transform-origin: center;
+  }
+
+  span:nth-child(1) {
+    top: 0.4rem;
+    left: var(--leonard-corner-inline);
+  }
+
+  span:nth-child(2) {
+    top: 0.4rem;
+    right: var(--leonard-corner-inline);
+  }
+
+  span:nth-child(3) {
+    bottom: 0.4rem;
+    left: var(--leonard-corner-inline);
+  }
+
+  span:nth-child(4) {
+    right: var(--leonard-corner-inline);
+    bottom: 0.4rem;
+  }
+}
+
+// Draw-in: the "-" wipes in, then the "|". Only when JS has added `--anim`
+// (which it does not do under reduced motion), so the default and the no-JS
+// state is the finished "+", identical to before. `is-drawn` is added by an
+// IntersectionObserver the first time each set scrolls into view.
+.leonard-corners--anim {
+  span::before {
+    transform: translate(-50%, -50%) scaleX(0);
+    transition: transform 0.3s ease;
+  }
+
+  span::after {
+    transform: translate(-50%, -50%) scaleY(0);
+    transition: transform 0.3s ease;
+    transition-delay: 0.28s; // waits for the "-" to finish
+  }
+
+  &.is-drawn span::before {
+    transform: translate(-50%, -50%) scaleX(1);
+  }
+
+  &.is-drawn span::after {
+    transform: translate(-50%, -50%) scaleY(1);
+  }
+}
+
+// On a panel that runs to the viewport edge, 0.6rem would leave the ticks
+// almost touching the screen. Line them up with the copy instead.
+.leonard-corners--bleed {
+  --leonard-corner-inline: 1.375rem; // == container gutter
+
+  @include media-breakpoint-up(lg) {
+    --leonard-corner-inline: 2.625rem; // 42px, as drawn inside the light rect
+  }
+}
+
+// ---------------------------------------------------------------------------
+// Trusted-partners marquee
+// ---------------------------------------------------------------------------
+// Figma places the logo strip twice, side by side — a scrolling ticker. The
+// strip is a flat screenshot on white, so it multiplies onto the light band.
+
+.leonard-marquee {
+  overflow: hidden;
+  mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent);
+}
+
+.leonard-marquee__track {
+  display: flex;
+  width: max-content;
+
+  // The strip is a screenshot on white, knocked back with `mix-blend-multiply`
+  // so the white becomes the band colour. That needs a backdrop *inside the
+  // same stacking context* — and both the mask on .leonard-marquee and the
+  // animation here create one, which left the logos sitting on white. Painting
+  // the band colour on the track itself gives the blend something to multiply
+  // against.
+  background: $leonard-neutral-lightest;
+  // 3x the old duration because the travel is now a 3-strip group rather than
+  // a single strip — same pixels per second, which is the speed that was right.
+  animation: leonard-marquee 135s linear infinite;
+}
+
+// Each group has to be at least as wide as the band on its own, or the track
+// runs out before the cycle ends and the tail of the loop plays over empty
+// space. The strip is only 674-1050px wide (its height is capped at the drawn
+// 81px, so it stops growing while the band keeps going full-bleed), against a
+// band that is the whole viewport — at 1728 that left 678px of nothing once per
+// cycle, which is what read as logos flashing in and out near the end.
+//
+// Three strips per group covers to ~3150px. Beyond that, add a fourth to each.
+.leonard-marquee__group {
+  display: flex;
+}
+
+.leonard-marquee__track img {
+  // The strip is exported at 2x; 81px tall is its drawn size
+  width: auto;
+  height: clamp(52px, 4.69vw, 81px);
+  max-width: none;
+  mix-blend-mode: multiply;
+}
+
+@keyframes leonard-marquee {
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .leonard-marquee__track {
+    animation: none;
+  }
+
+  .leonard-marquee {
+    mask-image: none;
+  }
+}
+
+// ---------------------------------------------------------------------------
+// Products page
+// ---------------------------------------------------------------------------
+
+// The page hero is a shallow 1685x468 band; that crop leaves nothing but a
+// sliver on a phone, so it deepens as the screen narrows.
+.leonard-page-hero-ratio {
+  --bs-aspect-ratio: 85%;
+
+  @include media-breakpoint-up(md) {
+    --bs-aspect-ratio: 45%;
+  }
+
+  @include media-breakpoint-up(lg) {
+    --bs-aspect-ratio: 27.78%; // 1685 x 468, as drawn
+  }
+}
+
+// ---------------------------------------------------------------------------
+// Products page (relume file)
+// ---------------------------------------------------------------------------
+
+// Darkens a full-bleed photo so overlaid copy stays legible. The design puts a
+// 40% black wash over the hero and the "discuss your equipment needs" band; as
+// the .ratio content child it covers the whole image with the text on top.
+.leonard-scrim {
+  background: rgba(#000, 0.4);
+}
+
+// Product band. Full-bleed light panel; position + clip so the ghosted
+// wordmark bleeds off the bottom without escaping the band (or the page).
+.leonard-product {
+  position: relative;
+  overflow: hidden;
+}
+
+// Testimonial card — a bordered panel on the dark page, quote in the body
+// colour, stars and rule in brand yellow. Kept to a hairline border so three
+// sit quietly in a row rather than reading as heavy boxes.
+.leonard-quote {
+  border: 1px solid rgba($leonard-lt-grey, 0.25);
+}
+
+// Rounded photo corners. Bootstrap's radii are all zeroed for the sharp
+// industrial look, but the Services block/safety photos are drawn with a soft
+// corner — a one-off rather than re-enabling rounding site-wide.
+.leonard-media-round {
+  border-radius: 1.5rem;
+}
+
+// Search result: a hairline-separated hit (section label, title link, excerpt,
+// "read more"). Same rule as the case-study rows; the title lifts to yellow on
+// hover, matching the nav / card idiom.
+.leonard-result {
+  border-bottom: 1px solid rgba($leonard-lt-grey, 0.2);
+}
+
+.leonard-result__title {
+  color: $leonard-lt-grey;
+
+  &:hover,
+  &:focus-visible {
+    color: $leonard-yellow;
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .leonard-result__title {
+    transition: color 0.2s ease-out;
+  }
+}
+
+// Case-study list row: a hairline-separated row, title left, square thumbnail
+// right. The whole row is one link; the title lifts to white on hover.
+.leonard-case {
+  border-bottom: 1px solid rgba($leonard-lt-grey, 0.2);
+}
+
+.leonard-case:first-child {
+  border-top: 1px solid rgba($leonard-lt-grey, 0.2);
+}
+
+.leonard-case__media {
+  width: 316px;
+  max-width: 100%;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .leonard-case h2 {
+    transition: color 0.2s ease;
+  }
+}
+
+.leonard-case:hover h2,
+.leonard-case:focus-visible h2 {
+  color: $white;
+}
+
+// Case-study detail list — label/value rows with a yellow label and a hairline
+// rule, used for the project meta (Client / Date / Role / Website).
+.leonard-detail {
+  margin: 0;
+
+  > div {
+    display: flex;
+    gap: 1rem;
+    justify-content: space-between;
+    padding-block: 0.85rem;
+    border-top: 1px solid rgba($leonard-lt-grey, 0.2);
+  }
+
+  > div:last-child {
+    border-bottom: 1px solid rgba($leonard-lt-grey, 0.2);
+  }
+
+  dt {
+    color: $leonard-yellow;
+    text-transform: uppercase;
+  }
+
+  dd {
+    margin: 0;
+    text-align: right;
+  }
+}
+
+// Industry "what you gain" outcome list — hairline-divided rows on the yellow
+// band, the active one carrying a caret. Static (the Figma tabs aren't wired).
+.leonard-outcomes > li {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding-block: 1.25rem;
+  border-top: 1px solid rgba($leonard-dk-grey, 0.25);
+}
+
+.leonard-outcomes > li:last-child {
+  border-bottom: 1px solid rgba($leonard-dk-grey, 0.25);
+}
+
+.leonard-outcomes > li.is-active::after {
+  font: var(--fa-font-solid);
+  content: "\f0da"; // caret-right
+}
+
+// ---------------------------------------------------------------------------
+// Article body — WordPress WYSIWYG prose
+// ---------------------------------------------------------------------------
+// One class that styles raw, class-less HTML the way a WordPress editor emits
+// it: headings, paragraphs, links, ul/ol, blockquotes, tables, figures and
+// images (including the classic-editor `alignleft` / `aligncenter` /
+// `alignright` float classes and Gutenberg's `alignwide` / `alignfull`
+// break-outs). Everything below is a descendant selector so pasted content
+// needs no utility classes to look right.
+
+.leonard-prose {
+  color: $leonard-lt-grey;
+  font-size: $font-size-base * 1.125; // 18px
+  line-height: 1.7;
+
+  // Vertical rhythm: consecutive blocks get a gap; the wrapper never adds a
+  // stray top/bottom margin of its own.
+  > * {
+    margin-top: 0;
+    margin-bottom: 1.5rem;
+  }
+
+  > :last-child {
+    margin-bottom: 0;
+  }
+
+  // Headings — the brand display face, yellow and uppercase, with extra air
+  // above so they read as section breaks.
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    margin-top: 3rem;
+    margin-bottom: 1.25rem;
+    font-family: $font-family-display;
+    font-weight: 800;
+    line-height: 1;
+    color: $leonard-yellow;
+    text-transform: uppercase;
+    letter-spacing: $leonard-tracking-display;
+  }
+
+  h2 {
+    @include font-size(2.75rem);
+  }
+
+  h3 {
+    @include font-size(2rem);
+  }
+
+  h4 {
+    @include font-size(1.5rem);
+  }
+
+  h5 {
+    @include font-size(1.25rem);
+  }
+
+  h6 {
+    @include font-size(1.0625rem);
+  }
+
+  a {
+    color: $leonard-yellow;
+    text-decoration: underline;
+    text-underline-offset: 0.2em;
+
+    &:hover,
+    &:focus-visible {
+      text-decoration: none;
+    }
+  }
+
+  strong,
+  b {
+    font-weight: 500;
+    color: $leonard-neutral-lightest;
+  }
+
+  em,
+  i {
+    font-style: italic;
+  }
+
+  // Lists — markers are drawn manually (absolutely positioned at the list's
+  // left edge) so a <ul> bullet and an <ol> number sit at the SAME x. With
+  // native `list-style: outside` the two marker types right-align to the text
+  // edge instead, so a "•" and a "1." start at different offsets and the two
+  // lists read as mis-indented against each other (the text edges align, only
+  // the markers drift). A fixed hanging indent keeps both identical, and the
+  // yellow marker colour comes along for free. Numbers use tabular figures and
+  // the 1.75rem indent clears two digits.
+  ul,
+  ol {
+    list-style: none;
+    padding-left: 0;
+  }
+
+  li {
+    position: relative;
+    margin-bottom: 0.5rem;
+    padding-left: 1.75rem;
+  }
+
+  ul > li::before {
+    position: absolute;
+    left: 0;
+    color: $leonard-yellow;
+    content: "\2022"; // •
+  }
+
+  ol {
+    counter-reset: leonard-ol;
+  }
+
+  ol > li {
+    counter-increment: leonard-ol;
+
+    &::before {
+      position: absolute;
+      left: 0;
+      color: $leonard-yellow;
+      font-variant-numeric: tabular-nums;
+      content: counter(leonard-ol) ".";
+    }
+  }
+
+  li > ul,
+  li > ol {
+    margin-top: 0.5rem;
+  }
+
+  // Blockquote — a yellow rule on the leading edge, lifted type.
+  blockquote {
+    padding-left: 1.75rem;
+    border-left: 3px solid $leonard-yellow;
+    color: $leonard-neutral-lightest;
+
+    @include font-size(1.5rem);
+
+    line-height: 1.4;
+
+    > :last-child {
+      margin-bottom: 0;
+    }
+
+    cite {
+      display: block;
+      margin-top: 1rem;
+      font-size: $font-size-base;
+      font-style: normal;
+      color: $leonard-grey;
+      text-transform: uppercase;
+      letter-spacing: $leonard-tracking-label;
+    }
+  }
+
+  // Figures and images. Images are fluid; a figure caption sits quietly beneath.
+  img {
+    max-width: 100%;
+    height: auto;
+  }
+
+  figure {
+    margin-inline: 0;
+  }
+
+  figcaption,
+  .wp-caption-text {
+    margin-top: 0.75rem;
+    font-size: $font-size-base * 0.875;
+    line-height: 1.5;
+    color: $leonard-grey;
+  }
+
+  // Tables — bordered, with a yellow header row (echoes .leonard-spec).
+  .table-wrap {
+    overflow-x: auto;
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: $font-size-base;
+  }
+
+  th,
+  td {
+    padding: 0.85rem 1rem;
+    text-align: left;
+    vertical-align: top;
+    border: 1px solid rgba($leonard-lt-grey, 0.2);
+  }
+
+  thead th {
+    color: $leonard-dk-grey;
+    text-transform: uppercase;
+    letter-spacing: $leonard-tracking-label;
+    background: $leonard-yellow;
+    border-color: $leonard-yellow;
+  }
+
+  // Inline + block code
+  code {
+    padding: 0.15em 0.4em;
+    font-size: 0.9em;
+    color: $leonard-neutral-lightest;
+    background: rgba($leonard-lt-grey, 0.12);
+  }
+
+  pre {
+    padding: 1.25rem 1.5rem;
+    overflow-x: auto;
+    background: rgba(#000, 0.25);
+
+    code {
+      padding: 0;
+      background: none;
+    }
+  }
+
+  hr {
+    margin-block: 3rem;
+    border: 0;
+    border-top: 1px solid rgba($leonard-lt-grey, 0.25);
+    opacity: 1;
+  }
+
+  // --- WordPress alignment classes ---------------------------------------
+  // Classic editor floats an image and lets text wrap around it; Gutenberg
+  // centres or breaks it out of the measure. Below `sm` a float would leave a
+  // useless sliver of text beside it, so aligned media stacks full width and
+  // only floats once there is room.
+  .aligncenter {
+    display: block;
+    margin-inline: auto;
+  }
+
+  @include media-breakpoint-up(sm) {
+    .alignleft {
+      float: left;
+      max-width: 45%;
+      margin: 0.5rem 2rem 1.25rem 0;
+    }
+
+    .alignright {
+      float: right;
+      max-width: 45%;
+      margin: 0.5rem 0 1.25rem 2rem;
+    }
+
+    figure.alignleft,
+    figure.alignright {
+      figcaption {
+        text-align: center;
+      }
+    }
+  }
+
+  // Break-outs: pull wide/full media past the reading measure. The article
+  // column sets --leonard-prose-bleed to how far it may reach each side.
+  .alignwide,
+  .alignfull {
+    margin-inline: calc(-1 * var(--leonard-prose-bleed, 0px));
+    max-width: none;
+    width: calc(100% + 2 * var(--leonard-prose-bleed, 0px));
+  }
+
+  // A float shouldn't spill past its heading or the next block that clears it.
+  h2,
+  h3 {
+    clear: both;
+  }
+
+  // How far `.alignwide` / `.alignfull` may reach past the reading measure.
+  // Zero on small screens (full-bleed would touch the viewport edge); a modest
+  // break-out once the column sits inside comfortable gutters.
+  @include media-breakpoint-up(lg) {
+    --leonard-prose-bleed: 4rem;
+  }
+}
+
+// News pagination — square page cells, the current one filled yellow.
+.leonard-pages a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 2.75rem;
+  height: 2.75rem;
+  color: $leonard-lt-grey;
+  text-decoration: none;
+  border: 1px solid rgba($leonard-lt-grey, 0.35);
+}
+
+.leonard-pages a.is-active {
+  color: $leonard-dk-grey;
+  background: $leonard-yellow;
+  border-color: $leonard-yellow;
+}
+
+// FAQ accordion — hairline-separated rows, the question in the display face
+// with a +/− driven by the Collapse aria state (same idiom as the mobile menu).
+.leonard-faq__item {
+  border-bottom: 1px solid rgba($leonard-lt-grey, 0.2);
+}
+
+.leonard-faq__item:first-child {
+  border-top: 1px solid rgba($leonard-lt-grey, 0.2);
+}
+
+.leonard-faq__q {
+  display: flex;
+  gap: 1.5rem;
+  align-items: baseline;
+  justify-content: space-between;
+  width: 100%;
+  padding: 1.5rem 0;
+  font-family: $font-family-display;
+  font-size: 1.5rem;
+  font-weight: 800;
+  line-height: 1.1;
+  color: inherit;
+  text-align: left;
+  text-transform: uppercase;
+  letter-spacing: $leonard-tracking-display;
+  background: none;
+  border: 0;
+}
+
+.leonard-faq__q::after {
+  flex: none;
+  font-family: $font-family-mono-ui;
+  font-size: 2rem;
+  font-weight: 100;
+  line-height: 1;
+  color: $leonard-yellow;
+  content: "+";
+}
+
+.leonard-faq__q[aria-expanded="true"]::after {
+  content: "\2212"; // minus sign
+}
+
+.leonard-faq__a {
+  padding-bottom: 1.75rem;
+}
+
+// Small hairline chip for project/case-study tags (Cement, Confined space …).
+.leonard-tag {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.35em 0.7em;
+  font-size: $font-size-base * 0.75;
+  line-height: 1;
+  letter-spacing: $leonard-tracking-label;
+  text-transform: uppercase;
+  border: 1px solid rgba($leonard-lt-grey, 0.35);
+}
+
+.leonard-quote__stars {
+  display: flex;
+  gap: 0.35em;
+}
+
+// ---------------------------------------------------------------------------
+// Product detail page
+// ---------------------------------------------------------------------------
+
+// Specification sheet. Bootstrap's .table gives the row rules; the design also
+// divides the three columns vertically and colours the label column yellow.
+.leonard-spec {
+  --bs-table-color: #{$leonard-white};
+  --bs-table-bg: transparent;
+
+  margin-bottom: 0;
+
+  th,
+  td {
+    font-family: $font-family-mono-ui;
+    font-size: clamp(13px, 1.157vw, 20px);
+    font-weight: 400;
+    letter-spacing: $leonard-tracking-display;
+    vertical-align: middle;
+  }
+
+  // Row label and both column headers are yellow
+  thead th,
+  tbody th {
+    color: $leonard-yellow;
+  }
+
+  // Vertical rules between the three columns
+  th + td,
+  td + td {
+    border-left: 1px solid $table-border-color;
+  }
+}
+
+// The detail hero watermark is two lines and fainter than the one on the
+// solution band, and is allowed to wrap. Doubled class so it beats the base
+// `.leonard-watermark span` rule regardless of which is declared first —
+// otherwise `white-space: nowrap` wins and it runs off on one line.
+.leonard-watermark.leonard-watermark--hero span {
+  color: rgba($leonard-dk-grey, 0.05);
+  white-space: normal;
+  transform: none;
+}
+
+// Form labels follow the mono UI type, tracked well out as drawn
+.leonard-form .form-label {
+  font-family: $font-family-mono-ui;
+  font-weight: 400;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+.leonard-form .form-control,
+.leonard-form .form-select {
+  font-family: $font-family-mono-ui;
+  font-weight: 300;
+}
+
+// Dark variant — for a form that sits on the page itself (the Contact page)
+// rather than on a light band. `$input-bg` is a white Sass value baked into the
+// controls, so the dark treatment has to be restated here: transparent fields
+// with a hairline light border, yellow on focus (matching the newsletter input).
+.leonard-form--dark {
+  .form-control,
+  .form-select {
+    color: $leonard-lt-grey;
+    background-color: transparent;
+    border-color: rgba($leonard-lt-grey, 0.35);
+
+    &::placeholder {
+      color: rgba($leonard-lt-grey, 0.6);
+    }
+
+    &:focus {
+      color: $leonard-lt-grey;
+      background-color: transparent;
+      border-color: $leonard-yellow;
+      box-shadow: none;
+    }
+  }
+
+  // Bootstrap's select caret is a dark SVG; swap it for a light one so it shows
+  // on the transparent field.
+  .form-select {
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23d8dfe5' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m2 5 6 6 6-6'/%3e%3c/svg%3e");
+  }
+
+  // Transparent so unchecked controls read as empty rings, not filled dots;
+  // Bootstrap paints the yellow marker in on :checked.
+  .form-check-input {
+    background-color: transparent;
+    border-color: rgba($leonard-lt-grey, 0.5);
+
+    &:checked {
+      background-color: $leonard-yellow;
+      border-color: $leonard-yellow;
+    }
+  }
+}
+
+// Jump targets. Bootstrap's reboot already enables smooth scrolling behind
+// prefers-reduced-motion; this just stops an anchored block landing flush
+// against the top of the viewport.
+.leonard-anchor {
+  scroll-margin-top: 1.5rem;
+}
+
+// Product names are 140px in the design and sit in a narrow left column, and
+// "DESCENDER" is a single unbreakable word. RFS alone does not scale far
+// enough at the small end, so the name was being clipped by the block on a
+// phone — hence an explicit clamp with a floor that fits a 320px column.
+// Overflowing the column at desktop is intentional: the name runs across the
+// product render, exactly as drawn.
+.leonard-product__name {
+  margin: 0;
+  font-family: $font-family-display;
+  font-size: clamp(2.25rem, 8.1vw, 8.75rem); // 140px at the 1728 design width
+  font-weight: 800;
+  line-height: 0.8;
+  text-transform: uppercase;
+  letter-spacing: $leonard-tracking-display;
+}
+
+// Product block eyebrow: rules above and below, sized to the label. Declared
+// after .leonard-eyebrow so inline-flex wins and the borders hug the text —
+// in the design each rule is a different width because each label is.
+.leonard-product__eyebrow {
+  display: inline-flex;
+  padding-block: 0.7rem;
+  border-top: 1px solid rgba($leonard-lt-grey, 0.35);
+  border-bottom: 1px solid rgba($leonard-lt-grey, 0.35);
+}
+
+// ---------------------------------------------------------------------------
+// DESCENDER watermark
+// ---------------------------------------------------------------------------
+// 300px Gilroy at 10% opacity, bled off the bottom of the solution band.
+
+.leonard-watermark {
+  position: absolute;
+  inset: auto 0 0;
+  overflow: hidden;
+  pointer-events: none;
+  user-select: none;
+
+  span {
+    display: block;
+    color: rgba($leonard-dk-grey, 0.1);
+    white-space: nowrap;
+    transform: translateY(22%);
+  }
+}
+
+// ---------------------------------------------------------------------------
+// Feature list rail
+// ---------------------------------------------------------------------------
+// From lg up the list hangs off a hairline rule, with the icons that have one
+// sitting centred on it — as drawn.
+
+$leonard-rail-gap: 6.2vw;
+
+.leonard-feature__icon {
+  display: block;
+  width: 38px;
+  height: 38px;
+  margin-bottom: 1rem;
+}
+
+// One feature's copy is a bulleted list in the design. It sits inside
+// .leonard-rail, which is itself a <ul>, so the browser would render level-two
+// hollow circles — the design uses solid discs.
+.leonard-rail ul {
+  list-style-type: disc;
+}
+
+@include media-breakpoint-up(lg) {
+  .leonard-rail {
+    // Named once so the icon (and the stack, below) can offset by exactly it
+    --leonard-rail-gap: #{clamp(40px, $leonard-rail-gap, 107px)};
+
+    padding-left: var(--leonard-rail-gap);
+    border-left: 1px solid rgba($leonard-lt-grey, 0.35);
+  }
+
+  .leonard-feature {
+    position: relative;
+  }
+
+  .leonard-feature__icon {
+    position: absolute;
+    top: 0;
+    left: calc(-1 * var(--leonard-rail-gap) - 19px);
+    margin-bottom: 0;
+  }
+}
+
+// Stacking feature cards
+// ---------------------------------------------------------------------------
+// Each feature pins under the one before it, so they pile up leaving a
+// title-height sliver of each — the enerblock.net `stack__container` effect,
+// measured off it: every item is `position: sticky` with a `top` stepped one
+// increment further down than its predecessor (theirs run 61 / 117.4 / 173.8 /
+// 230.2px, a flat 56.4px step).
+//
+// Plain CSS — sticky does all of it. Three things make it work:
+//
+//   * each card needs an OPAQUE background, or the card it covers shows
+//     straight through it. The band is a flat colour, so this is invisible
+//     until a card overlaps
+//   * the pinned sliver has to say something. At lg the icon is absolutely
+//     positioned out on the rail, so a card's top edge is its title — the step
+//     is sized to that (48px title + the 1rem inset, plus a little air)
+//   * any `overflow: hidden` ancestor would silently turn all of this back into
+//     static positioning
+//
+// lg+ only: below that the icon is in flow above the title, so a collapsed card
+// would show an icon and no name. Off under reduced motion too, which leaves
+// the plain scrolling list exactly as it was.
+
+.leonard-stack {
+  --leonard-stack-top: 6.5rem; // clears the 102px sticky header
+  --leonard-stack-inset: 1rem;
+
+  // The sliver has to be the card's top inset plus EXACTLY one line of its
+  // title. A step even slightly over that shears the second line of a wrapping
+  // title mid-glyph ("FASTER DEPLYOMENT, REDUCED DOWNTIME" is two lines, and
+  // one feature is three at lg); land it on the line box instead and the extra
+  // lines are simply cut at a line boundary, which is invisible.
+  //
+  // The title is .display-5 (3rem) at lh-flat, so its line box IS its
+  // font-size — but RFS makes that fluid (37.3px at 992, 43.2 at 1400, 48 at
+  // 1728). A fixed rem step would drift apart from it at every width, so run
+  // the same rfs() the display scale itself uses and the two stay locked.
+  @include rfs(3rem, --leonard-stack-line);
+
+  --leonard-stack-step: calc(var(--leonard-stack-inset) + var(--leonard-stack-line));
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  @include media-breakpoint-up(lg) {
+    // The rail line has to move above the cards. Each card has an opaque
+    // background that reaches left past the icon (below), which paints over the
+    // rail's own border-left — so drawn on the rail it would be covered by every
+    // pinned card. Instead the rail draws ONE continuous line on top (z-index 1,
+    // above the sticky cards), so it runs unbroken down the whole stack. No
+    // per-card segments, and no horizontal rules between cards.
+    .leonard-stack {
+      position: relative;
+      border-left: 0; // the covered one; replaced by the ::after below
+
+      &::after {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0; // == where the border-left was, i.e. the icon centres
+        z-index: 1;
+        width: 1px;
+        content: "";
+        background: rgba($leonard-lt-grey, 0.35);
+      }
+    }
+
+    .leonard-stack > .leonard-feature {
+      position: sticky;
+      top: calc(
+        var(--leonard-stack-top) + var(--leonard-stack-i, 0) * var(--leonard-stack-step)
+      );
+      padding-top: var(--leonard-stack-inset);
+      background: $leonard-dk-grey;
+    }
+
+    // Reach back across the rail gutter AND past the icon. The icon is
+    // absolutely positioned out on the rail, outside the card's box, so it is
+    // the one thing a covering card cannot paint over — leave it there and the
+    // collapsed cards' icons pile up on each other. The icon is centred on the
+    // rail line, so clearing it means reaching a further half-icon (19px) left.
+    .leonard-stack > .leonard-feature {
+      margin-left: calc(-1 * (var(--leonard-rail-gap) + 19px));
+      padding-left: calc(var(--leonard-rail-gap) + 19px);
+    }
+
+    // Level with the title, and re-anchored to the card's new left edge
+    .leonard-stack > .leonard-feature .leonard-feature__icon {
+      top: var(--leonard-stack-inset);
+      left: 0;
+    }
+
+    // The step multiplier. Generous upper bound so adding a feature to the
+    // markup needs no change here.
+    @for $i from 1 through 8 {
+      .leonard-stack > .leonard-feature:nth-child(#{$i}) {
+        --leonard-stack-i: #{$i - 1};
+      }
+    }
+  }
+}
+
+// The machine render sits flush with the left edge of the features band. It
+// overhung in the older clinker design, which is where the negative margin came
+// from — in relume it starts at x=0 of the frame, so it must not bleed out.
+
+// ---------------------------------------------------------------------------
+// Footer link underline
+// ---------------------------------------------------------------------------
+// A 1px yellow rule that wipes in from the left. It has to be a pseudo-element
+// rather than `text-decoration`: the colour and thickness could be set that way
+// ($link-hover-decoration is already `underline`), but a text-decoration line
+// cannot be animated from zero width — only faded.
+//
+// Every link in the footer sits on one line at every breakpoint, so the inline
+// box the ::after measures against is the whole label. If a link here ever
+// wraps, this underlines only the last line fragment.
+
+.leonard-footer a {
+  position: relative;
+
+  // Absolute, so on the LinkedIn link — which is a d-inline-flex — it is out
+  // of flow and never becomes a stray flex item.
+  &::after {
+    position: absolute;
+    inset: auto 0 -0.08em;
+    height: 1px;
+    background: $leonard-yellow;
+    transform: scaleX(0);
+    transform-origin: left;
+    content: "";
+  }
+
+  // The footer owns its link colour outright, so these carry no .link-light in
+  // the markup. That is deliberate: .link-light hard-codes its hover as
+  // `color: RGBA(224,229,234, ...) !important` — the only thing a variable can
+  // change is the opacity, so white was unreachable through it without an
+  // !important of our own. Setting the base colour here instead costs one
+  // declaration and keeps the override out of it. (Reboot's default would
+  // otherwise make these yellow: $link-color is left at $primary.)
+  color: $leonard-lt-grey;
+
+  // The label lifts to white as the rule arrives
+  &:hover,
+  &:focus-visible {
+    color: $white;
+    text-decoration: none; // stand down Bootstrap's own hover underline
+
+    &::after {
+      transform: scaleX(1);
+    }
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .leonard-footer a {
+    transition: color 0.3s ease-out;
+  }
+
+  .leonard-footer a::after {
+    transition: transform 0.3s ease-out;
+  }
+}
+
+// ---------------------------------------------------------------------------
+// Footer reveal
+// ---------------------------------------------------------------------------
+// A scroll-scrubbed parallax reveal, not a timed animation: every frame is a
+// function of scroll position, and scrolling back up runs it backwards.
+//
+// The tail — strapline, wordmark and legal row — sits on a full-bleed band in
+// the deeper green, inside a relative, clipped container. Two things scrub over
+// one range, linearly, no easing curve:
+//
+//   * `__layer` drifts from translateY(-50%) down to 0, so it is uncovered from
+//     the top edge as it settles
+//   * `::after`, a SOLID BLACK overlay above it, goes opacity 1 -> 0
+//
+// Together they read as the wordmark being uncovered while drifting into place,
+// rather than either a slide or a fade on its own.
+//
+// The range is the section's OWN entry: it starts as the top of this section
+// reaches the bottom of the viewport (`entry 0%`) and finishes as its bottom
+// does (`entry 100%`). That is a view-progress timeline, and it is self-sizing —
+// no magic pixel value to keep in step with the content, and because this
+// section is the last thing in the document `entry 100%` lands exactly at the
+// bottom of the page. So it still reads as the last thing the page does without
+// a hand-tuned scroll tail, which earlier versions needed.
+//
+// The timeline is declared on the section and consumed by both animations, so
+// the layer's own transform can never feed back into the measurement driving it.
+//
+// The layer is left IN FLOW rather than absolutely positioned. A transform moves
+// it either way, and in flow the container's height tracks the content instead
+// of needing a hard-coded height or a spacer sibling to stand it up.
+//
+// The overlay is black rather than the band colour on purpose — black is what
+// the content emerges from, and it reads as a cover being lifted rather than the
+// band dissolving into itself.
+
+.leonard-footer {
+  // The clip is the last thing in the footer and the band paints the page's
+  // bottom edge, so the footer contributes no padding of its own — any would
+  // show as a strip of the lighter green beneath the band.
+  padding-bottom: 0;
+}
+
+.leonard-footer-reveal {
+  position: relative;
+  padding-block: 3rem;
+  overflow: hidden;
+  background: $leonard-dk-grey-deep;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  @supports (animation-timeline: view()) {
+    .leonard-footer-reveal {
+      view-timeline-name: --leonard-footer-reveal;
+    }
+
+    .leonard-footer-reveal__layer {
+      animation: leonard-footer-drift linear both;
+      animation-timeline: --leonard-footer-reveal;
+      animation-range: entry 0% entry 100%;
+    }
+
+    // pointer-events: none is load-bearing. The overlay covers the whole
+    // section, and opacity 0 does NOT stop it receiving clicks — without this it
+    // sits over the legal row and the Privacy / Terms / Website by links are
+    // dead, with nothing on screen to explain why.
+    .leonard-footer-reveal::after {
+      position: absolute;
+      inset: 0;
+      content: "";
+      pointer-events: none;
+      background: #000;
+      animation: leonard-footer-uncover linear both;
+      animation-timeline: --leonard-footer-reveal;
+      animation-range: entry 0% entry 100%;
+    }
+  }
+}
+
+@keyframes leonard-footer-drift {
+  from {
+    transform: translateY(-50%);
+  }
+
+  to {
+    transform: none;
+  }
+}
+
+@keyframes leonard-footer-uncover {
+  from {
+    opacity: 1;
+  }
+
+  to {
+    opacity: 0;
+  }
+}
+
+// ---------------------------------------------------------------------------
+// Homepage intro splash  (Figma "start loader" 10203:35838)
+// ---------------------------------------------------------------------------
+// A one-shot brand overlay on the homepage only: a solid YELLOW screen with the
+// dark-green LEONARD wordmark dead-centre, a faint spirograph ring motif behind
+// it (up and to the left), and a small "360°" mono label below-left. It reveals
+// the pieces in sequence, holds, then lifts straight up to show the already-
+// rendered page beneath (no fade). Timing is pure CSS keyframes; main.js only
+// locks scroll (via `.leonard-intro-on` on <html>, added before first paint —
+// see index.html) and removes the node when the exit animation ends.
+//
+// Sequence / timing:
+//   logo reveal   0.0–0.8s   clip-path wipes bottom→top; the logo never moves
+//   "360°"        0.6–1.0s   short upward fade
+//   rings draw    0.9–2.0s   stroke-dashoffset on the single spirograph path
+//   hold          2.0–2.3s
+//   overlay exit  2.3–3.1s   translateY 0 → -100% (its own height = 100vh)
+//
+// The cover, lock and pre-animation states live inline in index.html's <head>
+// so the overlay paints correctly on the first frame (background #ffdb00).
+//
+// Layout is anchored to the wordmark. `--intro-w` is the wordmark width; the
+// ring motif and the "360°" are placed and sized off it with the exact ratios
+// the Figma frame uses (wordmark 1181px wide, dead-centre on a 1728×1117
+// frame), so the composition stays faithful and fully responsive.
+
+.leonard-intro {
+  align-items: center;
+  justify-content: center;
+  overflow: hidden; // clip the ring motif at the screen edges
+  // display/position/z-index/background are set inline in the <head> the instant
+  // `.leonard-intro-on` lands, so the yellow cover is there from frame one.
+  animation: leonard-intro-exit 0.8s cubic-bezier(0.76, 0, 0.24, 1) 2.3s both;
+  will-change: transform;
+}
+
+.leonard-intro__stage {
+  --intro-w: clamp(260px, 68vw, 1100px);
+
+  position: relative;
+  width: var(--intro-w);
+}
+
+// Wordmark — dark-green LEONARD, dead-centre. The mask is overflow-hidden and
+// the reveal is a clip-path wiping upward, so only the mask edge moves and the
+// logo itself holds its final position.
+.leonard-intro__logo-mask {
+  position: relative;
+  z-index: 1;
+  overflow: hidden;
+  line-height: 0;
+}
+
+.leonard-intro__logo {
+  display: block;
+  width: 100%;
+  height: auto;
+  clip-path: inset(100% 0 0 0); // start fully clipped (revealed bottom→top)
+  // ease-in-out so the wipe travels visibly across the full 0.8s rather than
+  // an ease-out front-loading it into the first ~300ms.
+  animation: leonard-intro-logo 0.8s cubic-bezier(0.76, 0, 0.24, 1) both;
+}
+
+// Ring motif — one spirograph path, faint grey, drawn on. Positioned/sized off
+// --intro-w to match the frame placement relative to the centred wordmark
+// (top-left of the vector at frame (-0.64, -73.9); center (864, 558.5); wordmark
+// 1181 wide → offsets and size expressed as fractions of --intro-w).
+.leonard-intro__rings {
+  position: absolute;
+  z-index: 0; // behind the wordmark
+  top: calc(50% + var(--intro-w) * -0.5355);
+  left: calc(50% + var(--intro-w) * -0.7321);
+  width: calc(var(--intro-w) * 1.0775);
+  height: calc(var(--intro-w) * 0.706);
+  opacity: 0.25;
+
+  path {
+    fill: none;
+    stroke: $leonard-grey; // #425057, the design's stroke colour
+    stroke-width: 1;
+    stroke-linecap: round;
+    stroke-miterlimit: 10;
+    vector-effect: non-scaling-stroke; // hairline at every size
+    // pathLength="1" normalises the length, so a full dash of 1 and an offset
+    // 1→0 draws the whole (compound) path regardless of its real length.
+    stroke-dasharray: 1;
+    stroke-dashoffset: 1;
+    animation: leonard-intro-rings 1.1s ease-in-out 0.9s both;
+  }
+}
+
+// "360°" — small Input Mono label, placed below-left of the wordmark (frame
+// 688.94, 756 → offset from centre as fractions of --intro-w); fades up in.
+.leonard-intro__360 {
+  position: absolute;
+  z-index: 1;
+  top: calc(50% + var(--intro-w) * 0.1672);
+  left: calc(50% + var(--intro-w) * -0.1483);
+  font-family: $font-family-mono-ui;
+  font-weight: 300;
+  font-size: max(12px, calc(var(--intro-w) * 0.017));
+  line-height: 1;
+  color: $leonard-dk-grey;
+  letter-spacing: -0.02em;
+  opacity: 0; // fades up into view
+  animation: leonard-intro-360 0.4s ease-out 0.6s both;
+}
+
+@keyframes leonard-intro-logo {
+  from {
+    clip-path: inset(100% 0 0 0);
+  }
+
+  to {
+    clip-path: inset(0 0 0 0);
+  }
+}
+
+@keyframes leonard-intro-360 {
+  from {
+    opacity: 0;
+    transform: translateY(1rem);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes leonard-intro-rings {
+  from {
+    stroke-dashoffset: 1;
+  }
+
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes leonard-intro-exit {
+  from {
+    transform: translateY(0);
+  }
+
+  to {
+    transform: translateY(-100%); // its own height (= 100vh): lifts fully clear
+  }
+}
+
+// ---------------------------------------------------------------------------
+// Page transition
+// ---------------------------------------------------------------------------
+// A yellow screen that, on leaving a page, slides up from the bottom to cover
+// it, then on the next page continues up and out through the top to reveal it —
+// one continuous upward motion across the navigation. Driven by
+// initPageTransition() in main.js.
+//
+// The panel lives in the header partial, so it is on every page and can already
+// be covering at first paint of an arriving page (via `.leonard-pt-arriving` on
+// <html>, added by a <head> script before paint) — the new page never flashes
+// before the reveal plays. Under reduced motion nothing animates: links
+// navigate normally and an arriving page just uncovers instantly.
+.leonard-pt {
+  position: fixed;
+  inset: 0;
+  z-index: 3000; // above the homepage intro (2000) and the cursor
+  background: $leonard-yellow;
+  transform: translateY(100%); // resting: just below the viewport
+  visibility: hidden; // no hit-testing or painting when idle
+  pointer-events: none;
+}
+
+// Arriving page: the panel is already covering at first paint.
+.leonard-pt-arriving .leonard-pt {
+  transform: translateY(0);
+  visibility: visible;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  // Leaving: slide up from the bottom to cover.
+  .leonard-pt--covering {
+    visibility: visible;
+    animation: leonard-pt-cover 0.45s cubic-bezier(0.76, 0, 0.24, 1) forwards;
+  }
+
+  // Arriving: continue up and out through the top to reveal.
+  .leonard-pt--revealing {
+    visibility: visible;
+    animation: leonard-pt-reveal 0.55s cubic-bezier(0.76, 0, 0.24, 1) forwards;
+  }
+}
+
+@keyframes leonard-pt-cover {
+  from {
+    transform: translateY(100%);
+  }
+
+  to {
+    transform: translateY(0);
+  }
+}
+
+@keyframes leonard-pt-reveal {
+  from {
+    transform: translateY(0);
+  }
+
+  to {
+    transform: translateY(-100%);
+  }
+}

@@ -1,0 +1,676 @@
+<!doctype html>
+<html lang="en" data-bs-theme="dark">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="icon" href="/favicon-32.png" sizes="32x32" type="image/png" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <style>
+      /* Critical: the arriving transition panel covers before any CSS loads,
+         so it also masks the dev server JS-injected-CSS flash. */
+      .leonard-pt-arriving .leonard-pt { position: fixed; inset: 0; z-index: 3000; background: #ffdb00; }
+    </style>
+    <script>
+      // Page transition: if we arrived via an in-site link, cover before first
+      // paint so the new page does not flash before the reveal (main.js).
+      try {
+        if (sessionStorage.getItem("leonard-pt") === "1") {
+          document.documentElement.classList.add("leonard-pt-arriving");
+        }
+      } catch (e) {}
+    </script>
+    <title>Leonard — Pioneering Industrial Innovation</title>
+    <link
+      rel="preload"
+      href="/fonts/gilroy-heavy.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+    <link rel="preconnect" href="https://use.typekit.net" crossorigin />
+    <link rel="stylesheet" href="https://use.typekit.net/djc8uke.css" />
+    <script
+      src="https://kit.fontawesome.com/462bc6ee41.js"
+      crossorigin="anonymous"
+    ></script>
+
+    <!-- Homepage intro splash. Activated synchronously below (before <body>
+         paints) so the render-blocking stylesheet covers the page from the very
+         first frame — no flash of the homepage. Skipped entirely without JS or
+         under reduced motion: the `leonard-intro-on` class is never added, so
+         the overlay stays `display:none` and the page is usable immediately.
+         main.js removes the overlay from the DOM when its exit animation ends. -->
+    <style>
+      .leonard-intro { display: none; }
+      /* Scroll is locked with overflow:hidden; main.js compensates by adding
+         padding-right equal to the scrollbar width so the page keeps the same
+         content width and does not reflow sideways when the scrollbar returns
+         on exit. The fixed inset:0 overlay ignores that padding, so it still
+         covers the whole window. */
+      html.leonard-intro-on,
+      html.leonard-intro-on body { overflow: hidden; }
+      html.leonard-intro-on .leonard-intro {
+        display: flex;
+        position: fixed;
+        inset: 0;
+        z-index: 2000;
+        background: #ffdb00;
+      }
+      /* Pre-animation states, inline so nothing flashes fully-formed before the
+         main stylesheet's keyframes take over. */
+      html.leonard-intro-on .leonard-intro__logo { clip-path: inset(100% 0 0 0); }
+      html.leonard-intro-on .leonard-intro__360 { opacity: 0; }
+      html.leonard-intro-on .leonard-intro__rings path {
+        stroke-dasharray: 1;
+        stroke-dashoffset: 1;
+      }
+    </style>
+    <script>
+      // Play the intro splash only on a direct/first visit — not when arriving
+      // via an in-site page transition (that plays the plain yellow reveal
+      // instead, so the LEONARD splash isn't repeated on every "home" click).
+      try {
+        if (
+          !window.matchMedia("(prefers-reduced-motion: reduce)").matches &&
+          sessionStorage.getItem("leonard-pt") !== "1"
+        ) {
+          document.documentElement.classList.add("leonard-intro-on");
+        }
+      } catch (e) {}
+    </script>
+  </head>
+  <body>
+    <!-- Intro overlay (see the <head> note). Decorative — the real logo and nav
+         are in the header below; this is a one-shot brand splash. -->
+    <div
+      class="leonard-intro"
+      id="leonardIntro"
+      role="presentation"
+      aria-hidden="true"
+    >
+      <div class="leonard-intro__stage">
+        <!-- Faint spirograph motif, drawn on. Single path exported from Figma
+             (10203:35852); it sits behind the wordmark, up and to the left. -->
+        <svg
+          class="leonard-intro__rings"
+          viewBox="0 0 1273.55 834.784"
+          fill="none"
+          aria-hidden="true"
+        >
+          <path
+            pathLength="1"
+            d="M0.500134 480.375C66.9781 309.889 335.38 272.124 542.085 368.927C704.223 444.859 777.529 583.948 734.931 693.226M674.94 834.284C553.412 780.83 512.16 662.15 556.043 544.716C565.623 519.084 579.3 493.171 597.256 467.579C697.836 324.252 907.312 234.961 1078.63 273.449C1268.94 316.217 1334.64 495.802 1207.47 667.212M853.427 643.428C755.055 762.911 629.751 785.349 541.904 724.503C523.407 711.687 506.215 695.094 490.871 674.645C408.044 564.322 402.622 363.262 484.986 201.796C580.586 14.4561 763.149 -64.2683 884.617 62.0243C1014.18 196.714 992.91 474.007 853.427 643.448V643.428ZM757.506 786.555C624.851 805.477 526.138 727.617 502.359 603.654C497.097 576.234 495.369 546.283 497.699 514.243C510.935 332.267 654.254 140.066 829.567 87.7368C1020 30.888 1162 161.64 1132.53 375.637C1104.32 580.493 931.071 761.826 757.506 786.575V786.555ZM803.618 640.375C736.438 758.592 613.222 794.67 499.587 743.908C474.422 732.659 449.437 717.111 425.256 697.083C287.842 583.145 222.97 357.216 290.232 184.681C363.337 -2.79938 556.525 -43.4171 709.103 102.783C854.772 242.353 891.526 485.698 803.618 640.375ZM750.255 662.05C709.625 766.246 599.123 815.019 472.052 786.977C442.147 780.368 411.037 769.52 379.445 753.992C185.976 658.916 56.2131 430.456 122.691 259.95C189.169 89.4643 409.571 85.3463 585.044 226.645C734.349 346.871 799.802 534.954 750.255 662.03V662.05Z"
+          />
+        </svg>
+        <div class="leonard-intro__logo-mask">
+          <img
+            class="leonard-intro__logo"
+            src="/img/intro-wordmark.svg"
+            alt=""
+            width="1181"
+            height="180"
+          />
+        </div>
+        <span class="leonard-intro__360">360&deg;</span>
+      </div>
+    </div>
+
+    <!-- #include partials/header.html -->
+
+    <main>
+      <!-- ============================================================== -->
+      <!-- Hero                                                            -->
+      <!-- ============================================================== -->
+      <!-- Full-bleed on the homepage: no container, so the image spans the
+           whole viewport width. pt-4/pb-4 leave a thin page-green edge above and
+           below; the height maths in .leonard-hero-ratio--full accounts for both. -->
+      <section class="pt-4 pb-4">
+        <div class="ratio leonard-hero-ratio leonard-hero-ratio--full overflow-hidden">
+          <img
+            class="w-100 h-100 object-fit-cover"
+            src="/img/v2-hero.webp"
+            alt="Robotic demolition arm working inside a refractory-lined industrial kiln"
+            width="1685"
+            height="970"
+          />
+          <!-- Image is full-bleed, but the copy sits in a container so it stays
+               on the page grid (aligned with the logo and the content below). -->
+          <div class="d-flex flex-column justify-content-end">
+            <div class="container-xxl pt-5 pb-4 pb-lg-5">
+              <p
+                class="leonard-eyebrow fw-light fs-8 ls-label text-white text-uppercase mb-4"
+              >
+                Refactory installation + robotic demolition
+              </p>
+              <h1
+                class="display-h1 lh-snug text-primary text-uppercase mw-hl mb-4"
+              >
+                Pioneering industrial innovation
+              </h1>
+              <a
+                class="btn btn-outline-light btn-lg d-inline-flex align-items-center gap-3 fw-light text-uppercase"
+                href="#video"
+              >
+                <i class="fa-solid fa-play" aria-hidden="true"></i>
+                Watch full video
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============================================================== -->
+      <!-- Statement                                                       -->
+      <!-- ============================================================== -->
+      <section class="container-xxl pt-section">
+        <div
+          class="position-relative overflow-hidden bg-dark px-3 px-lg-8 py-7 py-lg-9"
+        >
+          <div
+            class="leonard-corners text-primary fs-1 fw-thin"
+            aria-hidden="true"
+          >
+            <span></span><span></span><span></span><span></span>
+          </div>
+          <img
+            class="leonard-statement__mark d-none d-lg-block"
+            src="/img/statement-mark.svg"
+            alt=""
+            aria-hidden="true"
+            width="635"
+            height="416"
+          />
+          <div class="position-relative">
+            <p
+              class="leonard-eyebrow fw-light fs-8 ls-label text-primary text-uppercase mb-4"
+            >
+              Home safe, every day
+            </p>
+            <h2
+              class="leonard-statement__title display-h2 lh-snug text-uppercase text-break mw-stmt mb-0"
+            >
+              Leonard protects people, preserves critical infrastructure, and
+              helps the world's most demanding industries operate with
+              confidence.
+            </h2>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============================================================== -->
+      <!-- Trusted partners                                                -->
+      <!-- ============================================================== -->
+      <section class="bg-neutral text-dark py-4 mt-4">
+        <div class="container-xxl">
+          <p
+            class="leonard-eyebrow fw-light fs-10 ls-tight text-uppercase mb-3"
+          >
+            Trusted by the world's most demanding industries
+          </p>
+        </div>
+        <div class="leonard-marquee">
+          <!-- Two identical groups; the track travels exactly one group, so
+               the loop restarts on a frame that looks the same. Three strips a
+               group so a group is always wider than the band — see
+               _custom.scss. All but the first are decorative. -->
+          <div class="leonard-marquee__track">
+            <div class="leonard-marquee__group">
+              <img
+                src="/img/partner-logos.webp"
+                alt="Logos of Leonard's partner organisations"
+              />
+              <img src="/img/partner-logos.webp" alt="" aria-hidden="true" />
+              <img src="/img/partner-logos.webp" alt="" aria-hidden="true" />
+            </div>
+            <div class="leonard-marquee__group" aria-hidden="true">
+              <img src="/img/partner-logos.webp" alt="" />
+              <img src="/img/partner-logos.webp" alt="" />
+              <img src="/img/partner-logos.webp" alt="" />
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============================================================== -->
+      <!-- Who we are                                                      -->
+      <!-- ============================================================== -->
+      <section class="container-xxl py-7 py-lg-8">
+        <div class="row align-items-center gy-5">
+          <div class="col-12 col-lg-6">
+            <p
+              class="leonard-eyebrow fw-light fs-8 ls-label text-uppercase mb-4"
+            >
+              Who we are
+            </p>
+            <h2 class="display-h2 lh-snug text-primary text-uppercase mb-5">
+              A quiet confidence built over decades of hard work
+            </h2>
+            <div class="fw-light fs-8 lh-body mw-body-lg">
+              <p class="mb-4">
+                We are envisioning, engineering and pioneering better ways.
+              </p>
+              <p class="mb-0">
+                Our machines, our robotics and methodologies are tackling the
+                same old problems but in new, innovative and effective ways.
+                Less human and corporate risk, less refractory down time, more
+                return on investment.
+              </p>
+            </div>
+            <div class="d-flex flex-wrap gap-3 mt-5">
+              <a
+                class="btn btn-primary btn-lg d-inline-flex align-items-center gap-2 fw-light text-uppercase"
+                href="/about.html"
+              >
+                About us
+                <i class="fa-solid fa-caret-right fs-11" aria-hidden="true"></i>
+              </a>
+              <a
+                class="btn btn-outline-primary btn-lg d-inline-flex align-items-center gap-2 fw-light text-uppercase"
+                href="/contact.html"
+              >
+                Make an inquiry
+                <i class="fa-solid fa-caret-right fs-11" aria-hidden="true"></i>
+              </a>
+            </div>
+          </div>
+          <div class="col-12 col-lg-6">
+            <img
+              class="img-fluid d-block ms-lg-auto"
+              src="/img/v2-who.webp"
+              alt="Leonard engineers on site in protective equipment"
+              width="768"
+              height="768"
+              loading="lazy"
+            />
+          </div>
+        </div>
+      </section>
+
+      <!-- ============================================================== -->
+      <!-- Stats                                                           -->
+      <!-- ============================================================== -->
+      <section class="container-xxl">
+        <div class="bg-primary text-dark p-4">
+          <h2 class="display-5 lh-flat ls-tight text-uppercase mb-2">
+            Putting safety and efficiency in your hands.
+          </h2>
+          <p class="fw-light fs-8 lh-body ls-tight mb-7">
+            Our solutions are proven to be safer and more efficient.
+          </p>
+
+          <div class="row gy-5">
+            <div class="col-12 col-sm-6 col-xl-3">
+              <span data-countup="18" class="d-block display-stat lh-tight ls-tight">18</span>
+              <p
+                class="fw-light fs-7 lh-body ls-tight text-uppercase mt-3 mb-0"
+              >
+                Saving up to 18hrs through reduced deployment time
+              </p>
+            </div>
+            <div class="col-12 col-sm-6 col-xl-3">
+              <span data-countup="24" class="d-block display-stat lh-tight ls-tight">24</span>
+              <p
+                class="fw-light fs-7 lh-body ls-tight text-uppercase mt-3 mb-0"
+              >
+                Installation 24hrs after burner off
+              </p>
+            </div>
+            <div class="col-12 col-sm-6 col-xl-3">
+              <span data-countup="50" class="d-block display-stat lh-tight ls-tight">50</span>
+              <p
+                class="fw-light fs-7 lh-body ls-tight text-uppercase mt-3 mb-0"
+              >
+                50% time saving vs. manual methods
+              </p>
+            </div>
+            <div class="col-12 col-sm-6 col-xl-3">
+              <span data-countup="100" class="d-block display-stat lh-tight ls-tight">100</span>
+              <p
+                class="fw-light fs-7 lh-body ls-tight text-uppercase mt-3 mb-0"
+              >
+                Can operate at 100&deg;C+ / 212&deg;F+
+              </p>
+            </div>
+          </div>
+
+          <a
+            class="btn btn-dark leonard-btn-lt btn-lg d-inline-flex align-items-center gap-2 fw-light text-uppercase mt-6"
+            href="/health-safety.html"
+          >
+            Safety
+            <i class="fa-solid fa-caret-right fs-11" aria-hidden="true"></i>
+          </a>
+        </div>
+      </section>
+
+      <!-- Photo band pins while the section below rides up over it -->
+      <div class="leonard-reveal">
+        <!-- ============================================================== -->
+        <!-- Full-bleed photo band                                           -->
+        <!-- ============================================================== -->
+        <section class="leonard-reveal__media mt-section">
+          <div class="ratio leonard-band-ratio">
+            <img
+              class="w-100 h-100 object-fit-cover"
+              src="/img/v2-band.webp"
+              alt="Leonard crew preparing a robotic arm on site"
+              width="1728"
+              height="1021"
+              loading="lazy"
+            />
+          </div>
+        </section>
+
+        <!-- ============================================================== -->
+        <!-- One solution, multiple uses                                     -->
+        <!-- ============================================================== -->
+        <!-- Full-bleed light panel: the section carries no container, so the
+             band runs edge to edge. Figma draws this rect inset 24px, but the
+             build takes it to the viewport edge by request. The container is
+             moved inside so the copy still lines up with the rest of the page. -->
+        <section class="pt-section">
+          <div
+            class="position-relative overflow-hidden bg-light text-dark py-7 py-lg-8"
+          >
+            <div
+              class="leonard-corners leonard-corners--bleed fs-1 fw-thin"
+              aria-hidden="true"
+            >
+              <span></span><span></span><span></span><span></span>
+            </div>
+            <div class="leonard-watermark" aria-hidden="true">
+              <span class="display-wordmark lh-tight ls-tight text-uppercase"
+                >Descender</span
+              >
+            </div>
+
+            <div class="container-xxl px-4 px-lg-5">
+              <div class="row position-relative gy-4">
+                <div class="col-12 col-lg-5 order-lg-2">
+                  <div
+                    class="border-start border-3 border-primary ps-3 d-lg-flex flex-column align-items-lg-end text-lg-end border-lg-0 pe-lg-0"
+                  >
+                    <p class="display-6 lh-flat ls-tight text-uppercase mb-1">
+                      Descender
+                    </p>
+                    <p class="fw-light fs-7 lh-body ls-tight text-secondary mb-0">
+                      Vertical Access
+                    </p>
+                  </div>
+                  <img
+                    class="img-fluid d-block mt-5 ms-lg-auto"
+                    src="/img/descender-robot.webp"
+                    alt="Descender robotic arm unit"
+                    width="1076"
+                    height="836"
+                    loading="lazy"
+                  />
+                </div>
+
+                <div class="col-12 col-lg-7 order-lg-1">
+                  <p
+                    class="leonard-eyebrow fw-normal fs-9 ls-label text-secondary text-uppercase mb-4"
+                  >
+                    Robotic arm solutions
+                  </p>
+                  <h2 class="display-h2 lh-snug text-uppercase mb-5">
+                    One solution. Multiple uses.
+                  </h2>
+                  <p
+                    class="fw-light fs-7 lh-body ls-tight text-secondary mw-body-lg mb-0"
+                  >
+                    Not only do our robotic arms demolish tough castable
+                    refractory materials, it can cut anchors, weld new anchors,
+                    and gun on shot cast.
+                  </p>
+                  <div class="d-flex flex-wrap gap-3 mt-5">
+                    <a
+                      class="btn btn-primary btn-lg d-inline-flex align-items-center gap-2 fw-light text-uppercase"
+                      href="/product.html"
+                    >
+                      Find out more
+                      <i
+                        class="fa-solid fa-caret-right fs-11"
+                        aria-hidden="true"
+                      ></i>
+                    </a>
+                    <a
+                      class="btn btn-outline-dark btn-lg d-inline-flex align-items-center gap-2 fw-light text-uppercase"
+                      href="/products.html"
+                    >
+                      All products
+                      <i
+                        class="fa-solid fa-caret-right fs-11"
+                        aria-hidden="true"
+                      ></i>
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+
+      <!-- ============================================================== -->
+      <!-- Feature list                                                    -->
+      <!-- ============================================================== -->
+      <section class="bg-dark text-light mt-section">
+        <div class="container-xxl py-7 py-lg-8">
+          <div class="row gy-5">
+            <div class="col-12 col-lg-5">
+              <!-- Sticky at lg+: travels with the feature list, releasing at the
+                   last item because the column ends there. -->
+              <div class="leonard-sticky">
+                <img
+                  class="leonard-machine img-fluid d-block mb-5"
+                  src="/img/machine.webp"
+                  alt="Leonard robotic demolition machine"
+                  width="462"
+                  height="402"
+                  loading="lazy"
+                />
+                <p
+                  class="leonard-eyebrow fw-light fs-8 ls-label text-primary text-uppercase mb-4"
+                >
+                  Robotic arm solutions
+                </p>
+                <h2 class="display-h2 lh-snug text-primary text-uppercase mb-5">
+                  Home safe, every day
+                </h2>
+                <div class="d-flex flex-wrap gap-3">
+                  <a
+                    class="btn btn-primary btn-lg d-inline-flex align-items-center gap-2 fw-light text-uppercase"
+                    href="/products.html"
+                  >
+                    Products
+                    <i
+                      class="fa-solid fa-caret-right fs-11"
+                      aria-hidden="true"
+                    ></i>
+                  </a>
+                  <a
+                    class="btn btn-outline-light btn-lg d-inline-flex align-items-center gap-2 fw-light text-uppercase"
+                    href="/contact.html"
+                  >
+                    Make an inquiry
+                    <i
+                      class="fa-solid fa-caret-right fs-11"
+                      aria-hidden="true"
+                    ></i>
+                  </a>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-12 col-lg-7">
+              <!-- .leonard-stack pins each feature under the last, leaving a
+                   title-height sliver — see _custom.scss. lg+ only. -->
+              <ul class="leonard-rail leonard-stack list-unstyled mb-0">
+                <li class="leonard-feature">
+                  <img
+                    class="leonard-feature__icon"
+                    src="/img/icon-deployment.svg"
+                    alt=""
+                    width="38"
+                    height="38"
+                    loading="lazy"
+                  />
+                  <h3
+                    class="display-5 lh-flat ls-tight text-primary text-uppercase mb-3"
+                  >
+                    Maximum safety
+                  </h3>
+                  <p class="fw-light fs-7 lh-body ls-tight mw-body-lg mb-0">
+                    Removes all personnel from inside vessels.
+                  </p>
+                </li>
+                <li class="leonard-feature mt-8">
+                  <img
+                    class="leonard-feature__icon"
+                    src="/img/icon-deployment.svg"
+                    alt=""
+                    width="38"
+                    height="38"
+                    loading="lazy"
+                  />
+                  <h3
+                    class="display-5 lh-flat ls-tight text-primary text-uppercase mb-3"
+                  >
+                    Faster deplyoment, reduced downtime
+                  </h3>
+                  <ul class="fw-light fs-7 lh-body ls-tight mw-body-lg mb-0">
+                    <li>Installation 24hrs after burner off</li>
+                    <li>Can operate at 100&deg;C+ / 212&deg;F+</li>
+                    <li>
+                      Reduced deployment time vs manual approach, saving up to
+                      18hrs.
+                    </li>
+                  </ul>
+                </li>
+                <li class="leonard-feature mt-8">
+                  <img
+                    class="leonard-feature__icon"
+                    src="/img/icon-visibility.svg"
+                    alt=""
+                    width="38"
+                    height="38"
+                    loading="lazy"
+                  />
+                  <h3
+                    class="display-5 lh-flat ls-tight text-primary text-uppercase mb-3"
+                  >
+                    Enhanced visibility
+                  </h3>
+                  <p class="fw-light fs-7 lh-body ls-tight mw-body-lg mb-0">
+                    Camera and 3D scanning enables inspection of areas not
+                    typically accessible.
+                  </p>
+                </li>
+                <li class="leonard-feature mt-8">
+                  <img
+                    class="leonard-feature__icon"
+                    src="/img/icon-visibility.svg"
+                    alt=""
+                    width="38"
+                    height="38"
+                    loading="lazy"
+                  />
+                  <h3
+                    class="display-5 lh-flat ls-tight text-primary text-uppercase mb-3"
+                  >
+                    High productivity
+                  </h3>
+                  <p class="fw-light fs-7 lh-body ls-tight mw-body-lg mb-0">
+                    Cleans and demolishes large areas, with 50% time saving vs.
+                    manual methods.
+                  </p>
+                </li>
+                <li class="leonard-feature mt-8">
+                  <img
+                    class="leonard-feature__icon"
+                    src="/img/icon-deployment.svg"
+                    alt=""
+                    width="38"
+                    height="38"
+                    loading="lazy"
+                  />
+                  <h3
+                    class="display-5 lh-flat ls-tight text-primary text-uppercase mb-3"
+                  >
+                    Flexibility to be deployed across the plant
+                  </h3>
+                  <p class="fw-light fs-7 lh-body ls-tight mw-body-lg mb-0">
+                    Works in cyclones, risers, calciners, gas ducts, kiln hood,
+                    TA duct, cooler take off areas; multiple units increase
+                    efficiency and safety.
+                  </p>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============================================================== -->
+      <!-- Newsletter                                                      -->
+      <!-- ============================================================== -->
+      <section class="container-xxl pt-section">
+        <div class="leonard-newsletter position-relative px-4 px-lg-8 py-7">
+          <div
+            class="leonard-corners text-primary fs-1 fw-thin"
+            aria-hidden="true"
+          >
+            <span></span><span></span><span></span><span></span>
+          </div>
+          <div class="row align-items-center gy-5 position-relative">
+            <div class="col-12 col-lg-6">
+              <p
+                class="leonard-eyebrow fw-light fs-8 ls-label text-uppercase mb-4"
+              >
+                Sign up for updates
+              </p>
+              <h2 class="display-h3 lh-flat text-primary text-uppercase mb-4">
+                Get the news<br />from the front line
+              </h2>
+              <p class="fw-normal fs-8 lh-body mb-0">
+                Project stories, technical insights, and industry news. No
+                noise, just substance.
+              </p>
+            </div>
+            <div class="col-12 col-lg-5 offset-lg-1">
+              <form class="d-flex flex-column flex-sm-row gap-3" novalidate>
+                <label class="visually-hidden" for="newsletterEmail"
+                  >Email address</label
+                >
+                <input
+                  class="form-control leonard-newsletter__input"
+                  type="email"
+                  id="newsletterEmail"
+                  name="email"
+                  placeholder="Enter your email"
+                  autocomplete="email"
+                />
+                <button
+                  class="btn btn-primary btn-lg flex-shrink-0 fw-light text-nowrap text-uppercase"
+                  type="submit"
+                >
+                  Sign up
+                </button>
+              </form>
+              <p class="fw-normal fs-11 lh-body mt-3 mb-0">
+                By clicking Sign Up you're confirming that you agree with our
+                Terms and Conditions.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- #include partials/footer.html -->
+
+    <script type="module" src="/js/main.js"></script>
+  </body>
+</html>

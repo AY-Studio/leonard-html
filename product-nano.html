@@ -1,0 +1,394 @@
+<!doctype html>
+<html lang="en" data-bs-theme="dark">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="icon" href="/favicon-32.png" sizes="32x32" type="image/png" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <style>
+      /* Critical: the arriving transition panel covers before any CSS loads,
+         so it also masks the dev server JS-injected-CSS flash. */
+      .leonard-pt-arriving .leonard-pt { position: fixed; inset: 0; z-index: 3000; background: #ffdb00; }
+    </style>
+    <script>
+      // Page transition: if we arrived via an in-site link, cover before first
+      // paint so the new page does not flash before the reveal (main.js).
+      try {
+        if (sessionStorage.getItem("leonard-pt") === "1") {
+          document.documentElement.classList.add("leonard-pt-arriving");
+        }
+      } catch (e) {}
+    </script>
+    <title>Nano — Confined Space Access Arm | Leonard</title>
+    <link rel="preload" href="/fonts/gilroy-heavy.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preconnect" href="https://use.typekit.net" crossorigin />
+    <link rel="stylesheet" href="https://use.typekit.net/djc8uke.css" />
+    <script src="https://kit.fontawesome.com/462bc6ee41.js" crossorigin="anonymous"></script>
+  </head>
+  <body>
+    <!-- #include partials/header.html -->
+
+    <!--
+      Product detail template (relume 10203:36406), populated with Nano.
+      Duplicate per product and swap: title, eyebrow, watermark, render, the
+      statement copy, the spec rows and the "Enquire about ..." heading.
+    -->
+    <main>
+      <!-- ============================================================== -->
+      <!-- Hero                                                            -->
+      <!-- ============================================================== -->
+      <section class="container-xxl pt-4">
+        <div class="position-relative overflow-hidden bg-light text-dark">
+          <div class="leonard-watermark leonard-watermark--hero" aria-hidden="true">
+            <span class="display-wordmark lh-tight ls-tight text-uppercase">Nano</span>
+          </div>
+          <div class="row g-0 align-items-center position-relative">
+            <div class="col-12 col-lg-4 p-4 p-lg-5">
+              <p
+                class="leonard-eyebrow leonard-product__eyebrow fw-normal fs-9 ls-label text-uppercase mb-4"
+              >
+                Confined space access arm
+              </p>
+              <h1 class="display-2 lh-snug ls-tight text-uppercase mb-0">Nano</h1>
+            </div>
+            <div class="col-12 col-lg-8">
+              <div class="ratio" style="--bs-aspect-ratio: 65.5%">
+                <img
+                  class="w-100 h-100 object-fit-contain"
+                  src="/img/render-324.png"
+                  alt="Nano confined space access robotic arm"
+                  width="914"
+                  height="862"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============================================================== -->
+      <!-- Statement                                                       -->
+      <!-- ============================================================== -->
+      <section class="container-xxl pt-section">
+        <div class="position-relative bg-dark text-light px-3 px-lg-8 py-7 py-lg-9">
+          <div class="leonard-corners text-primary fs-1 fw-thin" aria-hidden="true">
+            <span></span><span></span><span></span><span></span>
+          </div>
+          <p class="leonard-eyebrow fw-light fs-8 ls-tight text-uppercase mb-4">
+            Nano — confined space access arm
+          </p>
+          <h2 class="display-4 lh-mid ls-tight text-uppercase text-break mw-stmt mb-0">
+            A high-performance robotic access system engineered to deliver safe,
+            precise, and efficient remote operation in demanding industrial
+            environments. With accuracy.
+          </h2>
+        </div>
+      </section>
+
+      <!-- ============================================================== -->
+      <!-- Specification sheet                                             -->
+      <!-- ============================================================== -->
+      <section class="container-xxl pt-section">
+        <div class="bg-secondary text-light p-4 p-lg-5">
+          <p class="leonard-eyebrow fw-light fs-10 ls-label text-uppercase mb-3">Key details</p>
+          <h2 class="display-2 lh-snug ls-tight text-primary text-uppercase text-break mb-5">
+            Specification sheet
+          </h2>
+
+          <div class="table-responsive">
+            <table class="table leonard-spec">
+              <caption class="visually-hidden">
+                Nano specification sheet
+              </caption>
+              <thead>
+                <tr>
+                  <th scope="col"><span class="visually-hidden">Specification</span></th>
+                  <th scope="col">Title</th>
+                  <th scope="col">Title</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <th scope="row">Item</th>
+                  <td>Lorem ipsum</td>
+                  <td>Lorem ipsum</td>
+                </tr>
+                <tr>
+                  <th scope="row">Item</th>
+                  <td>Lorem ipsum</td>
+                  <td>Lorem ipsum</td>
+                </tr>
+                <tr>
+                  <th scope="row">Item</th>
+                  <td>Lorem ipsum</td>
+                  <td>Lorem ipsum</td>
+                </tr>
+                <tr>
+                  <th scope="row">Item</th>
+                  <td>Lorem ipsum</td>
+                  <td>Lorem ipsum</td>
+                </tr>
+                <tr>
+                  <th scope="row">Item</th>
+                  <td>Lorem ipsum</td>
+                  <td>Lorem ipsum</td>
+                </tr>
+                <tr>
+                  <th scope="row">Item</th>
+                  <td>Lorem ipsum</td>
+                  <td>Lorem ipsum</td>
+                </tr>
+                <tr>
+                  <th scope="row">Item</th>
+                  <td>Lorem ipsum</td>
+                  <td>Lorem ipsum</td>
+                </tr>
+                <tr>
+                  <th scope="row">Item</th>
+                  <td>Lorem ipsum</td>
+                  <td>Lorem ipsum</td>
+                </tr>
+                <tr>
+                  <th scope="row">Item</th>
+                  <td>Lorem ipsum</td>
+                  <td>Lorem ipsum</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <p class="leonard-eyebrow fw-light fs-10 ls-label text-uppercase mt-6 mb-3">Downloads</p>
+          <div class="d-flex flex-wrap gap-3">
+            <a class="btn btn-primary minw-176 minh-37 fw-light ls-wide text-uppercase" href="#datasheet"
+              >Data sheet <i class="fa-solid fa-caret-right" aria-hidden="true"></i></a
+            >
+            <a
+              class="btn btn-outline-light minw-176 minh-37 fw-light ls-wide text-uppercase"
+              href="#downloads"
+              >Downloads <i class="fa-solid fa-caret-right" aria-hidden="true"></i></a
+            >
+          </div>
+        </div>
+      </section>
+
+      <!-- ============================================================== -->
+      <!-- Stats                                                           -->
+      <!-- ============================================================== -->
+      <section class="bg-primary text-dark mt-section">
+        <div class="container-xxl py-7 py-lg-8">
+          <h2 class="display-5 lh-flat ls-tight text-uppercase mb-2">
+            Putting safety and efficiency in your hands.
+          </h2>
+          <p class="fw-light fs-8 lh-body ls-tight mb-7">
+            Our solutions are proven to be safer and more efficient.
+          </p>
+
+          <div class="row gy-5">
+            <div class="col-12 col-sm-6 col-xl-3">
+              <span data-countup="18" class="d-block display-stat lh-tight ls-tight">18</span>
+              <p class="fw-light fs-7 lh-body ls-tight text-uppercase mt-3 mb-0">
+                Saving up to 18hrs through reduced deployment time
+              </p>
+            </div>
+            <div class="col-12 col-sm-6 col-xl-3">
+              <span data-countup="24" class="d-block display-stat lh-tight ls-tight">24</span>
+              <p class="fw-light fs-7 lh-body ls-tight text-uppercase mt-3 mb-0">
+                Installation 24hrs after burner off
+              </p>
+            </div>
+            <div class="col-12 col-sm-6 col-xl-3">
+              <span data-countup="50" class="d-block display-stat lh-tight ls-tight">50</span>
+              <p class="fw-light fs-7 lh-body ls-tight text-uppercase mt-3 mb-0">
+                50% time saving vs. manual methods
+              </p>
+            </div>
+            <div class="col-12 col-sm-6 col-xl-3">
+              <span data-countup="100" class="d-block display-stat lh-tight ls-tight">100</span>
+              <p class="fw-light fs-7 lh-body ls-tight text-uppercase mt-3 mb-0">
+                Can operate at 100&deg;C+ / 212&deg;F+
+              </p>
+            </div>
+          </div>
+
+          <a
+            class="btn btn-dark leonard-btn-lt btn-lg d-inline-flex align-items-center gap-2 fw-light text-uppercase mt-6"
+            href="/health-safety.html"
+          >
+            Safety
+            <i class="fa-solid fa-caret-right fs-11" aria-hidden="true"></i>
+          </a>
+        </div>
+      </section>
+
+      <!-- ============================================================== -->
+      <!-- Testimonials                                                    -->
+      <!-- ============================================================== -->
+      <section class="container-xxl pt-section">
+        <div class="text-center mb-7">
+          <p
+            class="leonard-eyebrow d-inline-flex fw-light fs-8 ls-label text-primary text-uppercase mb-4"
+          >
+            Customer testimonials
+          </p>
+          <h2 class="display-h3 lh-flat text-uppercase mw-hl mx-auto mb-0">
+            Trusted by the engineers who keep heavy industry running.
+          </h2>
+        </div>
+
+        <div class="row gy-4">
+          <div class="col-12 col-lg-4">
+            <figure class="leonard-quote h-100 d-flex flex-column p-4 p-lg-5 mb-0">
+              <div class="leonard-quote__stars text-primary fs-7 mb-4" aria-hidden="true">
+                <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i
+                ><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i
+                ><i class="fa-solid fa-star"></i>
+              </div>
+              <blockquote class="fw-light fs-8 lh-body mb-4">
+                "The unit did not stop. Fourteen days of continuous demolition in
+                a confined preheater tower and it never missed a beat."
+              </blockquote>
+              <figcaption class="mt-auto">
+                <p class="fw-normal fs-8 lh-body mb-0">Marcus Thorne</p>
+                <p class="fw-light fs-10 lh-body ls-tight text-body-secondary text-uppercase mb-0">
+                  Maintenance Manager, Holcim
+                </p>
+              </figcaption>
+            </figure>
+          </div>
+          <div class="col-12 col-lg-4">
+            <figure class="leonard-quote h-100 d-flex flex-column p-4 p-lg-5 mb-0">
+              <div class="leonard-quote__stars text-primary fs-7 mb-4" aria-hidden="true">
+                <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i
+                ><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i
+                ><i class="fa-solid fa-star"></i>
+              </div>
+              <blockquote class="fw-light fs-8 lh-body mb-4">
+                "We cut three days from our planned shutdown. The precision of
+                the grading system meant we were back in production ahead of
+                schedule."
+              </blockquote>
+              <figcaption class="mt-auto">
+                <p class="fw-normal fs-8 lh-body mb-0">Elena Rossi</p>
+                <p class="fw-light fs-10 lh-body ls-tight text-body-secondary text-uppercase mb-0">
+                  Shutdown Coordinator, ArcelorMittal
+                </p>
+              </figcaption>
+            </figure>
+          </div>
+          <div class="col-12 col-lg-4">
+            <figure class="leonard-quote h-100 d-flex flex-column p-4 p-lg-5 mb-0">
+              <div class="leonard-quote__stars text-primary fs-7 mb-4" aria-hidden="true">
+                <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i
+                ><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i
+                ><i class="fa-solid fa-star"></i>
+              </div>
+              <blockquote class="fw-light fs-8 lh-body mb-4">
+                "Safety is non-negotiable for us. Leonard's remote demolition
+                equipment kept my crew out of the danger zone entirely."
+              </blockquote>
+              <figcaption class="mt-auto">
+                <p class="fw-normal fs-8 lh-body mb-0">David Chen</p>
+                <p class="fw-light fs-10 lh-body ls-tight text-body-secondary text-uppercase mb-0">
+                  Operations Director, Vattenfall
+                </p>
+              </figcaption>
+            </figure>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============================================================== -->
+      <!-- Enquiry form                                                    -->
+      <!-- ============================================================== -->
+      <!-- data-bs-theme="light" flips Bootstrap's form control colours for this
+           band only; the document as a whole stays dark. -->
+      <section class="container-xxl pt-section" data-bs-theme="light">
+        <div class="bg-light text-dark px-3 px-lg-5 py-7">
+          <div class="row justify-content-center">
+            <div class="col-12 col-lg-9 col-xxl-7">
+              <div class="text-center mb-6">
+                <h2 class="display-2 lh-snug ls-tight text-uppercase mb-4">
+                  Enquire about<br />Nano
+                </h2>
+                <p class="fw-light fs-8 lh-body mb-0">
+                  Contact the Leonard team to learn more about purchasing this solution and how it
+                  can support your operation.
+                </p>
+              </div>
+
+              <form class="leonard-form" novalidate>
+                <div class="row g-4">
+                  <div class="col-12 col-md-6">
+                    <label class="form-label" for="firstName">First name</label>
+                    <input class="form-control" type="text" id="firstName" name="firstName" autocomplete="given-name" />
+                  </div>
+                  <div class="col-12 col-md-6">
+                    <label class="form-label" for="lastName">Last name</label>
+                    <input class="form-control" type="text" id="lastName" name="lastName" autocomplete="family-name" />
+                  </div>
+                  <div class="col-12 col-md-6">
+                    <label class="form-label" for="jobTitle">Job title</label>
+                    <input class="form-control" type="text" id="jobTitle" name="jobTitle" autocomplete="organization-title" />
+                  </div>
+                  <div class="col-12 col-md-6">
+                    <label class="form-label" for="company">Company</label>
+                    <input class="form-control" type="text" id="company" name="company" autocomplete="organization" />
+                  </div>
+                  <div class="col-12 col-md-6">
+                    <label class="form-label" for="email">Email</label>
+                    <input class="form-control" type="email" id="email" name="email" autocomplete="email" />
+                  </div>
+                  <div class="col-12 col-md-6">
+                    <label class="form-label" for="phone">Phone number</label>
+                    <input class="form-control" type="tel" id="phone" name="phone" autocomplete="tel" />
+                  </div>
+                  <div class="col-12">
+                    <label class="form-label" for="topic">Choose a topic</label>
+                    <select class="form-select" id="topic" name="topic">
+                      <option value="" selected>Select one...</option>
+                      <option>Purchasing</option>
+                      <option>Technical specification</option>
+                      <option>Service and support</option>
+                      <option>Something else</option>
+                    </select>
+                  </div>
+                  <div class="col-12">
+                    <label class="form-label" for="message">Message</label>
+                    <textarea
+                      class="form-control"
+                      id="message"
+                      name="message"
+                      rows="6"
+                      placeholder="Type your message..."
+                    ></textarea>
+                  </div>
+                  <div class="col-12">
+                    <div class="form-check">
+                      <input class="form-check-input" type="checkbox" id="terms" name="terms" />
+                      <label class="form-check-label fw-light ls-label text-uppercase" for="terms">
+                        I accept the <a class="link-dark" href="/terms.html">Terms</a>
+                      </label>
+                    </div>
+                  </div>
+                  <div class="col-12 text-center">
+                    <button
+                      class="btn btn-dark minw-176 minh-37 fw-light ls-wide text-uppercase"
+                      type="submit"
+                    >
+                      Submit
+                    </button>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- #include partials/footer.html -->
+
+    <script type="module" src="/js/main.js"></script>
+  </body>
+</html>

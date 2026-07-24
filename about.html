@@ -1,0 +1,199 @@
+<!doctype html>
+<html lang="en" data-bs-theme="dark">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="icon" href="/favicon-32.png" sizes="32x32" type="image/png" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <style>
+      /* Critical: the arriving transition panel covers before any CSS loads,
+         so it also masks the dev server JS-injected-CSS flash. */
+      .leonard-pt-arriving .leonard-pt { position: fixed; inset: 0; z-index: 3000; background: #ffdb00; }
+    </style>
+    <script>
+      // Page transition: if we arrived via an in-site link, cover before first
+      // paint so the new page does not flash before the reveal (main.js).
+      try {
+        if (sessionStorage.getItem("leonard-pt") === "1") {
+          document.documentElement.classList.add("leonard-pt-arriving");
+        }
+      } catch (e) {}
+    </script>
+    <title>About — Leonard</title>
+    <link rel="preload" href="/fonts/gilroy-heavy.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preconnect" href="https://use.typekit.net" crossorigin />
+    <link rel="stylesheet" href="https://use.typekit.net/djc8uke.css" />
+    <script src="https://kit.fontawesome.com/462bc6ee41.js" crossorigin="anonymous"></script>
+  </head>
+  <body>
+    <!-- #include partials/header.html -->
+
+    <main>
+      <!-- ============================================================== -->
+      <!-- Title                                                           -->
+      <!-- ============================================================== -->
+      <section class="container-xxl pt-4">
+        <div class="row justify-content-center">
+          <div class="col-12 col-lg-10 col-xxl-8">
+            <p class="leonard-eyebrow fw-normal fs-9 ls-label text-light text-uppercase mb-4">
+              Who we are
+            </p>
+            <h1 class="display-h2 lh-snug text-primary text-uppercase text-break mb-4">
+              A quiet confidence,<br />built over 30 years
+            </h1>
+            <p class="fw-light fs-8 lh-body mw-body-lg mb-0">
+              Leonard is a UK and Ireland based refractory installation and robotic
+              demolition specialist. For more than three decades we have kept heavy
+              industry running — safely, precisely, and on schedule — across cement,
+              metal processing, power, and energy plants worldwide.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============================================================== -->
+      <!-- Feature image                                                   -->
+      <!-- ============================================================== -->
+      <section class="container-xxl pt-section">
+        <div class="ratio ratio-21x9 leonard-media-round">
+          <img
+            class="w-100 h-100 object-fit-cover"
+            src="/img/who-we-are.webp"
+            alt="A Leonard crew on a plant shutdown"
+            width="1728"
+            height="740"
+          />
+        </div>
+      </section>
+
+      <!-- ============================================================== -->
+      <!-- Stats                                                           -->
+      <!-- ============================================================== -->
+      <section class="container-xxl pt-section">
+        <div class="row row-cols-2 row-cols-lg-4 g-4 text-center text-lg-start">
+          <div class="col">
+            <p class="display-4 lh-flat text-primary mb-2">30+</p>
+            <p class="leonard-eyebrow fw-light fs-10 ls-tight text-uppercase mb-0">
+              Years in operation
+            </p>
+          </div>
+          <div class="col">
+            <p class="display-4 lh-flat text-primary mb-2">5</p>
+            <p class="leonard-eyebrow fw-light fs-10 ls-tight text-uppercase mb-0">
+              Continents served
+            </p>
+          </div>
+          <div class="col">
+            <p class="display-4 lh-flat text-primary mb-2">30+</p>
+            <p class="leonard-eyebrow fw-light fs-10 ls-tight text-uppercase mb-0">
+              Industry-leading clients
+            </p>
+          </div>
+          <div class="col">
+            <p class="display-4 lh-flat text-primary mb-2">0</p>
+            <p class="leonard-eyebrow fw-light fs-10 ls-tight text-uppercase mb-0">
+              Lost-time injuries, confined space
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============================================================== -->
+      <!-- The Leonard approach — Planning / Organisation / Prep / Install -->
+      <!-- ============================================================== -->
+      <section class="bg-dark-deep mt-section">
+        <div class="container-xxl py-7 py-lg-8">
+          <p class="leonard-eyebrow fw-normal fs-9 ls-label text-primary text-uppercase mb-4">
+            How we work
+          </p>
+          <h2 class="display-h3 lh-flat text-light text-uppercase mw-hl mb-6">
+            Planning. Organisation. Preparation. Installation.
+          </h2>
+          <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-5">
+            <div class="col">
+              <p class="display-6 lh-flat text-primary mb-3">01</p>
+              <h3 class="fs-3 lh-snug text-uppercase text-light mb-3">Planning</h3>
+              <p class="fw-light fs-8 lh-body mb-0">
+                Every shutdown is surveyed and sequenced before a machine arrives on
+                site, so the scope, the risks, and the schedule are understood in
+                advance.
+              </p>
+            </div>
+            <div class="col">
+              <p class="display-6 lh-flat text-primary mb-3">02</p>
+              <h3 class="fs-3 lh-snug text-uppercase text-light mb-3">Organisation</h3>
+              <p class="fw-light fs-8 lh-body mb-0">
+                Trained, registered crews and the right equipment are mobilised
+                around your outage window, coordinated with your plant team from the
+                outset.
+              </p>
+            </div>
+            <div class="col">
+              <p class="display-6 lh-flat text-primary mb-3">03</p>
+              <h3 class="fs-3 lh-snug text-uppercase text-light mb-3">Preparation</h3>
+              <p class="fw-light fs-8 lh-body mb-0">
+                Exclusion zones are established, the shell is protected, and access
+                is staged — removing our people, and yours, from the danger zone.
+              </p>
+            </div>
+            <div class="col">
+              <p class="display-6 lh-flat text-primary mb-3">04</p>
+              <h3 class="fs-3 lh-snug text-uppercase text-light mb-3">Installation</h3>
+              <p class="fw-light fs-8 lh-body mb-0">
+                Robotic demolition and precision refractory installation, ending
+                with a verified surface handed back to the reline crew, on schedule.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============================================================== -->
+      <!-- Story                                                           -->
+      <!-- ============================================================== -->
+      <section class="container-xxl pt-section">
+        <div class="row justify-content-center">
+          <div class="col-12 col-lg-10 col-xxl-8">
+            <div class="leonard-prose">
+              <h2>Safety-driven from the start</h2>
+              <p>
+                Leonard was established over 30 years ago on a simple conviction:
+                that the most dangerous work in heavy industry — demolishing and
+                relining hot, confined, structurally unpredictable vessels — should
+                not put people at risk. That belief still drives every method we
+                engineer today, and it is why we invested early in remote robotic
+                systems that take crews out of harm's way.
+              </p>
+
+              <h2>A global reach, a specialist focus</h2>
+              <p>
+                From our base in Cookstown, County Tyrone, we deliver projects
+                across North America, Europe, Africa, the Middle East, and South
+                East Asia. We stay deliberately specialist — refractory installation,
+                robotic arm and confined space demolition, and media grading — so
+                that the depth of our expertise is never in question.
+              </p>
+
+              <h2>Trusted by demanding industries</h2>
+              <p>
+                Some of the world's largest cement, lime, aluminium, and energy
+                producers rely on Leonard for their most critical shutdowns. They
+                return to us because we deliver a verified result, safely and on
+                time — every time. Read more about the work on our
+                <a href="/case-studies.html">case studies</a>, or explore what we do
+                across our <a href="/services.html">services</a>.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- #include partials/cta.html -->
+    </main>
+
+    <!-- #include partials/footer.html -->
+
+    <script type="module" src="/js/main.js"></script>
+  </body>
+</html>

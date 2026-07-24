@@ -1,0 +1,633 @@
+<!doctype html>
+<html lang="en" data-bs-theme="dark">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="icon" href="/favicon-32.png" sizes="32x32" type="image/png" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <style>
+      /* Critical: the arriving transition panel covers before any CSS loads,
+         so it also masks the dev server JS-injected-CSS flash. */
+      .leonard-pt-arriving .leonard-pt { position: fixed; inset: 0; z-index: 3000; background: #ffdb00; }
+    </style>
+    <script>
+      // Page transition: if we arrived via an in-site link, cover before first
+      // paint so the new page does not flash before the reveal (main.js).
+      try {
+        if (sessionStorage.getItem("leonard-pt") === "1") {
+          document.documentElement.classList.add("leonard-pt-arriving");
+        }
+      } catch (e) {}
+    </script>
+    <title>Confined Space Robotic Demolition — Leonard</title>
+    <link rel="preload" href="/fonts/gilroy-heavy.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preconnect" href="https://use.typekit.net" crossorigin />
+    <link rel="stylesheet" href="https://use.typekit.net/djc8uke.css" />
+    <script src="https://kit.fontawesome.com/462bc6ee41.js" crossorigin="anonymous"></script>
+  </head>
+  <body>
+    <!-- #include partials/header.html -->
+
+    <!--
+      Service detail template (relume 10204:57140), populated with Robotic Arm
+      Demolition. Duplicate per service and swap: title, eyebrow, the hero/intro
+      copy, the feature items, the projects and the enquiry heading.
+    -->
+    <main>
+      <!-- ============================================================== -->
+      <!-- Hero                                                            -->
+      <!-- ============================================================== -->
+      <section class="container-xxl pt-4">
+        <div class="ratio leonard-hero-ratio overflow-hidden">
+          <img
+            class="w-100 h-100 object-fit-cover"
+            src="/img/service-confined.png"
+            alt="Robotic demolition unit working in a confined industrial space"
+            width="1685"
+            height="972"
+          />
+          <div
+            class="leonard-scrim d-flex flex-column justify-content-end align-items-start p-4 p-lg-5"
+          >
+            <p
+              class="leonard-eyebrow fw-light fs-8 ls-label text-light text-uppercase mb-4"
+            >
+              Leonard services
+            </p>
+            <h1 class="display-h1 lh-snug text-primary text-uppercase mw-hl mb-4">
+              Confined space robotic demolition
+            </h1>
+            <p class="fw-normal fs-8 lh-body text-white mw-body mb-0">
+              Leonard delivers specialist confined space robotic demolition services for complex and hazardous industrial environments — removing crews from the danger zone entirely.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============================================================== -->
+      <!-- Statement                                                       -->
+      <!-- ============================================================== -->
+      <section class="container-xxl pt-section">
+        <div
+          class="position-relative overflow-hidden bg-dark px-3 px-lg-8 py-7 py-lg-9"
+        >
+          <div
+            class="leonard-corners text-primary fs-1 fw-thin"
+            aria-hidden="true"
+          >
+            <span></span><span></span><span></span><span></span>
+          </div>
+          <img
+            class="leonard-statement__mark d-none d-lg-block"
+            src="/img/statement-mark.svg"
+            alt=""
+            aria-hidden="true"
+            width="635"
+            height="416"
+          />
+          <div class="position-relative">
+            <p
+              class="leonard-eyebrow fw-light fs-8 ls-label text-primary text-uppercase mb-4"
+            >
+              Protecting critical operations
+            </p>
+            <h2
+              class="leonard-statement__title display-h2 lh-snug text-uppercase text-break mw-stmt mb-0"
+            >
+              End-to-end industrial maintenance combining safety, precision and
+              efficiency. From robotic demolition to refractory installation, we
+              help heavy industry operate with confidence.
+            </h2>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============================================================== -->
+      <!-- Intro — precision lining systems                                -->
+      <!-- ============================================================== -->
+      <section class="container-xxl pt-section">
+        <div class="row align-items-center gy-4 gy-lg-5">
+          <div class="col-12 col-lg-6">
+            <p
+              class="leonard-eyebrow fw-normal fs-9 ls-label text-primary text-uppercase mb-4"
+            >
+              Confined space demolition
+            </p>
+            <h2 class="display-h3 lh-flat text-uppercase mb-4">
+              Precision lining systems that endure the extreme
+            </h2>
+            <p class="fw-light fs-8 lh-body mw-body mb-0">
+              We bring decades of specialist knowledge to every kiln, furnace,
+              and vessel. Our precision engineering extends the life of your
+              critical infrastructure, ensuring thermal efficiency under the
+              harshest conditions.
+            </p>
+          </div>
+          <div class="col-12 col-lg-6">
+            <div class="ratio ratio-4x3">
+              <img
+                class="w-100 h-100 object-fit-cover leonard-media-round"
+                src="/img/service-refractory.png"
+                alt="Leonard crew installing a refractory lining system"
+                width="1200"
+                height="1200"
+                loading="lazy"
+              />
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============================================================== -->
+      <!-- Our approach — photo left, 2x2 feature grid right               -->
+      <!-- ============================================================== -->
+      <section class="container-xxl pt-section">
+        <div class="row align-items-center gy-4 gy-lg-5">
+          <div class="col-12 col-lg-6">
+            <div class="ratio ratio-1x1">
+              <img
+                class="w-100 h-100 object-fit-cover leonard-media-round"
+                src="/img/service-shot-1.png"
+                alt="Robotic demolition unit at work on a shutdown"
+                width="1200"
+                height="1200"
+                loading="lazy"
+              />
+            </div>
+          </div>
+          <div class="col-12 col-lg-6">
+            <p
+              class="leonard-eyebrow fw-normal fs-9 ls-label text-primary text-uppercase mb-5"
+            >
+              Our approach
+            </p>
+            <div class="row g-4 g-lg-5">
+              <div class="col-12 col-sm-6">
+                <i class="fa-solid fa-clipboard-list fs-3 text-primary mb-3" aria-hidden="true"></i>
+                <h3 class="display-6 lh-flat ls-tight text-uppercase mb-2">
+                  Engineered for shutdowns
+                </h3>
+                <p class="fw-light fs-8 lh-body mb-0">
+                  We plan demolition like a military operation, not a maintenance
+                  task.
+                </p>
+              </div>
+              <div class="col-12 col-sm-6">
+                <i class="fa-solid fa-layer-group fs-3 text-primary mb-3" aria-hidden="true"></i>
+                <h3 class="display-6 lh-flat ls-tight text-uppercase mb-2">
+                  Proprietary techniques
+                </h3>
+                <p class="fw-light fs-8 lh-body mb-0">
+                  Our attachment sequencing removes linings faster without shell
+                  damage.
+                </p>
+              </div>
+              <div class="col-12 col-sm-6">
+                <i class="fa-solid fa-shield-halved fs-3 text-primary mb-3" aria-hidden="true"></i>
+                <h3 class="display-6 lh-flat ls-tight text-uppercase mb-2">
+                  Rigorous safety
+                </h3>
+                <p class="fw-light fs-8 lh-body mb-0">
+                  Zero lost-time injuries across a decade of confined space
+                  demolition.
+                </p>
+              </div>
+              <div class="col-12 col-sm-6">
+                <i class="fa-solid fa-circle-check fs-3 text-primary mb-3" aria-hidden="true"></i>
+                <h3 class="display-6 lh-flat ls-tight text-uppercase mb-2">
+                  Proven delivery
+                </h3>
+                <p class="fw-light fs-8 lh-body mb-0">
+                  We have never missed a critical path deadline on a shutdown.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============================================================== -->
+      <!-- Capabilities — list left, photo right                           -->
+      <!-- ============================================================== -->
+      <section class="container-xxl pt-section">
+        <div class="row align-items-center gy-4 gy-lg-5">
+          <div class="col-12 col-lg-6">
+            <ul class="list-unstyled mb-5">
+              <li class="d-flex gap-4 mb-5">
+                <i class="fa-solid fa-crosshairs fs-2 text-primary mt-1" aria-hidden="true"></i>
+                <div>
+                  <h3 class="display-6 lh-flat ls-tight text-uppercase mb-2">
+                    Remote precision demolition
+                  </h3>
+                  <p class="fw-light fs-8 lh-body mw-body mb-0">
+                    Our robotic arms dismantle worn refractory linings with
+                    surgical accuracy, keeping your people out of the hot zone.
+                  </p>
+                </div>
+              </li>
+              <li class="d-flex gap-4 mb-5">
+                <i class="fa-solid fa-sliders fs-2 text-primary mt-1" aria-hidden="true"></i>
+                <div>
+                  <h3 class="display-6 lh-flat ls-tight text-uppercase mb-2">
+                    Absolute operator control
+                  </h3>
+                  <p class="fw-light fs-8 lh-body mw-body mb-0">
+                    Operators command the machine from a safe distance, using
+                    real-time feedback to adapt to changing conditions instantly.
+                  </p>
+                </div>
+              </li>
+              <li class="d-flex gap-4 mb-0">
+                <i class="fa-solid fa-gears fs-2 text-primary mt-1" aria-hidden="true"></i>
+                <div>
+                  <h3 class="display-6 lh-flat ls-tight text-uppercase mb-2">
+                    Engineered for endurance
+                  </h3>
+                  <p class="fw-light fs-8 lh-body mw-body mb-0">
+                    Heavy-duty attachments and powerful breakers tear through the
+                    toughest linings without damaging the shell beneath.
+                  </p>
+                </div>
+              </li>
+            </ul>
+            <div class="d-flex flex-wrap gap-3">
+              <a
+                class="btn btn-primary btn-lg d-inline-flex align-items-center gap-2 fw-light text-uppercase"
+                href="/contact.html"
+              >
+                Find out more
+                <i class="fa-solid fa-caret-right fs-11" aria-hidden="true"></i>
+              </a>
+              <a
+                class="btn btn-outline-light btn-lg d-inline-flex align-items-center gap-2 fw-light text-uppercase"
+                href="/health-safety.html"
+              >
+                Safety
+                <i class="fa-solid fa-caret-right fs-11" aria-hidden="true"></i>
+              </a>
+            </div>
+          </div>
+          <div class="col-12 col-lg-6">
+            <div class="ratio ratio-1x1">
+              <img
+                class="w-100 h-100 object-fit-cover leonard-media-round"
+                src="/img/service-shot-0.png"
+                alt="Operator controlling a robotic demolition arm remotely"
+                width="1200"
+                height="1200"
+                loading="lazy"
+              />
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============================================================== -->
+      <!-- Stats                                                           -->
+      <!-- ============================================================== -->
+      <section class="bg-primary text-dark mt-section">
+        <div class="container-xxl py-7 py-lg-8">
+          <h2 class="display-5 lh-flat ls-tight text-uppercase mb-2">
+            Putting safety and efficiency in your hands.
+          </h2>
+          <p class="fw-light fs-8 lh-body ls-tight mb-7">
+            Our solutions are proven to be safer and more efficient.
+          </p>
+
+          <div class="row gy-5">
+            <div class="col-12 col-sm-6 col-xl-3">
+              <span data-countup="18" class="d-block display-stat lh-tight ls-tight">18</span>
+              <p class="fw-light fs-7 lh-body ls-tight text-uppercase mt-3 mb-0">
+                Saving up to 18hrs through reduced deployment time
+              </p>
+            </div>
+            <div class="col-12 col-sm-6 col-xl-3">
+              <span data-countup="24" class="d-block display-stat lh-tight ls-tight">24</span>
+              <p class="fw-light fs-7 lh-body ls-tight text-uppercase mt-3 mb-0">
+                Installation 24hrs after burner off
+              </p>
+            </div>
+            <div class="col-12 col-sm-6 col-xl-3">
+              <span data-countup="50" class="d-block display-stat lh-tight ls-tight">50</span>
+              <p class="fw-light fs-7 lh-body ls-tight text-uppercase mt-3 mb-0">
+                50% time saving vs. manual methods
+              </p>
+            </div>
+            <div class="col-12 col-sm-6 col-xl-3">
+              <span data-countup="100" class="d-block display-stat lh-tight ls-tight">100</span>
+              <p class="fw-light fs-7 lh-body ls-tight text-uppercase mt-3 mb-0">
+                Can operate at 100&deg;C+ / 212&deg;F+
+              </p>
+            </div>
+          </div>
+
+          <a
+            class="btn btn-dark leonard-btn-lt btn-lg d-inline-flex align-items-center gap-2 fw-light text-uppercase mt-6"
+            href="/health-safety.html"
+          >
+            Safety
+            <i class="fa-solid fa-caret-right fs-11" aria-hidden="true"></i>
+          </a>
+        </div>
+      </section>
+
+      <!-- ============================================================== -->
+      <!-- Projects                                                        -->
+      <!-- ============================================================== -->
+      <section class="container-xxl pt-section">
+        <div class="text-center mb-7">
+          <p
+            class="leonard-eyebrow d-inline-flex fw-light fs-8 ls-label text-primary text-uppercase mb-4"
+          >
+            Case studies
+          </p>
+          <h2 class="display-h3 lh-flat text-uppercase mb-3">
+            Projects in the kill zone
+          </h2>
+          <p class="fw-light fs-8 lh-body mw-body mx-auto mb-0">
+            See how we pull crews out of danger and keep plants running.
+          </p>
+        </div>
+
+        <div class="row gy-4">
+          <div class="col-12 col-lg-4">
+            <a class="leonard-card d-block text-light text-decoration-none h-100" href="#project">
+              <div class="leonard-card-media ratio ratio-16x9">
+                <img
+                  class="w-100 h-100 object-fit-cover"
+                  src="/img/service-shot-2.png"
+                  alt="Remote demolition of a collapsed preheater cyclone roof"
+                  width="720"
+                  height="405"
+                  loading="lazy"
+                />
+              </div>
+              <h3 class="leonard-card__title display-6 fs-4 lh-snug ls-tight text-uppercase mt-4 mb-2">
+                Cyclone roof rebuild
+              </h3>
+              <p class="fw-light fs-8 lh-body mb-3">
+                Remote demolition of a collapsed preheater cyclone roof in 48
+                hours.
+              </p>
+              <div class="d-flex flex-wrap gap-2 mb-4">
+                <span class="leonard-tag">Cement</span>
+                <span class="leonard-tag">Confined space</span>
+                <span class="leonard-tag">Emergency response</span>
+              </div>
+              <span
+                class="d-inline-flex align-items-center gap-2 fw-light fs-9 ls-wide text-primary text-uppercase"
+              >
+                View project
+                <i class="fa-solid fa-caret-right fs-11" aria-hidden="true"></i>
+              </span>
+            </a>
+          </div>
+          <div class="col-12 col-lg-4">
+            <a class="leonard-card d-block text-light text-decoration-none h-100" href="#project">
+              <div class="leonard-card-media ratio ratio-16x9">
+                <img
+                  class="w-100 h-100 object-fit-cover"
+                  src="/img/service-shot-3.png"
+                  alt="Zero-entry demolition of a flash smelting furnace"
+                  width="720"
+                  height="405"
+                  loading="lazy"
+                />
+              </div>
+              <h3 class="leonard-card__title display-6 fs-4 lh-snug ls-tight text-uppercase mt-4 mb-2">
+                Smelter furnace reline
+              </h3>
+              <p class="fw-light fs-8 lh-body mb-3">
+                Zero-entry demolition of a flash smelting furnace at a copper
+                plant.
+              </p>
+              <div class="d-flex flex-wrap gap-2 mb-4">
+                <span class="leonard-tag">Metal processing</span>
+                <span class="leonard-tag">Robotic demolition</span>
+                <span class="leonard-tag">Shutdown</span>
+              </div>
+              <span
+                class="d-inline-flex align-items-center gap-2 fw-light fs-9 ls-wide text-primary text-uppercase"
+              >
+                View project
+                <i class="fa-solid fa-caret-right fs-11" aria-hidden="true"></i>
+              </span>
+            </a>
+          </div>
+          <div class="col-12 col-lg-4">
+            <a class="leonard-card d-block text-light text-decoration-none h-100" href="#project">
+              <div class="leonard-card-media ratio ratio-16x9">
+                <img
+                  class="w-100 h-100 object-fit-cover"
+                  src="/img/service-shot-4.png"
+                  alt="Removing fused slag from a power station boiler throat"
+                  width="720"
+                  height="405"
+                  loading="lazy"
+                />
+              </div>
+              <h3 class="leonard-card__title display-6 fs-4 lh-snug ls-tight text-uppercase mt-4 mb-2">
+                Boiler throat extraction
+              </h3>
+              <p class="fw-light fs-8 lh-body mb-3">
+                Removing fused slag from a power station boiler throat without
+                confined entry.
+              </p>
+              <div class="d-flex flex-wrap gap-2 mb-4">
+                <span class="leonard-tag">Energy</span>
+                <span class="leonard-tag">Media grading</span>
+                <span class="leonard-tag">Turnkey</span>
+              </div>
+              <span
+                class="d-inline-flex align-items-center gap-2 fw-light fs-9 ls-wide text-primary text-uppercase"
+              >
+                View project
+                <i class="fa-solid fa-caret-right fs-11" aria-hidden="true"></i>
+              </span>
+            </a>
+          </div>
+        </div>
+
+        <div class="text-center mt-7">
+          <a
+            class="btn btn-outline-light btn-lg d-inline-flex align-items-center gap-2 fw-light text-uppercase"
+            href="/case-studies.html"
+          >
+            View all
+            <i class="fa-solid fa-caret-right fs-11" aria-hidden="true"></i>
+          </a>
+        </div>
+      </section>
+
+      <!-- ============================================================== -->
+      <!-- Testimonials                                                    -->
+      <!-- ============================================================== -->
+      <section class="container-xxl pt-section">
+        <div class="text-center mb-7">
+          <p
+            class="leonard-eyebrow d-inline-flex fw-light fs-8 ls-label text-primary text-uppercase mb-4"
+          >
+            Customer testimonials
+          </p>
+          <h2 class="display-h3 lh-flat text-uppercase mw-hl mx-auto mb-0">
+            Trusted by the engineers who keep heavy industry running.
+          </h2>
+        </div>
+
+        <div class="row gy-4">
+          <div class="col-12 col-lg-4">
+            <figure class="leonard-quote h-100 d-flex flex-column p-4 p-lg-5 mb-0">
+              <div class="leonard-quote__stars text-primary fs-7 mb-4" aria-hidden="true">
+                <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i
+                ><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i
+                ><i class="fa-solid fa-star"></i>
+              </div>
+              <blockquote class="fw-light fs-8 lh-body mb-4">
+                "The unit did not stop. Fourteen days of continuous demolition in
+                a confined preheater tower and it never missed a beat."
+              </blockquote>
+              <figcaption class="mt-auto">
+                <p class="fw-normal fs-8 lh-body mb-0">Marcus Thorne</p>
+                <p class="fw-light fs-10 lh-body ls-tight text-body-secondary text-uppercase mb-0">
+                  Maintenance Manager, Holcim
+                </p>
+              </figcaption>
+            </figure>
+          </div>
+          <div class="col-12 col-lg-4">
+            <figure class="leonard-quote h-100 d-flex flex-column p-4 p-lg-5 mb-0">
+              <div class="leonard-quote__stars text-primary fs-7 mb-4" aria-hidden="true">
+                <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i
+                ><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i
+                ><i class="fa-solid fa-star"></i>
+              </div>
+              <blockquote class="fw-light fs-8 lh-body mb-4">
+                "We cut three days from our planned shutdown. The precision of
+                the grading system meant we were back in production ahead of
+                schedule."
+              </blockquote>
+              <figcaption class="mt-auto">
+                <p class="fw-normal fs-8 lh-body mb-0">Elena Rossi</p>
+                <p class="fw-light fs-10 lh-body ls-tight text-body-secondary text-uppercase mb-0">
+                  Shutdown Coordinator, ArcelorMittal
+                </p>
+              </figcaption>
+            </figure>
+          </div>
+          <div class="col-12 col-lg-4">
+            <figure class="leonard-quote h-100 d-flex flex-column p-4 p-lg-5 mb-0">
+              <div class="leonard-quote__stars text-primary fs-7 mb-4" aria-hidden="true">
+                <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i
+                ><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i
+                ><i class="fa-solid fa-star"></i>
+              </div>
+              <blockquote class="fw-light fs-8 lh-body mb-4">
+                "Safety is non-negotiable for us. Leonard's remote demolition
+                equipment kept my crew out of the danger zone entirely."
+              </blockquote>
+              <figcaption class="mt-auto">
+                <p class="fw-normal fs-8 lh-body mb-0">David Chen</p>
+                <p class="fw-light fs-10 lh-body ls-tight text-body-secondary text-uppercase mb-0">
+                  Operations Director, Vattenfall
+                </p>
+              </figcaption>
+            </figure>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============================================================== -->
+      <!-- Enquiry form                                                    -->
+      <!-- ============================================================== -->
+      <!-- data-bs-theme="light" flips Bootstrap's form control colours for this
+           band only; the document as a whole stays dark. -->
+      <section class="container-xxl pt-section" data-bs-theme="light">
+        <div class="bg-light text-dark px-3 px-lg-5 py-7">
+          <div class="row justify-content-center">
+            <div class="col-12 col-lg-9 col-xxl-7">
+              <div class="text-center mb-6">
+                <h2 class="display-2 lh-snug ls-tight text-uppercase mb-4">
+                  Enquire about<br />confined space demolition
+                </h2>
+                <p class="fw-light fs-8 lh-body mb-0">
+                  Contact the Leonard team to learn more about this solution and
+                  how it can support your operation.
+                </p>
+              </div>
+
+              <form class="leonard-form" novalidate>
+                <div class="row g-4">
+                  <div class="col-12 col-md-6">
+                    <label class="form-label" for="firstName">First name</label>
+                    <input class="form-control" type="text" id="firstName" name="firstName" autocomplete="given-name" />
+                  </div>
+                  <div class="col-12 col-md-6">
+                    <label class="form-label" for="lastName">Last name</label>
+                    <input class="form-control" type="text" id="lastName" name="lastName" autocomplete="family-name" />
+                  </div>
+                  <div class="col-12 col-md-6">
+                    <label class="form-label" for="jobTitle">Job title</label>
+                    <input class="form-control" type="text" id="jobTitle" name="jobTitle" autocomplete="organization-title" />
+                  </div>
+                  <div class="col-12 col-md-6">
+                    <label class="form-label" for="company">Company</label>
+                    <input class="form-control" type="text" id="company" name="company" autocomplete="organization" />
+                  </div>
+                  <div class="col-12 col-md-6">
+                    <label class="form-label" for="email">Email</label>
+                    <input class="form-control" type="email" id="email" name="email" autocomplete="email" />
+                  </div>
+                  <div class="col-12 col-md-6">
+                    <label class="form-label" for="phone">Phone number</label>
+                    <input class="form-control" type="tel" id="phone" name="phone" autocomplete="tel" />
+                  </div>
+                  <div class="col-12">
+                    <label class="form-label" for="topic">Choose a topic</label>
+                    <select class="form-select" id="topic" name="topic">
+                      <option value="" selected>Select one...</option>
+                      <option>Purchasing</option>
+                      <option>Technical specification</option>
+                      <option>Service and support</option>
+                      <option>Something else</option>
+                    </select>
+                  </div>
+                  <div class="col-12">
+                    <label class="form-label" for="message">Message</label>
+                    <textarea
+                      class="form-control"
+                      id="message"
+                      name="message"
+                      rows="6"
+                      placeholder="Type your message..."
+                    ></textarea>
+                  </div>
+                  <div class="col-12">
+                    <div class="form-check">
+                      <input class="form-check-input" type="checkbox" id="terms" name="terms" />
+                      <label class="form-check-label fw-light ls-label text-uppercase" for="terms">
+                        I accept the <a class="link-dark" href="/terms.html">Terms</a>
+                      </label>
+                    </div>
+                  </div>
+                  <div class="col-12 text-center">
+                    <button
+                      class="btn btn-dark minw-176 minh-37 fw-light ls-wide text-uppercase"
+                      type="submit"
+                    >
+                      Submit
+                    </button>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- #include partials/footer.html -->
+
+    <script type="module" src="/js/main.js"></script>
+  </body>
+</html>

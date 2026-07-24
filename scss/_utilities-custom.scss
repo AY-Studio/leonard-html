@@ -1,0 +1,127 @@
+// Extensions to Bootstrap's utility API.
+//
+// Imported between `bootstrap/scss/utilities` (which defines $utilities) and
+// `bootstrap/scss/utilities/api` (which generates the classes), so these come
+// out as ordinary responsive Bootstrap utilities — .lh-tight, .ls-tight,
+// .minw-176 and so on — instead of one-off rules in a custom stylesheet.
+
+$utilities: map-merge(
+  $utilities,
+  (
+    // The display scale needs several line-heights the defaults don't cover:
+    // 0.8 for the 100px headlines, 0.9 for the hero, 0.95 for the statement.
+    "line-height":
+      map-merge(
+        map-get($utilities, "line-height"),
+        (
+          responsive: true,
+          values:
+            map-merge(
+              map-get(map-get($utilities, "line-height"), "values"),
+              (
+                tight: 0.8,
+                snug: 0.9,
+                mid: 0.95,
+                flat: 1,
+                body: 1.4,
+              )
+            ),
+        )
+      ),
+    // The relume file's neutral-lightest is not a LEONARD theme colour. Only a
+    // background utility is needed — the one place it is used as a text colour
+    // (the statement headline) is a plain rule in _custom.scss, since nothing
+    // competes with it and a utility would drag !important along.
+    "background-color":
+      map-merge(
+        map-get($utilities, "background-color"),
+        (
+          values:
+            map-merge(
+              map-get(map-get($utilities, "background-color"), "values"),
+              (
+                neutral: $leonard-neutral-lightest,
+                "neutral-lighter": $leonard-neutral-lighter,
+                // The deep green used for the pulled-up footer reveal; also the
+                // "how we work" band on the About page.
+                "dark-deep": $leonard-dk-grey-deep,
+              )
+            ),
+        )
+      ),
+    // Pick a brand family on any element — e.g. Gilroy on a card title that
+    // isn't a semantic heading, without a bespoke rule.
+    "font-family": (
+        property: font-family,
+        class: font,
+        values: (
+          display: $font-family-display,
+          mono: $font-family-mono-ui,
+          "mono-narrow": $font-family-mono-narrow,
+        ),
+      ),
+    // Input Mono ships a Thin (100) used by the decorative "+" ticks
+    "font-weight":
+      map-merge(
+        map-get($utilities, "font-weight"),
+        (
+          values: map-merge(map-get(map-get($utilities, "font-weight"), "values"), (thin: 100)),
+        )
+      ),
+    // Display type is tracked in, mono UI type is tracked out
+    "letter-spacing": (
+        property: letter-spacing,
+        class: ls,
+        values: (
+          tight: $leonard-tracking-display,
+          normal: 0,
+          label: $leonard-tracking-label,
+          wide: $leonard-tracking-ui,
+        ),
+      ),
+    // The design's CTAs are a fixed 176x37; the header's is 210x54
+    "min-width": (
+        property: min-width,
+        class: minw,
+        values: (
+          0: 0,
+          176: 176px,
+          210: 210px,
+        ),
+      ),
+    "min-height": (
+        property: min-height,
+        class: minh,
+        values: (
+          37: 37px,
+          54: 54px,
+          78: 78px,
+        ),
+      ),
+    // Measure caps. The `ch` values are meant to be set on the heading or
+    // paragraph itself — on a wrapper they would resolve against the
+    // wrapper's font-size, not the child's, and silently mis-wrap.
+    "max-width":
+      map-merge(
+        map-get($utilities, "max-width"),
+        (
+          responsive: true,
+          values:
+            map-merge(
+              map-get(map-get($utilities, "max-width"), "values"),
+              (
+                hl: 20ch,
+                // hero / section headlines
+                stmt: 30ch,
+                // the 70px statement, four lines as drawn
+                body: 46ch,
+                "body-lg": 62ch,
+                // Deliberately no px values here: utilities carry !important
+                // and would beat .img-fluid's max-width:100%, pinning an image
+                // wider than its column.
+              )
+            ),
+        )
+      )
+  )
+);
