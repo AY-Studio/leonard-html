@@ -935,12 +935,13 @@ body:has(.leonard-mega.show) .leonard-mega-backdrop {
   border-radius: 1.5rem;
 }
 
-// Industry bands — the full-bleed alternating rows on /industries. This class
-// owns the band's vertical padding, so a row is just
-// `<section class="leonard-industry"><div class="container-xxl">…`. Add the
+// Alternating band rows — the full-bleed photo/copy rows on /industries and
+// /services. This class owns the band's vertical padding (matching the Home
+// safe / stats bands), so a row is just
+// `<section class="leonard-band-row"><div class="container-xxl">…`. Add the
 // `.bg-dark-deep` utility for the darker rows — that's the single class a CMS
 // toggles per row (no bespoke markup needed).
-.leonard-industry {
+.leonard-band-row {
   padding-block: 6rem; // matches the Home safe band (py-7 / py-lg-8)
 
   @include media-breakpoint-up(lg) {
@@ -996,6 +997,34 @@ body:has(.leonard-mega.show) .leonard-mega-backdrop {
   .my-section {
     margin-top: 10rem !important;
     margin-bottom: 10rem !important;
+  }
+}
+
+// Listing pages (news, case studies) opt OUT of the bumped rhythm — the
+// band-level spacing is for marketing content sections, not dense listings and
+// their grids. `.leonard-listing` on <main> is more specific than the global
+// override, so it restores the original 40px section gap. Heroes are unaffected
+// everywhere (they use pt-4, not the section spacer).
+.leonard-listing {
+  .pt-section {
+    padding-top: 2.5rem !important;
+  }
+  .pb-section {
+    padding-bottom: 2.5rem !important;
+  }
+  .py-section {
+    padding-top: 2.5rem !important;
+    padding-bottom: 2.5rem !important;
+  }
+  .mt-section {
+    margin-top: 2.5rem !important;
+  }
+  .mb-section {
+    margin-bottom: 2.5rem !important;
+  }
+  .my-section {
+    margin-top: 2.5rem !important;
+    margin-bottom: 2.5rem !important;
   }
 }
 
