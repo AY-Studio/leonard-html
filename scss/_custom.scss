@@ -1400,6 +1400,17 @@ body:has(.leonard-mega.show) .leonard-mega-backdrop {
 }
 
 // Small hairline chip for project/case-study tags (Cement, Confined space …).
+// A SMALL hold below the homepage feature list so the sticky "Home safe, every
+// day" panel stays locked a beat longer at the last feature before releasing.
+// On the feature COLUMN (not the .leonard-stack ul) so the rail line doesn't
+// extend into it. Kept modest — a taller hold makes the panel's release point
+// sit visibly below the content. vh-based so it scales; lg+ only (sticky is lg+).
+.leonard-feature-hold {
+  @include media-breakpoint-up(lg) {
+    padding-bottom: 15vh;
+  }
+}
+
 .leonard-tag {
   display: inline-flex;
   align-items: center;

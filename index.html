@@ -380,7 +380,9 @@
              band runs edge to edge. Figma draws this rect inset 24px, but the
              build takes it to the viewport edge by request. The container is
              moved inside so the copy still lines up with the rest of the page. -->
-        <section class="pt-section">
+        <!-- No pt-section here: its page-green padding showed as a bar between
+             the pinned photo and this panel. The panel butts to the photo. -->
+        <section>
           <div
             class="position-relative overflow-hidden bg-light text-dark py-7 py-lg-8"
           >
@@ -400,7 +402,7 @@
               <div class="row position-relative gy-4">
                 <div class="col-12 col-lg-5 order-lg-2">
                   <div
-                    class="border-start border-3 border-primary ps-3 d-lg-flex flex-column align-items-lg-end text-lg-end border-lg-0 pe-lg-0"
+                    class="d-lg-flex flex-column align-items-lg-end text-lg-end"
                   >
                     <p class="display-6 lh-flat ls-tight text-uppercase mb-1">
                       Descender
@@ -426,7 +428,7 @@
                     Robotic arm solutions
                   </p>
                   <h2 class="display-h2 lh-snug text-uppercase mb-5">
-                    One solution. Multiple uses.
+                    One solution.<br />Multiple uses.
                   </h2>
                   <p
                     class="fw-light fs-7 lh-body ls-tight text-secondary mw-body-lg mb-0"
@@ -468,7 +470,7 @@
       <!-- Feature list                                                    -->
       <!-- ============================================================== -->
       <section class="bg-dark text-light mt-section">
-        <div class="container-xxl py-7 py-lg-8">
+        <div class="container-xxl py-7 pt-lg-8 pb-lg-5">
           <div class="row gy-5">
             <div class="col-12 col-lg-5">
               <!-- Sticky at lg+: travels with the feature list, releasing at the
@@ -488,7 +490,7 @@
                   Robotic arm solutions
                 </p>
                 <h2 class="display-h2 lh-snug text-primary text-uppercase mb-5">
-                  Home safe, every day
+                  Home safe,<br />every day
                 </h2>
                 <div class="d-flex flex-wrap gap-3">
                   <a
@@ -515,9 +517,13 @@
               </div>
             </div>
 
-            <div class="col-12 col-lg-7">
+            <div class="col-12 col-lg-7 leonard-feature-hold">
               <!-- .leonard-stack pins each feature under the last, leaving a
-                   title-height sliver — see _custom.scss. lg+ only. -->
+                   title-height sliver — see _custom.scss. lg+ only.
+                   .leonard-feature-hold adds a SMALL amount of bottom room to
+                   this column so the sticky "Home safe" panel stays locked a
+                   beat longer at the last feature (kept modest so the panel
+                   doesn't visibly sit far below the content). -->
               <ul class="leonard-rail leonard-stack list-unstyled mb-0">
                 <li class="leonard-feature">
                   <img
