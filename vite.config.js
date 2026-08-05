@@ -93,6 +93,7 @@ export default defineConfig({
         article: resolve(root, "article.html"),
         contact: resolve(root, "contact.html"),
         about: resolve(root, "about.html"),
+        careers: resolve(root, "careers.html"),
         "search-results": resolve(root, "search-results.html"),
         terms: resolve(root, "terms.html"),
         privacy: resolve(root, "privacy.html"),

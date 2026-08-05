@@ -13,6 +13,13 @@ import Offcanvas from "bootstrap/js/dist/offcanvas";
 import AOS from "aos";
 import "aos/dist/aos.css";
 
+// GLightbox — click-to-play video (and image) lightbox, used by the News video
+// cards. Industry-standard, dependency-free; auto-detects YouTube/Vimeo, traps
+// focus, closes on ESC/backdrop, and stops playback on close. Beats a bespoke
+// modal for a11y and for not shipping a player we'd have to maintain.
+import GLightbox from "glightbox";
+import "glightbox/dist/css/glightbox.min.css";
+
 // ---------------------------------------------------------------------------
 // Sticky nav: hide on scroll down, reveal on scroll up
 // ---------------------------------------------------------------------------
@@ -46,15 +53,18 @@ function initCountUp() {
   const run = (el) => {
     const target = Number(el.dataset.countup);
     if (!Number.isFinite(target)) return;
+    // Optional suffix (e.g. "+") kept on every frame — the count-up overwrites
+    // the whole text node, so a suffix baked into the markup would be lost.
+    const suffix = el.dataset.countupSuffix || "";
     const started = performance.now();
     const tick = (now) => {
       const t = Math.min(1, (now - started) / COUNT_MS);
       const eased = 1 - Math.pow(1 - t, 3); // ease-out, settles rather than stops
-      el.textContent = String(Math.round(target * eased));
+      el.textContent = String(Math.round(target * eased)) + suffix;
       if (t < 1) requestAnimationFrame(tick);
-      else el.textContent = String(target);
+      else el.textContent = String(target) + suffix;
     };
-    el.textContent = "0";
+    el.textContent = "0" + suffix;
     requestAnimationFrame(tick);
   };
 
@@ -432,6 +442,13 @@ function initReveal() {
   });
 }
 
+// Open any `.glightbox` link (the News video cards) in the lightbox rather than
+// navigating. No-op on pages without one.
+function initLightbox() {
+  if (!document.querySelector(".glightbox")) return;
+  GLightbox({ selector: ".glightbox", autoplayVideos: true });
+}
+
 function init() {
   initPageTransition();
   initIntro();
@@ -440,6 +457,7 @@ function init() {
   initCornerDraw();
   initCursor();
   initReveal();
+  initLightbox();
 }
 
 if (document.readyState === "loading") {

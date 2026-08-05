@@ -1,0 +1,148 @@
+<!doctype html>
+<html lang="en" data-bs-theme="dark">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="icon" href="/favicon-32.png" sizes="32x32" type="image/png" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <style>
+      /* Critical: the arriving transition panel covers before any CSS loads,
+         so it also masks the dev server JS-injected-CSS flash. */
+      .leonard-pt-arriving .leonard-pt { position: fixed; inset: 0; z-index: 3000; background: #ffdb00; }
+    </style>
+    <script>
+      // Page transition: if we arrived via an in-site link, cover before first
+      // paint so the new page does not flash before the reveal (main.js).
+      try {
+        if (sessionStorage.getItem("leonard-pt") === "1") {
+          document.documentElement.classList.add("leonard-pt-arriving");
+        }
+      } catch (e) {}
+    </script>
+    <title>Careers — Leonard</title>
+    <link rel="preload" href="/fonts/gilroy-heavy.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preconnect" href="https://use.typekit.net" crossorigin />
+    <link rel="stylesheet" href="https://use.typekit.net/djc8uke.css" />
+    <script src="https://kit.fontawesome.com/462bc6ee41.js" crossorigin="anonymous"></script>
+  </head>
+  <body>
+    <!-- #include partials/header.html -->
+
+    <!--
+      Careers — first-pass page (roles/copy to be filled in with the client).
+      Uses the shared full-bleed corner-ticked header band.
+    -->
+    <main>
+      <!-- ============================================================== -->
+      <!-- Header                                                          -->
+      <!-- ============================================================== -->
+      <section class="bg-dark-deep mt-4">
+        <div class="container-xxl position-relative overflow-hidden py-6 py-lg-7">
+          <div class="leonard-corners text-primary fs-1 fw-thin" aria-hidden="true">
+            <span></span><span></span><span></span><span></span>
+          </div>
+          <div class="position-relative text-center">
+            <p class="leonard-eyebrow d-inline-flex fw-light fs-8 ls-label text-light text-uppercase mb-4">
+              Join the team
+            </p>
+            <h1 class="display-h2 lh-snug text-primary text-uppercase text-break mw-hl mx-auto mb-4">
+              Careers
+            </h1>
+            <div class="leonard-rte text-white mw-body-lg mx-auto">
+              <p>
+                We build specialist teams for the most demanding work in heavy
+                industry. If you take safety and craft seriously, we would like to
+                hear from you.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============================================================== -->
+      <!-- Why Leonard                                                     -->
+      <!-- ============================================================== -->
+      <section class="container-xxl pt-section">
+        <div class="text-center mb-7">
+          <p class="leonard-eyebrow d-inline-flex fw-light fs-8 ls-label text-primary text-uppercase mb-4">
+            Why Leonard
+          </p>
+          <h2 class="display-h3 lh-flat text-uppercase mw-hl mx-auto mb-0">
+            Work that matters, done safely.
+          </h2>
+        </div>
+        <div class="row row-cols-1 row-cols-md-3 g-4">
+          <div class="col">
+            <div class="leonard-quote h-100 p-4 p-lg-5">
+              <i class="fa-solid fa-helmet-safety fs-2 text-primary mb-4" aria-hidden="true"></i>
+              <h3 class="display-6 fs-4 lh-flat ls-tight text-uppercase mb-2">Safety first, always</h3>
+              <div class="leonard-rte">
+                <p>
+                  Our remote and robotic methods keep our people out of the danger
+                  zone — a decade of confined-space work with zero lost-time
+                  injuries.
+                </p>
+              </div>
+            </div>
+          </div>
+          <div class="col">
+            <div class="leonard-quote h-100 p-4 p-lg-5">
+              <i class="fa-solid fa-globe fs-2 text-primary mb-4" aria-hidden="true"></i>
+              <h3 class="display-6 fs-4 lh-flat ls-tight text-uppercase mb-2">Global projects</h3>
+              <div class="leonard-rte">
+                <p>
+                  From our UK and Northern Ireland base we deliver shutdowns across
+                  five continents — real variety, real responsibility.
+                </p>
+              </div>
+            </div>
+          </div>
+          <div class="col">
+            <div class="leonard-quote h-100 p-4 p-lg-5">
+              <i class="fa-solid fa-screwdriver-wrench fs-2 text-primary mb-4" aria-hidden="true"></i>
+              <h3 class="display-6 fs-4 lh-flat ls-tight text-uppercase mb-2">Trained &amp; supported</h3>
+              <div class="leonard-rte">
+                <p>
+                  Recognised industry training and registration, mentoring on site,
+                  and a team that backs each other in.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============================================================== -->
+      <!-- Current opportunities                                           -->
+      <!-- ============================================================== -->
+      <section class="container-xxl pt-section pb-4">
+        <div class="row justify-content-center">
+          <div class="col-12 col-lg-10 col-xxl-8">
+            <div class="leonard-prose">
+              <h2>Current opportunities</h2>
+              <p>
+                We recruit refractory installers, robotic-demolition operators,
+                site supervisors, and project engineers, as well as office and
+                support roles. Live vacancies will be listed here.
+              </p>
+              <p>
+                Don't see the right role? We are always glad to hear from skilled,
+                safety-minded people. Send your CV and a short note to
+                <a href="mailto:office@leonard.co.uk">office@leonard.co.uk</a>, or
+                <a href="/contact.html">get in touch</a> and we will point you to
+                the right person.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- #include partials/cta.html -->
+    </main>
+
+    <!-- #include partials/footer.html -->
+
+    <script type="module" src="/js/main.js"></script>
+  </body>
+</html>

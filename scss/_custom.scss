@@ -400,6 +400,31 @@
   transform-origin: center;
 }
 
+// Play badge — marks a card (or any media box) whose target is a video, so the
+// news grid reads as supporting video as well as imagery. A child of `.ratio`,
+// so Bootstrap already positions it absolutely to fill the media box; the disc
+// is centred within. Non-blocking: the whole card is the link.
+.leonard-play {
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+
+  i {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 3.5rem;
+    height: 3.5rem;
+    padding-left: 0.2rem; // optical centring of the triangle
+    font-size: 1.1rem;
+    color: $leonard-dk-grey;
+    background: $leonard-yellow;
+    border-radius: 50%;
+  }
+}
+
 .leonard-card:hover .leonard-card-media::after,
 .leonard-card:focus-visible .leonard-card-media::after {
   transform: scaleX(1);
@@ -833,11 +858,38 @@
   background: rgba(#000, 0.4);
 }
 
+// Homepage hero scrim — weighted to the bottom-left where the copy sits, rather
+// than the flat 40% wash. Two stacked gradients: a strong bottom fade that
+// darkens the headline zone, plus a lighter left fade — so the corner behind the
+// text is deeply shaded (legible yellow H1 even over the crew's hi-vis) while
+// the robotic arm to the centre-right stays clear and lit.
+.leonard-hero-scrim {
+  background:
+    linear-gradient(to top, rgba(#000, 0.8) 0%, rgba(#000, 0.3) 45%, transparent 72%),
+    linear-gradient(to right, rgba(#000, 0.55) 0%, transparent 42%);
+}
+
 // Product band. Full-bleed light panel; position + clip so the ghosted
 // wordmark bleeds off the bottom without escaping the band (or the page).
 .leonard-product {
   position: relative;
   overflow: hidden;
+}
+
+// Every product render shares ONE aspect-ratio box at lg+, so all five product
+// bands are the same height regardless of each render's own proportions.
+// Descender / Charger are 16:9; the near-square renders (Axis, Nano, Calibre)
+// would otherwise stand much taller and push their bands out. `object-fit:
+// contain` fits each render inside the shared box — centred, never cropped or
+// stretched — so those simply sit a little smaller. Below lg the bands stack, so
+// each render keeps its natural size.
+.leonard-product__render {
+  @include media-breakpoint-up(lg) {
+    width: 100%;
+    aspect-ratio: 16 / 9; // Descender / Charger native shape — the reference
+    object-fit: contain;
+    object-position: center;
+  }
 }
 
 // Testimonial card — a bordered panel on the dark page, quote in the body
@@ -1231,6 +1283,26 @@
   @include media-breakpoint-up(lg) {
     --leonard-prose-bleed: 4rem;
   }
+
+  // Video — news / articles support video as well as imagery. A self-hosted
+  // <video> is made fluid here; an embedded player (<iframe>) should be wrapped
+  // in `<div class="ratio ratio-16x9">` so it stays responsive. Both sit in the
+  // reading column by default; add `.alignwide` / `.alignfull` to break out.
+  video {
+    display: block;
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+    margin-block: 2rem;
+  }
+
+  .ratio {
+    margin-block: 2rem;
+  }
+
+  iframe {
+    border: 0;
+  }
 }
 
 // News pagination — square page cells, the current one filled yellow.
@@ -1310,6 +1382,15 @@
   border: 1px solid rgba($leonard-lt-grey, 0.35);
 }
 
+// Video variant — a filled yellow pill with a play glyph, so a video card reads
+// unmistakably as "watch" against the outlined tags on the read-more cards.
+.leonard-tag--video {
+  gap: 0.4em;
+  color: $leonard-dk-grey;
+  background: $leonard-yellow;
+  border-color: $leonard-yellow;
+}
+
 .leonard-quote__stars {
   display: flex;
   gap: 0.35em;
@@ -1378,10 +1459,13 @@
 // controls, so the dark treatment has to be restated here: transparent fields
 // with a hairline light border, yellow on focus (matching the newsletter input).
 .leonard-form--dark {
+  // A subtle dark fill (not fully transparent) so each field reads as a distinct
+  // control rather than letting the page's dark-green show straight through —
+  // the "green in the background" the client flagged on this form.
   .form-control,
   .form-select {
     color: $leonard-lt-grey;
-    background-color: transparent;
+    background-color: rgba(#000, 0.16);
     border-color: rgba($leonard-lt-grey, 0.35);
 
     &::placeholder {
@@ -1390,7 +1474,7 @@
 
     &:focus {
       color: $leonard-lt-grey;
-      background-color: transparent;
+      background-color: rgba(#000, 0.16);
       border-color: $leonard-yellow;
       box-shadow: none;
     }
@@ -1671,6 +1755,154 @@ $leonard-rail-gap: 6.2vw;
 
   .leonard-footer a::after {
     transition: transform 0.3s ease-out;
+  }
+}
+
+// ---------------------------------------------------------------------------
+// Body link — the drawn-in yellow underline, reusable
+// ---------------------------------------------------------------------------
+// The footer / nav idiom generalized for links in page body content (e.g. the
+// contact panel's email / phone / social links). A 1px yellow rule wipes in
+// from the left on hover/focus while the label lifts to white. A pseudo-element
+// rather than text-decoration, so it can animate from zero width. Works on an
+// inline text link or a d-inline-flex link (the ::after is absolute, so it is
+// out of flow and never becomes a stray flex item).
+.leonard-link {
+  position: relative;
+  color: $leonard-lt-grey;
+  text-decoration: none;
+
+  &::after {
+    position: absolute;
+    inset: auto 0 -0.08em;
+    height: 1px;
+    background: $leonard-yellow;
+    transform: scaleX(0);
+    transform-origin: left;
+    content: "";
+  }
+
+  &:hover,
+  &:focus-visible {
+    color: $white;
+    text-decoration: none;
+
+    &::after {
+      transform: scaleX(1);
+    }
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .leonard-link {
+    transition: color 0.3s ease-out;
+
+    &::after {
+      transition: transform 0.3s ease-out;
+    }
+  }
+}
+
+// ---------------------------------------------------------------------------
+// Rich-text body copy (.leonard-rte)
+// ---------------------------------------------------------------------------
+// Wrap a WYSIWYG / CMS content region in this and its bare tags (<p>, <ul>,
+// <ol>, <a>, <strong>, <em>, sub-headings) pick up the site's standard band /
+// intro body style with NO per-element utility classes. The editor emits
+// class-less HTML and it just works — nothing here depends on the author
+// remembering to add `fw-light fs-8 lh-body …` to every paragraph and list.
+//
+// Two content stylers, by weight:
+//   * .leonard-prose — long-form article / legal bodies: yellow uppercase
+//     Gilroy headings, tables, blockquotes, figures, image alignments.
+//   * .leonard-rte   — this one: short band / section body copy. Just the
+//     flowing essentials (paragraphs, lists, inline emphasis, links).
+//
+// Colour is inherited, so it reads correctly on both the dark page and the
+// yellow bands (native list markers inherit too, so they are never yellow-on-
+// yellow).
+//
+// Component-level choices ride on the WRAPPER as ordinary utilities, not on the
+// authored tags — they map to a component's ACF/settings, not to any one
+// paragraph:
+//   * measure     — `mw-body` (46ch) / `mw-body-lg` (62ch). The wrapper is
+//                    18px, so its `ch` measure resolves against the size that
+//                    actually wraps (no ch-on-a-bigger-wrapper trap).
+//   * colour      — `text-white` / `text-light` for copy over a photo/scrim.
+//   * weight      — `fw-normal` bumps the default light body to regular (its
+//                    !important beats the base weight here; children inherit).
+//   * alignment   — `mx-auto` (+ inherited `text-center`) for centred copy.
+.leonard-rte {
+  font-weight: $font-weight-light;
+  font-size: map-get($font-sizes, 8); // 1.125rem / 18px — the body scale
+  line-height: 1.4; // lh-body
+
+  p,
+  ul,
+  ol {
+    margin-bottom: 1rem;
+  }
+
+  ul,
+  ol {
+    padding-left: 1.25rem;
+  }
+
+  ul {
+    list-style: disc;
+  }
+
+  ol {
+    list-style: decimal;
+  }
+
+  li {
+    margin-bottom: 0.35rem;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+
+  // Sub-headings an editor might insert (the band's own title stays chrome).
+  h2,
+  h3,
+  h4 {
+    margin-bottom: 0.75rem;
+    font-family: $font-family-display;
+    font-weight: 800;
+    line-height: 1.1;
+    text-transform: uppercase;
+  }
+
+  h2 {
+    font-size: map-get($font-sizes, 4);
+  }
+
+  h3,
+  h4 {
+    font-size: map-get($font-sizes, 5);
+  }
+
+  strong {
+    font-weight: $font-weight-normal;
+  }
+
+  em {
+    font-style: italic;
+  }
+
+  // Underlined, colour-inherited so it is legible on any band.
+  a {
+    color: inherit;
+    text-decoration: underline;
+    text-underline-offset: 0.15em;
+  }
+
+  // No trailing margin — the wrapper's own spacing owns the gap to the next
+  // block, exactly like a `mb-0` on the last authored element.
+  > :last-child {
+    margin-bottom: 0;
   }
 }
 

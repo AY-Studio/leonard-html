@@ -31,71 +31,111 @@
 
     <main>
       <!-- ============================================================== -->
-      <!-- Title                                                           -->
+      <!-- Hero — no photo, fills ~one screen (copy pinned bottom-left), the  -->
+      <!-- Latest News hero pattern (--screen). The feature photo follows.    -->
       <!-- ============================================================== -->
       <section class="container-xxl pt-4">
-        <div class="row justify-content-center">
-          <div class="col-12 col-lg-10 col-xxl-8">
-            <p class="leonard-eyebrow fw-normal fs-9 ls-label text-light text-uppercase mb-4">
+        <div class="ratio leonard-hero-ratio leonard-hero-ratio--screen overflow-hidden bg-dark">
+          <div
+            class="d-flex flex-column justify-content-end align-items-start p-4 p-lg-5"
+          >
+            <p class="leonard-eyebrow fw-light fs-8 ls-label text-light text-uppercase mb-4">
               Who we are
             </p>
-            <h1 class="display-h2 lh-snug text-primary text-uppercase text-break mb-4">
+            <h1 class="display-h1 lh-snug text-primary text-uppercase mw-hl mb-4">
               A quiet confidence,<br />built over 30 years
             </h1>
-            <p class="fw-light fs-8 lh-body mw-body-lg mb-0">
-              Leonard is a UK and Ireland based refractory installation and robotic
-              demolition specialist. For more than three decades we have kept heavy
-              industry running — safely, precisely, and on schedule — across cement,
-              metal processing, power, and energy plants worldwide.
-            </p>
+            <div class="leonard-rte fw-normal text-white mw-body-lg">
+              <p>
+                Leonard is a UK and Ireland based refractory installation and robotic
+                demolition specialist. For more than three decades we have kept heavy
+                industry running — safely, precisely, and on schedule — across cement,
+                metal processing, power, and energy plants worldwide.
+              </p>
+            </div>
           </div>
         </div>
       </section>
 
       <!-- ============================================================== -->
-      <!-- Feature image                                                   -->
+      <!-- Photo band pins while the content below rides up over it — the   -->
+      <!-- homepage photo-reveal pattern (.leonard-reveal). Pure CSS.        -->
       <!-- ============================================================== -->
-      <section class="container-xxl pt-section">
-        <div class="ratio ratio-21x9 leonard-media-round">
-          <img
-            class="w-100 h-100 object-fit-cover"
-            src="/img/who-we-are.webp"
-            alt="A Leonard crew on a plant shutdown"
-            width="1728"
-            height="740"
-          />
-        </div>
-      </section>
+      <div class="leonard-reveal">
+        <section class="leonard-reveal__media mt-section">
+          <div class="ratio leonard-band-ratio">
+            <img
+              class="w-100 h-100 object-fit-cover"
+              src="/img/who-we-are.webp"
+              alt="A Leonard crew on a plant shutdown"
+              width="1728"
+              height="740"
+              loading="lazy"
+            />
+          </div>
+        </section>
+
+        <!-- Covering block — rides up over the pinned photo. The opaque
+             page-green fill + z-index come from `.leonard-reveal > :not(__media)`. -->
+        <div>
 
       <!-- ============================================================== -->
       <!-- Stats                                                           -->
       <!-- ============================================================== -->
       <section class="container-xxl pt-section">
-        <div class="row row-cols-2 row-cols-lg-4 g-4 text-center text-lg-start">
-          <div class="col">
-            <p class="display-4 lh-flat text-primary mb-2">30+</p>
-            <p class="leonard-eyebrow fw-light fs-10 ls-tight text-uppercase mb-0">
-              Years in operation
-            </p>
+        <div class="bg-primary text-dark p-4">
+          <h2 class="display-5 lh-flat ls-tight text-uppercase mb-2">
+            Experience you can measure.
+          </h2>
+          <p class="fw-light fs-8 lh-body ls-tight mb-7">
+            Three decades of specialist refractory and robotic demolition work, a
+            global footprint, and a safety record we protect on every site.
+          </p>
+
+          <div class="row gy-5">
+            <div class="col-12 col-sm-6 col-xl-3">
+              <span
+                data-countup="30"
+                data-countup-suffix="+"
+                class="d-block display-stat lh-tight ls-tight"
+                >30+</span
+              >
+              <p class="fw-light fs-7 lh-body ls-tight text-uppercase mt-3 mb-0">
+                Years in operation
+              </p>
+            </div>
+            <div class="col-12 col-sm-6 col-xl-3">
+              <span data-countup="5" class="d-block display-stat lh-tight ls-tight">5</span>
+              <p class="fw-light fs-7 lh-body ls-tight text-uppercase mt-3 mb-0">
+                Continents served
+              </p>
+            </div>
+            <div class="col-12 col-sm-6 col-xl-3">
+              <span
+                data-countup="30"
+                data-countup-suffix="+"
+                class="d-block display-stat lh-tight ls-tight"
+                >30+</span
+              >
+              <p class="fw-light fs-7 lh-body ls-tight text-uppercase mt-3 mb-0">
+                Industry-leading clients
+              </p>
+            </div>
+            <div class="col-12 col-sm-6 col-xl-3">
+              <span data-countup="0" class="d-block display-stat lh-tight ls-tight">0</span>
+              <p class="fw-light fs-7 lh-body ls-tight text-uppercase mt-3 mb-0">
+                Lost-time injuries, confined space
+              </p>
+            </div>
           </div>
-          <div class="col">
-            <p class="display-4 lh-flat text-primary mb-2">5</p>
-            <p class="leonard-eyebrow fw-light fs-10 ls-tight text-uppercase mb-0">
-              Continents served
-            </p>
-          </div>
-          <div class="col">
-            <p class="display-4 lh-flat text-primary mb-2">30+</p>
-            <p class="leonard-eyebrow fw-light fs-10 ls-tight text-uppercase mb-0">
-              Industry-leading clients
-            </p>
-          </div>
-          <div class="col">
-            <p class="display-4 lh-flat text-primary mb-2">0</p>
-            <p class="leonard-eyebrow fw-light fs-10 ls-tight text-uppercase mb-0">
-              Lost-time injuries, confined space
-            </p>
-          </div>
+
+          <a
+            class="btn btn-dark leonard-btn-lt btn-lg d-inline-flex align-items-center gap-2 fw-light text-uppercase mt-6"
+            href="/health-safety.html"
+          >
+            Safety
+            <i class="fa-solid fa-caret-right fs-11" aria-hidden="true"></i>
+          </a>
         </div>
       </section>
 
@@ -110,49 +150,57 @@
           <h2 class="display-h3 lh-flat text-light text-uppercase mw-hl mb-6">
             Planning. Organisation. Preparation. Installation.
           </h2>
-          <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-5">
+          <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 gy-5">
             <div class="col">
               <p class="display-6 lh-flat text-primary mb-3">01</p>
               <h3 class="fs-3 lh-snug text-uppercase text-light mb-3">Planning</h3>
-              <p class="fw-light fs-8 lh-body mb-0">
-                Every shutdown is surveyed and sequenced before a machine arrives on
-                site, so the scope, the risks, and the schedule are understood in
-                advance.
-              </p>
+              <div class="leonard-rte">
+                <p>
+                  Every shutdown is surveyed and sequenced before a machine arrives on
+                  site, so the scope, the risks, and the schedule are understood in
+                  advance.
+                </p>
+              </div>
             </div>
             <div class="col">
               <p class="display-6 lh-flat text-primary mb-3">02</p>
               <h3 class="fs-3 lh-snug text-uppercase text-light mb-3">Organisation</h3>
-              <p class="fw-light fs-8 lh-body mb-0">
-                Trained, registered crews and the right equipment are mobilised
-                around your outage window, coordinated with your plant team from the
-                outset.
-              </p>
+              <div class="leonard-rte">
+                <p>
+                  Trained, registered crews and the right equipment are mobilised
+                  around your outage window, coordinated with your plant team from the
+                  outset.
+                </p>
+              </div>
             </div>
             <div class="col">
               <p class="display-6 lh-flat text-primary mb-3">03</p>
               <h3 class="fs-3 lh-snug text-uppercase text-light mb-3">Preparation</h3>
-              <p class="fw-light fs-8 lh-body mb-0">
-                Exclusion zones are established, the shell is protected, and access
-                is staged — removing our people, and yours, from the danger zone.
-              </p>
+              <div class="leonard-rte">
+                <p>
+                  Exclusion zones are established, the shell is protected, and access
+                  is staged — removing our people, and yours, from the danger zone.
+                </p>
+              </div>
             </div>
             <div class="col">
               <p class="display-6 lh-flat text-primary mb-3">04</p>
               <h3 class="fs-3 lh-snug text-uppercase text-light mb-3">Installation</h3>
-              <p class="fw-light fs-8 lh-body mb-0">
-                Robotic demolition and precision refractory installation, ending
-                with a verified surface handed back to the reline crew, on schedule.
-              </p>
+              <div class="leonard-rte">
+                <p>
+                  Robotic demolition and precision refractory installation, ending
+                  with a verified surface handed back to the reline crew, on schedule.
+                </p>
+              </div>
             </div>
           </div>
         </div>
       </section>
 
       <!-- ============================================================== -->
-      <!-- Story                                                           -->
+      <!-- Story — roomy vertical padding (py-6 = 64px, py-lg-8 = 160px)      -->
       <!-- ============================================================== -->
-      <section class="container-xxl pt-section">
+      <section class="container-xxl py-6 py-lg-8">
         <div class="row justify-content-center">
           <div class="col-12 col-lg-10 col-xxl-8">
             <div class="leonard-prose">
@@ -188,6 +236,9 @@
           </div>
         </div>
       </section>
+        </div>
+      </div>
+      <!-- /leonard-reveal -->
 
       <!-- #include partials/cta.html -->
     </main>

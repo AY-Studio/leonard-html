@@ -127,16 +127,22 @@
            below; the height maths in .leonard-hero-ratio--full accounts for both. -->
       <section class="pt-4 pb-4">
         <div class="ratio leonard-hero-ratio leonard-hero-ratio--full overflow-hidden">
+          <!-- Kiln hero removed per client (not representative of the majority
+               of our technology). Authentic on-site shot of the Leonard crew
+               operating the branded robotic demolition arm; a naturally dark
+               frame, with the scrim below guaranteeing the copy reads over the
+               hi-vis in the lower-left. -->
           <img
             class="w-100 h-100 object-fit-cover"
-            src="/img/v2-hero.webp"
-            alt="Robotic demolition arm working inside a refractory-lined industrial kiln"
-            width="1685"
-            height="970"
+            src="/img/v2-products-cta.png"
+            alt="Leonard crew operating a branded robotic demolition arm on site"
+            width="3076"
+            height="1730"
           />
           <!-- Image is full-bleed, but the copy sits in a container so it stays
-               on the page grid (aligned with the logo and the content below). -->
-          <div class="d-flex flex-column justify-content-end">
+               on the page grid (aligned with the logo and the content below).
+               The scrim is weighted to the bottom-left, where the copy sits. -->
+          <div class="leonard-hero-scrim d-flex flex-column justify-content-end">
             <div class="container-xxl pt-5 pb-4 pb-lg-5">
               <p
                 class="leonard-eyebrow fw-light fs-8 ls-label text-white text-uppercase mb-4"
@@ -148,9 +154,14 @@
               >
                 Pioneering industrial innovation
               </h1>
+              <!-- Opens the hero video in the shared GLightbox overlay (same as
+                   the News video cards). Swap the YouTube URL for the real
+                   Leonard video — currently a placeholder. -->
               <a
-                class="btn btn-outline-light btn-lg d-inline-flex align-items-center gap-3 fw-light text-uppercase"
-                href="#video"
+                class="btn btn-outline-light btn-lg d-inline-flex align-items-center gap-3 fw-light text-uppercase glightbox"
+                href="https://www.youtube.com/watch?v=RY11iULaX7E"
+                data-glightbox="type: video"
+                aria-label="Watch the Leonard overview video"
               >
                 <i class="fa-solid fa-play" aria-hidden="true"></i>
                 Watch full video
@@ -246,11 +257,11 @@
             <h2 class="display-h2 lh-snug text-primary text-uppercase mb-5">
               A quiet confidence built over decades of hard work
             </h2>
-            <div class="fw-light fs-8 lh-body mw-body-lg">
-              <p class="mb-4">
+            <div class="leonard-rte mw-body-lg">
+              <p>
                 We are envisioning, engineering and pioneering better ways.
               </p>
-              <p class="mb-0">
+              <p>
                 Our machines, our robotics and methodologies are tackling the
                 same old problems but in new, innovative and effective ways.
                 Less human and corporate risk, less refractory down time, more
@@ -634,10 +645,12 @@
               <h2 class="display-h3 lh-flat text-primary text-uppercase mb-4">
                 Get the news<br />from the front line
               </h2>
-              <p class="fw-normal fs-8 lh-body mb-0">
-                Project stories, technical insights, and industry news. No
-                noise, just substance.
-              </p>
+              <div class="leonard-rte fw-normal">
+                <p>
+                  Project stories, technical insights, and industry news. No
+                  noise, just substance.
+                </p>
+              </div>
             </div>
             <div class="col-12 col-lg-5 offset-lg-1">
               <form class="d-flex flex-column flex-sm-row gap-3" novalidate>

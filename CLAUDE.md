@@ -329,7 +329,12 @@ The four stats animate 0 → value the first time they scroll into view
 Each `<span>` carries its **real value as text** and `data-countup` holds the
 target, so the numbers are correct with no JS at all, and the animation is
 skipped outright under `prefers-reduced-motion: reduce` — it only ever replaces
-a number that is already on screen.
+a number that is already on screen. An optional **`data-countup-suffix`** (e.g.
+`"+"`) is re-appended every frame — the count-up overwrites the whole text node,
+so a suffix baked into the markup would otherwise be lost (used by the About
+band's `30+`). The full stat band (yellow `bg-primary` box, `display-stat`
+count-ups, title + description, `Safety` button) is shared by the homepage,
+About, and the product/service/industry detail pages.
 
 ### Full-bleed bands
 
@@ -1051,11 +1056,17 @@ its matching sibling; the mega-menus still deep-link to the **listing** sections
 
 - `about.html` — sourced from gleonard.com (30+ years, UK/Ireland, the
   Planning · Organisation · Preparation · Installation approach, global reach),
-  rebuilt in our style. Reached from the footer Company column and the `#about`
-  CTA buttons — **not** added to the header nav, which is measured to fit
-  exactly at `xl` and would break with another item. Uses `.bg-dark-deep`
+  rebuilt in our style. Opens with the **Latest-News hero** (the no-photo
+  `.leonard-hero-ratio--screen` band, copy pinned bottom-left), then a **pinned
+  photo band** — the homepage `.leonard-reveal` pattern: the full-bleed photo is
+  `position: sticky` (z 0) and the stats / how-we-work / story ride up over it
+  in the opaque covering block (z 1). Reached from the footer Company column and the
+  `#about` CTA buttons — **not** added to the header nav, which is measured to
+  fit exactly at `xl` and would break with another item. Uses `.bg-dark-deep`
   (the deep-green `$leonard-dk-grey-deep`, added to the background-color utility
-  values) for the "how we work" band.
+  values) for the "how we work" band — whose 4-col grid uses `gy-5` (not `g-5`,
+  which overflowed 2px: a 24px negative row margin against 22px container
+  padding — the gutter trap).
 - `privacy.html` — standalone Privacy Policy (was sharing the Terms template);
   footer, mobile menu, and Terms §5 now point at it. Like Terms, it is a
   template and not legal advice.

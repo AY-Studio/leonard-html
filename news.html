@@ -20,7 +20,7 @@
         }
       } catch (e) {}
     </script>
-    <title>Latest News — Leonard</title>
+    <title>News &amp; Events — Leonard</title>
     <link rel="preload" href="/fonts/gilroy-heavy.woff2" as="font" type="font/woff2" crossorigin />
     <link rel="preconnect" href="https://use.typekit.net" crossorigin />
     <link rel="stylesheet" href="https://use.typekit.net/djc8uke.css" />
@@ -43,16 +43,18 @@
             <p
               class="leonard-eyebrow fw-light fs-8 ls-label text-light text-uppercase mb-4"
             >
-              Latest news &amp; insights
+              News &amp; events
             </p>
             <h1 class="display-h1 lh-snug text-primary text-uppercase mw-hl mb-4">
               Knowledge. Innovation. Performance.
             </h1>
-            <p class="fw-normal fs-8 lh-body text-white mw-body mb-0">
-              Stay up to date with the latest company news, industry
-              developments, project highlights, and technical insights from
-              Leonard and the sectors we serve.
-            </p>
+            <div class="leonard-rte fw-normal text-white mw-body">
+              <p>
+                Company news, project highlights and technical insights — plus
+                the events and campaigns where you can meet the Leonard team in
+                person.
+              </p>
+            </div>
           </div>
         </div>
       </section>
@@ -117,22 +119,34 @@
             </a>
           </div>
           <div class="col">
-            <a class="leonard-card d-flex flex-column h-100 text-light text-decoration-none" href="/article.html">
+            <!-- Video card: opens the clip in a GLightbox overlay (industry-
+                 standard lightbox) instead of navigating. Swap the YouTube URL
+                 for the real Leonard video. The play badge + "Video" tag +
+                 "Watch video" CTA set it apart from the "Read more" cards. -->
+            <a
+              class="leonard-card leonard-card--video d-flex flex-column h-100 text-light text-decoration-none glightbox"
+              href="https://www.youtube.com/watch?v=RY11iULaX7E"
+              data-glightbox="type: video"
+              aria-label="Play video: remote robotics on the front line"
+            >
               <div class="leonard-card-media ratio ratio-4x3 mb-4">
-                <img class="w-100 h-100 object-fit-cover" src="/img/news-3.png" alt="" loading="lazy" />
+                <img class="w-100 h-100 object-fit-cover" src="/img/service-robotic-arm.png" alt="" loading="lazy" />
+                <span class="leonard-play" aria-hidden="true"><i class="fa-solid fa-play"></i></span>
               </div>
               <div class="d-flex align-items-center gap-3 mb-3">
-                <span class="leonard-tag">Insights</span>
+                <span class="leonard-tag leonard-tag--video">
+                  <i class="fa-solid fa-play" aria-hidden="true"></i> Video
+                </span>
                 <span class="fw-light fs-11 lh-body ls-tight text-body-secondary">26 July 26</span>
               </div>
               <h2 class="display-6 fs-4 lh-snug ls-tight text-uppercase mb-3">
-                Report: the power of remote robotics
+                Watch: remote robotics on the front line
               </h2>
               <span
                 class="d-inline-flex align-items-center gap-2 fw-light fs-9 ls-wide text-primary text-uppercase mt-auto"
               >
-                Read more
-                <i class="fa-solid fa-caret-right fs-11" aria-hidden="true"></i>
+                Watch video
+                <i class="fa-solid fa-play fs-11" aria-hidden="true"></i>
               </span>
             </a>
           </div>
@@ -159,7 +173,7 @@
           <div class="col">
             <a class="leonard-card d-flex flex-column h-100 text-light text-decoration-none" href="/article.html">
               <div class="leonard-card-media ratio ratio-4x3 mb-4">
-                <img class="w-100 h-100 object-fit-cover" src="/img/news-3.png" alt="" loading="lazy" />
+                <img class="w-100 h-100 object-fit-cover" src="/img/descender-robot.webp" alt="" loading="lazy" />
               </div>
               <div class="d-flex align-items-center gap-3 mb-3">
                 <span class="leonard-tag">Insights</span>
@@ -199,7 +213,7 @@
           <div class="col">
             <a class="leonard-card d-flex flex-column h-100 text-light text-decoration-none" href="/article.html">
               <div class="leonard-card-media ratio ratio-4x3 mb-4">
-                <img class="w-100 h-100 object-fit-cover" src="/img/news-3.png" alt="" loading="lazy" />
+                <img class="w-100 h-100 object-fit-cover" src="/img/descender-robot.webp" alt="" loading="lazy" />
               </div>
               <div class="d-flex align-items-center gap-3 mb-3">
                 <span class="leonard-tag">Insights</span>
@@ -283,6 +297,149 @@
       </section>
 
       <!-- ============================================================== -->
+      <!-- Upcoming events — promote events + capture campaign/event leads. -->
+      <!-- Event dates and details are placeholders to confirm.            -->
+      <!-- ============================================================== -->
+      <section class="bg-dark-deep mt-section">
+        <div class="container-xxl py-7 py-lg-8">
+          <!-- No mw-hl on this wrapper: `ch` resolves against the wrapper's 16px
+               and collapses the whole header to ~a third width. The heading is
+               short; the intro carries its own mw-body. -->
+          <div class="mb-7">
+            <p class="leonard-eyebrow fw-normal fs-9 ls-label text-primary text-uppercase mb-4">
+              Upcoming events
+            </p>
+            <h2 class="display-h3 lh-flat text-uppercase mb-3">Meet us on site</h2>
+            <div class="leonard-rte mw-body">
+              <p>
+                Trade shows, technical seminars and demonstration days — where you
+                can see our robotic demolition capability first-hand and talk to
+                the engineering team.
+              </p>
+            </div>
+          </div>
+
+          <ul class="list-unstyled mb-7">
+            <li class="leonard-case py-4">
+              <div class="row align-items-center gx-0 gy-3">
+                <div class="col-12 col-lg-2">
+                  <p class="fw-normal fs-8 lh-flat ls-tight text-primary text-uppercase mb-0">
+                    12&ndash;14 Sep
+                  </p>
+                </div>
+                <div class="col-12 col-lg-6">
+                  <h3 class="display-6 fs-4 lh-flat ls-tight text-uppercase mb-2">
+                    Cemtech Middle East
+                  </h3>
+                  <p class="fw-light fs-9 lh-body ls-tight text-body-secondary text-uppercase mb-0">
+                    Dubai &middot; Stand + live demo
+                  </p>
+                </div>
+                <div class="col-12 col-lg-4 text-lg-end">
+                  <a
+                    class="btn btn-outline-light d-inline-flex align-items-center gap-2 fw-light text-uppercase"
+                    href="#register"
+                  >
+                    Register interest
+                    <i class="fa-solid fa-caret-right fs-11" aria-hidden="true"></i>
+                  </a>
+                </div>
+              </div>
+            </li>
+            <li class="leonard-case py-4">
+              <div class="row align-items-center gx-0 gy-3">
+                <div class="col-12 col-lg-2">
+                  <p class="fw-normal fs-8 lh-flat ls-tight text-primary text-uppercase mb-0">
+                    08 Oct
+                  </p>
+                </div>
+                <div class="col-12 col-lg-6">
+                  <h3 class="display-6 fs-4 lh-flat ls-tight text-uppercase mb-2">
+                    Refractory maintenance seminar
+                  </h3>
+                  <p class="fw-light fs-9 lh-body ls-tight text-body-secondary text-uppercase mb-0">
+                    Cookstown &middot; Technical seminar
+                  </p>
+                </div>
+                <div class="col-12 col-lg-4 text-lg-end">
+                  <a
+                    class="btn btn-outline-light d-inline-flex align-items-center gap-2 fw-light text-uppercase"
+                    href="#register"
+                  >
+                    Register interest
+                    <i class="fa-solid fa-caret-right fs-11" aria-hidden="true"></i>
+                  </a>
+                </div>
+              </div>
+            </li>
+            <li class="leonard-case py-4">
+              <div class="row align-items-center gx-0 gy-3">
+                <div class="col-12 col-lg-2">
+                  <p class="fw-normal fs-8 lh-flat ls-tight text-primary text-uppercase mb-0">
+                    20 Nov
+                  </p>
+                </div>
+                <div class="col-12 col-lg-6">
+                  <h3 class="display-6 fs-4 lh-flat ls-tight text-uppercase mb-2">
+                    Metals &amp; energy demo day
+                  </h3>
+                  <p class="fw-light fs-9 lh-body ls-tight text-body-secondary text-uppercase mb-0">
+                    UK &middot; Live demolition demonstration
+                  </p>
+                </div>
+                <div class="col-12 col-lg-4 text-lg-end">
+                  <a
+                    class="btn btn-outline-light d-inline-flex align-items-center gap-2 fw-light text-uppercase"
+                    href="#register"
+                  >
+                    Register interest
+                    <i class="fa-solid fa-caret-right fs-11" aria-hidden="true"></i>
+                  </a>
+                </div>
+              </div>
+            </li>
+          </ul>
+
+          <!-- Event / campaign lead capture -->
+          <div id="register" class="leonard-anchor row align-items-center gy-4">
+            <div class="col-12 col-lg-6">
+              <h3 class="display-6 fs-3 lh-flat ls-tight text-primary text-uppercase mb-3">
+                Register your interest
+              </h3>
+              <div class="leonard-rte mw-body">
+                <p>
+                  Tell us which event you would like to attend and we will hold
+                  you a slot and send the details.
+                </p>
+              </div>
+            </div>
+            <div class="col-12 col-lg-5 offset-lg-1">
+              <form class="leonard-form leonard-form--dark d-flex flex-column flex-sm-row gap-3" novalidate>
+                <label class="visually-hidden" for="eventEmail">Email address</label>
+                <input
+                  class="form-control"
+                  type="email"
+                  id="eventEmail"
+                  name="email"
+                  placeholder="Enter your email"
+                  autocomplete="email"
+                />
+                <button
+                  class="btn btn-primary btn-lg flex-shrink-0 fw-light text-nowrap text-uppercase"
+                  type="submit"
+                >
+                  Register
+                </button>
+              </form>
+              <p class="fw-normal fs-11 lh-body mt-3 mb-0">
+                We'll only use your details to contact you about the event.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============================================================== -->
       <!-- Newsletter                                                      -->
       <!-- ============================================================== -->
       <section class="container-xxl pt-section">
@@ -303,10 +460,12 @@
               <h2 class="display-h3 lh-flat text-primary text-uppercase mb-4">
                 Get the news<br />from the front line
               </h2>
-              <p class="fw-normal fs-8 lh-body mb-0">
-                Project stories, technical insights, and industry news. No
-                noise, just substance.
-              </p>
+              <div class="leonard-rte fw-normal">
+                <p>
+                  Project stories, technical insights, and industry news. No
+                  noise, just substance.
+                </p>
+              </div>
             </div>
             <div class="col-12 col-lg-5 offset-lg-1">
               <form class="d-flex flex-column flex-sm-row gap-3" novalidate>

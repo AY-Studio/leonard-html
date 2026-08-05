@@ -31,50 +31,62 @@
 
     <main>
       <!-- ============================================================== -->
-      <!-- Hero                                                            -->
+      <!-- Hero — full-bleed cropped photo + scrim, copy pinned bottom-left  -->
+      <!-- (the Products hero pattern). Uses the on-site portrait.           -->
       <!-- ============================================================== -->
-      <section class="container-xxl pt-7 pb-4">
-        <div class="text-center">
-          <h1 class="display-h1 lh-snug text-primary text-uppercase mw-hl mx-auto mb-4">
-            Start the conversation
-          </h1>
-          <p class="fw-normal fs-8 lh-body text-white mw-body mx-auto mb-0">
-            Talk to us about your next shutdown, a refractory project, or a
-            robotic demolition requirement. We work with plant managers,
-            maintenance directors, and procurement teams.
-          </p>
-        </div>
-      </section>
-
-      <!-- Portrait band (the name card is part of the composition) -->
-      <section class="container-xxl pt-section">
-        <div class="ratio leonard-band-ratio overflow-hidden">
+      <section class="container-xxl pt-4">
+        <div class="ratio leonard-hero-ratio overflow-hidden">
           <img
-            class="w-100 h-100 object-fit-cover leonard-media-round"
+            class="w-100 h-100 object-fit-cover"
             src="/img/v2-contact-portrait.png"
             alt="Brian Smith, Refractory Specialist, on site for Leonard"
             width="1685"
             height="720"
           />
+          <div
+            class="leonard-scrim d-flex flex-column justify-content-end align-items-start p-4 p-lg-5"
+          >
+            <p class="leonard-eyebrow fw-light fs-8 ls-label text-light text-uppercase mb-4">
+              Contact
+            </p>
+            <h1 class="display-h1 lh-snug text-primary text-uppercase mw-hl mb-4">
+              Start the conversation
+            </h1>
+            <div class="leonard-rte fw-normal text-white mw-body">
+              <p>
+                Talk to us about your next shutdown, a refractory project, or a
+                robotic demolition requirement. We work with plant managers,
+                maintenance directors, and procurement teams.
+              </p>
+            </div>
+          </div>
         </div>
       </section>
 
       <!-- ============================================================== -->
-      <!-- Get started — enquiry form                                      -->
+      <!-- Contact block — the core of the page. Form (primary) on the      -->
+      <!-- left; a sticky "reach us directly" panel on the right co-locates -->
+      <!-- email / phone / socials with the form instead of leaving them as -->
+      <!-- a separate, disconnected 3-column section further down.          -->
       <!-- ============================================================== -->
-      <section class="container-xxl pt-section">
-        <div class="row gy-5">
-          <div class="col-12 col-lg-4">
-            <p class="leonard-eyebrow fw-normal fs-9 ls-label text-primary text-uppercase mb-4">
-              Enquire
-            </p>
-            <h2 class="display-h3 lh-flat text-uppercase mb-4">Get started</h2>
-            <p class="fw-light fs-8 lh-body mw-body mb-0">
+      <section class="container-xxl pt-7">
+        <!-- Heading sits above the row so the form's first input row and the
+             "Prefer to talk?" panel share the same top edge. -->
+        <div class="mb-6">
+          <p class="leonard-eyebrow fw-normal fs-9 ls-label text-primary text-uppercase mb-4">
+            Enquire
+          </p>
+          <h2 class="display-h3 lh-flat text-uppercase mb-3">Send us a message</h2>
+          <div class="leonard-rte mw-body">
+            <p>
               Tell us about your project and a specialist will respond within one
               business day.
             </p>
           </div>
-          <div class="col-12 col-lg-7 offset-lg-1">
+        </div>
+        <div class="row gy-5">
+          <!-- Enquiry form -->
+          <div class="col-12 col-lg-7">
             <form class="leonard-form leonard-form--dark" novalidate>
               <div class="row g-4">
                 <div class="col-12 col-md-6">
@@ -92,6 +104,28 @@
                 <div class="col-12 col-md-6">
                   <label class="form-label" for="phone">Phone number</label>
                   <input class="form-control" type="tel" id="phone" name="phone" autocomplete="tel" />
+                </div>
+                <div class="col-12 col-md-6">
+                  <label class="form-label" for="enquiryType">Enquiry type</label>
+                  <select class="form-select" id="enquiryType" name="enquiryType">
+                    <option value="" selected>Select one...</option>
+                    <option>Sales</option>
+                    <option>Finance</option>
+                    <option>HR / Recruitment</option>
+                    <option>Supplier</option>
+                    <option>General enquiry</option>
+                  </select>
+                </div>
+                <div class="col-12 col-md-6">
+                  <label class="form-label" for="country">Country / region</label>
+                  <input
+                    class="form-control"
+                    type="text"
+                    id="country"
+                    name="country"
+                    autocomplete="country-name"
+                    placeholder="e.g. United Kingdom"
+                  />
                 </div>
                 <div class="col-12">
                   <label class="form-label" for="service">Service interest</label>
@@ -167,135 +201,117 @@
               </div>
             </form>
           </div>
-        </div>
-      </section>
 
-      <!-- ============================================================== -->
-      <!-- Direct lines                                                    -->
-      <!-- ============================================================== -->
-      <section class="container-xxl pt-section">
-        <div class="mw-hl mb-7">
-          <p class="leonard-eyebrow fw-normal fs-9 ls-label text-primary text-uppercase mb-4">
-            Contact
-          </p>
-          <h2 class="display-h3 lh-flat text-uppercase mb-3">Direct lines</h2>
-          <p class="fw-light fs-8 lh-body mw-body mb-0">
-            Reach the engineering team directly to discuss an upcoming shutdown or
-            technical challenge.
-          </p>
-        </div>
+          <!-- Reach us directly — sticky sidebar (lg+), stacks under the form
+               on mobile. Replaces the old free-floating "Direct lines" band. -->
+          <div class="col-12 col-lg-4 offset-lg-1">
+            <div class="leonard-sticky bg-dark-deep border border-secondary p-4 p-lg-5">
+              <p class="leonard-eyebrow fw-normal fs-9 ls-label text-primary text-uppercase mb-4">
+                Prefer to talk?
+              </p>
 
-        <div class="row gy-5">
-          <div class="col-12 col-md-4">
-            <i class="fa-solid fa-envelope fs-2 text-primary mb-4" aria-hidden="true"></i>
-            <h3 class="display-6 fs-4 lh-flat ls-tight text-uppercase mb-3">Email</h3>
-            <p class="fw-light fs-8 lh-body mw-body mb-3">
-              Send project briefs and technical specifications. We respond within
-              one business day.
-            </p>
-            <a class="link-light fw-normal fs-8 text-break" href="mailto:projects@leonard.com"
-              >projects@leonard.com</a
-            >
-          </div>
-          <div class="col-12 col-md-4">
-            <i class="fa-solid fa-phone fs-2 text-primary mb-4" aria-hidden="true"></i>
-            <h3 class="display-6 fs-4 lh-flat ls-tight text-uppercase mb-3">Phone</h3>
-            <p class="fw-light fs-8 lh-body mw-body mb-3">
-              Call to speak with a senior engineer about urgent refractory or
-              demolition requirements.
-            </p>
-            <a class="link-light fw-normal fs-8" href="tel:+61280000000">+61 2 8000 0000</a>
-          </div>
-          <div class="col-12 col-md-4">
-            <i class="fa-solid fa-location-dot fs-2 text-primary mb-4" aria-hidden="true"></i>
-            <h3 class="display-6 fs-4 lh-flat ls-tight text-uppercase mb-3">Office</h3>
-            <p class="fw-light fs-8 lh-body mw-body mb-3">
-              Our headquarters in Cookstown. Visits by appointment only.
-            </p>
-            <address class="fw-light fs-8 lh-body mb-0">
-              2nd Floor, Gortalowry House,<br />
-              94 Church Street, Cookstown,<br />
-              County Tyrone, Northern Ireland, BT80 8HX.
-            </address>
+              <div class="d-flex gap-3 mb-4">
+                <i class="fa-solid fa-envelope fs-4 text-primary mt-1" aria-hidden="true"></i>
+                <div>
+                  <p class="fw-light fs-10 ls-label text-uppercase text-body-secondary mb-1">
+                    Email
+                  </p>
+                  <a class="leonard-link fw-normal fs-8 text-break" href="mailto:office@leonard.co.uk"
+                    >office@leonard.co.uk</a
+                  >
+                </div>
+              </div>
+
+              <div class="d-flex gap-3 mb-4">
+                <i class="fa-solid fa-phone fs-4 text-primary mt-1" aria-hidden="true"></i>
+                <div>
+                  <p class="fw-light fs-10 ls-label text-uppercase text-body-secondary mb-1">
+                    Phone
+                  </p>
+                  <a class="leonard-link fw-normal fs-8" href="tel:+61280000000">+61 2 8000 0000</a>
+                </div>
+              </div>
+
+              <hr class="border-secondary opacity-50 my-4" />
+
+              <p class="fw-light fs-9 lh-body text-body-secondary mb-4">
+                We respond to every enquiry within one business day.
+              </p>
+
+              <div class="d-flex flex-wrap align-items-center gap-3 column-gap-4">
+                <a class="leonard-link d-inline-flex align-items-center gap-2 fw-light fs-9 text-uppercase ls-tight" href="#linkedin">
+                  <i class="fa-brands fa-linkedin fs-6" aria-hidden="true"></i> LinkedIn
+                </a>
+                <a class="leonard-link d-inline-flex align-items-center gap-2 fw-light fs-9 text-uppercase ls-tight" href="#youtube">
+                  <i class="fa-brands fa-youtube fs-6" aria-hidden="true"></i> YouTube
+                </a>
+              </div>
+            </div>
           </div>
         </div>
       </section>
 
       <!-- ============================================================== -->
-      <!-- Where we work                                                   -->
+      <!-- Where we work — presence, not addresses (no accountant / office  -->
+      <!-- street address, no map, per client). A CONTAINED full-bleed      -->
+      <!-- dark-deep band with numbered regions, so the three presence      -->
+      <!-- items read as one intentional unit rather than floating columns. -->
       <!-- ============================================================== -->
-      <section class="container-xxl pt-section">
-        <div class="mw-hl mb-7">
-          <p class="leonard-eyebrow fw-normal fs-9 ls-label text-primary text-uppercase mb-4">
-            Locations
-          </p>
-          <h2 class="display-h3 lh-flat text-uppercase mb-3">Where we work</h2>
-          <p class="fw-light fs-8 lh-body mw-body mb-0">
-            Engineering hubs positioned to serve the world's heavy industries.
-          </p>
-        </div>
+      <section class="bg-dark-deep mt-7">
+        <div class="container-xxl py-7 py-lg-8">
+          <div class="row gy-5">
+            <div class="col-12 col-lg-4">
+              <p class="leonard-eyebrow fw-normal fs-9 ls-label text-primary text-uppercase mb-4">
+                Reach
+              </p>
+              <h2 class="display-h3 lh-flat text-uppercase mb-3">Where we work</h2>
+              <div class="leonard-rte mw-body">
+                <p>
+                  Rooted in the UK and Northern Ireland, mobilised to
+                  heavy-industry sites anywhere in the world.
+                </p>
+              </div>
+            </div>
 
-        <div class="row align-items-center gy-5">
-          <div class="col-12 col-lg-5">
-            <ul class="list-unstyled mb-0">
-              <li class="leonard-case py-4">
-                <h3 class="display-6 fs-4 lh-flat ls-tight text-primary text-uppercase mb-2">
-                  Cookstown, N. Ireland
-                </h3>
-                <address class="fw-light fs-8 lh-body mb-3">
-                  2nd Floor, Gortalowry House, 94 Church Street, Cookstown,
-                  County Tyrone, Northern Ireland, BT80 8HX.
-                </address>
-                <a
-                  class="d-inline-flex align-items-center gap-2 fw-light fs-9 ls-wide text-primary text-uppercase link-primary text-decoration-none"
-                  href="#office-cookstown"
-                >
-                  View office
-                  <i class="fa-solid fa-caret-right fs-11" aria-hidden="true"></i>
-                </a>
-              </li>
-              <li class="leonard-case py-4">
-                <h3 class="display-6 fs-4 lh-flat ls-tight text-primary text-uppercase mb-2">
-                  Dallas, USA
-                </h3>
-                <address class="fw-light fs-8 lh-body mb-3">
-                  450 Lexington Ave, New York NY 10017 USA.
-                </address>
-                <a
-                  class="d-inline-flex align-items-center gap-2 fw-light fs-9 ls-wide text-primary text-uppercase link-primary text-decoration-none"
-                  href="#office-dallas"
-                >
-                  View office
-                  <i class="fa-solid fa-caret-right fs-11" aria-hidden="true"></i>
-                </a>
-              </li>
-              <li class="leonard-case py-4">
-                <h3 class="display-6 fs-4 lh-flat ls-tight text-primary text-uppercase mb-2">
-                  Singapore
-                </h3>
-                <address class="fw-light fs-8 lh-body mb-3">
-                  30 Fenchurch St, London EC3M 3BD, United Kingdom.
-                </address>
-                <a
-                  class="d-inline-flex align-items-center gap-2 fw-light fs-9 ls-wide text-primary text-uppercase link-primary text-decoration-none"
-                  href="#office-singapore"
-                >
-                  View office
-                  <i class="fa-solid fa-caret-right fs-11" aria-hidden="true"></i>
-                </a>
-              </li>
-            </ul>
-          </div>
-          <div class="col-12 col-lg-6 offset-lg-1">
-            <div class="ratio ratio-4x3">
-              <img
-                class="w-100 h-100 object-fit-cover leonard-media-round"
-                src="/img/v2-industry-hero.png"
-                alt="Aerial view of a site served by Leonard"
-                width="960"
-                height="720"
-                loading="lazy"
-              />
+            <div class="col-12 col-lg-8">
+              <div class="row gy-4 gy-md-0">
+                <div class="col-12 col-md-4">
+                  <div class="h-100">
+                    <p class="font-display fs-3 lh-1 text-primary mb-3">01</p>
+                    <h3 class="display-6 fs-4 lh-flat ls-tight text-uppercase mb-2">
+                      United Kingdom
+                    </h3>
+                    <p class="fw-light fs-9 lh-body mb-0">
+                      Engineering, project management and rapid response for
+                      shutdowns across mainland Britain.
+                    </p>
+                  </div>
+                </div>
+                <div class="col-12 col-md-4">
+                  <div class="h-100">
+                    <p class="font-display fs-3 lh-1 text-primary mb-3">02</p>
+                    <h3 class="display-6 fs-4 lh-flat ls-tight text-uppercase mb-2">
+                      Northern Ireland
+                    </h3>
+                    <p class="fw-light fs-9 lh-body mb-0">
+                      Our home base, and the workshop where our robotic
+                      demolition fleet is built and maintained.
+                    </p>
+                  </div>
+                </div>
+                <div class="col-12 col-md-4">
+                  <div class="h-100">
+                    <p class="font-display fs-3 lh-1 text-primary mb-3">03</p>
+                    <h3 class="display-6 fs-4 lh-flat ls-tight text-uppercase mb-2">
+                      Global
+                    </h3>
+                    <p class="fw-light fs-9 lh-body mb-0">
+                      Deployed to cement, metals and energy plants worldwide —
+                      we travel to the site, not the other way around.
+                    </p>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -304,7 +320,7 @@
       <!-- ============================================================== -->
       <!-- CTA                                                             -->
       <!-- ============================================================== -->
-      <section class="container-xxl pt-section">
+      <section class="container-xxl pt-7">
         <div class="leonard-newsletter position-relative text-center px-4 px-lg-8 py-7 py-lg-8">
           <div
             class="leonard-corners text-primary fs-1 fw-thin"
@@ -316,11 +332,13 @@
             <h2 class="display-h2 lh-snug text-primary text-uppercase mw-hl mx-auto mb-4">
               Ready to engineer confidence together
             </h2>
-            <p class="fw-normal fs-8 lh-body mw-body mx-auto mb-5">
-              Explore our full range of specialist industrial maintenance and
-              robotic demolition services, or see how we have delivered for
-              operations like yours.
-            </p>
+            <div class="leonard-rte fw-normal mw-body mx-auto mb-5">
+              <p>
+                Explore our full range of specialist industrial maintenance and
+                robotic demolition services, or see how we have delivered for
+                operations like yours.
+              </p>
+            </div>
             <div class="d-flex flex-wrap justify-content-center gap-3">
               <a
                 class="btn btn-primary btn-lg d-inline-flex align-items-center gap-2 fw-light text-uppercase"
