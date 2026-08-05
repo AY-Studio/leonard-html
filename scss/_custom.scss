@@ -256,9 +256,38 @@
     }
   }
 
-  // Dim the hero while a panel is open, as drawn
-  .leonard-header:has(.leonard-mega.show) ~ main .leonard-hero-ratio > img {
-    filter: brightness(0.4);
+  // The page dims behind an open panel via .leonard-mega-backdrop (a full-page
+  // scrim below), so every page dims uniformly — not just the hero image, which
+  // an earlier per-hero `filter: brightness()` did.
+}
+
+// Full-page scrim behind an open mega-menu, so the panel reads as the focus.
+// CSS-only: `body:has(.leonard-mega.show)` fades it in. `.leonard-mega.show`
+// only exists at xl+ (mega-menus are desktop-only), so this never shows on the
+// mobile offcanvas. z-index sits just under the sticky header — which owns the
+// mega — so the header + panel stay bright and only the content behind dims.
+// visibility toggles pointer-events: while shown it absorbs the dismiss click
+// (Bootstrap closes the dropdown) so no link behind it is triggered by mistake.
+.leonard-mega-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: $zindex-sticky - 1;
+  background: rgba(#000, 0.5);
+  opacity: 0;
+  visibility: hidden;
+  transition:
+    opacity 0.25s ease,
+    visibility 0.25s;
+}
+
+body:has(.leonard-mega.show) .leonard-mega-backdrop {
+  opacity: 1;
+  visibility: visible;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .leonard-mega-backdrop {
+    transition: none;
   }
 }
 

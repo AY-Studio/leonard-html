@@ -3,6 +3,11 @@
      page to reveal it. Body-level (fixed). See initPageTransition() in main.js. -->
 <div class="leonard-pt" aria-hidden="true"></div>
 
+<!-- Dims the page behind an open mega-menu so it reads as a focused panel.
+     CSS-only (body:has(.leonard-mega.show)); sits below the sticky header and
+     its mega but above the page, so only the content dims. -->
+<div class="leonard-mega-backdrop" aria-hidden="true"></div>
+
 <header class="leonard-header container-xxl pt-4">
   <nav class="navbar navbar-expand-xl minh-78 px-3">
     <a class="navbar-brand py-0 me-3" href="/" aria-label="Leonard — home">
@@ -174,12 +179,31 @@
                 </div>
               </div>
               <hr class="border-top border-dark opacity-25 my-0" />
-              <div class="row row-cols-2 row-cols-md-3 row-cols-lg-6 g-4 pt-4">
+              <!-- Rationalised to mirror the five services on /services.html
+                   (same order, anchors and imagery). Site Surveys leads, as on
+                   the page — it is where an engagement starts. The two duplicate
+                   "Refractory Installation" placeholder tiles were dropped. -->
+              <div class="row row-cols-2 row-cols-md-3 row-cols-lg-5 g-4 pt-4">
+                <div class="col">
+                  <a class="leonard-card d-block text-dark text-decoration-none" href="/services.html#site-surveys">
+                    <div class="leonard-card-media ratio" style="--bs-aspect-ratio: 90%">
+                      <img
+                        src="/img/v2-industry-hero.png"
+                        alt="Site surveys"
+                        class="w-100 h-100 object-fit-cover"
+                        loading="lazy"
+                      />
+                    </div>
+                    <h3 class="leonard-card__title font-display fs-3 lh-snug ls-tight text-uppercase mt-3 mb-0">
+                      Site Surveys
+                    </h3>
+                  </a>
+                </div>
                 <div class="col">
                   <a class="leonard-card d-block text-dark text-decoration-none" href="/services.html#refractory-installation">
                     <div class="leonard-card-media ratio" style="--bs-aspect-ratio: 90%">
                       <img
-                        src="/img/service-1.webp"
+                        src="/img/service-refractory.png"
                         alt="Refractory installation services"
                         class="w-100 h-100 object-fit-cover"
                         loading="lazy"
@@ -194,7 +218,7 @@
                   <a class="leonard-card d-block text-dark text-decoration-none" href="/services.html#robotic-arm-demolition">
                     <div class="leonard-card-media ratio" style="--bs-aspect-ratio: 90%">
                       <img
-                        src="/img/service-2.webp"
+                        src="/img/service-robotic-arm.png"
                         alt="Robotic arm demolition"
                         class="w-100 h-100 object-fit-cover"
                         loading="lazy"
@@ -209,7 +233,7 @@
                   <a class="leonard-card d-block text-dark text-decoration-none" href="/services.html#confined-space">
                     <div class="leonard-card-media ratio" style="--bs-aspect-ratio: 90%">
                       <img
-                        src="/img/service-3.webp"
+                        src="/img/service-confined.png"
                         alt="Confined space robotic demolition"
                         class="w-100 h-100 object-fit-cover"
                         loading="lazy"
@@ -224,7 +248,7 @@
                   <a class="leonard-card d-block text-dark text-decoration-none" href="/services.html#media-grading">
                     <div class="leonard-card-media ratio" style="--bs-aspect-ratio: 90%">
                       <img
-                        src="/img/service-4.webp"
+                        src="/img/service-media.png"
                         alt="Media grading"
                         class="w-100 h-100 object-fit-cover"
                         loading="lazy"
@@ -232,36 +256,6 @@
                     </div>
                     <h3 class="leonard-card__title font-display fs-3 lh-snug ls-tight text-uppercase mt-3 mb-0">
                       Media Grading
-                    </h3>
-                  </a>
-                </div>
-                <div class="col">
-                  <a class="leonard-card d-block text-dark text-decoration-none" href="/services.html#refractory-installation">
-                    <div class="leonard-card-media ratio" style="--bs-aspect-ratio: 90%">
-                      <img
-                        src="/img/service-5.webp"
-                        alt="Refractory installation services"
-                        class="w-100 h-100 object-fit-cover"
-                        loading="lazy"
-                      />
-                    </div>
-                    <h3 class="leonard-card__title font-display fs-3 lh-snug ls-tight text-uppercase mt-3 mb-0">
-                      Refactory Installation Services
-                    </h3>
-                  </a>
-                </div>
-                <div class="col">
-                  <a class="leonard-card d-block text-dark text-decoration-none" href="/services.html#refractory-installation">
-                    <div class="leonard-card-media ratio" style="--bs-aspect-ratio: 90%">
-                      <img
-                        src="/img/service-6.webp"
-                        alt="Refractory installation services"
-                        class="w-100 h-100 object-fit-cover"
-                        loading="lazy"
-                      />
-                    </div>
-                    <h3 class="leonard-card__title font-display fs-3 lh-snug ls-tight text-uppercase mt-3 mb-0">
-                      Refactory Installation Services
                     </h3>
                   </a>
                 </div>
