@@ -935,6 +935,70 @@ body:has(.leonard-mega.show) .leonard-mega-backdrop {
   border-radius: 1.5rem;
 }
 
+// Industry bands — the full-bleed alternating rows on /industries. This class
+// owns the band's vertical padding, so a row is just
+// `<section class="leonard-industry"><div class="container-xxl">…`. Add the
+// `.bg-dark-deep` utility for the darker rows — that's the single class a CMS
+// toggles per row (no bespoke markup needed).
+.leonard-industry {
+  padding-block: 6rem; // matches the Home safe band (py-7 / py-lg-8)
+
+  @include media-breakpoint-up(lg) {
+    padding-block: 10rem;
+  }
+}
+
+// Section rhythm — bumped to the band padding (py-7 / py-lg-8 = 96px, rising to
+// 160px at lg) so every general content section is spaced consistently with the
+// full-bleed bands. This overrides the shared `section` spacer utilities (the
+// site's standard `pt-section` / `mt-section` gaps, ~100 uses) in ONE place
+// rather than editing every section — and a CMS keeps using the same classes.
+// _custom.scss is imported after Bootstrap's utilities/api, so these win over
+// the generated 40px values.
+.pt-section {
+  padding-top: 6rem !important;
+}
+.pb-section {
+  padding-bottom: 6rem !important;
+}
+.py-section {
+  padding-top: 6rem !important;
+  padding-bottom: 6rem !important;
+}
+.mt-section {
+  margin-top: 6rem !important;
+}
+.mb-section {
+  margin-bottom: 6rem !important;
+}
+.my-section {
+  margin-top: 6rem !important;
+  margin-bottom: 6rem !important;
+}
+
+@include media-breakpoint-up(lg) {
+  .pt-section {
+    padding-top: 10rem !important;
+  }
+  .pb-section {
+    padding-bottom: 10rem !important;
+  }
+  .py-section {
+    padding-top: 10rem !important;
+    padding-bottom: 10rem !important;
+  }
+  .mt-section {
+    margin-top: 10rem !important;
+  }
+  .mb-section {
+    margin-bottom: 10rem !important;
+  }
+  .my-section {
+    margin-top: 10rem !important;
+    margin-bottom: 10rem !important;
+  }
+}
+
 // Search result: a hairline-separated hit (section label, title link, excerpt,
 // "read more"). Same rule as the case-study rows; the title lifts to yellow on
 // hover, matching the nav / card idiom.
@@ -1399,15 +1463,59 @@ body:has(.leonard-mega.show) .leonard-mega-backdrop {
   padding-bottom: 1.75rem;
 }
 
-// Small hairline chip for project/case-study tags (Cement, Confined space …).
-// A SMALL hold below the homepage feature list so the sticky "Home safe, every
-// day" panel stays locked a beat longer at the last feature before releasing.
-// On the feature COLUMN (not the .leonard-stack ul) so the rail line doesn't
-// extend into it. Kept modest — a taller hold makes the panel's release point
-// sit visibly below the content. vh-based so it scales; lg+ only (sticky is lg+).
-.leonard-feature-hold {
-  @include media-breakpoint-up(lg) {
-    padding-bottom: 15vh;
+
+// ---------------------------------------------------------------------------
+// Feature steps — scroll-driven accordion (GSAP ScrollTrigger; initFeatureSteps)
+// ---------------------------------------------------------------------------
+// The original feature list: a vertical rail with each icon on it, all TITLES
+// always visible. Scrolling opens one feature's body at a time (the others
+// collapsed to their title) — like scrolling through scenes. Default (no JS /
+// reduced motion / below lg) is the plain list with every body open — readable
+// without JS. GSAP adds `.is-active` at lg+ with motion to drive the accordion.
+
+.leonard-step + .leonard-step {
+  margin-top: 2.5rem; // spacing between features in the list
+}
+
+.leonard-step__icon {
+  display: block;
+  width: 38px;
+  height: 38px;
+  margin-bottom: 1rem; // icon above the title below lg
+}
+
+.leonard-step__body {
+  overflow: hidden; // height animation clips; auto height in the fallback fits
+  margin-top: 0.85rem; // title → body gap; animated to 0 so it fully collapses
+}
+
+@include media-breakpoint-up(lg) {
+  // The rail — a continuous hairline down the list connecting the icons, exactly
+  // like the original .leonard-rail. Inset a little so nothing clips it.
+  .leonard-steps {
+    --leonard-rail-gap: clamp(40px, 6.2vw, 107px);
+    --leonard-rail-x: 22px;
+    position: relative;
+
+    &::before {
+      position: absolute;
+      inset: 0 auto 0 var(--leonard-rail-x);
+      width: 1px;
+      background: rgba($leonard-lt-grey, 0.35);
+      content: "";
+    }
+  }
+
+  .leonard-step {
+    position: relative;
+    padding-left: calc(var(--leonard-rail-x) + var(--leonard-rail-gap));
+  }
+
+  .leonard-step__icon {
+    position: absolute;
+    top: 0;
+    left: calc(var(--leonard-rail-x) - 19px); // centred on the rail
+    margin-bottom: 0;
   }
 }
 

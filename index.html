@@ -469,13 +469,17 @@
       <!-- ============================================================== -->
       <!-- Feature list                                                    -->
       <!-- ============================================================== -->
-      <section class="bg-dark text-light mt-section">
-        <div class="container-xxl py-7 pt-lg-8 pb-lg-5">
-          <div class="row gy-5">
+      <!-- GSAP ScrollTrigger pins this section and reveals the features ONE AT A
+           TIME (open → read → close → next), so you read a single feature at a
+           time — no previous-item text bleeding through. The intro panel is held
+           for the whole sequence, with a beat at the end before it releases.
+           JS: initFeatureSteps() in main.js. Fallback (no JS / reduced motion /
+           below lg): a plain, fully-visible vertical list, no pin. -->
+      <section class="leonard-feature-section bg-dark text-light mt-section">
+        <div class="container-xxl py-7 py-lg-8">
+          <div class="row gy-5 align-items-lg-start">
             <div class="col-12 col-lg-5">
-              <!-- Sticky at lg+: travels with the feature list, releasing at the
-                   last item because the column ends there. -->
-              <div class="leonard-sticky">
+              <div class="leonard-feature-intro">
                 <img
                   class="leonard-machine img-fluid d-block mb-5"
                   src="/img/machine.webp"
@@ -498,133 +502,90 @@
                     href="/products.html"
                   >
                     Products
-                    <i
-                      class="fa-solid fa-caret-right fs-11"
-                      aria-hidden="true"
-                    ></i>
+                    <i class="fa-solid fa-caret-right fs-11" aria-hidden="true"></i>
                   </a>
                   <a
                     class="btn btn-outline-light btn-lg d-inline-flex align-items-center gap-2 fw-light text-uppercase"
                     href="/contact.html"
                   >
                     Make an inquiry
-                    <i
-                      class="fa-solid fa-caret-right fs-11"
-                      aria-hidden="true"
-                    ></i>
+                    <i class="fa-solid fa-caret-right fs-11" aria-hidden="true"></i>
                   </a>
                 </div>
               </div>
             </div>
 
-            <div class="col-12 col-lg-7 leonard-feature-hold">
-              <!-- .leonard-stack pins each feature under the last, leaving a
-                   title-height sliver — see _custom.scss. lg+ only.
-                   .leonard-feature-hold adds a SMALL amount of bottom room to
-                   this column so the sticky "Home safe" panel stays locked a
-                   beat longer at the last feature (kept modest so the panel
-                   doesn't visibly sit far below the content). -->
-              <ul class="leonard-rail leonard-stack list-unstyled mb-0">
-                <li class="leonard-feature">
-                  <img
-                    class="leonard-feature__icon"
-                    src="/img/icon-deployment.svg"
-                    alt=""
-                    width="38"
-                    height="38"
-                    loading="lazy"
-                  />
-                  <h3
-                    class="display-5 lh-flat ls-tight text-primary text-uppercase mb-3"
-                  >
+            <div class="col-12 col-lg-7">
+              <!-- Scroll-driven accordion: all titles stay visible on the rail;
+                   scrolling opens each feature's body in turn (one at a time),
+                   the rest collapsed to their title — initFeatureSteps(). -->
+              <div class="leonard-steps">
+                <article class="leonard-step">
+                  <img class="leonard-step__icon" src="/img/icon-deployment.svg" alt="" width="38" height="38" loading="lazy" />
+                  <h3 class="leonard-step__title display-5 lh-flat ls-tight text-primary text-uppercase mb-0">
                     Maximum safety
                   </h3>
-                  <p class="fw-light fs-7 lh-body ls-tight mw-body-lg mb-0">
-                    Removes all personnel from inside vessels.
-                  </p>
-                </li>
-                <li class="leonard-feature mt-8">
-                  <img
-                    class="leonard-feature__icon"
-                    src="/img/icon-deployment.svg"
-                    alt=""
-                    width="38"
-                    height="38"
-                    loading="lazy"
-                  />
-                  <h3
-                    class="display-5 lh-flat ls-tight text-primary text-uppercase mb-3"
-                  >
+                  <div class="leonard-step__body">
+                    <p class="fw-light fs-7 lh-body ls-tight mw-body-lg mb-0">
+                      Removes all personnel from inside vessels.
+                    </p>
+                  </div>
+                </article>
+
+                <article class="leonard-step">
+                  <img class="leonard-step__icon" src="/img/icon-deployment.svg" alt="" width="38" height="38" loading="lazy" />
+                  <h3 class="leonard-step__title display-5 lh-flat ls-tight text-primary text-uppercase mb-0">
                     Faster deplyoment, reduced downtime
                   </h3>
-                  <ul class="fw-light fs-7 lh-body ls-tight mw-body-lg mb-0">
-                    <li>Installation 24hrs after burner off</li>
-                    <li>Can operate at 100&deg;C+ / 212&deg;F+</li>
-                    <li>
-                      Reduced deployment time vs manual approach, saving up to
-                      18hrs.
-                    </li>
-                  </ul>
-                </li>
-                <li class="leonard-feature mt-8">
-                  <img
-                    class="leonard-feature__icon"
-                    src="/img/icon-visibility.svg"
-                    alt=""
-                    width="38"
-                    height="38"
-                    loading="lazy"
-                  />
-                  <h3
-                    class="display-5 lh-flat ls-tight text-primary text-uppercase mb-3"
-                  >
+                  <div class="leonard-step__body">
+                    <ul class="fw-light fs-7 lh-body ls-tight mw-body-lg mb-0">
+                      <li>Installation 24hrs after burner off</li>
+                      <li>Can operate at 100&deg;C+ / 212&deg;F+</li>
+                      <li>Reduced deployment time vs manual approach, saving up to 18hrs.</li>
+                    </ul>
+                  </div>
+                </article>
+
+                <article class="leonard-step">
+                  <img class="leonard-step__icon" src="/img/icon-visibility.svg" alt="" width="38" height="38" loading="lazy" />
+                  <h3 class="leonard-step__title display-5 lh-flat ls-tight text-primary text-uppercase mb-0">
                     Enhanced visibility
                   </h3>
-                  <p class="fw-light fs-7 lh-body ls-tight mw-body-lg mb-0">
-                    Camera and 3D scanning enables inspection of areas not
-                    typically accessible.
-                  </p>
-                </li>
-                <li class="leonard-feature mt-8">
-                  <img
-                    class="leonard-feature__icon"
-                    src="/img/icon-visibility.svg"
-                    alt=""
-                    width="38"
-                    height="38"
-                    loading="lazy"
-                  />
-                  <h3
-                    class="display-5 lh-flat ls-tight text-primary text-uppercase mb-3"
-                  >
+                  <div class="leonard-step__body">
+                    <p class="fw-light fs-7 lh-body ls-tight mw-body-lg mb-0">
+                      Camera and 3D scanning enables inspection of areas not
+                      typically accessible.
+                    </p>
+                  </div>
+                </article>
+
+                <article class="leonard-step">
+                  <img class="leonard-step__icon" src="/img/icon-visibility.svg" alt="" width="38" height="38" loading="lazy" />
+                  <h3 class="leonard-step__title display-5 lh-flat ls-tight text-primary text-uppercase mb-0">
                     High productivity
                   </h3>
-                  <p class="fw-light fs-7 lh-body ls-tight mw-body-lg mb-0">
-                    Cleans and demolishes large areas, with 50% time saving vs.
-                    manual methods.
-                  </p>
-                </li>
-                <li class="leonard-feature mt-8">
-                  <img
-                    class="leonard-feature__icon"
-                    src="/img/icon-deployment.svg"
-                    alt=""
-                    width="38"
-                    height="38"
-                    loading="lazy"
-                  />
-                  <h3
-                    class="display-5 lh-flat ls-tight text-primary text-uppercase mb-3"
-                  >
+                  <div class="leonard-step__body">
+                    <p class="fw-light fs-7 lh-body ls-tight mw-body-lg mb-0">
+                      Cleans and demolishes large areas, with 50% time saving vs.
+                      manual methods.
+                    </p>
+                  </div>
+                </article>
+
+                <article class="leonard-step">
+                  <img class="leonard-step__icon" src="/img/icon-deployment.svg" alt="" width="38" height="38" loading="lazy" />
+                  <h3 class="leonard-step__title display-5 lh-flat ls-tight text-primary text-uppercase mb-0">
                     Flexibility to be deployed across the plant
                   </h3>
-                  <p class="fw-light fs-7 lh-body ls-tight mw-body-lg mb-0">
-                    Works in cyclones, risers, calciners, gas ducts, kiln hood,
-                    TA duct, cooler take off areas; multiple units increase
-                    efficiency and safety.
-                  </p>
-                </li>
-              </ul>
+                  <div class="leonard-step__body">
+                    <p class="fw-light fs-7 lh-body ls-tight mw-body-lg mb-0">
+                      Works in cyclones, risers, calciners, gas ducts, kiln hood,
+                      TA duct, cooler take off areas; multiple units increase
+                      efficiency and safety.
+                    </p>
+                  </div>
+                </article>
+              </div>
             </div>
           </div>
         </div>

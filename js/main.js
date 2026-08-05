@@ -20,6 +20,14 @@ import "aos/dist/aos.css";
 import GLightbox from "glightbox";
 import "glightbox/dist/css/glightbox.min.css";
 
+// GSAP + ScrollTrigger — drives the homepage feature section: pin it and reveal
+// the features one at a time as you scroll (initFeatureSteps). Industry-standard
+// for scroll-pinned sequences; free as of 2025.
+import gsap from "gsap";
+import ScrollTrigger from "gsap/ScrollTrigger";
+
+gsap.registerPlugin(ScrollTrigger);
+
 // ---------------------------------------------------------------------------
 // Sticky nav: hide on scroll down, reveal on scroll up
 // ---------------------------------------------------------------------------
@@ -407,7 +415,9 @@ function initReveal() {
         rows.push(row);
       });
     };
-    collect(document.querySelector("main"));
+    // Skip the feature section — GSAP (initFeatureSteps) owns its reveal, so AOS
+    // must not also hide its columns.
+    collect(document.querySelector("main"), ".leonard-feature-section");
     collect(document.querySelector(".leonard-footer"), ".leonard-footer-reveal");
 
     rows.forEach((row) => {
@@ -449,6 +459,73 @@ function initLightbox() {
   GLightbox({ selector: ".glightbox", autoplayVideos: true });
 }
 
+// Homepage feature section: pin it and scroll through the features ONE AT A TIME
+// as you scroll. The stage is masked to a single "slot"; the track (the list,
+// with its continuous rail) translates up slot-by-slot, so each feature scrolls
+// in, holds to be read, then scrolls up to the next — the rail line connecting
+// them, like the original list. A hold at the end before it releases. Only at
+// lg+ with motion; gsap.matchMedia() tears it down (restoring the plain,
+// fully-visible list) on the mobile / reduced-motion side.
+function initFeatureSteps() {
+  const section = document.querySelector(".leonard-feature-section");
+  if (!section) return;
+  const wrap = section.querySelector(".leonard-steps");
+  const steps = gsap.utils.toArray(section.querySelectorAll(".leonard-step"));
+  const bodies = steps.map((s) => s.querySelector(".leonard-step__body"));
+  if (!wrap || steps.length < 2 || bodies.some((b) => !b)) return;
+
+  gsap.matchMedia().add(
+    "(min-width: 992px) and (prefers-reduced-motion: no-preference)",
+    () => {
+      wrap.classList.add("is-active");
+
+      // A body's full height even while collapsed — scrollHeight ignores the
+      // clamped height. Re-measured on refresh (resize) so opens stay exact.
+      let heights = [];
+      const measure = () => {
+        heights = bodies.map((b) => b.scrollHeight);
+      };
+      measure();
+
+      const GAP = "0.85rem"; // title → body gap when open (matches the CSS)
+      // Start: the first feature's body open, the rest collapsed to their title.
+      gsap.set(bodies, { height: 0, marginTop: 0, autoAlpha: 0 });
+      gsap.set(bodies[0], { height: () => heights[0], marginTop: GAP, autoAlpha: 1 });
+
+      const HOLD = 1; // "reading" dwell per open feature
+      const TRANS = 0.6; // close-one / open-next
+      const tl = gsap.timeline();
+      tl.to({}, { duration: HOLD }); // read feature 1
+      steps.forEach((step, i) => {
+        if (i === 0) return;
+        // Close the current, open the next — one accordion open at a time.
+        tl.to(bodies[i - 1], { height: 0, marginTop: 0, autoAlpha: 0, duration: TRANS, ease: "power1.inOut" });
+        tl.to(bodies[i], { height: () => heights[i], marginTop: GAP, autoAlpha: 1, duration: TRANS, ease: "power1.inOut" }, "<");
+        tl.to({}, { duration: HOLD }); // read feature i
+      });
+      tl.to({}, { duration: 1.4 }); // hold at the end before the section releases
+
+      const st = ScrollTrigger.create({
+        animation: tl,
+        trigger: section,
+        start: "top top",
+        end: () => `+=${Math.round(window.innerHeight * (steps.length + 1) * 0.7)}`,
+        pin: true,
+        scrub: 0.6,
+        invalidateOnRefresh: true,
+        onRefresh: measure,
+      });
+
+      // Teardown when leaving this breakpoint / enabling reduced motion.
+      return () => {
+        st.kill();
+        wrap.classList.remove("is-active");
+        gsap.set(bodies, { clearProps: "all" });
+      };
+    }
+  );
+}
+
 function init() {
   initPageTransition();
   initIntro();
@@ -458,6 +535,7 @@ function init() {
   initCursor();
   initReveal();
   initLightbox();
+  initFeatureSteps();
 }
 
 if (document.readyState === "loading") {
