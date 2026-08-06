@@ -25,6 +25,8 @@
     <link rel="preconnect" href="https://use.typekit.net" crossorigin />
     <link rel="stylesheet" href="https://use.typekit.net/djc8uke.css" />
     <script src="https://kit.fontawesome.com/462bc6ee41.js" crossorigin="anonymous"></script>
+    <!-- BugHerd feedback sidebar (staging/review) -->
+    <script type="text/javascript" src="https://www.bugherd.com/sidebarv2.js?apikey=5dwvwbi7k7xlszxhtd8piw" async="true"></script>
   </head>
   <body>
     <!-- #include partials/header.html -->
@@ -119,24 +121,18 @@
             </a>
           </div>
           <div class="col">
-            <!-- Video card: opens the clip in a GLightbox overlay (industry-
-                 standard lightbox) instead of navigating. Swap the YouTube URL
-                 for the real Leonard video. The play badge + "Video" tag +
-                 "Watch video" CTA set it apart from the "Read more" cards. -->
+            <!-- Video article card: navigates to the single (which carries the
+                 clip as its hero) rather than opening a lightbox popup. Kept
+                 visually distinct with the yellow "Video" tag; no play badge. -->
             <a
-              class="leonard-card leonard-card--video d-flex flex-column h-100 text-light text-decoration-none glightbox"
-              href="https://www.youtube.com/watch?v=RY11iULaX7E"
-              data-glightbox="type: video"
-              aria-label="Play video: remote robotics on the front line"
+              class="leonard-card d-flex flex-column h-100 text-light text-decoration-none"
+              href="/article.html"
             >
               <div class="leonard-card-media ratio ratio-4x3 mb-4">
                 <img class="w-100 h-100 object-fit-cover" src="/img/service-robotic-arm.png" alt="" loading="lazy" />
-                <span class="leonard-play" aria-hidden="true"><i class="fa-solid fa-play"></i></span>
               </div>
               <div class="d-flex align-items-center gap-3 mb-3">
-                <span class="leonard-tag leonard-tag--video">
-                  <i class="fa-solid fa-play" aria-hidden="true"></i> Video
-                </span>
+                <span class="leonard-tag leonard-tag--video">Video</span>
                 <span class="fw-light fs-11 lh-body ls-tight text-body-secondary">26 July 26</span>
               </div>
               <h2 class="display-6 fs-4 lh-snug ls-tight text-uppercase mb-3">
@@ -146,7 +142,7 @@
                 class="d-inline-flex align-items-center gap-2 fw-light fs-9 ls-wide text-primary text-uppercase mt-auto"
               >
                 Watch video
-                <i class="fa-solid fa-play fs-11" aria-hidden="true"></i>
+                <i class="fa-solid fa-caret-right fs-11" aria-hidden="true"></i>
               </span>
             </a>
           </div>

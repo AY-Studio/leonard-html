@@ -26,14 +26,16 @@ Everything else is *disabled, not deleted*, and switches back on cleanly.
 | Industries | `industries.html` |
 | News & Events | `news.html` |
 | — single article | `article.html` |
+| Case Studies | `case-studies.html` |
+| — case study detail | `case-study.html` |
 | Contact us | `contact.html` |
 | Careers | `careers.html` *(footer only)* |
 | Terms & Conditions | `terms.html` *(footer only)* |
 | Privacy Policy | `privacy.html` *(footer only)* |
 | 404 | `404.html` *(host error page)* |
 
-**Disabled for launch** (fully built, switched off): `about`, `case-studies`,
-`case-study`, `search-results`, `faqs`, `health-safety`, `certifications`,
+**Disabled for launch** (fully built, switched off): `about`,
+`search-results`, `faqs`, `health-safety`, `certifications`,
 `partnerships`, and every detail template — `product` (+ `-nano`, `-descender`,
 `-charger`, `-calibre`), `service` (+ `-refractory-installation`,
 `-confined-space`, `-media-grading`), `industry` (+ `-aluminium`,

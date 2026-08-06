@@ -482,6 +482,27 @@ function initLightbox() {
   GLightbox({ selector: ".glightbox", autoplayVideos: true });
 }
 
+// Video hero (article page): a click-to-play facade. The poster + play badge is
+// swapped for an autoplaying YouTube embed on first click, so the heavy iframe
+// only loads on demand. Without JS the element is a plain link to the clip.
+function initVideoHero() {
+  const hero = document.querySelector(".leonard-video-hero");
+  if (!hero) return;
+  hero.addEventListener("click", (e) => {
+    e.preventDefault();
+    const src = hero.dataset.videoEmbed;
+    if (!src) return;
+    const iframe = document.createElement("iframe");
+    iframe.src = src;
+    iframe.title = hero.getAttribute("aria-label") || "Video";
+    iframe.allow =
+      "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share";
+    iframe.allowFullscreen = true;
+    hero.replaceChildren(iframe);
+    hero.classList.add("is-playing");
+  });
+}
+
 // Homepage feature section: pin it and scroll through the features ONE AT A TIME
 // as you scroll. The stage is masked to a single "slot"; the track (the list,
 // with its continuous rail) translates up slot-by-slot, so each feature scrolls
@@ -559,6 +580,7 @@ function init() {
   initCursor();
   initReveal();
   initLightbox();
+  initVideoHero();
   initFeatureSteps();
 }
 

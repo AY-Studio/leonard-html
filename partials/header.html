@@ -363,19 +363,14 @@
              Imagery is shared with the Industries panel and does not match
              these titles in the Figma source (placeholder art), so the
              images are marked decorative and the heading names each link. -->
-        <!-- LAUNCH: Case Studies is not in the initial launch — nav item disabled.
-           Re-enable: remove this <template> wrapper. -->
-        <template class="launch-disabled"><li class="nav-item dropdown">
-          <a
-            class="nav-link dropdown-toggle"
-            href="/case-studies.html"
-            role="button"
-            data-bs-toggle="dropdown"
-            data-bs-display="static"
-            aria-expanded="false"
-            >Case Studies</a
-          >
-          <div class="dropdown-menu leonard-mega">
+        <li class="nav-item">
+          <a class="nav-link" href="/case-studies.html">Case Studies</a>
+          <!-- LAUNCH: mega-menu temporarily disabled — the nav item links
+               straight to the listing. To restore the mega-menu: unwrap the
+               panel below and put the toggle back on the link above
+               (dropdown-toggle class + role / data-bs-toggle="dropdown" /
+               data-bs-display="static" / aria-expanded="false"). -->
+          <template class="launch-disabled"><div class="dropdown-menu leonard-mega">
             <div class="p-4 p-lg-5">
               <div class="d-flex flex-wrap justify-content-between align-items-center gap-3 mb-3">
                 <p class="fs-7 fw-normal ls-wide text-uppercase mb-0">Case studies</p>
@@ -498,8 +493,8 @@
                 </div>
               </div>
             </div>
-          </div>
-        </li></template>
+          </div></template>
+        </li>
         <li class="nav-item"><a class="nav-link" href="/news.html">News &amp; Events</a></li>
       </ul>
 
@@ -578,11 +573,9 @@
       <li class="leonard-mnav__item">
         <a href="/industries.html">Industries</a>
       </li>
-      <!-- LAUNCH: Case Studies not in the initial launch. Re-enable by uncommenting.
       <li class="leonard-mnav__item">
         <a href="/case-studies.html">Case Studies</a>
       </li>
-      -->
       <li class="leonard-mnav__item">
         <a href="/news.html">News &amp; Events</a>
       </li>

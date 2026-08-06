@@ -25,6 +25,8 @@
     <link rel="preconnect" href="https://use.typekit.net" crossorigin />
     <link rel="stylesheet" href="https://use.typekit.net/djc8uke.css" />
     <script src="https://kit.fontawesome.com/462bc6ee41.js" crossorigin="anonymous"></script>
+    <!-- BugHerd feedback sidebar (staging/review) -->
+    <script type="text/javascript" src="https://www.bugherd.com/sidebarv2.js?apikey=5dwvwbi7k7xlszxhtd8piw" async="true"></script>
   </head>
   <body>
     <!-- #include partials/header.html -->
@@ -63,17 +65,27 @@
         </div>
       </section>
 
-      <!-- Hero image -->
+      <!-- Video hero. Click-to-play facade: the poster + play badge is swapped
+           for an autoplaying YouTube embed on first click (initVideoHero in
+           main.js), so the heavy iframe only loads on demand. Without JS the
+           element is a plain link to the clip. Swap the YouTube id + poster for
+           the real Leonard video per article. -->
       <section class="container-xxl pt-section">
-        <div class="ratio leonard-band-ratio overflow-hidden">
+        <a
+          class="leonard-video-hero ratio leonard-band-ratio d-block overflow-hidden leonard-media-round"
+          href="https://www.youtube.com/watch?v=RY11iULaX7E"
+          data-video-embed="https://www.youtube.com/embed/RY11iULaX7E?autoplay=1"
+          aria-label="Play video: robotic demolition in confined spaces"
+        >
           <img
-            class="w-100 h-100 object-fit-cover leonard-media-round"
+            class="w-100 h-100 object-fit-cover"
             src="/img/article-hero.png"
             alt="Robotic demolition arm at work inside a confined industrial vessel"
             width="1685"
             height="720"
           />
-        </div>
+          <span class="leonard-play" aria-hidden="true"><i class="fa-solid fa-play"></i></span>
+        </a>
       </section>
 
       <!-- ============================================================== -->

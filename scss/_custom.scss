@@ -454,6 +454,32 @@ body:has(.leonard-mega.show) .leonard-mega-backdrop {
   }
 }
 
+// Video hero (article page) — click-to-play facade reusing the card play badge.
+// Once playing, the badge is gone (replaced by the embed) so drop the hover.
+.leonard-video-hero {
+  cursor: pointer;
+
+  img {
+    transition: transform 0.45s ease;
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    &:not(.is-playing):hover img,
+    &:not(.is-playing):focus-visible img {
+      transform: scale(1.03);
+    }
+  }
+
+  &:focus-visible {
+    outline: 2px solid $leonard-yellow;
+    outline-offset: 4px;
+  }
+
+  &.is-playing {
+    cursor: auto;
+  }
+}
+
 .leonard-card:hover .leonard-card-media::after,
 .leonard-card:focus-visible .leonard-card-media::after {
   transform: scaleX(1);
@@ -925,8 +951,14 @@ body:has(.leonard-mega.show) .leonard-mega-backdrop {
 // Testimonial card — a bordered panel on the dark page, quote in the body
 // colour, stars and rule in brand yellow. Kept to a hairline border so three
 // sit quietly in a row rather than reading as heavy boxes.
+// Testimonial card — a light panel on the dark page: #eee fill, dk-grey text.
+// The role line uses `.text-body-secondary` (theme-aware), which would resolve
+// to a light muted on the dark document and vanish here, so re-map its variable
+// to a dark muted for the card's contents. Stars stay yellow (`.text-primary`).
 .leonard-quote {
-  border: 1px solid rgba($leonard-lt-grey, 0.25);
+  --bs-secondary-color: #{rgba($leonard-dk-grey, 0.7)};
+  background: $leonard-neutral-lightest;
+  color: $leonard-dk-grey;
 }
 
 // Rounded photo corners. Bootstrap's radii are all zeroed for the sharp
@@ -1580,6 +1612,9 @@ html.lenis {
 .leonard-quote__stars {
   display: flex;
   gap: 0.35em;
+  // dk-grey to match the card text — the markup carries `.text-primary`
+  // (yellow, !important), so beat it with !important.
+  color: $leonard-dk-grey !important;
 }
 
 // ---------------------------------------------------------------------------
