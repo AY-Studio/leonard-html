@@ -1720,7 +1720,7 @@ html.lenis {
   // Bootstrap's select caret is a dark SVG; swap it for a light one so it shows
   // on the transparent field.
   .form-select {
-    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23d8dfe5' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m2 5 6 6 6-6'/%3e%3c/svg%3e");
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23d8dfe2' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m2 5 6 6 6-6'/%3e%3c/svg%3e");
   }
 
   // Transparent so unchecked controls read as empty rings, not filled dots;
@@ -2262,7 +2262,7 @@ $leonard-rail-gap: 6.2vw;
 //   overlay exit  2.3–3.1s   translateY 0 → -100% (its own height = 100vh)
 //
 // The cover, lock and pre-animation states live inline in index.html's <head>
-// so the overlay paints correctly on the first frame (background #ffdb00).
+// so the overlay paints correctly on the first frame (background #ffdd00).
 //
 // Layout is anchored to the wordmark. `--intro-w` is the wordmark width; the
 // ring motif and the "360°" are placed and sized off it with the exact ratios
@@ -2321,7 +2321,7 @@ $leonard-rail-gap: 6.2vw;
 
   path {
     fill: none;
-    stroke: $leonard-grey; // #425057, the design's stroke colour
+    stroke: $leonard-grey; // #768592, the design's stroke colour
     stroke-width: 1;
     stroke-linecap: round;
     stroke-miterlimit: 10;

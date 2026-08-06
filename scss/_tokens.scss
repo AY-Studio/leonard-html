@@ -7,18 +7,20 @@
 // The aim is that as much of the design system as possible lives in these
 // variables, so the markup can be plain Bootstrap utilities and components.
 
-// Brand palette — Figma variable names in comments
-$leonard-dk-grey: #002529; // LEONARD/dk grey
-$leonard-grey: #425057; // LEONARD/grey
-$leonard-lt-grey: #d8dfe5; // LEONARD/Lt grey
-$leonard-yellow: #ffdb00; // LEONARD/Yellow
+// Brand palette — current Figma variable names in comments. The variable names
+// below keep their original (dk-grey/grey/lt-grey/yellow) slugs to avoid a
+// sitewide rename; only the hex values changed with the rebrand.
+$leonard-dk-grey: #253746; // LEONARD/Clinker (was dk grey #002529)
+$leonard-grey: #768592; // LEONARD/Brick (was grey #425057)
+$leonard-lt-grey: #d8dfe2; // LEONARD/Zinc (was Lt grey #d8dfe5)
+$leonard-yellow: #ffdd00; // LEONARD/Flame (was Yellow #ffdb00)
 $leonard-white: #ffffff; // white
 // From the relume file's own token set, not the LEONARD palette. Used for the
 // trusted-partners band, which is deliberately lighter than LEONARD/Lt grey.
 $leonard-neutral-lightest: #eeeeee; // color/neutral-lightest
 
 // color/neutral-lighter — the product-band panels on the Products page. A shade
-// darker than lt-grey (#d8dfe5), also outside the LEONARD theme palette, so like
+// darker than lt-grey (#d8dfe2), also outside the LEONARD theme palette, so like
 // neutral-lightest it is a single background utility rather than a theme colour.
 $leonard-neutral-lighter: #cccccc; // color/neutral-lighter
 
