@@ -12,6 +12,21 @@
 // The square is a literal glyph in Figma, but U+25A0 is outside the latin
 // subset we ship, so it's drawn rather than typed.
 
+// The eyebrow's square marker stays solid; a ring pulses OUT from it (radar /
+// ripple), drawn as an expanding, fading box-shadow so it needs no extra element.
+// currentColor keeps the ring the same colour as the marker on every band. The
+// 70%→100% hold at full-transparent is the quiet gap between pulses. Global
+// (every `.leonard-eyebrow`); off under reduced motion, where it just sits solid.
+@keyframes leonard-eyebrow-pulse {
+  0% {
+    box-shadow: 0 0 0 0 currentColor;
+  }
+  70%,
+  100% {
+    box-shadow: 0 0 0 0.6em transparent;
+  }
+}
+
 .leonard-eyebrow {
   display: flex;
   gap: 0.75em;
@@ -25,6 +40,10 @@
     margin-top: calc((1lh - 0.5em) / 2); // centre on the FIRST line when wrapped
     content: "";
     background: currentcolor;
+
+    @media (prefers-reduced-motion: no-preference) {
+      animation: leonard-eyebrow-pulse 2.4s ease-out infinite;
+    }
   }
 }
 
