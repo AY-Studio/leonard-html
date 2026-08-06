@@ -596,6 +596,17 @@ body:has(.leonard-mega.show) .leonard-mega-backdrop {
   }
 }
 
+// Photo-CTA parallax. The image is taller than its clipped `.ratio` box and
+// drifts vertically on scroll (initParallax, GSAP scrub) for a subtle parallax.
+// The extra height + negative top keep it covering the box at both ends of the
+// drift; with no JS or under reduced motion it simply sits static (showing the
+// vertical middle of the image), so the CTA is unaffected.
+.leonard-parallax img {
+  height: 130%;
+  top: -15%;
+  will-change: transform;
+}
+
 // The statement headline is neutral-lightest, a shade lighter than the body
 // colour it would otherwise inherit. A plain rule rather than a utility: the
 // heading has no competing colour declaration, so this needs no !important.

@@ -503,6 +503,37 @@ function initVideoHero() {
   });
 }
 
+// Photo-CTA parallax: the background image of each `.leonard-parallax` box
+// drifts vertically as the section passes through the viewport, scrubbed off
+// scroll position (smooth under Lenis). The image is oversized in CSS so the
+// drift never exposes an edge. Off under reduced motion — the matchMedia tears
+// the tween down and clears the transform, restoring the static image.
+function initParallax() {
+  const boxes = gsap.utils.toArray(".leonard-parallax");
+  if (!boxes.length) return;
+  gsap.matchMedia().add("(prefers-reduced-motion: no-preference)", () => {
+    const tweens = boxes.map((box) => {
+      const img = box.querySelector("img");
+      if (!img) return null;
+      return gsap.fromTo(
+        img,
+        { yPercent: -9 },
+        {
+          yPercent: 9,
+          ease: "none",
+          scrollTrigger: {
+            trigger: box,
+            start: "top bottom",
+            end: "bottom top",
+            scrub: true,
+          },
+        }
+      );
+    });
+    return () => tweens.forEach((t) => t && t.scrollTrigger && t.scrollTrigger.kill());
+  });
+}
+
 // Homepage feature section: pin it and scroll through the features ONE AT A TIME
 // as you scroll. The stage is masked to a single "slot"; the track (the list,
 // with its continuous rail) translates up slot-by-slot, so each feature scrolls
@@ -582,6 +613,7 @@ function init() {
   initLightbox();
   initVideoHero();
   initFeatureSteps();
+  initParallax();
 }
 
 if (document.readyState === "loading") {

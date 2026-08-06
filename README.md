@@ -1,5 +1,7 @@
 # Leonard website
 
+[![Netlify Status](https://api.netlify.com/api/v1/badges/a3a52371-2708-429d-82d4-4557b38f7842/deploy-status)](https://app.netlify.com/projects/leonardglobal/deploys)
+
 Bootstrap 5.3.8 + Sass + Vite static multi-page site. See `CLAUDE.md` for the
 full architecture, component notes, and per-page detail.
 
