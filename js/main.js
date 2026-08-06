@@ -155,15 +155,27 @@ function initCornerDraw() {
   if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
   if (!("IntersectionObserver" in window)) return;
 
+  // Fire as each set ENTERS view, not at 50% coverage. `.leonard-corners` is
+  // inset:0 of its band, so on a tall band (e.g. the homepage "Home safe"
+  // statement) 50% is only reached once the top ticks have scrolled off the top
+  // — they'd then draw unseen. threshold:0 + a bottom rootMargin triggers a
+  // little after the top edge enters, so the ticks are on screen as they draw,
+  // on bands of any height.
+  //
+  // The band (and its columns) also fade in via AOS (~700ms). Firing the draw at
+  // the same instant hides it inside the fade, so hold `is-drawn` back until the
+  // fade has run — the ticks then draw in as a distinct beat over the settled band.
+  const DRAW_DELAY = 750; // > AOS fade duration (700ms)
   const io = new IntersectionObserver(
     (entries) => {
       for (const entry of entries) {
         if (!entry.isIntersecting) continue;
         io.unobserve(entry.target);
-        entry.target.classList.add("is-drawn");
+        const set = entry.target;
+        window.setTimeout(() => set.classList.add("is-drawn"), DRAW_DELAY);
       }
     },
-    { threshold: 0.5 }
+    { threshold: 0, rootMargin: "0px 0px -15% 0px" }
   );
 
   sets.forEach((set) => {
