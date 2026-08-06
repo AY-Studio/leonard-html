@@ -2,6 +2,9 @@
 
 Built from `Leonard.fig`. The homepage is complete.
 
+> **Statamic migration:** see `CMS.md` — page types, the page-builder block
+> library, per-component field maps, and which classes are the template hooks.
+
 ## Two Figma files are in play
 
 | File | Key | Used for |
