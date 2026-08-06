@@ -699,6 +699,66 @@ body:has(.leonard-mega.show) .leonard-mega-backdrop {
   --bs-btn-active-color: #{$leonard-dk-grey};
 }
 
+// Button hover — the rolling-label effect, applied to every button by
+// initButtonFx (which wraps each label in two stacked copies inside a clipped
+// one-line window). On hover the label rolls down one line — the first copy out
+// the bottom, the second in from above — a clean same-colour refresh (each copy
+// inherits its button's own text colour, so it works on every variant). The
+// button's colours are FROZEN on hover (the hover custom props point back at the
+// rest ones), so the roll is the feedback rather than a bg change. Where a button
+// carries the square brand mark ("brick", arrow-dark.svg) it spins 45° in place;
+// carets are deliberately left alone. Behind hover:hover + prefers-reduced-motion;
+// :focus-visible gets it too. No overflow clip on the button itself — the label
+// clips its own roll and the rotating brick must not be cut off.
+.leonard-btn-slide {
+  position: relative;
+  --bs-btn-hover-color: var(--bs-btn-color);
+  --bs-btn-hover-bg: var(--bs-btn-bg);
+  --bs-btn-hover-border-color: var(--bs-btn-border-color);
+
+  // One-line window that clips the two stacked text copies. Button labels are
+  // uppercase (no descenders), so a tight one-line clip is clean.
+  &__label {
+    position: relative;
+    display: inline-block;
+    overflow: hidden;
+    vertical-align: middle;
+  }
+
+  &__text {
+    display: block;
+    transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  // The incoming copy: parked exactly one line up (colour inherited from button).
+  &__text--alt {
+    position: absolute;
+    inset: 0;
+    transform: translateY(-100%);
+  }
+
+  // The square brand mark spins 45° on hover; carets get no transition/rotate.
+  &__brick {
+    transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  @media (hover: hover) and (prefers-reduced-motion: no-preference) {
+    &:hover .leonard-btn-slide__text,
+    &:focus-visible .leonard-btn-slide__text {
+      transform: translateY(100%);
+    }
+    &:hover .leonard-btn-slide__text--alt,
+    &:focus-visible .leonard-btn-slide__text--alt {
+      transform: translateY(0);
+    }
+
+    &:hover .leonard-btn-slide__brick,
+    &:focus-visible .leonard-btn-slide__brick {
+      transform: rotate(45deg);
+    }
+  }
+}
+
 // Newsletter sits on a 50% black scrim over the page background
 .leonard-newsletter {
   color: $leonard-lt-grey;

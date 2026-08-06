@@ -497,6 +497,48 @@ function initSmoothScroll() {
   gsap.ticker.lagSmoothing(0);
 }
 
+// Roll every button's label on hover: wrap the label text in two stacked copies
+// inside a clipped one-line window (the CSS rolls them). Also tag the square
+// brand mark ("brick", arrow-dark.svg) so it spins 45° — carets are left alone.
+// Runs once; skips already-wrapped and icon-only buttons. The alt copy is
+// aria-hidden so the accessible name stays a single label.
+function initButtonFx() {
+  document.querySelectorAll(".btn").forEach((btn) => {
+    if (btn.classList.contains("leonard-btn-slide")) return;
+
+    const textNodes = [...btn.childNodes].filter(
+      (n) => n.nodeType === Node.TEXT_NODE && n.textContent.trim()
+    );
+    if (!textNodes.length) return; // icon-only button — nothing to roll
+
+    const text = textNodes
+      .map((n) => n.textContent)
+      .join(" ")
+      .replace(/\s+/g, " ")
+      .trim();
+
+    const label = document.createElement("span");
+    label.className = "leonard-btn-slide__label";
+
+    const main = document.createElement("span");
+    main.className = "leonard-btn-slide__text";
+    main.textContent = text;
+
+    const alt = document.createElement("span");
+    alt.className = "leonard-btn-slide__text leonard-btn-slide__text--alt";
+    alt.setAttribute("aria-hidden", "true");
+    alt.textContent = text;
+
+    label.append(main, alt);
+    btn.insertBefore(label, textNodes[0]);
+    textNodes.forEach((n) => n.remove());
+    btn.classList.add("leonard-btn-slide");
+
+    const brick = btn.querySelector('img[src*="arrow-dark"]');
+    if (brick) brick.classList.add("leonard-btn-slide__brick");
+  });
+}
+
 // Open any `.glightbox` link (the News video cards) in the lightbox rather than
 // navigating. No-op on pages without one.
 function initLightbox() {
@@ -636,6 +678,7 @@ function init() {
   initVideoHero();
   initFeatureSteps();
   initParallax();
+  initButtonFx();
 }
 
 if (document.readyState === "loading") {
