@@ -778,6 +778,30 @@ body:has(.leonard-mega.show) .leonard-mega-backdrop {
   }
 }
 
+// Enerblock-style title reveal (initScramble): a solid block wipes in left→right
+// over the hidden title, then wipes out the same way to uncover the text, which
+// decodes (ScrambleTextPlugin) in its wake. The block is `currentColor`, so it
+// matches the title and reads as the block resolving into the letters. `__text`
+// stays inline so the title still wraps normally.
+.leonard-scramble {
+  position: relative;
+}
+
+.leonard-scramble__block {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  // width is set in JS to the title's full content width (`scrollWidth`) so it
+  // still covers titles whose text overflows their box — e.g. the big product
+  // names that run across the render. For normal titles this equals the box width.
+  z-index: 1;
+  background: currentcolor;
+  transform: scaleX(0);
+  transform-origin: left center;
+  pointer-events: none;
+}
+
 // Newsletter sits on a 50% black scrim over the page background
 .leonard-newsletter {
   color: $leonard-lt-grey;

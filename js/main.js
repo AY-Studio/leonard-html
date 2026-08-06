@@ -25,8 +25,11 @@ import "glightbox/dist/css/glightbox.min.css";
 // for scroll-pinned sequences; free as of 2025.
 import gsap from "gsap";
 import ScrollTrigger from "gsap/ScrollTrigger";
+// ScrambleTextPlugin — the "decode" reveal on titles. A GSAP bonus plugin, free
+// since GreenSock went fully free; ships in the `gsap` package.
+import ScrambleTextPlugin from "gsap/ScrambleTextPlugin";
 
-gsap.registerPlugin(ScrollTrigger);
+gsap.registerPlugin(ScrollTrigger, ScrambleTextPlugin);
 
 // Lenis (Studio Freight) — the industry-standard smooth-scroll, paired with
 // GSAP ScrollTrigger. It smooths the *native* scroll (no wrapper transform), so
@@ -539,6 +542,171 @@ function initButtonFx() {
   });
 }
 
+// Enerblock-style title reveal on `[data-scramble]`: a solid block wipes in
+// left→right over the hidden title, then wipes out the same way to uncover the
+// text, which decodes (GSAP ScrambleTextPlugin) in its wake. POC: the homepage
+// hero <h1>. The final text stays in the markup (correct with no JS / for SEO)
+// and is mirrored into aria-label so screen readers get the real title while it
+// scrambles. Off under reduced motion.
+//
+// The build (and crucially the HIDE) happens immediately on load, so the final
+// text never flashes before the reveal — even while the homepage intro is still
+// lifting. Only PLAYING the timeline is deferred until the intro lifts (or runs
+// straight away on pages without one).
+function initScramble() {
+  const targets = gsap.utils.toArray("[data-scramble]");
+  if (!targets.length) return;
+  if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+
+  // Build + HIDE each title immediately so the final text never flashes before
+  // the reveal (even during the homepage intro lift). Measuring/playing is
+  // deferred until fonts are ready (accurate widths) AND the intro has lifted.
+  const setups = targets.map((el) => {
+    // Rebuild the title as: a __text wrapper holding one span PER WORD (real
+    // spaces kept as text nodes, so line breaks / footprint are preserved and the
+    // scramble can't merge words), plus a solid __block overlay for the wipe.
+    // Walk the original child nodes so hard line breaks (<br>) — used in several
+    // of these titles — are preserved rather than lost via textContent.
+    const nodes = [...el.childNodes];
+    const textWrap = document.createElement("span");
+    textWrap.className = "leonard-scramble__text";
+    const words = [];
+    let ariaText = "";
+    nodes.forEach((node) => {
+      if (node.nodeName === "BR") {
+        textWrap.appendChild(document.createElement("br"));
+        ariaText += " ";
+      } else if (node.nodeType === Node.TEXT_NODE) {
+        ariaText += node.textContent;
+        node.textContent.split(/(\s+)/).forEach((part) => {
+          if (/\s/.test(part)) {
+            textWrap.appendChild(document.createTextNode(part));
+          } else if (part) {
+            const span = document.createElement("span");
+            span.className = "leonard-scramble__word";
+            span.textContent = part;
+            textWrap.appendChild(span);
+            words.push(span);
+          }
+        });
+      } else {
+        // Any other inline element: keep it as-is (not scrambled).
+        textWrap.appendChild(node.cloneNode(true));
+        ariaText += node.textContent;
+      }
+    });
+    el.setAttribute("aria-label", ariaText.replace(/\s+/g, " ").trim());
+
+    const block = document.createElement("span");
+    block.className = "leonard-scramble__block";
+    block.setAttribute("aria-hidden", "true");
+
+    el.textContent = "";
+    el.append(textWrap, block);
+    el.classList.add("leonard-scramble");
+
+    // Hidden state applied NOW — title blank from load until the reveal plays.
+    gsap.set(textWrap, { opacity: 0 });
+    gsap.set(block, { scaleX: 0, transformOrigin: "left center" });
+
+    return { el, textWrap, block, words };
+  });
+
+  // Play ONE title's reveal (measure with fonts loaded, then run the timeline).
+  const play = ({ el, textWrap, block, words }) => {
+    // Lock the height, and PIN each word to its final rendered width, so the
+    // changing scramble characters (proportional glyphs vary in width even at a
+    // fixed count) can't shift anything horizontally — no more jumping.
+    el.style.minHeight = el.offsetHeight + "px";
+    // Size the wipe block to the full content width, so it also covers titles
+    // whose text overflows the element (e.g. the big product names).
+    block.style.width = el.scrollWidth + "px";
+    const widths = words.map((s) => s.getBoundingClientRect().width);
+    words.forEach((s, wi) => {
+      s.style.display = "inline-block";
+      s.style.width = widths[wi] + "px";
+    });
+
+    const tl = gsap.timeline({
+      onComplete: () => {
+        el.style.minHeight = "";
+        block.remove();
+        words.forEach((s) => {
+          s.style.display = "";
+          s.style.width = "";
+        });
+      },
+    });
+
+    // 1. Block wipes IN left→right over the (still hidden) text.
+    tl.to(block, { scaleX: 1, duration: 0.35, ease: "power2.inOut" });
+
+    // 2. At full cover, reveal the text (still behind the block) and wipe the
+    //    block OUT the same way — its left edge retreats right, uncovering the
+    //    text left→right — while each word scrambles/decodes in its wake.
+    tl.addLabel("reveal");
+    tl.set(textWrap, { opacity: 1 }, "reveal");
+    tl.set(block, { transformOrigin: "right center" }, "reveal");
+    tl.to(block, { scaleX: 0, duration: 0.5, ease: "power2.inOut" }, "reveal");
+    words.forEach((span, wi) => {
+      tl.to(
+        span,
+        {
+          duration: 0.85,
+          ease: "none",
+          scrambleText: {
+            text: span.textContent,
+            chars: "upperCase",
+            speed: 0.6,
+            tweenLength: false,
+          },
+        },
+        "reveal+=" + wi * 0.08
+      );
+    });
+  };
+
+  // Fire each title as it enters view (once). Titles already on screen when we
+  // arm — the heroes — play immediately; section titles further down decode as
+  // they scroll in, so the reveal isn't wasted off-screen.
+  const playAll = () => {
+    setups.forEach((setup) => {
+      const rect = setup.el.getBoundingClientRect();
+      if (rect.top < window.innerHeight * 0.9 && rect.bottom > 0) {
+        play(setup);
+      } else {
+        ScrollTrigger.create({
+          trigger: setup.el,
+          start: "top 85%",
+          once: true,
+          onEnter: () => play(setup),
+        });
+      }
+    });
+  };
+
+  // Play once fonts are ready (so pinned widths are correct) AND any full-page
+  // cover has lifted — the homepage intro splash (`leonard-intro-on`) or the
+  // page-transition panel on in-site navigation (`leonard-pt-arriving`) — so the
+  // reveal is never spent unseen behind one. With no cover it resolves at once.
+  const html = document.documentElement;
+  const covered = () =>
+    html.classList.contains("leonard-intro-on") ||
+    html.classList.contains("leonard-pt-arriving");
+  const coverLifted = new Promise((resolve) => {
+    if (!covered()) return resolve();
+    const obs = new MutationObserver(() => {
+      if (!covered()) {
+        obs.disconnect();
+        resolve();
+      }
+    });
+    obs.observe(html, { attributes: true, attributeFilter: ["class"] });
+  });
+  const fontsReady = document.fonts ? document.fonts.ready : Promise.resolve();
+  Promise.all([coverLifted, fontsReady]).then(playAll);
+}
+
 // Open any `.glightbox` link (the News video cards) in the lightbox rather than
 // navigating. No-op on pages without one.
 function initLightbox() {
@@ -679,6 +847,7 @@ function init() {
   initFeatureSteps();
   initParallax();
   initButtonFx();
+  initScramble();
 }
 
 if (document.readyState === "loading") {
