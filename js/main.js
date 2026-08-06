@@ -28,6 +28,13 @@ import ScrollTrigger from "gsap/ScrollTrigger";
 
 gsap.registerPlugin(ScrollTrigger);
 
+// Lenis (Studio Freight) — the industry-standard smooth-scroll, paired with
+// GSAP ScrollTrigger. It smooths the *native* scroll (no wrapper transform), so
+// the sticky header, sticky photo band, CSS scroll-timelines and fixed overlays
+// all keep working — unlike a transform-based smoother.
+import Lenis from "lenis";
+import "lenis/dist/lenis.css";
+
 // ---------------------------------------------------------------------------
 // Sticky nav: hide on scroll down, reveal on scroll up
 // ---------------------------------------------------------------------------
@@ -452,6 +459,22 @@ function initReveal() {
   });
 }
 
+// Smooth scrolling via Lenis, driven off GSAP's ticker with ScrollTrigger kept
+// in sync — the setup GSAP and Lenis both recommend. `anchors: true` gives
+// smooth in-page #hash jumps. Off under reduced motion (respects the user's
+// preference); the page then uses the browser's native scroll.
+function initSmoothScroll() {
+  if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+  const lenis = new Lenis({
+    duration: 1.05,
+    smoothWheel: true,
+    anchors: true,
+  });
+  lenis.on("scroll", ScrollTrigger.update);
+  gsap.ticker.add((time) => lenis.raf(time * 1000));
+  gsap.ticker.lagSmoothing(0);
+}
+
 // Open any `.glightbox` link (the News video cards) in the lightbox rather than
 // navigating. No-op on pages without one.
 function initLightbox() {
@@ -527,6 +550,7 @@ function initFeatureSteps() {
 }
 
 function init() {
+  initSmoothScroll();
   initPageTransition();
   initIntro();
   initStickyNav();

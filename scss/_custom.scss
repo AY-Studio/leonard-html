@@ -698,6 +698,7 @@ body:has(.leonard-mega.show) .leonard-mega-backdrop {
 
   position: absolute;
   inset: 0;
+  z-index: 1; // above the statement mark (which has no z-index and follows in DOM)
   pointer-events: none;
 
   // Each tick was a "+" glyph. It is now two bars in a 1em box — the box keeps
@@ -933,6 +934,14 @@ body:has(.leonard-mega.show) .leonard-mega-backdrop {
 // corner — a one-off rather than re-enabling rounding site-wide.
 .leonard-media-round {
   border-radius: 1.5rem;
+}
+
+// Lenis owns smooth scrolling; turn off Bootstrap's CSS `scroll-behavior: smooth`
+// while it's active (Lenis adds `.lenis` to <html>) so the two don't double up
+// on anchor jumps. Native scroll-behavior returns wherever Lenis is off
+// (reduced motion), so hash links still ease there via Bootstrap's own setting.
+html.lenis {
+  scroll-behavior: auto;
 }
 
 // Alternating band rows — the full-bleed photo/copy rows on /industries and
