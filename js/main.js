@@ -58,29 +58,39 @@ import "lenis/dist/lenis.css";
 // a number that is already there. Runs once, the first time it scrolls into
 // view, then stops observing.
 
-const COUNT_MS = 1400;
+const COUNT_S = 2; // seconds
 
 function initCountUp() {
   const stats = document.querySelectorAll("[data-countup]");
   if (!stats.length || !("IntersectionObserver" in window)) return;
   if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
 
+  // Drive the count with a GSAP tween of a proxy value rather than a hand-rolled
+  // rAF loop: GSAP runs on the shared, Lenis-synced ticker and its `snap` rounds
+  // the value every frame, so the digits step cleanly. `power2.out` is the
+  // counter-standard ease: a fast start (so it never "holds" on the small stats'
+  // low integers, which read as harsh on an ease-in) into an even, smooth
+  // deceleration that settles on the final value without stalling at the end.
   const run = (el) => {
     const target = Number(el.dataset.countup);
     if (!Number.isFinite(target)) return;
     // Optional suffix (e.g. "+") kept on every frame — the count-up overwrites
     // the whole text node, so a suffix baked into the markup would be lost.
     const suffix = el.dataset.countupSuffix || "";
-    const started = performance.now();
-    const tick = (now) => {
-      const t = Math.min(1, (now - started) / COUNT_MS);
-      const eased = 1 - Math.pow(1 - t, 3); // ease-out, settles rather than stops
-      el.textContent = String(Math.round(target * eased)) + suffix;
-      if (t < 1) requestAnimationFrame(tick);
-      else el.textContent = String(target) + suffix;
-    };
+    const counter = { val: 0 };
     el.textContent = "0" + suffix;
-    requestAnimationFrame(tick);
+    gsap.to(counter, {
+      val: target,
+      duration: COUNT_S,
+      ease: "power2.out",
+      snap: { val: 1 },
+      onUpdate: () => {
+        el.textContent = String(Math.round(counter.val)) + suffix;
+      },
+      onComplete: () => {
+        el.textContent = String(target) + suffix;
+      },
+    });
   };
 
   const io = new IntersectionObserver(
