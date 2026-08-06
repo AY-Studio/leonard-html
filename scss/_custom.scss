@@ -930,6 +930,14 @@ body:has(.leonard-mega.show) .leonard-mega-backdrop {
 .leonard-product {
   position: relative;
   overflow: hidden;
+  // Owns its padding (rather than utility classes) so the content can sit near
+  // the top-left as drawn — ~80px from the top, ~30px from the left at lg. The
+  // render column drives the band height, so the copy pins to this top inset.
+  padding: 3.5rem 1.5rem;
+
+  @include media-breakpoint-up(lg) {
+    padding: 5rem 1.875rem; // 80px top, 30px left
+  }
 }
 
 // Every product render shares ONE aspect-ratio box at lg+, so all five product
@@ -1067,6 +1075,14 @@ html.lenis {
     margin-top: 2.5rem !important;
     margin-bottom: 2.5rem !important;
   }
+}
+
+// Product bands sit in a tight ~40px rhythm rather than the bumped section gap,
+// so the five panels read as one stacked group. Applied to bands 2–5 only (not
+// the first), so the group keeps its normal separation from the statement above.
+// Two classes beat the single-class `.pt-section` override at every breakpoint.
+.leonard-product-gap.pt-section {
+  padding-top: 2.5rem !important;
 }
 
 // Search result: a hairline-separated hit (section label, title link, excerpt,
@@ -1743,14 +1759,15 @@ html.lenis {
   letter-spacing: $leonard-tracking-display;
 }
 
-// Product block eyebrow: rules above and below, sized to the label. Declared
-// after .leonard-eyebrow so inline-flex wins and the borders hug the text —
-// in the design each rule is a different width because each label is.
+// Product block eyebrow: a 1px dotted dk-grey (green) rule above and below,
+// sized to the label. Declared after .leonard-eyebrow so inline-flex wins and
+// the borders hug the text — in the design each rule is a different width
+// because each label is.
 .leonard-product__eyebrow {
   display: inline-flex;
-  padding-block: 0.7rem;
-  border-top: 1px solid rgba($leonard-lt-grey, 0.35);
-  border-bottom: 1px solid rgba($leonard-lt-grey, 0.35);
+  padding-block: 0.6rem;
+  border-top: 1px dotted $leonard-dk-grey;
+  border-bottom: 1px dotted $leonard-dk-grey;
 }
 
 // ---------------------------------------------------------------------------
