@@ -527,6 +527,12 @@ products.html             Products page  (Figma 92:3)
 product.html              Product detail (Figma 92:973) — Axis; see below
 partials/header.html      shared nav + 4 mega-menus  — edit once
 partials/footer.html      shared footer
+partials/stats.html       shared stat band content (title + 4 count-ups) — the
+                          per-page <section> wrapper (boxed vs full-bleed) and
+                          "Safety" button stay in each page around the include
+partials/testimonials.html  shared 3 testimonial cards
+partials/newsletter.html  shared newsletter band
+partials/cta.html         shared "Talk to our engineering team" CTA
 js/main.js                imports styles.scss + Collapse (for the navbar)
 scss/styles.scss          import order; note utilities-custom sits between
                           `utilities` and `utilities/api`
@@ -711,37 +717,22 @@ content would otherwise show through as it scrolls under. The **`.leonard-header
 wrapper is transparent**: its 24px `pt-4` strip sits over the page-green top and
 needs no fill of its own. (An earlier pass filled the header too; that was removed.)
 
-**Engineered detailing** *(experiment — isolated in `scss/_nav-engineered.scss`,
-imported after `custom` so it overrides the plain bar; revert steps are in that
-file's header + `<!-- NAV TEST -->` markers in `partials/header.html`).* To stop
-the bar dissolving into same-colour clinker sections — and to give it presence on
-a metalwork site *without* decoration — the `.navbar` is styled as a **precisely
-drawn panel**: a hairline frame (top/bottom
-`border`), faint **corner "+" ticks** (the site's own motif, from the statement
-bands), and thin **zone dividers** (`.leonard-nav-vr` spans in `partials/header.html`,
-between logo / nav / CTA). Key decisions, each load-bearing:
+**Bar fill + frame** *(isolated in `scss/_nav-engineered.scss`, imported after
+`custom` so it overrides the plain bar; delete the `@import` to revert).* The
+`.navbar` gets a slightly darker fill than the page (`#212f3c`) plus a subtle
+top/bottom hairline, so it stays delineated where it scrolls over a same-colour
+clinker section — no decoration. Logo/button use the original `px-3`.
 
-- **Spacing is width-gated by the exact-1200 fit.** The nav fills the bar exactly
-  at `xl` (1200), so that band has *no* slack: the navbar keeps `px-3` there
-  (`px-4 px-xl-3 px-xxl-5`) and the **zone dividers only show at `xxl`** (≥1400,
-  where the container widens and the ~17px-each dividers fit). Below `xl` the nav
-  is the mobile offcanvas, so the zones don't exist anyway. Adding padding *or*
-  dividers at `xl` wraps `CASE STUDIES` / `NEWS & EVENTS` to two lines — verified.
-- The corner ticks sit at a **6px inset** so they clear the logo/CTA at every
-  width; the extra breathing room at large sizes comes from the `xxl` padding jump.
-
-- **The ticks are drawn into the `background`** (eight `linear-gradient` layers
-  positioned to the four corners), *not* an absolutely-positioned child — that
-  would need `.navbar { position: relative }`, which would steal the mega-menu's
-  anchor from the sticky header (the panel is `position:absolute; left:0; right:0`
-  off the header). Background paints on the bar's own border-box, so no
-  positioning is needed and the anchor is untouched.
-- **Neutral, not yellow.** Yellow is the *action* colour (CTA, logo, interactive
-  hover/focus); making non-interactive ornament yellow would compete with the CTA
-  and dilute the signal. The ticks/rules/dividers are faint `$leonard-lt-grey`.
-- Rejected on the way here: a `mix-blend-mode: difference` reactive accent (gold
-  over dark but electric-blue over the light panels) and a brushed-steel plate
-  (read as cheap skeuomorphism). The steer was **precision over texture**.
+> **History.** This started as the fix for the bar dissolving into same-colour
+> sections. Rejected along the way: a `mix-blend-mode: difference` reactive accent
+> (gold over dark but electric-blue over the light panels) and a brushed-steel
+> plate (read as cheap skeuomorphism). Then an "engineered detailing" pass added
+> faint corner "+" ticks (drawn into the `background` — *not* an absolutely
+> positioned child, which would need `.navbar{position:relative}` and steal the
+> mega-menu's anchor off the sticky header) and thin zone dividers, with roomier
+> `xxl` padding to balance the spacing. The client didn't like the ticks, so ticks
+> **and** dividers were removed and the padding reverted — leaving just the fill
+> and frame above.
 
 Direction handling is in `main.js` (`.leonard-header--hidden` →
 `translateY(-100%)`). It deliberately refuses to hide when:
@@ -999,6 +990,18 @@ into the *width*, which blew the hero out to 795px inside a 390px viewport.
 Change the ratio per breakpoint instead (`.leonard-hero-ratio`).
 
 ### Verifying responsive behaviour
+
+**Test switch: `?noanim`.** Add `?noanim` to any page URL (or set
+`localStorage['leonard-noanim'] = '1'`) to strip every load/scroll animation and
+render the final state immediately — no intro, no page-transition cover, no title
+scramble, no AOS reveal, no count-up, no parallax. `initScramble`/`initIntro` etc.
+are simply skipped and the pre-paint `<head>` covers are removed, so screenshots
+and layout QA aren't caught mid-animation. Structural/interactive bits (sticky
+nav, cursor, lightbox, button hover) still run. Gate lives at the top of `init()`
+in `main.js` (`const NO_ANIM = …`). Note this does **not** load the Adobe Typekit
+font offline, so headless renders still use a wider fallback — the navbar can
+appear to wrap below ~1500px in headless while fitting fine in a real browser
+(the same font-fallback artifact as the "fits exactly at 1200" note above).
 
 Old headless Chrome (`--window-size=390`) will not lay out below the macOS
 minimum window width — it renders wider and clips the screenshot, which looks

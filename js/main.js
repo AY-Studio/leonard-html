@@ -833,21 +833,38 @@ function initFeatureSteps() {
   );
 }
 
+// Test switch — add `?noanim` to the URL (or set localStorage['leonard-noanim']
+// = '1') to strip every load/scroll animation and render the final state
+// immediately: no intro, no page-transition cover, no title scramble, no AOS
+// reveal, no count-up, no parallax. For clean screenshots and layout QA that
+// aren't caught mid-animation. Structural/interactive bits still run.
+const NO_ANIM =
+  new URLSearchParams(window.location.search).has("noanim") ||
+  window.localStorage?.getItem("leonard-noanim") === "1";
+
 function init() {
-  initSmoothScroll();
-  initPageTransition();
-  initIntro();
+  if (NO_ANIM) {
+    // Drop the pre-paint covers the <head> scripts add, and unlock scroll.
+    document.documentElement.classList.remove("leonard-intro-on", "leonard-pt-arriving");
+    document.querySelector(".leonard-intro")?.remove();
+  } else {
+    initSmoothScroll();
+    initPageTransition();
+    initIntro();
+    initCountUp();
+    initCornerDraw();
+    initReveal();
+    initFeatureSteps();
+    initParallax();
+    initScramble();
+  }
+
+  // Always on — structural / interactive, no interference with a clean capture.
   initStickyNav();
-  initCountUp();
-  initCornerDraw();
   initCursor();
-  initReveal();
   initLightbox();
   initVideoHero();
-  initFeatureSteps();
-  initParallax();
   initButtonFx();
-  initScramble();
 }
 
 if (document.readyState === "loading") {
