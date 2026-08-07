@@ -790,6 +790,17 @@ body:has(.leonard-mega.show) .leonard-mega-backdrop {
   position: relative;
 }
 
+// Each scrambled word is pinned to its final width (JS) so the changing
+// characters can't shift the layout. On titles with `.text-break` (word-break:
+// break-word) a scramble wider than that pinned width would otherwise wrap
+// INSIDE the fixed-width span — growing it to two lines and making the title
+// jump. Keep every word on one line (it overflows horizontally instead) and
+// override any inherited word-break.
+.leonard-scramble__word {
+  white-space: nowrap;
+  word-break: normal;
+}
+
 .leonard-scramble__block {
   position: absolute;
   top: 0;
