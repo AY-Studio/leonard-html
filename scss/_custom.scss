@@ -2651,6 +2651,31 @@ $leonard-rail-gap: 6.2vw;
   transform: translateY(100%); // resting: just below the viewport
   visibility: hidden; // no hit-testing or painting when idle
   pointer-events: none;
+
+  // LEONARD wordmark, knocked back to a watermark. The dark-green mark on
+  // yellow is the intro splash's pairing, so the transition reads as the same
+  // brand moment at a lower volume.
+  //
+  // A pseudo-element, NOT an <img> in the panel: the panel is a body-level div
+  // that renders before the stylesheet does on the dev server (where the CSS is
+  // JS-injected), and a real 1181px image inside an unstyled div would push the
+  // whole page down. With no CSS there is simply no pseudo-element.
+  //
+  // The box carries the viewBox ratio and the art is stretched to fill it
+  // (`100% 100%`) rather than sized `auto`: the SVG is `preserveAspectRatio="none"`
+  // with percentage width/height, so it has no intrinsic size to resolve `auto`
+  // against — fixing the box ratio keeps the wordmark undistorted either way.
+  &::after {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: clamp(220px, 58vw, 940px);
+    aspect-ratio: 1180.98 / 180.02;
+    transform: translate(-50%, -50%);
+    background: url("/img/intro-wordmark.svg") no-repeat center / 100% 100%;
+    opacity: 0.2;
+    content: "";
+  }
 }
 
 // Arriving page: the panel is already covering at first paint.

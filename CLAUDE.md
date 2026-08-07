@@ -135,8 +135,9 @@ continuous upward motion across the navigation. It's an MPA (full reloads), so
 the two halves live on different documents and are stitched with a
 `sessionStorage['leonard-pt']` flag. CSS in `_custom.scss`, logic in `main.js`
 `initPageTransition()`, panel markup in `partials/header.html` (body-level, so
-it's on every page), and a tiny **flag→class `<head>` script on every page**
-(injected after the `apple-touch-icon` link).
+it's on every page), and a tiny **flag→class `<head>` script** — that script and
+the critical inline CSS beside it live in **`partials/head.html`**, so they exist
+once rather than in all 32 page heads.
 
 - **Leaving:** a delegated document click handler catches in-site `<a>` clicks,
   sets the flag, runs the **cover** animation (`translateY(100%)→0`), and
@@ -551,6 +552,11 @@ will not emit it.
 index.html                homepage       (relume 10203:36188)
 products.html             Products page  (Figma 92:3)
 product.html              Product detail (Figma 92:973) — Axis; see below
+partials/head.html        shared <head>: viewport, favicons, the critical
+                          page-transition CSS + flag→class script, font preload,
+                          Typekit, the FA kit, BugHerd. Each page's own <head> is
+                          only `<meta charset>`, its `<title>`, then this include
+                          (index.html adds the intro-splash style/script after it)
 partials/header.html      shared nav + 4 mega-menus  — edit once
 partials/footer.html      shared footer
 partials/stats.html       shared stat band content (title + 4 count-ups) — the

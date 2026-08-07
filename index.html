@@ -2,39 +2,8 @@
 <html lang="en" data-bs-theme="dark">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
-    <link rel="icon" href="/favicon-32.png" sizes="32x32" type="image/png" />
-    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
-    <style>
-      /* Critical: the arriving transition panel covers before any CSS loads,
-         so it also masks the dev server JS-injected-CSS flash. */
-      .leonard-pt-arriving .leonard-pt { position: fixed; inset: 0; z-index: 3000; background: #ffdd00; }
-    </style>
-    <script>
-      // Page transition: if we arrived via an in-site link, cover before first
-      // paint so the new page does not flash before the reveal (main.js).
-      try {
-        if (sessionStorage.getItem("leonard-pt") === "1") {
-          document.documentElement.classList.add("leonard-pt-arriving");
-        }
-      } catch (e) {}
-    </script>
     <title>Leonard — Pioneering Industrial Innovation</title>
-    <link
-      rel="preload"
-      href="/fonts/gilroy-heavy.woff2"
-      as="font"
-      type="font/woff2"
-      crossorigin
-    />
-    <link rel="preconnect" href="https://use.typekit.net" crossorigin />
-    <link rel="stylesheet" href="https://use.typekit.net/djc8uke.css" />
-    <script
-      src="https://kit.fontawesome.com/462bc6ee41.js"
-      crossorigin="anonymous"
-    ></script>
-
+    <!-- #include partials/head.html -->
     <!-- Homepage intro splash. Activated synchronously below (before <body>
          paints) so the render-blocking stylesheet covers the page from the very
          first frame — no flash of the homepage. Skipped entirely without JS or
@@ -79,8 +48,6 @@
         }
       } catch (e) {}
     </script>
-    <!-- BugHerd feedback sidebar (staging/review) -->
-    <script type="text/javascript" src="https://www.bugherd.com/sidebarv2.js?apikey=5dwvwbi7k7xlszxhtd8piw" async="true"></script>
   </head>
   <body>
     <!-- Intro overlay (see the <head> note). Decorative — the real logo and nav
