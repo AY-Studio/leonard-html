@@ -27,17 +27,34 @@ The homepage hero is a **full-width, high-impact open**: `.leonard-hero-ratio`
 plus the `.leonard-hero-ratio--full` modifier, which drops the `.ratio`
 aspect-ratio spacer (`&::before { content: none }`) and sizes to the screen.
 
-- **Full-bleed width** — the section has **no `container-xxl`** (`class="pt-4
-  pb-4"`), so the image spans the whole viewport. The *copy* is wrapped in its
-  own `container-xxl` inside the overlay so it stays on the page grid; the image
-  does not.
-- **Desktop height** `calc(100svh - 150px)` (lg+) — viewport less the sticky
-  header (102px) and the section's `pt-4` + `pb-4` (24px each), leaving a thin
-  page-green edge above and below.
-- **Mobile height 70svh** — a full 100vh reads awkwardly tall in portrait. A
-  `min-height` guards short landscape screens.
-- `svh` throughout with a `vh` fallback. Only the homepage uses `--full`; the
-  other pages keep the aspect-ratio crops.
+- **Background is a video** — a client-supplied MP4 loop
+  (`leonard-homepage-loop.mp4` on the b-cdn) as a full-bleed `<video>` (muted,
+  loop, playsinline, `object-fit: cover`). **No `autoplay` attribute**: `poster`
+  is **frame 1** (`/img/hero-poster.jpg`, grabbed from the mp4 with headless
+  Chrome — no ffmpeg locally) and `initHeroVideo()` in `main.js` calls `play()`
+  **only when motion is welcome**, so under reduced-motion / no-JS / `?noanim`
+  the poster stays a still (and `preload="none"` means those users don't fetch
+  the 27 MB). The **"Watch full video" button is commented out** in the markup
+  (client asked to hide, not remove — re-add later).
+- **Full-bleed width** — the section has **no `container-xxl`**, so the video
+  spans the whole viewport. The *copy* is wrapped in its own `container-xxl`
+  inside the overlay so it stays on the page grid; the video does not.
+- **Bleeds up under the navbar.** `.leonard-hero-bleed` on the section pulls it
+  up by the header height (`calc(-1 * (1.5rem + 78px))` = pt-4 24px + navbar
+  78px = 102px), so the video runs from the very top and the **navbar sits over
+  it** — no page-green strip on top. The transparent `.leonard-header` wrapper
+  shows the video through its 24px strip; the sticky header (z `$zindex-sticky`)
+  paints above the video (static below it). A thin page-green edge remains
+  **below** (the section's `pb-4`).
+- **Height** — the homepage overrides `.leonard-hero-ratio--full`'s height to
+  `calc(100svh - 24px)` (viewport less the bottom edge), scoped via
+  `.leonard-hero-bleed .leonard-hero-ratio--full` so it runs full-height under
+  the navbar. **The base `--full` is unchanged** — 70svh (mobile) /
+  `calc(100svh - 150px)` (lg) — and is **shared by the products / services /
+  industries / contact / case-study heroes**, so the homepage's height change
+  must stay scoped to `.leonard-hero-bleed` or those crops break (they have no
+  pull-up and would overflow the fold). `svh` with a `vh` fallback; `min-height`
+  guards short screens.
 
 ### Homepage intro splash (`.leonard-intro`)
 
@@ -1218,14 +1235,14 @@ entry…" block — the Figma tabs behaviour is **not wired**; it's static.
 
 ## News (relume `10204:123460` → `news.html`)
 
-Latest-news index: a **dark hero with no photo** — `.ratio.leonard-hero-ratio`
-with `bg-dark` in place of an image, copy pinned bottom-left. It carries the
-**`.leonard-hero-ratio--screen`** modifier so the hero fills roughly one screen
-(min-height `calc(100svh - 8rem)`, aspect spacer dropped) and the page opens on
-the hero with the filters below the fold; the filter section uses `pt-7` for a
-clear gap. (The case-study single hero clones this exact pattern.) Note `mw-hl`
-goes on the `<h1>`, never the wrapper — on a 16px wrapper the `ch` unit collapses
-it to ~320px (this bit once). Then a filter bar (View all / Category one–four,
+Latest-news index: an **image hero matching the industries page** — a
+`.leonard-hero-ratio--full` cropped photo (`news-1.png`, the page's own card
+image; the subject sits right of frame, clear of the copy) with a `.leonard-scrim`
+and the copy pinned bottom-left. (It was a no-photo `bg-dark` `--screen` band; the
+**case-study single hero still uses that `--screen` no-photo pattern**, so that
+one is now the sole user of `--screen`.) The filter section below uses `pt-7` for
+a clear gap. Note `mw-hl` goes on the `<h1>`, never the wrapper — on a 16px
+wrapper the `ch` unit collapses it to ~320px (this bit once). Then a filter bar (View all / Category one–four,
 visual only), a **Bootstrap block grid** of nine article cards
 (`row row-cols-1 row-cols-sm-2 row-cols-lg-3`), a visual `.leonard-pages`
 pagination (Prev / 1·2·3 / Next), and the newsletter. Cards reuse `.leonard-card`

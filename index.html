@@ -124,24 +124,31 @@
       <!-- ============================================================== -->
       <!-- Hero                                                            -->
       <!-- ============================================================== -->
-      <!-- Full-bleed on the homepage: no container, so the image spans the
-           whole viewport width. pt-4/pb-4 leave a thin page-green edge above and
-           below; the height maths in .leonard-hero-ratio--full accounts for both. -->
+      <!-- Full-bleed video hero. The section bleeds UP behind the sticky header
+           (.leonard-hero-bleed) so the navbar sits directly over the video with no
+           page-green strip on top; a thin page-green edge remains below (pb-4).
+           The image span logic still applies: no container, so the video spans the
+           whole viewport width. -->
       <!-- ▐ BLOCK: Hero -->
-      <section class="pt-4 pb-4" data-block="hero">
+      <section class="pb-4 leonard-hero-bleed" data-block="hero">
         <div class="ratio leonard-hero-ratio leonard-hero-ratio--full overflow-hidden">
-          <!-- Kiln hero removed per client (not representative of the majority
-               of our technology). Authentic on-site shot of the Leonard crew
-               operating the branded robotic demolition arm; a naturally dark
-               frame, with the scrim below guaranteeing the copy reads over the
-               hi-vis in the lower-left. -->
-          <img
-            class="w-100 h-100 object-fit-cover"
-            src="/img/v2-products-cta.png"
-            alt="Leonard crew operating a branded robotic demolition arm on site"
-            width="3076"
-            height="1730"
-          />
+          <!-- Client homepage loop. Poster is frame 1 of the mp4 — shown while the
+               video loads/plays, and left as a still under reduced motion or with
+               no JS (initHeroVideo only calls play() when motion is welcome). -->
+          <video
+            class="w-100 h-100 object-fit-cover leonard-hero-video"
+            poster="/img/hero-poster.jpg"
+            muted
+            loop
+            playsinline
+            preload="none"
+            aria-label="Leonard crew operating a branded robotic demolition arm on site"
+          >
+            <source
+              src="https://leonard-global.b-cdn.net/leonard-homepage-loop.mp4"
+              type="video/mp4"
+            />
+          </video>
           <!-- Image is full-bleed, but the copy sits in a container so it stays
                on the page grid (aligned with the logo and the content below).
                The scrim is weighted to the bottom-left, where the copy sits. -->
@@ -158,9 +165,9 @@
               >
                 Pioneering industrial innovation
               </h1>
-              <!-- Opens the hero video in the shared GLightbox overlay (same as
-                   the News video cards). Swap the YouTube URL for the real
-                   Leonard video — currently a placeholder. -->
+              <!-- HIDDEN per client — re-add later. Opens the hero video in the
+                   shared GLightbox overlay (same as the News video cards); swap the
+                   placeholder YouTube URL for the real Leonard video when restoring.
               <a
                 class="btn btn-outline-light btn-lg d-inline-flex align-items-center gap-3 fw-light text-uppercase glightbox"
                 href="https://www.youtube.com/watch?v=RY11iULaX7E"
@@ -170,6 +177,7 @@
                 <i class="fa-solid fa-play" aria-hidden="true"></i>
                 Watch full video
               </a>
+              -->
             </div>
           </div>
         </div>

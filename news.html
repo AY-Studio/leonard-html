@@ -33,14 +33,21 @@
 
     <main class="leonard-listing">
       <!-- ============================================================== -->
-      <!-- Hero — no photo. A dark band that fills ~one screen (copy pinned  -->
-      <!-- bottom-left, --screen modifier), so the page opens on the hero    -->
-      <!-- and the filters sit below the fold.                               -->
+      <!-- Hero — image, matching the industries page: a --full cropped photo
+           with a bottom-left scrim holding the copy (the subject sits right of
+           frame, clear of the copy). -->
       <!-- ============================================================== -->
-      <section class="container-xxl pt-4">
-        <div class="ratio leonard-hero-ratio leonard-hero-ratio--screen overflow-hidden bg-dark">
+      <section class="container-xxl pt-4 pb-4">
+        <div class="ratio leonard-hero-ratio leonard-hero-ratio--full overflow-hidden">
+          <img
+            class="w-100 h-100 object-fit-cover"
+            src="/img/news-1.png"
+            alt="Leonard crew member inspecting robotic demolition equipment on site"
+            width="4096"
+            height="2731"
+          />
           <div
-            class="d-flex flex-column justify-content-end align-items-start p-4 p-lg-5"
+            class="leonard-scrim d-flex flex-column justify-content-end align-items-start p-4 p-lg-5"
           >
             <p
               class="leonard-eyebrow fw-light fs-8 ls-label text-light text-uppercase mb-4"

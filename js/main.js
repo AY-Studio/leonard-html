@@ -842,6 +842,18 @@ const NO_ANIM =
   new URLSearchParams(window.location.search).has("noanim") ||
   window.localStorage?.getItem("leonard-noanim") === "1";
 
+// Homepage hero background video. It has no `autoplay` attribute, so by default
+// (no JS, reduced motion, or the ?noanim test switch) the poster — frame 1 —
+// stays as a still. We only call play() when motion is welcome. Muted, so the
+// play() is allowed by autoplay policies; the .catch swallows a block so the
+// poster simply remains.
+function initHeroVideo() {
+  const v = document.querySelector(".leonard-hero-video");
+  if (!v) return;
+  if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+  v.play().catch(() => {});
+}
+
 function init() {
   if (NO_ANIM) {
     // Drop the pre-paint covers the <head> scripts add, and unlock scroll.
@@ -857,6 +869,7 @@ function init() {
     initFeatureSteps();
     initParallax();
     initScramble();
+    initHeroVideo();
   }
 
   // Always on — structural / interactive, no interference with a clean capture.

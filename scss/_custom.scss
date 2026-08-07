@@ -578,11 +578,31 @@ body:has(.leonard-mega.show) .leonard-mega-backdrop {
 
   // Desktop: near-full viewport. 100svh less the sticky header (102px) and the
   // section's pt-4 + pb-4 (24px each) = 150px, so a thin page-green edge shows
-  // above and below the image.
+  // above and below the image. Used by products/services/industries/contact/
+  // case-study heroes; the homepage overrides the height below (it bleeds up).
   @include media-breakpoint-up(lg) {
     height: calc(100vh - 150px);
     height: calc(100svh - 150px);
     min-height: 32rem;
+  }
+}
+
+// Homepage video hero bleeds up behind the sticky header so the navbar sits over
+// the video (no page-green strip on top). Pull the section up by the header
+// height — pt-4 (1.5rem) + the navbar (minh-78 = 78px) = 102px — so the video
+// starts at the very top; the transparent header wrapper shows the video through
+// its 24px strip and the dark navbar sits over it. The header (sticky, z-index
+// $zindex-sticky) paints above the video, which is static below it.
+.leonard-hero-bleed {
+  margin-top: calc(-1 * (1.5rem + 78px));
+
+  // Homepage-only height: fills the viewport less the bottom edge (24px). It
+  // runs from the very top (section pulled up), so — unlike the default --full
+  // crop above — it must NOT subtract the header. Scoped here so the other
+  // pages' --full crops are untouched.
+  .leonard-hero-ratio--full {
+    height: calc(100vh - 24px);
+    height: calc(100svh - 24px);
   }
 }
 
