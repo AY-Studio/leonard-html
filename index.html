@@ -352,7 +352,13 @@
                 >
               </div>
 
-              <div class="row position-relative gy-4">
+              <!-- gy-6 below lg: stacked, these two columns are the block's two
+                   groups (copy + CTA, then the product showcase), so the gap
+                   between them has to be the LARGEST in the block. At gy-4 it
+                   was 24px — the tightest gap of the lot, tighter than the 48px
+                   between paragraphs — so the halves ran together. gy-lg-4
+                   keeps desktop as drawn. -->
+              <div class="row position-relative gy-6 gy-lg-4">
                 <!-- order-2 (not order-lg-2): the desktop value is the same, but
                      applying it from xs up stops the DOM order taking over on a
                      phone, where the product name and render used to stack ABOVE

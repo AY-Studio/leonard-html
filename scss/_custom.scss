@@ -2285,6 +2285,19 @@ html.lenis {
     .leonard-rte {
       font-size: 1.125rem !important; // 18px — the site's body size
     }
+
+    // The corner ticks come off on a phone. They carry the `--bleed` inset
+    // (22px) while this panel's content padding is 24px, so the marks landed
+    // just INSIDE the text edge — close enough to read as a misalignment rather
+    // than a frame. On a 329px panel they are noise for no gain.
+    //
+    // Deliberately scoped to this block, NOT to `.leonard-corners` generally:
+    // the statement band's background is the same colour as the page, so its
+    // ticks are the only thing defining it as a panel at all. This one has a
+    // light fill and reads as a block without them.
+    .leonard-corners {
+      display: none;
+    }
   }
 }
 
