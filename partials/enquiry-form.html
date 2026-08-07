@@ -1,0 +1,69 @@
+<!-- Shared enquiry form. Identical on all 14 detail pages (product / service /
+     industry families + the case study), so it lives here rather than 14 times.
+     The heading and intro copy ABOVE it are page-specific ("Enquire about Axis"
+     etc.) and stay in each page, as does the light band / data-bs-theme wrapper.
+     Fields are styled by .leonard-form in scss/_custom.scss. -->
+<form class="leonard-form" novalidate>
+                <div class="row g-4">
+                  <div class="col-12 col-md-6">
+                    <label class="form-label" for="firstName">First name</label>
+                    <input class="form-control" type="text" id="firstName" name="firstName" autocomplete="given-name" />
+                  </div>
+                  <div class="col-12 col-md-6">
+                    <label class="form-label" for="lastName">Last name</label>
+                    <input class="form-control" type="text" id="lastName" name="lastName" autocomplete="family-name" />
+                  </div>
+                  <div class="col-12 col-md-6">
+                    <label class="form-label" for="jobTitle">Job title</label>
+                    <input class="form-control" type="text" id="jobTitle" name="jobTitle" autocomplete="organization-title" />
+                  </div>
+                  <div class="col-12 col-md-6">
+                    <label class="form-label" for="company">Company</label>
+                    <input class="form-control" type="text" id="company" name="company" autocomplete="organization" />
+                  </div>
+                  <div class="col-12 col-md-6">
+                    <label class="form-label" for="email">Email</label>
+                    <input class="form-control" type="email" id="email" name="email" autocomplete="email" />
+                  </div>
+                  <div class="col-12 col-md-6">
+                    <label class="form-label" for="phone">Phone number</label>
+                    <input class="form-control" type="tel" id="phone" name="phone" autocomplete="tel" />
+                  </div>
+                  <div class="col-12">
+                    <label class="form-label" for="topic">Choose a topic</label>
+                    <select class="form-select" id="topic" name="topic">
+                      <option value="" selected>Select one...</option>
+                      <option>Purchasing</option>
+                      <option>Technical specification</option>
+                      <option>Service and support</option>
+                      <option>Something else</option>
+                    </select>
+                  </div>
+                  <div class="col-12">
+                    <label class="form-label" for="message">Message</label>
+                    <textarea
+                      class="form-control"
+                      id="message"
+                      name="message"
+                      rows="6"
+                      placeholder="Type your message..."
+                    ></textarea>
+                  </div>
+                  <div class="col-12">
+                    <div class="form-check">
+                      <input class="form-check-input" type="checkbox" id="terms" name="terms" />
+                      <label class="form-check-label fw-light ls-label text-uppercase" for="terms">
+                        I accept the <a class="link-dark" href="/terms.html">Terms</a>
+                      </label>
+                    </div>
+                  </div>
+                  <div class="col-12 text-center">
+                    <button
+                      class="btn btn-dark minw-176 minh-37 fw-light ls-wide text-uppercase"
+                      type="submit"
+                    >
+                      Submit
+                    </button>
+                  </div>
+                </div>
+              </form>

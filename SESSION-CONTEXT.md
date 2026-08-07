@@ -240,7 +240,7 @@ full block library + per-component field maps):
 - **`partials/stats.html`** — the 4 count-up stats were de-duplicated from 14
   pages into this partial (included inside each page's own wrapper + Safety
   button). Editing the stats is now one file.
-- **News hero** is now an **image hero** (`news-1.png`) matching the industries
+- **News hero** is now an **image hero** (`news-1.webp`) matching the industries
   pattern (was a no-photo `--screen` band; `case-study.html` is now the sole
   `--screen` user).
 - **"One solution" band** (homepage) is **boxed**; its Descender/Vertical-Access

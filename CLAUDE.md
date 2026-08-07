@@ -562,6 +562,10 @@ partials/footer.html      shared footer
 partials/stats.html       shared stat band content (title + 4 count-ups) — the
                           per-page <section> wrapper (boxed vs full-bleed) and
                           "Safety" button stay in each page around the include
+partials/enquiry-form.html  shared enquiry form — identical on all 14 detail
+                          pages (product / service / industry families + case
+                          study). The heading and intro copy above it are
+                          page-specific and stay in each page
 partials/testimonials.html  shared 3 testimonial cards
 partials/newsletter.html  shared newsletter band
 partials/cta.html         shared "Talk to our engineering team" CTA
@@ -1251,7 +1255,7 @@ entry…" block — the Figma tabs behaviour is **not wired**; it's static.
 ## News (relume `10204:123460` → `news.html`)
 
 Latest-news index: an **image hero matching the industries page** — a
-`.leonard-hero-ratio--full` cropped photo (`news-1.png`, the page's own card
+`.leonard-hero-ratio--full` cropped photo (`news-1.webp`, the page's own card
 image; the subject sits right of frame, clear of the copy) with a `.leonard-scrim`
 and the copy pinned bottom-left. (It was a no-photo `bg-dark` `--screen` band; the
 **case-study single hero still uses that `--screen` no-photo pattern**, so that
