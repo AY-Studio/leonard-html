@@ -2,17 +2,29 @@
      _custom.scss, and a utility's !important would outrank it. -->
 <footer class="leonard-footer bg-dark text-light pt-7 mt-3">
   <div class="container-xxl">
-    <div class="row gy-5">
-      <!-- Company and Products pair on phones (col-6): both are five short links,
-           so they balance each other and halve a footer that otherwise ran to a
-           full screen. Information and Contact stay full width — Contact carries
-           the email, locations and four cert badges and is crushed in half a
-           column. See the mobile footer block in _custom.scss for the gutter and
-           type that make the pairing fit. -->
-      <div class="col-6 col-lg-3">
-        <p class="leonard-eyebrow fw-normal fs-10 ls-label text-primary text-uppercase mb-3">
-          Company
+    <!-- Bootstrap accordion, but only ON PHONES. One set of markup serves both:
+         below sm the sections collapse; from lg the panels are forced open and
+         the buttons made inert in CSS, so it lays out as the four columns it
+         always was. No duplicated markup, and the links stay in the DOM for
+         crawlers and for anyone without JS.
+         No data-bs-parent: the sections open independently, because a footer
+         accordion that closes Contact when you open Products is hostile. -->
+    <div class="row gy-5 accordion leonard-facc" id="footerNav">
+      <div class="col-12 col-lg-3 accordion-item">
+        <p class="leonard-eyebrow fw-normal fs-10 ls-label text-primary text-uppercase mb-3 accordion-header">
+          <button
+            class="accordion-button"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#footerNav1"
+            aria-expanded="false"
+            aria-controls="footerNav1"
+          >
+            Company
+          </button>
         </p>
+        <div id="footerNav1" class="accordion-collapse collapse">
+          <div class="accordion-body">
         <ul class="list-unstyled mb-0 display-6 fs-4 lh-body ls-tight text-uppercase">
           <!-- LAUNCH: About not in the initial launch.
           <li><a href="/about.html">About</a></li>
@@ -23,12 +35,25 @@
           <li><a href="/case-studies.html">Case Studies</a></li>
           <li><a href="/news.html">News &amp; Events</a></li>
         </ul>
+          </div>
+        </div>
       </div>
 
-      <div class="col-6 col-lg-3">
-        <p class="leonard-eyebrow fw-normal fs-10 ls-label text-primary text-uppercase mb-3">
-          Products
+      <div class="col-12 col-lg-3 accordion-item">
+        <p class="leonard-eyebrow fw-normal fs-10 ls-label text-primary text-uppercase mb-3 accordion-header">
+          <button
+            class="accordion-button"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#footerNav2"
+            aria-expanded="false"
+            aria-controls="footerNav2"
+          >
+            Products
+          </button>
         </p>
+        <div id="footerNav2" class="accordion-collapse collapse">
+          <div class="accordion-body">
         <ul class="list-unstyled mb-0 display-6 fs-4 lh-body ls-tight text-uppercase">
           <li><a href="/products.html#nano">Nano</a></li>
           <li><a href="/products.html#descender">Descender</a></li>
@@ -36,12 +61,25 @@
           <li><a href="/products.html#charger">Charger</a></li>
           <li><a href="/products.html#calibre">Calibre</a></li>
         </ul>
+          </div>
+        </div>
       </div>
 
-      <div class="col-12 col-sm-6 col-lg-3">
-        <p class="leonard-eyebrow fw-normal fs-10 ls-label text-primary text-uppercase mb-3">
-          Information
+      <div class="col-12 col-lg-3 accordion-item">
+        <p class="leonard-eyebrow fw-normal fs-10 ls-label text-primary text-uppercase mb-3 accordion-header">
+          <button
+            class="accordion-button"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#footerNav3"
+            aria-expanded="false"
+            aria-controls="footerNav3"
+          >
+            Information
+          </button>
         </p>
+        <div id="footerNav3" class="accordion-collapse collapse">
+          <div class="accordion-body">
         <ul class="list-unstyled mb-0 display-6 fs-4 lh-body ls-tight text-uppercase">
           <!-- LAUNCH: FAQs / Health & Safety / Certifications / Partnerships are
                not in the initial launch. Re-enable by uncommenting.
@@ -53,12 +91,25 @@
           <li><a href="/careers.html">Careers</a></li>
           <li><a href="/contact.html">Contact</a></li>
         </ul>
+          </div>
+        </div>
       </div>
 
-      <div class="col-12 col-sm-6 col-lg-3">
-        <p class="leonard-eyebrow fw-normal fs-10 ls-label text-primary text-uppercase mb-3">
-          Contact
+      <div class="col-12 col-lg-3 accordion-item">
+        <p class="leonard-eyebrow fw-normal fs-10 ls-label text-primary text-uppercase mb-3 accordion-header">
+          <button
+            class="accordion-button"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#footerNav4"
+            aria-expanded="false"
+            aria-controls="footerNav4"
+          >
+            Contact
+          </button>
         </p>
+        <div id="footerNav4" class="accordion-collapse collapse">
+          <div class="accordion-body">
         <div class="display-6 fs-5 lh-body ls-tight text-uppercase">
           <p class="mb-4">
             <a class="text-break" href="mailto:office@leonardglobal.com"
@@ -116,6 +167,8 @@
             >
           </li>
         </ul>
+          </div>
+        </div>
       </div>
     </div>
   </div>

@@ -2572,39 +2572,133 @@ $leonard-rail-gap: 6.2vw;
 // box the ::after measures against is the whole label. If a link here ever
 // wraps, this underlines only the last line fragment.
 
-// Footer nav on phones.
+// ---------------------------------------------------------------------------
+// Footer nav — Bootstrap accordion on phones, four columns from lg
+// ---------------------------------------------------------------------------
+// Stacked full width the four sections ran 1042px, more than a whole screen, and
+// read as uneven because the heights had nothing to do with one another
+// (185 / 185 / 96 / 383). Collapsed, the footer opens at four labels.
 //
-// Stacked full width, the four columns ran 1042px — more than a whole screen —
-// and read as uneven because the heights had nothing to do with each other
-// (185 / 185 / 96 / 383). Company and Products are both five short links, so
-// they pair naturally and balance each other; Information and Contact stay full
-// width because Contact carries the email, the locations and four cert badges
-// and would be crushed in half a column.
-//
-// Two things have to give for the pairing to work at this width:
-// - the grid gutter. 2.75rem is a desktop measure; two-up on a phone it eats
-//   44px of a 187px column, and "News & Events" (152px) no longer fits.
-// - the link size. 21px is heading scale for what is a nav list; 18px matches
-//   the site's body size and clears the longest label with room to spare.
-@include media-breakpoint-down(sm) {
-  .leonard-footer > .container-xxl > .row {
-    --bs-gutter-x: 1rem;
-  }
+// It is Bootstrap's own Accordion (markup + Collapse), restyled — not a bespoke
+// one — so the toggling, ARIA and keyboard behaviour are the framework's. What
+// is custom is that it only applies BELOW sm: one set of markup, unwrapped back
+// into columns at lg, so nothing is duplicated and every link stays in the DOM
+// for crawlers and for no-JS.
+.leonard-facc {
+  // Bootstrap's chrome is built for a light card. Strip it back to the footer.
+  --bs-accordion-bg: transparent;
+  --bs-accordion-border-color: #{rgba($leonard-lt-grey, 0.2)};
+  --bs-accordion-border-width: 0;
+  --bs-accordion-border-radius: 0;
+  --bs-accordion-inner-border-radius: 0;
+  --bs-accordion-btn-padding-x: 0;
+  --bs-accordion-btn-padding-y: 1rem;
+  --bs-accordion-btn-color: #{$leonard-yellow};
+  --bs-accordion-btn-bg: transparent;
+  --bs-accordion-active-color: #{$leonard-yellow};
+  --bs-accordion-active-bg: transparent;
+  --bs-accordion-body-padding-x: 0;
+  --bs-accordion-body-padding-y: 0;
+  --bs-accordion-btn-focus-box-shadow: none;
 
-  // Both the nav lists and the Contact block carry `.display-6`, so one rule
-  // levels them. Without it the contact details sat at 20px against 18px links —
-  // the address outweighing the navigation, which is the wrong way round.
-  .leonard-footer .row > [class*="col-"] > .display-6 {
-    font-size: 1.125rem !important; // 18px, beats the fs-4 / fs-5 utilities
+  .accordion-button {
+    // The label already carries the eyebrow's type; inherit rather than restate.
+    font: inherit;
+    letter-spacing: inherit;
+    text-transform: inherit;
+    box-shadow: none;
+
+    // `.leonard-eyebrow` is itself a flex row whose ::before draws the ■ marker.
+    // Bootstrap's button is `width: 100%`, which pushed the marker onto a line
+    // of its own; flexing instead keeps the two on one row as designed.
+    flex: 1 1 auto;
+    width: auto;
+
+    // Swap Bootstrap's chevron for the site's +/− (the FAQ idiom) so the footer
+    // reads as the same family. `--bs-accordion-btn-icon` is a background image,
+    // so it has to be removed rather than recoloured.
+    &::after {
+      width: auto;
+      height: auto;
+      margin-left: auto;
+      font-family: $font-family-mono-ui;
+      font-size: 1.75rem;
+      font-weight: 100;
+      line-height: 1;
+      color: $leonard-yellow;
+      content: "+";
+      background-image: none;
+      transform: none;
+    }
+
+    &[aria-expanded="true"]::after {
+      content: "\2212"; // minus
+    }
   }
 }
 
-// Below 360 even 18px will not sit two-up without breaking a label, so the pair
-// falls back to full width. Bootstrap has no breakpoint between 0 and sm, hence
-// the explicit query.
-@media (max-width: 359.98px) {
-  .leonard-footer .row > .col-6 {
-    width: 100%;
+@include media-breakpoint-down(lg) {
+  .leonard-facc {
+    --bs-gutter-y: 0; // the hairlines separate the sections now, not a gutter
+
+    .accordion-item {
+      border-bottom: 1px solid rgba($leonard-lt-grey, 0.2);
+
+      &:first-child {
+        border-top: 1px solid rgba($leonard-lt-grey, 0.2);
+      }
+    }
+
+    // The eyebrow's own bottom margin would sit between the label and its panel.
+    //
+    // `align-items: center` matters as much: `.leonard-eyebrow` top-aligns its ■
+    // marker (right for a wrapping label), but the button centres its text
+    // inside 1rem of padding, so the marker sat well above the word and read as
+    // a line of its own. Centring both, and dropping the marker's optical
+    // nudge, puts them back on one line.
+    .accordion-header {
+      align-items: center;
+      margin-bottom: 0 !important;
+
+      &::before {
+        margin-top: 0;
+      }
+    }
+
+    .accordion-body {
+      padding-bottom: 1.25rem;
+    }
+
+    // 21px is heading scale for a nav list. 18px matches the site's body size,
+    // and levels the Contact block with the links — at 20px the address was
+    // outweighing the navigation, which is the wrong way round.
+    .accordion-body > .display-6 {
+      font-size: 1.125rem !important;
+    }
+  }
+}
+
+// From lg the accordion is undone: panels forced open, buttons made inert, and
+// the items lay out as the four grid columns they always were. `!important` is
+// needed because Collapse writes `height` inline and toggles `.show`.
+@include media-breakpoint-up(lg) {
+  .leonard-facc {
+    .accordion-collapse {
+      display: block !important;
+      height: auto !important;
+      visibility: visible !important;
+      overflow: visible !important;
+    }
+
+    .accordion-button {
+      padding: 0;
+      pointer-events: none; // nothing to toggle at this width
+      cursor: default;
+
+      &::after {
+        content: none;
+      }
+    }
   }
 }
 
