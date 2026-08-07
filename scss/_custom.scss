@@ -2017,6 +2017,24 @@ html.lenis {
     background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23d8dfe2' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m2 5 6 6 6-6'/%3e%3c/svg%3e");
   }
 
+  // The OPEN dropdown. The rules above colour the closed field, and <option>
+  // inherits that light text — but an option's background stays transparent, and
+  // the popup is painted by the platform on its own (light) surface. Light text
+  // on a white popup measured 1.35:1: the list was there but unreadable.
+  //
+  // Both values must be OPAQUE — a translucent fill composites against the
+  // platform surface, which is exactly how the field's rgba(#000, .16) ended up
+  // as white. lt-grey on dk-grey is 9.09:1, and both are existing palette tokens.
+  //
+  // Chrome, Edge and Firefox honour these directly. Safari ignores option
+  // colours and draws a system popup instead — that path is covered by
+  // `color-scheme: dark`, which Bootstrap already sets via [data-bs-theme=dark],
+  // so the system popup renders dark with its own legible text.
+  .form-select option {
+    color: $leonard-lt-grey;
+    background-color: $leonard-dk-grey;
+  }
+
   // Transparent so unchecked controls read as empty rings, not filled dots;
   // Bootstrap paints the yellow marker in on :checked.
   .form-check-input {
@@ -2027,6 +2045,33 @@ html.lenis {
       background-color: $leonard-yellow;
       border-color: $leonard-yellow;
     }
+  }
+}
+
+// Autofill — the same failure as the dropdown, one layer down. When the browser
+// fills a field it paints its OWN opaque background behind the value (pale blue
+// in Chrome, pale yellow in Firefox) and our light text lands on top of it. Every
+// dark field here is transparent or translucent by design, so there is nothing
+// of ours underneath to rescue it.
+//
+// Chrome now honours `color-scheme: dark` for this, but Firefox does not and
+// nor do older Chromes — so repaint it explicitly rather than rely on that.
+// `background-color` is ignored on an autofilled control: a large inset
+// box-shadow is the only way to cover the browser's fill, and the text needs
+// `-webkit-text-fill-color`, which outranks `color`.
+//
+// Scoped to the DARK controls only. The enquiry form on the light bands wants
+// the browser's default pale fill with dark text, which is already legible
+// (measured 12.26:1) — repainting that one would break it.
+//
+// `:is()` is forgiving, so a browser that knows neither pseudo-class simply
+// drops it instead of invalidating the whole rule.
+.leonard-form--dark :is(input, textarea, select),
+.leonard-newsletter__input {
+  &:is(:autofill, :-webkit-autofill) {
+    -webkit-text-fill-color: $leonard-lt-grey;
+    caret-color: $leonard-lt-grey;
+    box-shadow: 0 0 0 100vmax $leonard-dk-grey inset;
   }
 }
 

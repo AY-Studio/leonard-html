@@ -9,7 +9,15 @@ dist/
 
 # Vite / build caches
 .vite/
+.cache/
 *.local
+
+# Accessibility tooling — keep the page list, ignore generated reports.
+# `a11y/*` rather than `a11y/`: git cannot re-include a file inside a directory
+# it has already excluded, so the directory itself must stay un-ignored for the
+# negation below to take effect.
+a11y/*
+!a11y/urls.txt
 
 # Environment
 .env
