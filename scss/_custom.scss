@@ -2440,7 +2440,19 @@ $leonard-rail-gap: 6.2vw;
     .leonard-footer-reveal__layer {
       animation: leonard-footer-drift linear both;
       animation-timeline: --leonard-footer-reveal;
-      animation-range: entry 0% entry 100%;
+      // Ends at 99%, not 100%. This section is the last thing in the document,
+      // so `entry 100%` coincides with the document bottom and sub-pixel
+      // rounding leaves the timeline resting at ~0.9992 — measured: the layer
+      // keeps a permanent `translateY(-0.147px)`. A fractional transform
+      // composites the layer off the pixel grid, so the wordmark and the legal
+      // row under it never render on whole pixels. Stopping 1% early lets the
+      // drift actually land on translateY(0); the last 1% of travel is well
+      // under a pixel, so the motion is unchanged.
+      //
+      // The overlay below deliberately KEEPS `entry 100%` — its residual is
+      // opacity 0.0008, under one 8-bit level and genuinely invisible, and
+      // there is no pixel grid for an opacity to fall off.
+      animation-range: entry 0% entry 99%;
     }
 
     // pointer-events: none is load-bearing. The overlay covers the whole

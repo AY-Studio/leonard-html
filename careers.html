@@ -10,26 +10,35 @@
 
     <!--
       Careers — first-pass page (roles/copy to be filled in with the client).
-      Uses the shared full-bleed corner-ticked header band.
+      Opens with the Contact-page hero (cropped photo + scrim, copy pinned
+      bottom-left), not the corner-ticked header band it used to use.
     -->
     <main>
       <!-- ============================================================== -->
-      <!-- Header                                                          -->
+      <!-- Hero — full-bleed cropped photo + scrim, copy pinned bottom-left  -->
+      <!-- (the Contact / Products hero pattern). Crew shot: the subject sits -->
+      <!-- right and centre, so the copy block stays clear of faces.         -->
       <!-- ============================================================== -->
-      <!-- ▐ BLOCK: Content block -->
-      <section class="bg-dark-deep mt-4" data-block="content">
-        <div class="container-xxl position-relative overflow-hidden py-6 py-lg-7">
-          <div class="leonard-corners text-primary fs-1 fw-thin" aria-hidden="true">
-            <span></span><span></span><span></span><span></span>
-          </div>
-          <div class="position-relative text-center">
-            <p class="leonard-eyebrow d-inline-flex fw-light fs-8 ls-label text-light text-uppercase mb-4">
+      <!-- ▐ BLOCK: Hero -->
+      <section class="container-xxl pt-4 pb-4" data-block="hero">
+        <div class="ratio leonard-hero-ratio leonard-hero-ratio--full overflow-hidden">
+          <img
+            class="w-100 h-100 object-fit-cover"
+            src="/img/v2-band.webp"
+            alt="Leonard crew preparing a robotic arm on site"
+            width="2000"
+            height="1182"
+          />
+          <div
+            class="leonard-scrim d-flex flex-column justify-content-end align-items-start p-4 p-lg-5"
+          >
+            <p class="leonard-eyebrow fw-light fs-8 ls-label text-light text-uppercase mb-4">
               Join the team
             </p>
-            <h1 data-scramble class="display-h2 lh-snug text-primary text-uppercase text-break mw-hl mx-auto mb-4">
+            <h1 data-scramble class="display-h1 lh-snug text-primary text-uppercase mw-hl mb-4">
               Careers
             </h1>
-            <div class="leonard-rte text-white mw-body-lg mx-auto">
+            <div class="leonard-rte fw-normal text-white mw-body">
               <p>
                 We build specialist teams for the most demanding work in heavy
                 industry. If you take safety and craft seriously, we would like to
@@ -56,7 +65,7 @@
         <div class="row row-cols-1 row-cols-md-3 g-4">
           <div class="col">
             <div class="leonard-quote h-100 p-4 p-lg-5">
-              <i class="fa-solid fa-helmet-safety fs-2 text-primary mb-4" aria-hidden="true"></i>
+              <i class="fa-solid fa-helmet-safety fs-2 mb-4" aria-hidden="true"></i>
               <h3 class="display-6 fs-4 lh-flat ls-tight text-uppercase mb-2">Safety first, always</h3>
               <div class="leonard-rte">
                 <p>
@@ -69,7 +78,7 @@
           </div>
           <div class="col">
             <div class="leonard-quote h-100 p-4 p-lg-5">
-              <i class="fa-solid fa-globe fs-2 text-primary mb-4" aria-hidden="true"></i>
+              <i class="fa-solid fa-globe fs-2 mb-4" aria-hidden="true"></i>
               <h3 class="display-6 fs-4 lh-flat ls-tight text-uppercase mb-2">Global projects</h3>
               <div class="leonard-rte">
                 <p>
@@ -81,7 +90,7 @@
           </div>
           <div class="col">
             <div class="leonard-quote h-100 p-4 p-lg-5">
-              <i class="fa-solid fa-screwdriver-wrench fs-2 text-primary mb-4" aria-hidden="true"></i>
+              <i class="fa-solid fa-screwdriver-wrench fs-2 mb-4" aria-hidden="true"></i>
               <h3 class="display-6 fs-4 lh-flat ls-tight text-uppercase mb-2">Trained &amp; supported</h3>
               <div class="leonard-rte">
                 <p>

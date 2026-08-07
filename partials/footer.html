@@ -131,8 +131,14 @@
           height="259"
         />
 
-        <div class="row gy-2 fw-light fs-11 ls-tight mt-3">
-          <div class="col-12 col-sm-6 col-lg-3">
+        <!-- fs-10 (14px), not fs-11 (12px): at 12px this row sits on a dark band
+             in a light weight and reads as blurry rather than small. -->
+        <div class="row gy-2 fw-light fs-10 ls-tight mt-3">
+          <!-- pe-lg-0: at 14px this line needs 397px and a quarter-column gives
+               388. Dropping only its right gutter yields 410 without moving any
+               column's content edge, so the row still aligns to the nav columns
+               above. The next item starts 35px clear. -->
+          <div class="col-12 col-sm-6 col-lg-3 pe-lg-0">
             Copyright © 2026 Leonard — All Rights Reserved
           </div>
           <div class="col-12 col-sm-6 col-lg-3"><a href="/privacy.html">Privacy Policy</a></div>
