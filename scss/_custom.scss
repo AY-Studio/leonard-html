@@ -676,6 +676,21 @@ body:has(.leonard-mega.show) .leonard-mega-backdrop {
   .leonard-hero-ratio--full {
     height: calc(100vh - 24px);
     height: calc(100svh - 24px);
+
+    // Phones: take the last 24px too, so the hero runs edge to edge and reads as
+    // a true full-screen open. The page-green edge below is a desktop nicety
+    // that only costs height on a small screen.
+    //
+    // This is as tall as it can safely go. `svh` is the SMALL viewport (browser
+    // UI showing), which is deliberate — it is the only unit that stays put as
+    // the URL bar hides and shows. Switching to `lvh`/`dvh` would add ~90px on
+    // iOS, but the hero's copy is pinned to the BOTTOM, so the eyebrow and the
+    // H1 would start below the fold on load. Height is not worth losing the
+    // headline for.
+    @include media-breakpoint-down(md) {
+      height: 100vh;
+      height: 100svh;
+    }
   }
 }
 
@@ -757,6 +772,25 @@ body:has(.leonard-mega.show) .leonard-mega-backdrop {
   .leonard-band-ratio:has(> .leonard-scrim) {
     min-height: 45vh;
     min-height: 45svh;
+  }
+}
+
+// Hero eyebrow on phones. At the desktop 18px (`fs-8`) it reads as a second
+// heading rather than a label, and it is the one piece of hero copy that wraps:
+// measured at 390, "REFACTORY INSTALLATION + ROBOTIC DEMOLITION" needs 525px
+// against a 375px column. 14px puts every other hero eyebrow on a single line
+// down to 320 (the longest of those, "ROBOTIC ARM SOLUTIONS", needs 203px), and
+// halves the bulk of the one that still has to wrap.
+//
+// Only the homepage string is long enough to wrap at all — fitting *it* on one
+// line would need 12px, which would make the other nine needlessly small to
+// solve a problem they do not have. `!important` beats the `fs-*` utility.
+//
+// Scoped to hero overlays: section eyebrows sit in their own space and are
+// already sized per block.
+@include media-breakpoint-down(md) {
+  :is(.leonard-scrim, .leonard-hero-scrim) .leonard-eyebrow {
+    font-size: 0.875rem !important; // 14px
   }
 }
 
