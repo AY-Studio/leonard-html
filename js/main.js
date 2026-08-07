@@ -506,7 +506,10 @@ function initSmoothScroll() {
 // Runs once; skips already-wrapped and icon-only buttons. The alt copy is
 // aria-hidden so the accessible name stays a single label.
 function initButtonFx() {
-  document.querySelectorAll(".btn").forEach((btn) => {
+  // `.btn` for every button; `[data-roll]` opts anything else in — used by the
+  // news/article cards' "Read more", which is a plain <span> inside the card
+  // link rather than a button, so it would otherwise never be wrapped.
+  document.querySelectorAll(".btn, [data-roll]").forEach((btn) => {
     if (btn.classList.contains("leonard-btn-slide")) return;
 
     const textNodes = [...btn.childNodes].filter(

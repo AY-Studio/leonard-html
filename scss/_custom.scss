@@ -512,6 +512,22 @@ body:has(.leonard-mega.show) .leonard-mega-backdrop {
   transform: scale(1.05);
 }
 
+// The card's "Read more" ([data-roll], wrapped by initButtonFx) rolls with the
+// rest of the card hover, not only when the pointer is over the words — the
+// whole card is one link, so it has to answer to the card. Same trigger and
+// guards as the image zoom / yellow rule above.
+@media (hover: hover) and (prefers-reduced-motion: no-preference) {
+  .leonard-card:hover .leonard-btn-slide__text,
+  .leonard-card:focus-visible .leonard-btn-slide__text {
+    transform: translateY(100%);
+  }
+
+  .leonard-card:hover .leonard-btn-slide__text--alt,
+  .leonard-card:focus-visible .leonard-btn-slide__text--alt {
+    transform: translateY(0);
+  }
+}
+
 .leonard-card:focus-visible {
   outline: 2px solid $leonard-dk-grey;
   outline-offset: 4px;
@@ -1740,31 +1756,74 @@ html.lenis {
 }
 
 @include media-breakpoint-up(lg) {
-  // The rail — a continuous hairline down the list connecting the icons, exactly
-  // like the original .leonard-rail. Inset a little so nothing clips it.
-  .leonard-steps {
-    --leonard-rail-gap: clamp(40px, 6.2vw, 107px);
-    --leonard-rail-x: 22px;
+  // The rail — a dotted yellow line running down the list. It sits to the LEFT
+  // of the icons rather than passing through them (the icons used to be centred
+  // on a solid hairline), so the line and the icon column read as two separate
+  // vertical elements.
+  // Measured off relume Frame 76 (10208:170586), `Line 5` = 10203:36284.
+  .leonard-feature-section {
+    // Dash rhythm: 2px on, 2px off — a 4px period, measured from the Figma
+    // render (duty cycle 0.497 over an exact 4px period). A repeating gradient
+    // rather than `border-left: dashed`, which ties the dash length to the
+    // stroke width and gives no control over the gap.
+    --leonard-rail-dash: 2px;
+    --leonard-rail-dash-gap: 2px;
+    // The line runs proud of the block it belongs to by the same amount at each
+    // end — in the source it runs 152→1544 against content painting 163→1533.
+    --leonard-rail-overhang: 11px;
+  }
+
+  // The rail hangs off the LEFT column, so its height is the intro block's
+  // height (machine → buttons). It was drawn on .leonard-steps, which sized it
+  // to the feature list and made it read as part of that list rather than as
+  // the divider between the two columns.
+  //
+  // It still lands exactly where it did: the columns are separated by one grid
+  // gutter of padding (22px each side), so the steps' content edge is one full
+  // --bs-gutter-x right of the intro's content edge.
+  .leonard-feature-intro {
     position: relative;
 
-    &::before {
+    &::after {
       position: absolute;
-      inset: 0 auto 0 var(--leonard-rail-x);
+      top: calc(-1 * var(--leonard-rail-overhang));
+      right: calc(-1 * var(--bs-gutter-x, #{$grid-gutter-width}));
+      bottom: calc(-1 * var(--leonard-rail-overhang));
       width: 1px;
-      background: rgba($leonard-lt-grey, 0.35);
+      background-image: repeating-linear-gradient(
+        to bottom,
+        #{$leonard-yellow} 0,
+        #{$leonard-yellow} var(--leonard-rail-dash),
+        transparent var(--leonard-rail-dash),
+        transparent calc(var(--leonard-rail-dash) + var(--leonard-rail-dash-gap))
+      );
       content: "";
     }
   }
 
+  .leonard-steps {
+    --leonard-rail-x: 0px; // the dotted line's x, in this column's coordinates
+    --leonard-rail-icon-gap: clamp(20px, 2.6vw, 45px); // line → icon (44.9 @1728)
+    --leonard-rail-icon: 38px; // icon box (matches .leonard-step__icon)
+    --leonard-rail-gap: clamp(16px, 1.39vw, 24px); // icon → text (24.3 @1728)
+
+    position: relative;
+  }
+
   .leonard-step {
     position: relative;
-    padding-left: calc(var(--leonard-rail-x) + var(--leonard-rail-gap));
+    // line + gap + icon + gap, so the copy clears the icon column rather than
+    // being measured from the rail as it was when the icon straddled it.
+    padding-left: calc(
+      var(--leonard-rail-x) + var(--leonard-rail-icon-gap) + var(--leonard-rail-icon) +
+        var(--leonard-rail-gap)
+    );
   }
 
   .leonard-step__icon {
     position: absolute;
     top: 0;
-    left: calc(var(--leonard-rail-x) - 19px); // centred on the rail
+    left: calc(var(--leonard-rail-x) + var(--leonard-rail-icon-gap));
     margin-bottom: 0;
   }
 }

@@ -59,8 +59,12 @@
               >office@leonardglobal.com</a
             >
           </p>
-          <p class="mb-4">
-            United Kingdom &middot; Northern Ireland &middot; Global
+          <!-- One location per line. `text-nowrap` still honours the explicit
+               <br>s, so it only stops each location wrapping within itself —
+               "Northern Ireland" would otherwise split over two lines on a
+               narrow phone. -->
+          <p class="mb-4 text-nowrap">
+            United Kingdom<br />Northern Ireland<br />Global
           </p>
           <p class="mb-0 d-flex flex-wrap gap-4">
             <a class="d-inline-flex align-items-center gap-2" href="#linkedin"
