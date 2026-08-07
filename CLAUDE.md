@@ -705,11 +705,43 @@ An earlier pass used `top: -1.5rem` (the negative of that `pt-4`) to pull the
 padding off-screen and sit the bar flush against the viewport edge. **That is
 not wanted** — don't reintroduce it.
 
-Only the **`.navbar`** carries an explicit `background` (`$leonard-dk-grey`) —
-at rest it only *looks* dark because the page behind it is, and content would
-otherwise show through as it scrolls under. The **`.leonard-header` wrapper is
-transparent**: its 24px `pt-4` strip sits over the page-green top and needs no
-fill of its own. (An earlier pass filled the header too; that was removed.)
+Only the **`.navbar`** carries an explicit `background` (on a `$leonard-dk-grey`
+base) — at rest it would only *look* dark because the page behind it is, and
+content would otherwise show through as it scrolls under. The **`.leonard-header`
+wrapper is transparent**: its 24px `pt-4` strip sits over the page-green top and
+needs no fill of its own. (An earlier pass filled the header too; that was removed.)
+
+**Engineered detailing** *(experiment — isolated in `scss/_nav-engineered.scss`,
+imported after `custom` so it overrides the plain bar; revert steps are in that
+file's header + `<!-- NAV TEST -->` markers in `partials/header.html`).* To stop
+the bar dissolving into same-colour clinker sections — and to give it presence on
+a metalwork site *without* decoration — the `.navbar` is styled as a **precisely
+drawn panel**: a hairline frame (top/bottom
+`border`), faint **corner "+" ticks** (the site's own motif, from the statement
+bands), and thin **zone dividers** (`.leonard-nav-vr` spans in `partials/header.html`,
+between logo / nav / CTA). Key decisions, each load-bearing:
+
+- **Spacing is width-gated by the exact-1200 fit.** The nav fills the bar exactly
+  at `xl` (1200), so that band has *no* slack: the navbar keeps `px-3` there
+  (`px-4 px-xl-3 px-xxl-5`) and the **zone dividers only show at `xxl`** (≥1400,
+  where the container widens and the ~17px-each dividers fit). Below `xl` the nav
+  is the mobile offcanvas, so the zones don't exist anyway. Adding padding *or*
+  dividers at `xl` wraps `CASE STUDIES` / `NEWS & EVENTS` to two lines — verified.
+- The corner ticks sit at a **6px inset** so they clear the logo/CTA at every
+  width; the extra breathing room at large sizes comes from the `xxl` padding jump.
+
+- **The ticks are drawn into the `background`** (eight `linear-gradient` layers
+  positioned to the four corners), *not* an absolutely-positioned child — that
+  would need `.navbar { position: relative }`, which would steal the mega-menu's
+  anchor from the sticky header (the panel is `position:absolute; left:0; right:0`
+  off the header). Background paints on the bar's own border-box, so no
+  positioning is needed and the anchor is untouched.
+- **Neutral, not yellow.** Yellow is the *action* colour (CTA, logo, interactive
+  hover/focus); making non-interactive ornament yellow would compete with the CTA
+  and dilute the signal. The ticks/rules/dividers are faint `$leonard-lt-grey`.
+- Rejected on the way here: a `mix-blend-mode: difference` reactive accent (gold
+  over dark but electric-blue over the light panels) and a brushed-steel plate
+  (read as cheap skeuomorphism). The steer was **precision over texture**.
 
 Direction handling is in `main.js` (`.leonard-header--hidden` →
 `translateY(-100%)`). It deliberately refuses to hide when:

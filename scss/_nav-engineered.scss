@@ -1,0 +1,62 @@
+// ===========================================================================
+// EXPERIMENT — "engineered detailing" navbar treatment
+// ===========================================================================
+// A test. Makes the navbar read as a precisely drawn panel — a hairline frame
+// (top/bottom borders), faint corner "+" ticks (the site's own statement-band
+// motif, drawn into the background), and thin zone dividers between the
+// logo / nav / CTA — so it has presence on a metalwork site without decoration,
+// and never dissolves where it scrolls over a same-colour clinker section.
+//
+// Isolated here on purpose so it can be pulled cleanly. This file is imported in
+// `styles.scss` AFTER `custom`, so the `.leonard-header .navbar` rule below
+// overrides the plain `background: $leonard-dk-grey` there.
+//
+// ---------------------------------------------------------------------------
+// TO REVERT (back to the plain flat bar) — three edits:
+//   1. scss/styles.scss  — delete the line `@import "nav-engineered";`
+//                          (and delete this file).
+//   2. partials/header.html — on the <nav>, change
+//        `class="navbar navbar-expand-xl minh-78 px-4 px-xl-3 px-xxl-5"`
+//        back to
+//        `class="navbar navbar-expand-xl minh-78 px-3"`
+//   3. partials/header.html — delete the two zone-divider spans (both marked
+//        `<!-- NAV TEST: ... -->`):
+//        `<span class="leonard-nav-vr d-none d-xxl-block" aria-hidden="true"></span>`
+// Nothing else references these; the bar returns to plain clinker.
+// ---------------------------------------------------------------------------
+//
+// Notes on the choices (see CLAUDE.md → "Sticky nav" for the fuller story):
+//   * Ticks are painted into the BACKGROUND (eight gradients), not an absolutely
+//     positioned child — that would need `.navbar { position: relative }`, which
+//     would steal the mega-menu's anchor from the sticky header.
+//   * Neutral, not yellow: yellow is reserved for the CTA / logo / interactive
+//     states, so this ornament never competes with the action colour.
+//   * Spacing is width-gated by the exact-1200 nav fit: `px-3` at xl (no slack),
+//     dividers + roomier padding only at xxl (≥1400). See header.html classes.
+
+.leonard-header .navbar {
+  --nav-tick: #{rgba($leonard-lt-grey, 0.5)};
+
+  border-top: 1px solid rgba($leonard-lt-grey, 0.2);
+  border-bottom: 1px solid rgba($leonard-lt-grey, 0.32);
+  background:
+    linear-gradient(var(--nav-tick), var(--nav-tick)) left 6px top 10px / 9px 1px no-repeat,
+    linear-gradient(var(--nav-tick), var(--nav-tick)) left 10px top 6px / 1px 9px no-repeat,
+    linear-gradient(var(--nav-tick), var(--nav-tick)) right 6px top 10px / 9px 1px no-repeat,
+    linear-gradient(var(--nav-tick), var(--nav-tick)) right 10px top 6px / 1px 9px no-repeat,
+    linear-gradient(var(--nav-tick), var(--nav-tick)) left 6px bottom 10px / 9px 1px no-repeat,
+    linear-gradient(var(--nav-tick), var(--nav-tick)) left 10px bottom 6px / 1px 9px no-repeat,
+    linear-gradient(var(--nav-tick), var(--nav-tick)) right 6px bottom 10px / 9px 1px no-repeat,
+    linear-gradient(var(--nav-tick), var(--nav-tick)) right 10px bottom 6px / 1px 9px no-repeat,
+    $leonard-dk-grey;
+}
+
+// Thin vertical dividers between the logo / nav / CTA zones. Only shown at xxl
+// (≥1400) — the nav fills the bar exactly at xl (1200), so there is no room for
+// them until the container widens (see header.html: `d-none d-xxl-block`).
+.leonard-nav-vr {
+  align-self: stretch;
+  width: 1px;
+  margin: 1.15rem 0.5rem;
+  background: rgba($leonard-lt-grey, 0.2);
+}

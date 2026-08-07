@@ -44,3 +44,8 @@
 //    Bootstrap variable or utility should not appear here.
 @import "fonts";
 @import "custom";
+
+// EXPERIMENT — isolated so it can be pulled cleanly. Overrides the plain navbar
+// in `custom`. To revert, delete this import + the file; see its header for the
+// two accompanying header.html edits.
+@import "nav-engineered";

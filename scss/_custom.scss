@@ -154,6 +154,9 @@
 
 .leonard-header .navbar {
   background: $leonard-dk-grey;
+  // NOTE: the "engineered detailing" treatment (hairline frame + corner ticks +
+  // zone dividers) is an EXPERIMENT kept isolated in `_nav-engineered.scss`,
+  // which overrides this rule. See that file's header for how to revert.
 }
 
 // Hidden on the way down, restored on the way up — toggled from main.js
