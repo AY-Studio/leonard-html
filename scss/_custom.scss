@@ -2263,6 +2263,31 @@ html.lenis {
 // ---------------------------------------------------------------------------
 // 300px Gilroy at 10% opacity, bled off the bottom of the solution band.
 
+// "One solution. Multiple uses." — the Descender block on the homepage.
+//
+// On a phone this stacked into a jumble. Three things caused it, none of them
+// the design itself:
+//
+// 1. Reading order. The columns only carried `order-lg-*`, so below lg the DOM
+//    order won and the product name + render came BEFORE the section's own
+//    eyebrow and headline. Fixed in the markup with `order-1` / `order-2`, which
+//    hold at every breakpoint (the desktop values were already 1 / 2).
+// 2. The body copy. `.leonard-rte` is 18px everywhere else on the page, but this
+//    block adds `fs-7` on top, so it ran at 20px — in the NARROWEST column on
+//    the page (281px), which left about 23 characters a line and made the copy
+//    sprawl. Below md it drops back to the page's own 18px.
+// 3. Padding. `py-7` wrapped 192px around the content on a 329px-wide panel.
+@include media-breakpoint-down(md) {
+  .leonard-solution {
+    padding-top: 3rem !important;
+    padding-bottom: 3rem !important;
+
+    .leonard-rte {
+      font-size: 1.125rem !important; // 18px — the site's body size
+    }
+  }
+}
+
 .leonard-watermark {
   position: absolute;
   inset: auto 0 0;

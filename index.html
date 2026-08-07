@@ -338,7 +338,7 @@
         <section class="pt-section">
           <div class="container-xxl">
             <div
-              class="position-relative overflow-hidden bg-light text-dark py-7 py-lg-8 px-4 px-lg-5"
+              class="leonard-solution position-relative overflow-hidden bg-light text-dark py-7 py-lg-8 px-4 px-lg-5"
             >
               <div
                 class="leonard-corners leonard-corners--bleed fs-1 fw-thin"
@@ -353,7 +353,11 @@
               </div>
 
               <div class="row position-relative gy-4">
-                <div class="col-12 col-lg-5 order-lg-2">
+                <!-- order-2 (not order-lg-2): the desktop value is the same, but
+                     applying it from xs up stops the DOM order taking over on a
+                     phone, where the product name and render used to stack ABOVE
+                     the section's own eyebrow and headline and read backwards. -->
+                <div class="col-12 col-lg-5 order-2">
                   <!-- Label sits top-right (align-items-lg-end keeps the block on
                        the right), but the text itself is left-aligned with a yellow
                        left rule. -->
@@ -377,7 +381,7 @@
                   />
                 </div>
 
-                <div class="col-12 col-lg-7 order-lg-1">
+                <div class="col-12 col-lg-7 order-1">
                   <p
                     class="leonard-eyebrow fw-normal fs-9 ls-label text-secondary text-uppercase mb-4"
                   >
