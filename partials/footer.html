@@ -3,7 +3,13 @@
 <footer class="leonard-footer bg-dark text-light pt-7 mt-3">
   <div class="container-xxl">
     <div class="row gy-5">
-      <div class="col-12 col-sm-6 col-lg-3">
+      <!-- Company and Products pair on phones (col-6): both are five short links,
+           so they balance each other and halve a footer that otherwise ran to a
+           full screen. Information and Contact stay full width — Contact carries
+           the email, locations and four cert badges and is crushed in half a
+           column. See the mobile footer block in _custom.scss for the gutter and
+           type that make the pairing fit. -->
+      <div class="col-6 col-lg-3">
         <p class="leonard-eyebrow fw-normal fs-10 ls-label text-primary text-uppercase mb-3">
           Company
         </p>
@@ -19,7 +25,7 @@
         </ul>
       </div>
 
-      <div class="col-12 col-sm-6 col-lg-3">
+      <div class="col-6 col-lg-3">
         <p class="leonard-eyebrow fw-normal fs-10 ls-label text-primary text-uppercase mb-3">
           Products
         </p>

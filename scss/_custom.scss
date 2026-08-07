@@ -2572,6 +2572,42 @@ $leonard-rail-gap: 6.2vw;
 // box the ::after measures against is the whole label. If a link here ever
 // wraps, this underlines only the last line fragment.
 
+// Footer nav on phones.
+//
+// Stacked full width, the four columns ran 1042px — more than a whole screen —
+// and read as uneven because the heights had nothing to do with each other
+// (185 / 185 / 96 / 383). Company and Products are both five short links, so
+// they pair naturally and balance each other; Information and Contact stay full
+// width because Contact carries the email, the locations and four cert badges
+// and would be crushed in half a column.
+//
+// Two things have to give for the pairing to work at this width:
+// - the grid gutter. 2.75rem is a desktop measure; two-up on a phone it eats
+//   44px of a 187px column, and "News & Events" (152px) no longer fits.
+// - the link size. 21px is heading scale for what is a nav list; 18px matches
+//   the site's body size and clears the longest label with room to spare.
+@include media-breakpoint-down(sm) {
+  .leonard-footer > .container-xxl > .row {
+    --bs-gutter-x: 1rem;
+  }
+
+  // Both the nav lists and the Contact block carry `.display-6`, so one rule
+  // levels them. Without it the contact details sat at 20px against 18px links —
+  // the address outweighing the navigation, which is the wrong way round.
+  .leonard-footer .row > [class*="col-"] > .display-6 {
+    font-size: 1.125rem !important; // 18px, beats the fs-4 / fs-5 utilities
+  }
+}
+
+// Below 360 even 18px will not sit two-up without breaking a label, so the pair
+// falls back to full width. Bootstrap has no breakpoint between 0 and sm, hence
+// the explicit query.
+@media (max-width: 359.98px) {
+  .leonard-footer .row > .col-6 {
+    width: 100%;
+  }
+}
+
 .leonard-footer a {
   position: relative;
 
