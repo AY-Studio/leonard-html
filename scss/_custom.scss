@@ -7,6 +7,63 @@
 // marquee, the DESCENDER watermark, and the feature rail.
 
 // ---------------------------------------------------------------------------
+// Accessibility — WCAG 2.2 AA
+// ---------------------------------------------------------------------------
+// Focus indicator (1.4.11 Non-text Contrast, 2.4.7 Focus Visible).
+//
+// Bootstrap removes the focus outline on most components and substitutes a
+// box-shadow at $focus-ring-opacity (0.25). Measured, that ring computes to
+// 1.86:1 against the page — well under the 3:1 a focus indicator needs.
+//
+// Rather than restyle every component (and pick a colour per band), the ring
+// inherits the element's OWN text colour. That colour already clears 4.5:1
+// against whatever the element sits on, so the indicator is guaranteed to
+// contrast everywhere — including the yellow stats band, where a fixed yellow
+// ring would vanish. No new colour is introduced anywhere.
+//
+// !important is load-bearing: Bootstrap's `.nav-link:focus-visible { outline: 0 }`
+// and friends are class-specificity and would otherwise win.
+:is(a, button, input, select, textarea, summary, [tabindex]):focus-visible {
+  outline: 3px solid currentcolor !important;
+  outline-offset: 2px;
+}
+
+// Filled buttons draw the ring INSIDE, over the button's own fill. A filled
+// button's text colour is picked to contrast with the BUTTON, not with the page
+// behind it — the yellow button's label is black, which is 15.6:1 on the yellow
+// but only 1.71:1 against the dark page an offset ring would land on. Inset, it
+// is always measured against the fill the colour was chosen for.
+.btn:focus-visible {
+  outline-offset: -3px;
+}
+
+// 2.4.11 Focus Not Obscured (Minimum). The header is `position: sticky` and
+// 102px tall, so an element scrolled to by keyboard can land underneath it.
+// Reserving that much scroll padding keeps the focused element clear — this
+// also fixes in-page anchor jumps landing under the bar.
+html {
+  scroll-padding-top: 7rem; // 112px — clears the 102px sticky header
+}
+
+// 2.4.1 Bypass Blocks. The header carries four mega-menus, so a keyboard user
+// would otherwise tab through the whole nav on every page. Off-screen until
+// focused, so it costs the visual design nothing.
+.leonard-skip {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 3100; // above the page-transition panel (3000)
+  padding: 0.75rem 1.25rem;
+  color: $leonard-dk-grey;
+  background: $leonard-yellow;
+  transform: translateY(-150%);
+
+  &:focus {
+    transform: translateY(0);
+  }
+}
+
+// ---------------------------------------------------------------------------
 // "■ LABEL" eyebrow
 // ---------------------------------------------------------------------------
 // The square is a literal glyph in Figma, but U+25A0 is outside the latin

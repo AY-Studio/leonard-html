@@ -3,6 +3,12 @@
      page to reveal it. Body-level (fixed). See initPageTransition() in main.js. -->
 <div class="leonard-pt" aria-hidden="true"></div>
 
+<!-- WCAG 2.2 — 2.4.1 Bypass Blocks. First thing in the tab order; off-screen
+     until focused. Targets <main id="main">, which every page carries.
+     `data-no-transition` so the page-transition handler ignores it (it is a
+     same-page hash link, but being explicit keeps it working if that changes). -->
+<a class="leonard-skip" href="#main" data-no-transition>Skip to main content</a>
+
 <!-- Dims the page behind an open mega-menu so it reads as a focused panel.
      CSS-only (body:has(.leonard-mega.show)); sits below the sticky header and
      its mega but above the page, so only the content dims. -->
