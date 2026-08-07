@@ -39,16 +39,19 @@
 
   border-top: 1px solid rgba($leonard-lt-grey, 0.2);
   border-bottom: 1px solid rgba($leonard-lt-grey, 0.32);
+  // Corner "+" ticks: 15px in from the sides, 14px in from top/bottom (arm 9px).
+  // The 15px horizontal inset sets the +→logo / button→+ gap to ~24px (padding
+  // 48px − tick 24px), which the zone dividers below are matched to.
   background:
-    linear-gradient(var(--nav-tick), var(--nav-tick)) left 6px top 10px / 9px 1px no-repeat,
-    linear-gradient(var(--nav-tick), var(--nav-tick)) left 10px top 6px / 1px 9px no-repeat,
-    linear-gradient(var(--nav-tick), var(--nav-tick)) right 6px top 10px / 9px 1px no-repeat,
-    linear-gradient(var(--nav-tick), var(--nav-tick)) right 10px top 6px / 1px 9px no-repeat,
-    linear-gradient(var(--nav-tick), var(--nav-tick)) left 6px bottom 10px / 9px 1px no-repeat,
-    linear-gradient(var(--nav-tick), var(--nav-tick)) left 10px bottom 6px / 1px 9px no-repeat,
-    linear-gradient(var(--nav-tick), var(--nav-tick)) right 6px bottom 10px / 9px 1px no-repeat,
-    linear-gradient(var(--nav-tick), var(--nav-tick)) right 10px bottom 6px / 1px 9px no-repeat,
-    $leonard-dk-grey;
+    linear-gradient(var(--nav-tick), var(--nav-tick)) left 15px top 18px / 9px 1px no-repeat,
+    linear-gradient(var(--nav-tick), var(--nav-tick)) left 19px top 14px / 1px 9px no-repeat,
+    linear-gradient(var(--nav-tick), var(--nav-tick)) right 15px top 18px / 9px 1px no-repeat,
+    linear-gradient(var(--nav-tick), var(--nav-tick)) right 19px top 14px / 1px 9px no-repeat,
+    linear-gradient(var(--nav-tick), var(--nav-tick)) left 15px bottom 18px / 9px 1px no-repeat,
+    linear-gradient(var(--nav-tick), var(--nav-tick)) left 19px bottom 14px / 1px 9px no-repeat,
+    linear-gradient(var(--nav-tick), var(--nav-tick)) right 15px bottom 18px / 9px 1px no-repeat,
+    linear-gradient(var(--nav-tick), var(--nav-tick)) right 19px bottom 14px / 1px 9px no-repeat,
+    #212f3c;
 }
 
 // Thin vertical dividers between the logo / nav / CTA zones. Only shown at xxl
@@ -57,6 +60,19 @@
 .leonard-nav-vr {
   align-self: stretch;
   width: 1px;
-  margin: 1.15rem 0.5rem;
+  margin-block: 1.15rem;
   background: rgba($leonard-lt-grey, 0.2);
+}
+// Balance: the INNER gap (toward the logo / CTA) is matched to the +→logo /
+// button→+ gap (~33px at xxl, = padding 48px − tick 15px), so the logo sits
+// centred between the corner tick and its divider, and the CTA between its
+// divider and the tick. The OUTER side (toward the centred nav links) stays
+// tight. The logo divider adds 17px (the brand's own me-3 makes up the rest).
+.leonard-nav-vr--logo {
+  margin-right: 0.5rem;
+  margin-left: 17px;
+}
+.leonard-nav-vr--cta {
+  margin-right: 33px;
+  margin-left: 0.5rem;
 }

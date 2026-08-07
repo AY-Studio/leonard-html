@@ -1764,6 +1764,20 @@ html.lenis {
   color: $leonard-dk-grey !important;
 }
 
+// Testimonials row (partials/testimonials.html): taller / more square cards. The
+// card is already a flex column with `h-100` (so the row stretches all three to
+// equal height) and the figcaption carries `mt-auto` — so the quote sits at the
+// top, then a flexible gap, then the name/role pinned to the bottom, aligned
+// across all three. A min-height gives the "more square" proportion; because one
+// card's min-height stretches the whole row, every card grows together. Modifier
+// class so it doesn't touch the other `.leonard-quote` uses (certifications grid,
+// detail-page quotes, careers). lg+ only — below that the cards stack full-width.
+@include media-breakpoint-up(lg) {
+  .leonard-quote--tall {
+    min-height: 26rem;
+  }
+}
+
 // ---------------------------------------------------------------------------
 // Product detail page
 // ---------------------------------------------------------------------------
