@@ -2676,6 +2676,20 @@ $leonard-rail-gap: 6.2vw;
       font-size: 1.125rem !important;
     }
   }
+
+  // The accordion ends on a rule, and the band below it is a different colour
+  // (the deeper green), so it already reads as a boundary — `mt-8` left 160px of
+  // dead footer between the two. Collapsed, that gap was most of what you saw.
+  // `!important` beats the utility.
+  .leonard-footer .leonard-footer-reveal {
+    margin-top: 0 !important;
+  }
+
+  // With the band butting straight up against it, the last item's own hairline
+  // and the colour change would double up.
+  .leonard-facc .accordion-item:last-child {
+    border-bottom: 0;
+  }
 }
 
 // From lg the accordion is undone: panels forced open, buttons made inert, and
