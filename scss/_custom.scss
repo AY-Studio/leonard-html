@@ -695,6 +695,72 @@ body:has(.leonard-mega.show) .leonard-mega-backdrop {
 }
 
 // ---------------------------------------------------------------------------
+// Phones/tablets: a media box is a FLOOR, not a fixed frame
+// ---------------------------------------------------------------------------
+// The overlay copy was being clipped on small phones. The cause was not the type
+// size — it was that the box height came from a rule that ignored the copy
+// entirely: either an aspect ratio (derived from width) or an `svh` fraction
+// (derived from screen height). As a phone narrows, the copy grows because it
+// wraps more, while the box shrinks. They move in opposite directions, and the
+// `.overflow-hidden` on these boxes ate the difference silently.
+//
+// Measured shortfall at 320x568: service/industry hero -134px, the --full hero
+// -163px, the photo CTA -157px.
+//
+// So rather than shrink the type (which would break the hero-to-CTA hierarchy
+// and only postpone the problem to the next long headline), the box gives up its
+// fixed height below lg: it keeps a viewport-relative MINIMUM for impact, and the
+// scrim goes back IN FLOW so longer copy can push the box taller. The photo is
+// absolutely positioned with object-fit: cover, so it just crops to whatever
+// height results. Type is untouched at every breakpoint.
+//
+// `--screen` already worked exactly this way; this generalises it to the rest,
+// so every hero opens at one consistent height on a phone instead of three.
+@include media-breakpoint-down(lg) {
+  .leonard-hero-ratio,
+  .leonard-hero-ratio--full,
+  .leonard-band-ratio:has(> .leonard-scrim) {
+    display: flex;
+    flex-direction: column;
+    height: auto;
+
+    &::before {
+      content: none;
+    }
+
+    // Bootstrap's `.ratio > *` absolutely positions every child. Returning the
+    // overlay to flow is what lets it size the box; the image stays absolute.
+    //
+    // `flex: 1` is load-bearing: in flow the overlay is only as tall as its own
+    // copy, so its `justify-content-end` would have no free space to push
+    // against and the copy would ride at the TOP of the photo instead of sitting
+    // bottom-left. Stretching it to fill restores the designed alignment, while
+    // still letting long copy grow past the minimum and take the box with it.
+    > .leonard-scrim,
+    > .leonard-hero-scrim {
+      position: relative;
+      flex: 1 1 auto;
+    }
+  }
+
+  // One opening height for every hero. `--screen` is excluded — it sets its own,
+  // taller minimum and is already content-driven.
+  .leonard-hero-ratio:not(.leonard-hero-ratio--screen) {
+    min-height: 70vh;
+    min-height: 70svh;
+  }
+
+  // Photo CTAs sit below a hero, so they get a smaller floor — subordinate by
+  // proportion rather than by shrinking their type. `:has()` keeps this off the
+  // homepage's plain photo band, which carries no copy and whose aspect ratio is
+  // the design.
+  .leonard-band-ratio:has(> .leonard-scrim) {
+    min-height: 45vh;
+    min-height: 45svh;
+  }
+}
+
+// ---------------------------------------------------------------------------
 // Homepage (relume file)
 // ---------------------------------------------------------------------------
 
