@@ -353,40 +353,41 @@
         <!-- ============================================================== -->
         <!-- One solution, multiple uses                                     -->
         <!-- ============================================================== -->
-        <!-- Full-bleed light panel: the section carries no container, so the
-             band runs edge to edge. Figma draws this rect inset 24px, but the
-             build takes it to the viewport edge by request. The container is
-             moved inside so the copy still lines up with the rest of the page. -->
-        <!-- No pt-section here: its page-green padding showed as a bar between
-             the pinned photo and this panel. The panel butts to the photo. -->
+        <!-- Boxed light panel (as Figma draws it, inset ~24px): container-xxl
+             insets the panel; the section itself stays full-width and carries the
+             reveal's opaque clinker fill (.leonard-reveal > :not(...)), so the
+             pinned photo is covered through the new gutters rather than showing. -->
         <section>
-          <div
-            class="position-relative overflow-hidden bg-light text-dark py-7 py-lg-8"
-          >
+          <div class="container-xxl">
             <div
-              class="leonard-corners leonard-corners--bleed fs-1 fw-thin"
-              aria-hidden="true"
+              class="position-relative overflow-hidden bg-light text-dark py-7 py-lg-8 px-4 px-lg-5"
             >
-              <span></span><span></span><span></span><span></span>
-            </div>
-            <div class="leonard-watermark" aria-hidden="true">
-              <span class="display-wordmark lh-tight ls-tight text-uppercase"
-                >Descender</span
+              <div
+                class="leonard-corners leonard-corners--bleed fs-1 fw-thin"
+                aria-hidden="true"
               >
-            </div>
+                <span></span><span></span><span></span><span></span>
+              </div>
+              <div class="leonard-watermark" aria-hidden="true">
+                <span class="display-wordmark lh-tight ls-tight text-uppercase"
+                  >Descender</span
+                >
+              </div>
 
-            <div class="container-xxl px-4 px-lg-5">
               <div class="row position-relative gy-4">
                 <div class="col-12 col-lg-5 order-lg-2">
-                  <div
-                    class="d-lg-flex flex-column align-items-lg-end text-lg-end"
-                  >
-                    <p class="display-6 lh-flat ls-tight text-uppercase mb-1">
-                      Descender
-                    </p>
-                    <p class="fw-light fs-7 lh-body ls-tight text-secondary mb-0">
-                      Vertical Access
-                    </p>
+                  <!-- Label sits top-right (align-items-lg-end keeps the block on
+                       the right), but the text itself is left-aligned with a yellow
+                       left rule. -->
+                  <div class="d-lg-flex flex-column align-items-lg-end">
+                    <div class="border-start border-primary border-4 ps-3 text-start">
+                      <p class="display-6 lh-flat ls-tight text-uppercase mb-1">
+                        Descender
+                      </p>
+                      <p class="fw-light fs-7 lh-body ls-tight text-secondary mb-0">
+                        Vertical Access
+                      </p>
+                    </div>
                   </div>
                   <img
                     class="img-fluid d-block mt-5 ms-lg-auto"
