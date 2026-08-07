@@ -850,6 +850,24 @@ body:has(.leonard-mega.show) .leonard-mega-backdrop {
 // The vertical padding comes down with it — `py-7` put 192px of padding around a
 // 139px block, which is what unbalanced the panel top-to-bottom.
 @include media-breakpoint-down(md) {
+  // HOMEPAGE ONLY. There the band sat 96px clear of the hero but only 24px clear
+  // of the partners band below, so it read as top-heavy. The 96px is
+  // `pt-section`, the site's mobile rhythm, and it is right nearly everywhere:
+  // on Products and Services the statement is followed by a section that also
+  // uses that rhythm, so it is already balanced 96/96 and must not be touched.
+  //
+  // The homepage is the one exception, because the partners band that follows it
+  // carries `mt-4` (24px) rather than `mt-section`. The hero's own `pb-4` already
+  // puts 24px above the panel, so dropping the section padding leaves 24px above
+  // and 24px below — which is also what the source file draws either side of it.
+  //
+  // `.leonard-hero-bleed` is the homepage hero and nothing else, so the adjacent
+  // sibling selector pins this to that page without a page-specific class. Two
+  // selector parts beat the single-class `.pt-section` !important override.
+  .leonard-hero-bleed + section:has(> .leonard-statement) {
+    padding-top: 0 !important;
+  }
+
   .leonard-statement {
     padding-top: 3rem !important; // 48px, beats py-7's utility
     padding-bottom: 3rem !important;
