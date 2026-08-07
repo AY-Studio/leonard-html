@@ -133,6 +133,31 @@ covering block above it.
 
 ---
 
+## 5b. Per-page block sequence (page-builder pages)
+
+Each block on these pages is marked **in the markup** — a `<!-- ▐ BLOCK: name -->`
+comment + `data-block="slug"` on the section — so the Replicator order is
+unambiguous. Sequence (Hero is the required first field group, then the blocks):
+
+- **index (home):** Statement band · Partners marquee · *Content block* (who-we-are)
+  · Stats band · **Photo band reveal** (pins the photo; the "one solution" content
+  rides over it) · Feature list · Newsletter
+- **services:** Statement band · Home-safe band · Band row ×5 (site-surveys + 4
+  services) · *Content block* · Stats band · Testimonials · CTA · Newsletter
+- **industries:** Home-safe band · Band row ×4 · Stats band · CTA
+- **about:** **Photo band reveal** (composite — the stats / how-we-work / story
+  content sections ride over the pinned photo; shown as reveal + 3 *Content
+  blocks*) · CTA
+- **careers:** *Content block* header + 2 *Content blocks* · CTA
+
+`Content block` = a bespoke content section with no library-block class (free
+`.leonard-rte` copy) → a **Prose block** (§5) or a page-specific set. The
+**Photo band reveal** is a *composite*: one block that pins a photo while the
+content blocks inside it scroll over — model it as a block that contains a nested
+Replicator, or keep it bespoke per page.
+
+---
+
 ## 6. Fixed-template collections (blueprints)
 
 ### products (listing)

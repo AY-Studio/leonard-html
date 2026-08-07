@@ -127,7 +127,8 @@
       <!-- Full-bleed on the homepage: no container, so the image spans the
            whole viewport width. pt-4/pb-4 leave a thin page-green edge above and
            below; the height maths in .leonard-hero-ratio--full accounts for both. -->
-      <section class="pt-4 pb-4">
+      <!-- ▐ BLOCK: Hero -->
+      <section class="pt-4 pb-4" data-block="hero">
         <div class="ratio leonard-hero-ratio leonard-hero-ratio--full overflow-hidden">
           <!-- Kiln hero removed per client (not representative of the majority
                of our technology). Authentic on-site shot of the Leonard crew
@@ -177,7 +178,8 @@
       <!-- ============================================================== -->
       <!-- Statement                                                       -->
       <!-- ============================================================== -->
-      <section class="container-xxl pt-section">
+      <!-- ▐ BLOCK: Statement band -->
+      <section class="container-xxl pt-section" data-block="statement">
         <div
           class="position-relative overflow-hidden bg-dark px-3 px-lg-8 py-7 py-lg-9"
         >
@@ -215,7 +217,8 @@
       <!-- ============================================================== -->
       <!-- Trusted partners                                                -->
       <!-- ============================================================== -->
-      <section class="bg-neutral text-dark py-4 mt-4">
+      <!-- ▐ BLOCK: Partners marquee -->
+      <section class="bg-neutral text-dark py-4 mt-4" data-block="partners">
         <div class="container-xxl">
           <p
             class="leonard-eyebrow fw-light fs-10 ls-tight text-uppercase mb-3"
@@ -249,7 +252,8 @@
       <!-- ============================================================== -->
       <!-- Who we are                                                      -->
       <!-- ============================================================== -->
-      <section class="container-xxl py-7 py-lg-8">
+      <!-- ▐ BLOCK: Content block -->
+      <section class="container-xxl py-7 py-lg-8" data-block="content">
         <div class="row align-items-center gy-5">
           <div class="col-12 col-lg-6">
             <p
@@ -304,7 +308,8 @@
       <!-- ============================================================== -->
       <!-- Stats                                                           -->
       <!-- ============================================================== -->
-      <section class="container-xxl leonard-stats leonard-stats--boxed">
+      <!-- ▐ BLOCK: Stats band -->
+      <section class="container-xxl leonard-stats leonard-stats--boxed" data-block="stats">
         <div class="bg-primary text-dark p-4">
           <h2 class="display-5 lh-flat ls-tight text-uppercase mb-2">
             Putting safety and efficiency in your hands.
@@ -359,7 +364,8 @@
       </section>
 
       <!-- Photo band pins while the section below rides up over it -->
-      <div class="leonard-reveal">
+      <!-- ▐ BLOCK: Photo band reveal (pins photo; sections below ride over it) -->
+      <div class="leonard-reveal" data-block="photo-reveal">
         <!-- ============================================================== -->
         <!-- Full-bleed photo band                                           -->
         <!-- ============================================================== -->
@@ -478,7 +484,8 @@
            for the whole sequence, with a beat at the end before it releases.
            JS: initFeatureSteps() in main.js. Fallback (no JS / reduced motion /
            below lg): a plain, fully-visible vertical list, no pin. -->
-      <section class="leonard-feature-section bg-dark text-light mt-section">
+      <!-- ▐ BLOCK: Feature list -->
+      <section class="leonard-feature-section bg-dark text-light mt-section" data-block="feature-list">
         <div class="container-xxl py-7 py-lg-8">
           <div class="row gy-5 align-items-lg-start">
             <div class="col-12 col-lg-5">
@@ -597,6 +604,7 @@
       <!-- ============================================================== -->
       <!-- Newsletter                                                      -->
       <!-- ============================================================== -->
+      <!-- ▐ BLOCK: Newsletter (partials/newsletter.html) -->
       <!-- #include partials/newsletter.html -->
     </main>
 

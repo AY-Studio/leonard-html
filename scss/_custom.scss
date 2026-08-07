@@ -621,8 +621,11 @@ body:has(.leonard-mega.show) .leonard-mega-backdrop {
 // drift; with no JS or under reduced motion it simply sits static (showing the
 // vertical middle of the image), so the CTA is unaffected.
 .leonard-parallax img {
-  height: 130%;
-  top: -15%;
+  // `!important` beats the `.h-100` utility (also !important) on the <img>;
+  // without it the image stays 100% tall and the drift exposes empty space.
+  // 140% tall / -20% top gives a generous margin so it always fills at ±9%.
+  height: 140% !important;
+  top: -20%;
   will-change: transform;
 }
 

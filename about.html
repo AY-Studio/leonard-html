@@ -36,7 +36,8 @@
       <!-- Hero — no photo, fills ~one screen (copy pinned bottom-left), the  -->
       <!-- Latest News hero pattern (--screen). The feature photo follows.    -->
       <!-- ============================================================== -->
-      <section class="container-xxl pt-4">
+      <!-- ▐ BLOCK: Hero -->
+      <section class="container-xxl pt-4" data-block="hero">
         <div class="ratio leonard-hero-ratio leonard-hero-ratio--screen overflow-hidden bg-dark">
           <div
             class="d-flex flex-column justify-content-end align-items-start p-4 p-lg-5"
@@ -63,7 +64,8 @@
       <!-- Photo band pins while the content below rides up over it — the   -->
       <!-- homepage photo-reveal pattern (.leonard-reveal). Pure CSS.        -->
       <!-- ============================================================== -->
-      <div class="leonard-reveal">
+      <!-- ▐ BLOCK: Photo band reveal (pins photo; sections below ride over it) -->
+      <div class="leonard-reveal" data-block="photo-reveal">
         <section class="leonard-reveal__media mt-section">
           <div class="ratio leonard-band-ratio">
             <img
@@ -84,7 +86,8 @@
       <!-- ============================================================== -->
       <!-- Stats                                                           -->
       <!-- ============================================================== -->
-      <section class="container-xxl pt-section">
+      <!-- ▐ BLOCK: Content block -->
+      <section class="container-xxl pt-section" data-block="content">
         <div class="bg-primary text-dark p-4">
           <h2 class="display-5 lh-flat ls-tight text-uppercase mb-2">
             Experience you can measure.
@@ -144,7 +147,8 @@
       <!-- ============================================================== -->
       <!-- The Leonard approach — Planning / Organisation / Prep / Install -->
       <!-- ============================================================== -->
-      <section class="bg-dark-deep mt-section">
+      <!-- ▐ BLOCK: Content block -->
+      <section class="bg-dark-deep mt-section" data-block="content">
         <div class="container-xxl py-7 py-lg-8">
           <p class="leonard-eyebrow fw-normal fs-9 ls-label text-primary text-uppercase mb-4">
             How we work
@@ -202,7 +206,8 @@
       <!-- ============================================================== -->
       <!-- Story — roomy vertical padding (py-6 = 64px, py-lg-8 = 160px)      -->
       <!-- ============================================================== -->
-      <section class="container-xxl py-6 py-lg-8">
+      <!-- ▐ BLOCK: Content block -->
+      <section class="container-xxl py-6 py-lg-8" data-block="content">
         <div class="row justify-content-center">
           <div class="col-12 col-lg-10 col-xxl-8">
             <div class="leonard-prose">
@@ -242,6 +247,7 @@
       </div>
       <!-- /leonard-reveal -->
 
+      <!-- ▐ BLOCK: CTA (partials/cta.html) -->
       <!-- #include partials/cta.html -->
     </main>
 
