@@ -1961,6 +1961,102 @@ html.lenis {
   margin-top: 0.85rem; // title → body gap; animated to 0 so it fully collapses
 }
 
+// Mobile accordion (initFeatureSteps adds `--accordion` below lg). Borrows the
+// FAQ's language — hairline rules and a yellow +/− marker — so it reads as the
+// same component family rather than a new one.
+//
+// The class is only ever present when JS has built the buttons, so the no-JS
+// fallback (every body visible) is untouched.
+@include media-breakpoint-down(lg) {
+  .leonard-steps--accordion {
+    .leonard-step {
+      // Grid puts the icon beside the title instead of stacked above it, which
+      // is what made each row 54px taller than it needed to be. Purely visual —
+      // the DOM order is unchanged, so the icon is still before the heading.
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 0 1rem;
+      align-items: center;
+      border-bottom: 1px solid rgba($leonard-lt-grey, 0.2);
+
+      + .leonard-step {
+        margin-top: 0; // the rules do the separating now
+      }
+
+      &:first-child {
+        border-top: 1px solid rgba($leonard-lt-grey, 0.2);
+      }
+    }
+
+    .leonard-step__icon {
+      grid-row: 1;
+      grid-column: 1;
+      margin-bottom: 0;
+    }
+
+    .leonard-step__title {
+      grid-row: 1;
+      grid-column: 2;
+    }
+
+    // Collapse on max-height rather than height: no JS measurement, so nothing
+    // needs re-measuring when the copy or the viewport changes. (A 0fr→1fr grid
+    // row would be the tidier trick, but the body is itself a grid item of the
+    // step's grid here and the fr never resolved — it stayed at 0.)
+    //
+    // The cap only has to clear the tallest body; the longest here is ~200px, so
+    // 24rem leaves plenty of room while keeping the easing honest.
+    // max-height and margin-top are written inline by initFeatureSteps; CSS only
+    // supplies the easing (and `overflow: hidden` comes from the base rule).
+    .leonard-step__body {
+      grid-column: 1 / -1;
+      transition: max-height 0.35s ease, margin-top 0.35s ease;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .leonard-step__body {
+        transition: none;
+      }
+    }
+
+    // The whole row is the target — well past the 24px minimum for 2.5.8.
+    .leonard-step__toggle {
+      display: flex;
+      gap: 1rem;
+      align-items: center;
+      width: 100%;
+      padding: 1.25rem 0;
+      color: inherit;
+      font: inherit;
+      text-align: left;
+      background: none;
+      border: 0;
+
+      &::after {
+        flex: none;
+        margin-left: auto;
+        font-family: $font-family-mono-ui;
+        font-size: 2rem;
+        font-weight: 100;
+        line-height: 1;
+        color: $leonard-yellow;
+        content: "+";
+      }
+
+      &[aria-expanded="true"]::after {
+        content: "\2212"; // minus
+      }
+    }
+
+    // Breathing room between an open body and the rule below it. It has to sit
+    // on the STEP, not the body: the body's height is what animates, and any
+    // padding on it stays outside that height, so a closed row kept a 20px gap.
+    .leonard-step.is-open {
+      padding-bottom: 1.25rem;
+    }
+  }
+}
+
 @include media-breakpoint-up(lg) {
   // The rail — a dotted yellow line running down the list. It sits to the LEFT
   // of the icons rather than passing through them (the icons used to be centred

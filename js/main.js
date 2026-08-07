@@ -834,6 +834,104 @@ function initFeatureSteps() {
       };
     }
   );
+
+  // Below lg the pinned sequence is off, and the fallback left all five bodies
+  // open at once: 1342px of copy, 2.4 screens of scrolling, with nothing to tell
+  // one feature from the next. On a phone that reads as a wall rather than a
+  // list, so it becomes an accordion — one open at a time, which is the same
+  // behaviour the pinned version gives on desktop, in the site's existing FAQ
+  // idiom (hairline rules, a yellow +/− marker).
+  //
+  // Progressive enhancement: the markup ships with every body visible, so with
+  // no JS this is still the readable list it always was. Only the collapsing is
+  // added here. Runs regardless of reduced-motion — collapsing is a layout
+  // affordance, not decoration — but the open/close is instant under it.
+  gsap.matchMedia().add("(max-width: 991.98px)", () => {
+    const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    wrap.classList.add("leonard-steps--accordion");
+
+    const toggles = steps.map((step, i) => {
+      const title = step.querySelector(".leonard-step__title");
+      const body = bodies[i];
+      body.id = body.id || `leonard-step-body-${i}`;
+
+      // The title is an <h3>; the button goes INSIDE it so the heading keeps its
+      // level and outline position while the control gets the right role.
+      const btn = document.createElement("button");
+      btn.type = "button";
+      btn.className = "leonard-step__toggle";
+      btn.setAttribute("aria-controls", body.id);
+      btn.setAttribute("aria-expanded", String(i === 0));
+      while (title.firstChild) btn.appendChild(title.firstChild);
+      title.appendChild(btn);
+      return btn;
+    });
+
+    // Open/close is a class, animated by CSS (a 0fr→1fr grid row), NOT a GSAP
+    // tween. Tweens created in here are recorded by the matchMedia context and
+    // get reverted to the state this callback set, so a tween fired later from a
+    // click was silently undone — aria flipped but the body never moved. A class
+    // sidesteps the context entirely and needs no height measurement.
+    // The open height is written INLINE rather than left to a class. A stylesheet
+    // rule for the open state was being beaten in a way the cascade did not
+    // explain (the matching rule was there, more specific, in a matching media
+    // query, and still lost) — and an accordion that silently fails to open is
+    // not worth the elegance. Inline always wins; CSS only supplies the easing.
+    //
+    // scrollHeight is read while the body is clipped, so it reports the full
+    // content height regardless of the current max-height.
+    const setOpen = (i, open) => {
+      const body = bodies[i];
+      steps[i].classList.toggle("is-open", open);
+      toggles[i].setAttribute("aria-expanded", String(open));
+      body.style.marginTop = open ? "0.85rem" : "0px";
+
+      if (open) {
+        body.style.maxHeight = `${body.scrollHeight}px`;
+        // Once the ease has finished, drop the cap. Pinning it to the measured
+        // height would clip the copy the moment anything reflowed it — a rotate,
+        // a font swap, a longer string from the CMS.
+        const done = (e) => {
+          if (e.propertyName !== "max-height") return;
+          body.style.maxHeight = "none";
+          body.removeEventListener("transitionend", done);
+        };
+        body.addEventListener("transitionend", done);
+      } else {
+        // Nothing eases out of `none`, so pin a real height first and flush it.
+        if (body.style.maxHeight === "none") {
+          body.style.maxHeight = `${body.scrollHeight}px`;
+          void body.offsetHeight;
+        }
+        body.style.maxHeight = "0px";
+      }
+    };
+
+    // Any inline height/opacity left by the desktop branch would beat the CSS.
+    gsap.set(bodies, { clearProps: "all" });
+    steps.forEach((_, i) => setOpen(i, i === 0));
+
+    const onClick = (e) => {
+      const i = toggles.indexOf(e.currentTarget);
+      const isOpen = toggles[i].getAttribute("aria-expanded") === "true";
+      // One at a time, mirroring the desktop sequence. The open one can be
+      // closed again, so a reader can collapse the whole list.
+      steps.forEach((_, j) => setOpen(j, j === i ? !isOpen : false));
+    };
+    toggles.forEach((b) => b.addEventListener("click", onClick));
+
+    return () => {
+      toggles.forEach((btn, i) => {
+        btn.removeEventListener("click", onClick);
+        const title = steps[i].querySelector(".leonard-step__title");
+        while (btn.firstChild) title.appendChild(btn.firstChild);
+        btn.remove();
+        steps[i].classList.remove("is-open");
+      });
+      wrap.classList.remove("leonard-steps--accordion");
+      gsap.set(bodies, { clearProps: "all" });
+    };
+  });
 }
 
 // Test switch — add `?noanim` to the URL (or set localStorage['leonard-noanim']
