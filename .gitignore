@@ -19,6 +19,9 @@ dist/
 a11y/*
 !a11y/urls.txt
 
+# Generated audit runs
+audits/
+
 # Environment
 .env
 .env.*

@@ -9,6 +9,7 @@
     "#cmplz-cookiebanner-container",
     "#cmplz-manage-consent",
     ".grecaptcha-badge",
-    "#lightbox"
+    "#lightbox",
+    "#bugherd_embed_communication_frame"
   ]
 }
