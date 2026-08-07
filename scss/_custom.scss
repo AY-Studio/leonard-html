@@ -869,9 +869,13 @@ body:has(.leonard-mega.show) .leonard-mega-backdrop {
 // ---------------------------------------------------------------------------
 
 .leonard-corners {
-  // How far in from the panel edge the ticks sit. A custom property so a
+  // How far in from the panel edge the ticks sit. Custom properties so a
   // full-bleed panel can push them in without restating all four corners.
+  // Inline and block are separate because a panel that insets the ticks
+  // horizontally has to inset them vertically by the same amount, or the "+"
+  // sits far from the sides and almost on the top/bottom edge.
   --leonard-corner-inline: 0.6rem;
+  --leonard-corner-block: 0.4rem;
 
   position: absolute;
   inset: 0;
@@ -918,23 +922,23 @@ body:has(.leonard-mega.show) .leonard-mega-backdrop {
   }
 
   span:nth-child(1) {
-    top: 0.4rem;
+    top: var(--leonard-corner-block);
     left: var(--leonard-corner-inline);
   }
 
   span:nth-child(2) {
-    top: 0.4rem;
+    top: var(--leonard-corner-block);
     right: var(--leonard-corner-inline);
   }
 
   span:nth-child(3) {
-    bottom: 0.4rem;
+    bottom: var(--leonard-corner-block);
     left: var(--leonard-corner-inline);
   }
 
   span:nth-child(4) {
     right: var(--leonard-corner-inline);
-    bottom: 0.4rem;
+    bottom: var(--leonard-corner-block);
   }
 }
 
@@ -965,8 +969,13 @@ body:has(.leonard-mega.show) .leonard-mega-backdrop {
 
 // On a panel that runs to the viewport edge, 0.6rem would leave the ticks
 // almost touching the screen. Line them up with the copy instead.
+//
+// Block matches inline. The "+" is centred in its 1em box, so equal insets give
+// equal visual gaps on all four sides — left at the base 0.4rem the ticks read
+// as pinned to the top and bottom edges while floating well in from the sides.
 .leonard-corners--bleed {
   --leonard-corner-inline: 1.375rem; // == container gutter
+  --leonard-corner-block: var(--leonard-corner-inline);
 
   @include media-breakpoint-up(lg) {
     --leonard-corner-inline: 2.625rem; // 42px, as drawn inside the light rect
@@ -1718,6 +1727,10 @@ html.lenis {
   display: block;
   width: 38px;
   height: 38px;
+  // The box is fixed so every icon occupies the same slot on the rail, but the
+  // supplied assets aren't all exactly square (the hard hat is 38x36) — contain
+  // fits them instead of stretching the frame out of round.
+  object-fit: contain;
   margin-bottom: 1rem; // icon above the title below lg
 }
 

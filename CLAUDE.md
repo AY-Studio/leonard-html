@@ -1,9 +1,18 @@
-# Leonard homepage
+# Leonard site — CLAUDE.md (detailed reference)
 
-Built from `Leonard.fig`. The homepage is complete.
+The full Leonard marketing site (Bootstrap 5.3.8 + Sass + Vite, ~33 pages),
+sourced from the **leonard---relume** Figma and destined for **Statamic CMS**.
+This file is the authoritative, per-component record of every decision, trap and
+pattern — it is long; use it as a reference.
 
-> **Statamic migration:** see `CMS.md` — page types, the page-builder block
-> library, per-component field maps, and which classes are the template hooks.
+> **New session? Start with `SESSION-CONTEXT.md`** — the fast orientation (stack,
+> external libs, SCSS structure, naming/conventions, testing, the `?noanim`
+> switch, current state & active experiments, and a doc index). Then come here
+> for detail.
+>
+> - **`CMS.md`** — the Statamic migration guide (page types, block library,
+>   per-component field maps, template hooks).
+> - **`README.md`** — launch scope (which pages ship; how disabling works).
 
 ## Two Figma files are in play
 

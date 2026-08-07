@@ -356,8 +356,12 @@
         <!-- Boxed light panel (as Figma draws it, inset ~24px): container-xxl
              insets the panel; the section itself stays full-width and carries the
              reveal's opaque clinker fill (.leonard-reveal > :not(...)), so the
-             pinned photo is covered through the new gutters rather than showing. -->
-        <section>
+             pinned photo is covered through the new gutters rather than showing.
+             pt-section gives a clinker gap ABOVE the box equal to the feature
+             section's mt-section below it — so the boxed band no longer butts the
+             photo and its top/bottom spacing match. The pt is padding (inside the
+             clinker fill), so it covers the photo rather than exposing it. -->
+        <section class="pt-section">
           <div class="container-xxl">
             <div
               class="position-relative overflow-hidden bg-light text-dark py-7 py-lg-8 px-4 px-lg-5"
@@ -500,7 +504,7 @@
                    the rest collapsed to their title — initFeatureSteps(). -->
               <div class="leonard-steps">
                 <article class="leonard-step">
-                  <img class="leonard-step__icon" src="/img/icon-deployment.svg" alt="" width="38" height="38" loading="lazy" />
+                  <img class="leonard-step__icon" src="/img/maximum_safety.png" alt="" width="38" height="36" loading="lazy" />
                   <h3 class="leonard-step__title display-5 lh-flat ls-tight text-primary text-uppercase mb-0">
                     Maximum safety
                   </h3>
@@ -539,7 +543,7 @@
                 </article>
 
                 <article class="leonard-step">
-                  <img class="leonard-step__icon" src="/img/icon-visibility.svg" alt="" width="38" height="38" loading="lazy" />
+                  <img class="leonard-step__icon" src="/img/high_productivity.png" alt="" width="38" height="38" loading="lazy" />
                   <h3 class="leonard-step__title display-5 lh-flat ls-tight text-primary text-uppercase mb-0">
                     High productivity
                   </h3>
@@ -552,7 +556,7 @@
                 </article>
 
                 <article class="leonard-step">
-                  <img class="leonard-step__icon" src="/img/icon-deployment.svg" alt="" width="38" height="38" loading="lazy" />
+                  <img class="leonard-step__icon" src="/img/flexibility.png" alt="" width="38" height="38" loading="lazy" />
                   <h3 class="leonard-step__title display-5 lh-flat ls-tight text-primary text-uppercase mb-0">
                     Flexibility to be deployed across the plant
                   </h3>

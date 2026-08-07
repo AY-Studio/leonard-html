@@ -2,9 +2,12 @@
 
 [![Netlify Status](https://api.netlify.com/api/v1/badges/a3a52371-2708-429d-82d4-4557b38f7842/deploy-status)](https://app.netlify.com/projects/leonardglobal/deploys)
 
-Bootstrap 5.3.8 + Sass + Vite static multi-page site. See `CLAUDE.md` for the
-full architecture, component notes, and per-page detail, and **`CMS.md` for the
-Statamic migration guide** (page types, block library, per-component field maps).
+Bootstrap 5.3.8 + Sass + Vite static multi-page site.
+
+**New here?** Start with **`SESSION-CONTEXT.md`** — the fast orientation (stack,
+libraries, SCSS structure, conventions, testing, current state). Then:
+`CLAUDE.md` for full architecture / per-component detail, and **`CMS.md`** for the
+Statamic migration guide (page types, block library, per-component field maps).
 
 ## Commands
 
