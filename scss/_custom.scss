@@ -788,8 +788,11 @@ body:has(.leonard-mega.show) .leonard-mega-backdrop {
 //
 // Scoped to hero overlays: section eyebrows sit in their own space and are
 // already sized per block.
+// Targets the fs-8 (18px) tier specifically — the large eyebrow used by heroes
+// and the statement band. The fs-9/fs-10 eyebrows inside cards and rows are
+// already label-sized and are left alone, so the tiers stay distinct.
 @include media-breakpoint-down(md) {
-  :is(.leonard-scrim, .leonard-hero-scrim) .leonard-eyebrow {
+  .leonard-eyebrow.fs-8 {
     font-size: 0.875rem !important; // 14px
   }
 }
@@ -830,6 +833,31 @@ body:has(.leonard-mega.show) .leonard-mega-backdrop {
 // heading has no competing colour declaration, so this needs no !important.
 .leonard-statement__title {
   color: $leonard-neutral-lightest;
+}
+
+// Statement band on phones.
+//
+// RFS scales display type against the VIEWPORT, but the measure it has to fill
+// shrinks much faster than that. Measured: at 767 the statement is a comfortable
+// 6 lines; by 320 the type has only come down 46px → 33.9px while the column has
+// halved, so it runs to 15 lines. That is what read as "too large" and as a
+// narrow ragged column rather than a block using its full width.
+//
+// So below md the statement leaves the RFS curve and scales on its own, steeper,
+// line: ~20px at 320 and ~23px at 390 (7-8 lines), rising to meet RFS's 46px
+// right at the breakpoint so there is no step at 768.
+//
+// The vertical padding comes down with it — `py-7` put 192px of padding around a
+// 139px block, which is what unbalanced the panel top-to-bottom.
+@include media-breakpoint-down(md) {
+  .leonard-statement {
+    padding-top: 3rem !important; // 48px, beats py-7's utility
+    padding-bottom: 3rem !important;
+  }
+
+  .leonard-statement__title {
+    font-size: clamp(1.25rem, 5.8vw, 2.875rem);
+  }
 }
 
 // ---------------------------------------------------------------------------
@@ -1048,7 +1076,10 @@ body:has(.leonard-mega.show) .leonard-mega-backdrop {
   // horizontally has to inset them vertically by the same amount, or the "+"
   // sits far from the sides and almost on the top/bottom edge.
   --leonard-corner-inline: 0.6rem;
-  --leonard-corner-block: 0.4rem;
+  // Matches the inline inset. The "+" is centred in its 1em box, so equal insets
+  // give equal visual gaps — at the old 0.4rem the ticks sat visibly nearer the
+  // top and bottom edges than the sides, which read as sloppy on a small panel.
+  --leonard-corner-block: var(--leonard-corner-inline);
 
   position: absolute;
   inset: 0;
