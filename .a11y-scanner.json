@@ -1,0 +1,14 @@
+{
+  "outputDir": "a11y/reports",
+  "timeout": 120000,
+  "wait": 1000,
+  "includeWarnings": true,
+  "includeNotices": false,
+  "includeAll": false,
+  "hideElements": [
+    "#cmplz-cookiebanner-container",
+    "#cmplz-manage-consent",
+    ".grecaptcha-badge",
+    "#lightbox"
+  ]
+}

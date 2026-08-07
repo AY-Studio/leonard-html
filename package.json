@@ -10,7 +10,8 @@
   },
   "devDependencies": {
     "sass": "^1.93.2",
-    "vite": "^7.1.7"
+    "vite": "^7.1.7",
+    "wcag-a11y-scanner": "^0.1.15"
   },
   "dependencies": {
     "aos": "^2.3.4",
