@@ -327,14 +327,52 @@ have. Four peer cells for what is really **three links and a sign-off**.
   arrangement, and hanging it on `lg` puts the sign-off *above* the links at the
   widths where it still wraps. Leaving it out gives one rule that holds
   everywhere (copyright always last) and keeps visual order matching DOM order.
-- The copyright is `--bs-secondary-color` + `text-wrap: balance` — muted because
-  it isn't actionable, balanced so a narrow-phone wrap splits evenly instead of
-  orphaning "Reserved".
-- Below `sm` the links go one per row at `padding-block: 0.7rem` → ~43px targets
-  (they were 21px lines of text). **Padding, not `min-height`**: `.leonard-footer
-  a::after` — the hover rule — is pinned to the bottom of the link box, so height
-  alone strands it ~11px below the label. The mobile block therefore also shifts
-  `::after { bottom: calc(0.7rem - 0.08em) }` to keep the two together.
+- The copyright is `--bs-secondary-color` — muted, because it isn't actionable.
+- **The Astutely credit is running text on the end of the copyright line**, not a
+  third link in the `<ul>`. As a peer of Privacy and Terms it read as equal in
+  weight to them, which it isn't. It stays a real link (so it keeps the footer
+  link colour — a link that matches its surrounding text exactly has no cue at
+  all, which is the thing WCAG 1.4.1 is about), just no longer competing.
+
+**Below `md` the strip stacks**: the two policy links on one row separated by a
+muted `|` (`li + li::before`), the copyright on a row of its own beneath. The
+base component's `border-top` still rules the strip off from the wordmark.
+
+- **One size for the whole band**, held in `--leonard-band-fs` on
+  `.leonard-footer-reveal`: strapline, links, pipe and copyright all read at the
+  same weight and can't drift apart when one is retuned. The value is set by the
+  strapline, the longest line and the only one that must not wrap (see the
+  eyebrow note below).
+- **The size goes on the `<ul>`, not the anchors.** The `|` is generated content
+  on the `<li>`, so sizing the anchors leaves the separator rendering at the
+  container's 14px — a half-step heavier than the links it divides. Spacing is in
+  `em` so it tracks the size.
+- Links get `padding-block: 0.35rem` — invisible on a transparent link, but it
+  lifts the target from a ~18px line of text to ~29px, clear of the 24px minimum.
+  **Padding, not a height**: `.leonard-footer a::after` (the hover rule) is
+  pinned to the bottom of the link box, so `::after { bottom }` has to move with
+  it or the rule strands itself below the label.
+- The copyright carries the credit now, so at 66 characters it can't hold one
+  line on a phone — two balanced lines instead.
+
+**An earlier pass boxed the links** — three, then two, bordered cells across the
+row. Rejected: the borders gave two policy links the visual weight of buttons and
+made them the loudest thing under the wordmark. Don't reinstate it.
+- The band size is **fluid, not stepped** — `clamp(0.5625rem, 3.1vw, 0.875rem)`
+  — because the strapline has to hold one line. It is 42 mono characters and the
+  ■ marker adds 1.25em (0.5em wide + 0.75em gap), so the line measures ~26.5em
+  and 320px of content only affords ~10.9px of type. Its `<br class="d-md-none">`
+  is gone. **No `white-space: nowrap`** anywhere here: if a wider fallback face
+  ever overruns, wrapping is a far cheaper failure than overflowing the page.
+- **The wordmark is `w-100` on the container, i.e. content width** — the same
+  left and right edge as the eyebrow above it and the link boxes below it, so
+  the band shares one spine. An earlier pass bled it past the gutters to the
+  screen edge; that broke the alignment and was rejected. Don't reinstate it.
+- Verified at 320/360/390/414/480/575/600/767: strapline on one line, both policy
+  links on one row, all four pieces of band text at an identical computed size,
+  wordmark edges matching the content exactly, zero page overflow. Measured
+  headless, i.e. against the **wider fallback** face — with Input Mono loaded
+  there is more headroom than these numbers show.
 
 #### Earlier takes, and why they went
 
@@ -985,6 +1023,44 @@ to 1px tall inside the flex buttons here. Size with `fs-*` instead.
 `window.FontAwesome` is undefined — neither means the kit is broken. Check the
 `::before` `content` on the `<i>` instead; an unavailable icon resolves to an
 empty string.
+
+## Closing CTA ("Talk to our engineering team") on phones
+
+Two variants of the same lockup — heading, one sentence, two buttons, centred:
+`.leonard-cta--photo` (over a photo, inline in `article` / `case-studies` /
+`industries` / `products` / `services`) and `.leonard-cta--band` (the corner-
+ticked band in `partials/cta.html`). **The photo one is duplicated across five
+pages, not a partial** — change it in all five or it drifts.
+
+On a phone it read as squashed and busy. Four changes, each at the breakpoint
+that fixes what it is for — they deliberately don't share one threshold:
+
+- **Padding and the copy→actions gap are in the markup**, on the Bootstrap scale,
+  because they're spacing decisions: the scrim went `p-4 p-lg-5` →
+  `px-4 py-6 px-lg-5 py-lg-5` (24px → 64px vertical), and the copy `mb-5` →
+  `mb-6 mb-lg-5`. **The `-lg-` halves are load-bearing**: Bootstrap emits every
+  `py-*` after every `p-*`, so a bare `py-6` would beat `p-lg-5` at lg and
+  silently change the desktop band too.
+- **`.leonard-cta__actions` (new hook class) stacks the buttons full width below
+  `sm`.** The pair needs ~374px to sit side by side, so under ~466px they already
+  stacked — but as two centred pills of *different* widths (169 and 189), giving
+  four unaligned edges. Full width gives them one left and one right edge, shared
+  with the copy. **`sm`, not `md`** — from 576 they fit on one row again and a
+  675px-wide button reads as a bug.
+- **`width: 100%` on the actions row itself is required**, not just on the
+  buttons: the photo scrim is a column flex with `align-items-center`, so the row
+  is sized to its content and "full width" would mean the width of the wider
+  button. Claim the column first.
+- **The scrim goes 40% → 62% below `md`.** At 40% the copy sits over hi-vis
+  workwear and lit machinery — legible, but competing for attention the whole way
+  down, which was most of "busy". Below md the lockup fills the frame so there is
+  no uncovered photo left to protect; from md the band is wide enough that 40% is
+  right again. Scoped to `.leonard-cta--photo` — **the heroes use the same
+  `.leonard-scrim` class and must keep their own weighting.**
+
+Verified 390/575/576/767/768/1400 on all five photo pages plus the band variant:
+buttons equal-width and edge-aligned with the copy below 576, the inline pair
+restored above it, desktop pixel-unchanged, zero page overflow.
 
 ## Traps already hit — read before editing
 

@@ -181,12 +181,11 @@
   <div class="leonard-footer-reveal mt-8">
     <div class="leonard-footer-reveal__layer">
       <div class="container-xxl">
-        <!-- Breaks after the "+" on phones, matching the hero eyebrow, so the
-             two lines split on the sense rather than at "+ ROBOTIC / DEMOLITION".
-             The space before the <br> is load-bearing: at md+ the break is
-             display:none and the words would otherwise join. -->
+        <!-- One line at every width. On phones it is the type that gives way,
+             not the line: _custom.scss sizes it fluidly so the whole strapline
+             stays on one row down to 320. -->
         <p class="leonard-eyebrow fw-light fs-7 ls-tight text-uppercase mb-0">
-          Refactory installation + <br class="d-md-none" />robotic demolition
+          Refactory installation + robotic demolition
         </p>
 
         <img
@@ -209,19 +208,25 @@
              fs-10 (14px), not fs-11 (12px): at 12px this sits on a dark band
              in a light weight and reads as blurry rather than small. -->
         <div class="leonard-legal fw-light fs-10 ls-tight mt-3">
-          <!-- The three links are one group, so they are one list. That is the
+          <!-- The policy links are one group, so they are one list. That is the
                whole fix for "disorganised": previously they were peers of the
                copyright in a grid, which is not what they are. -->
           <ul class="leonard-legal__links list-unstyled mb-0">
             <li><a href="/privacy.html">Privacy Policy</a></li>
             <li><a href="/terms.html">Terms &amp; Conditions</a></li>
-            <li><a href="#astutely">Website by Astutely</a></li>
           </ul>
           <!-- Last, at every width: bottom-right when the strip fits on one
                line, on its own line beneath when it wraps. No `order` swap, so
-               visual order matches DOM order. -->
+               visual order matches DOM order.
+
+               The Astutely credit is running text on the end of this line, not
+               a peer of the policy links — as a third box it read as equal in
+               weight to Privacy and Terms, which it isn't. Sentence-final, at
+               fine-print size, it is still a link and still reachable, just no
+               longer competing. -->
           <p class="leonard-legal__copy mb-0">
-            Copyright © 2026 Leonard — All Rights Reserved
+            Copyright © 2026 Leonard — All Rights Reserved.
+            <a href="#astutely">Website by Astutely</a>
           </p>
         </div>
       </div>

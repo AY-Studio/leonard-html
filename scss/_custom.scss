@@ -1296,6 +1296,59 @@ body:has(.leonard-mega.show) .leonard-mega-backdrop {
   background: rgba(#000, 0.4);
 }
 
+// ---------------------------------------------------------------------------
+// Closing CTA on phones
+// ---------------------------------------------------------------------------
+// The photo CTA is a centred lockup — heading, a sentence, two buttons — over a
+// full-bleed photo. On a phone all three stack into a narrow column and it read
+// as squashed and busy: 24px of padding against the photo edges, and two
+// auto-width buttons centred one above the other, so their left and right edges
+// disagreed with each other and with everything above them.
+//
+// Padding and the copy/action gap are handled in the markup (`py-6`, `mb-6`,
+// both reverted at lg) because they are spacing decisions and this project keeps
+// those on the Bootstrap scale. What can't be said in a utility is here.
+// Full width and stacked, on phones only. The pair needs ~374px to sit side by
+// side, so below ~466px they were already stacking — but as two centred pills of
+// different widths (169 and 189), which put four different edges between them
+// and none of them aligned to the copy above. Full width gives the pair one left
+// and one right edge, shared with the heading and the sentence.
+//
+// `sm`, not `md`: from 576 up they fit on one row again, and a 675px-wide button
+// at the top of the tablet range looks like a mistake rather than a decision.
+//
+// `flex-direction` alone would do it — flex items blockify and the default
+// `align-items: stretch` fills the cross axis — but the widths are stated so the
+// intent survives anyone adding an `align-items-*` utility to the row.
+@include media-breakpoint-down(sm) {
+  .leonard-cta__actions {
+    // The photo CTA's scrim is a column flex with `align-items-center`, so this
+    // row is sized to its content — without a width the buttons would go "full
+    // width" of the widest button and nothing would change. It has to claim the
+    // column first, then the buttons can fill it.
+    width: 100%;
+    flex-direction: column;
+    align-items: stretch;
+
+    .btn {
+      justify-content: center; // the buttons are d-inline-flex; centre the label
+      width: 100%;
+    }
+  }
+}
+
+// A heavier wash. At 40% the copy sits over hi-vis workwear and lit machinery —
+// legible, but the photo competes with it for attention the whole way down,
+// which is most of what "busy" was. Below md the lockup covers nearly the whole
+// frame, so there is no uncovered part of the photo left to protect; from md the
+// band is wide enough that the copy no longer fills it and 40% is right again.
+// Scoped to the CTA — the heroes keep their own weighting.
+@include media-breakpoint-down(md) {
+  .leonard-cta--photo .leonard-scrim {
+    background: rgba(#000, 0.62);
+  }
+}
+
 // Homepage hero scrim — weighted to the bottom-left where the copy sits, rather
 // than the flat 40% wash. Two stacked gradients: a strong bottom fade that
 // darkens the headline zone, plus a lighter left fade — so the corner behind the
@@ -2969,33 +3022,44 @@ $leonard-rail-gap: 6.2vw;
 // 137px, nearly THREE TIMES taller than the logo. The hierarchy inverts: the
 // fine print becomes the biggest thing in the closing statement.
 //
-// Two moves here: let the wordmark run edge to edge so it reads as deliberate,
-// and drop the eyebrow so it stops out-weighing it. The legal strip below it is
-// its own component — see .leonard-legal.
+// The fix is to shrink what surrounds it rather than to blow the wordmark up:
+// the eyebrow comes down off heading scale so it stops out-weighing the logo,
+// and the legal block below collapses from a stack into one boxed row. The
+// wordmark itself stays `w-100` on the container — i.e. exactly the width of the
+// eyebrow above it and the link boxes below it — so the whole band shares one
+// left and right edge. (An earlier pass bled it past the gutters to the screen
+// edge; that broke the alignment and is not wanted.)
+//
+// The legal strip is its own component — see .leonard-legal.
 @include media-breakpoint-down(md) {
   .leonard-footer-reveal {
-    // A narrower gutter for this band only. 22px each side is a desktop measure
-    // and it cost the copyright a second line — the string needs 340px and a
-    // 329px column forced it to wrap. 16px yields 358 and it sits on one line,
-    // which is a better fix than shrinking the type again. It also brings the
-    // copy closer to the edge-to-edge wordmark, so the block reads as one unit.
+    // ONE fluid size for every piece of text in the band — strapline, policy
+    // links, pipe and copyright all read at the same weight, and none of them
+    // can drift out of step with the others when one is retuned.
+    //
+    // It is set by the strapline, which is the longest single line here and the
+    // only one that must not wrap: 42 characters in a mono face plus the ■
+    // marker's 1.25em (0.5em wide + 0.75em gap) measures ~26.5em, so 320px of
+    // content affords ~10.9px. 3.1vw stays under that at every width and caps at
+    // the 14px the band used before.
+    --leonard-band-fs: clamp(0.5625rem, 3.1vw, 0.875rem);
+
+    // A narrower gutter for this band only: 22px each side is a desktop measure,
+    // and the 44px it costs is the difference between a line of this fitting and
+    // wrapping. Everything in the band — strapline, wordmark, links, copyright —
+    // is measured to this width.
     .container-xxl {
       --bs-gutter-x: 2rem;
     }
 
     // 20px was heading scale, and it wrapped to two lines — taller than the
-    // wordmark it introduces.
+    // wordmark it introduces. `!important` because `fs-7` is a utility. No
+    // `nowrap`: if a wider fallback face ever overruns the line, wrapping is a
+    // much cheaper failure than overflowing the page.
     .leonard-eyebrow {
-      font-size: 0.875rem !important; // 14px
+      font-size: var(--leonard-band-fs) !important;
     }
 
-    // Edge to edge, past the container gutters. `calc(100% + gutter)` rather
-    // than `100vw` so a scrollbar can never make it overflow the page.
-    .leonard-footer-reveal__layer img {
-      width: calc(100% + var(--bs-gutter-x, 2.75rem)) !important;
-      max-width: none;
-      margin-inline: calc(var(--bs-gutter-x, 2.75rem) / -2);
-    }
   }
 }
 
@@ -3054,33 +3118,58 @@ $leonard-rail-gap: 6.2vw;
 // last, bottom-right when the strip is on one line and bottom-centre-left when
 // it wraps — and keeps visual order matching DOM order for assistive tech.
 //
-// Phones: one link per row rather than a ragged two-then-one wrap. That matches
-// the accordion directly above — a stack of full-width rows — and it turns each
-// link from a 21px line of text into a ~44px touch target.
-@include media-breakpoint-down(sm) {
+// Phones and small tablets: the two policy links sit on one row separated by a
+// pipe, and the copyright — which carries the Astutely credit — takes a row of
+// its own beneath. The base component's hairline still rules the strip off from
+// the wordmark above.
+//
+// Breakpoint matches the rest of the band's phone treatment (the narrowed
+// gutter, the fluid eyebrow) so the whole block changes form at one width
+// rather than three.
+@include media-breakpoint-down(md) {
   .leonard-legal {
-    gap: 0;
+    display: block; // links row, then copyright row — nothing shares a line
 
+    // Plain text links with a pipe between them. Boxed, they carried the visual
+    // weight of buttons — far more than two policy links warrant, and it made
+    // them the loudest thing under the wordmark. The pipe is muted so it
+    // separates without competing.
+    // Sized on the <ul>, not on the links, so the `|` — which is generated
+    // content on the <li> — takes the band size too. Set it on the anchors and
+    // the separator is left rendering at the container's 14px, a half-step
+    // heavier than the links it divides. Spacing in `em` so it tracks the size.
     &__links {
-      display: block;
-      width: 100%;
-    }
+      gap: 0.5em;
+      font-size: var(--leonard-band-fs);
 
-    // Padding rather than min-height, because `.leonard-footer a::after` — the
-    // hover rule — is pinned to the bottom of the link box. Height alone would
-    // strand it 11px below the label; padding moves the box and the offset
-    // together, so the rule still sits under the text.
-    &__links a {
-      display: inline-block;
-      padding-block: 0.7rem;
-
-      &::after {
-        bottom: calc(0.7rem - 0.08em);
+      li + li::before {
+        margin-right: 0.5em;
+        color: var(--bs-secondary-color);
+        content: "|";
       }
     }
 
+    // Vertical padding is invisible on a transparent link but lifts the target
+    // from a ~18px line of text to ~29px, clear of the 24px minimum. Padding
+    // rather than a height, because `.leonard-footer a::after` — the hover rule
+    // — is pinned to the bottom of the link box, so the offset has to move with
+    // it or the rule strands itself below the label.
+    &__links a {
+      display: inline-block;
+      padding-block: 0.35rem;
+
+      &::after {
+        bottom: calc(0.35rem - 0.08em);
+      }
+    }
+
+    // Its own row beneath the links. It carries the Astutely credit now, so at
+    // 66 characters it is too long to hold one line on a phone — it takes two
+    // balanced lines instead. Left-aligned, keeping the band's left spine with
+    // the wordmark and strapline.
     &__copy {
-      margin-top: 0.75rem;
+      margin-top: 0.875rem;
+      font-size: var(--leonard-band-fs);
     }
   }
 }
