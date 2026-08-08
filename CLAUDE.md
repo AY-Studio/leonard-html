@@ -305,6 +305,37 @@ file has. It is `shade-color($leonard-dk-grey, 35%)` (`#00181b`), derived rather
 than hand-picked so it tracks if dk grey is ever corrected. Worth confirming with
 the designer.
 
+#### Legal strip (`.leonard-legal`) — do not put it back on the grid
+
+The copyright + policy links under the wordmark are a **wrapping flex strip, not
+a `.row`**, and that is load-bearing. As four `col-lg-3`/`col-sm-6` cells the
+items' natural widths (140–400px) fought the equal quarters: ~200px holes opened
+between the short links, the copyright — the longest string and the only
+non-link — was the one forced to wrap, and at `sm` it folded into a 2×2 that read
+across as "copyright | privacy / terms | website by", the zig-zag of a broken
+table. A `pe-lg-0` fudge existed purely to buy the copyright 22px it still didn't
+have. Four peer cells for what is really **three links and a sign-off**.
+
+- The three links are **one group, so they are one `<ul>`** (`__links`). That
+  grouping is the whole fix; the layout follows from it.
+- Both children sit in a `flex-wrap` row with `justify-content: space-between`,
+  so each takes its content width and the strip folds by itself. **No breakpoint
+  maths to re-measure** when the copy or the font changes.
+- **There is deliberately no `order` swap** to put the copyright left on desktop.
+  The strip starts fitting on one line at ~1050px — a value that drifts with the
+  font — so hanging the swap on `xl` splits 1050–1199 off into a different
+  arrangement, and hanging it on `lg` puts the sign-off *above* the links at the
+  widths where it still wraps. Leaving it out gives one rule that holds
+  everywhere (copyright always last) and keeps visual order matching DOM order.
+- The copyright is `--bs-secondary-color` + `text-wrap: balance` — muted because
+  it isn't actionable, balanced so a narrow-phone wrap splits evenly instead of
+  orphaning "Reserved".
+- Below `sm` the links go one per row at `padding-block: 0.7rem` → ~43px targets
+  (they were 21px lines of text). **Padding, not `min-height`**: `.leonard-footer
+  a::after` — the hover rule — is pinned to the bottom of the link box, so height
+  alone strands it ~11px below the label. The mobile block therefore also shifts
+  `::after { bottom: calc(0.7rem - 0.08em) }` to keep the two together.
+
 #### Earlier takes, and why they went
 
 All were measured off `enerblock.net/en`, whose footer runs `.footer__parallax`

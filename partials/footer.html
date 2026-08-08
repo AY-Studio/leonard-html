@@ -181,8 +181,12 @@
   <div class="leonard-footer-reveal mt-8">
     <div class="leonard-footer-reveal__layer">
       <div class="container-xxl">
+        <!-- Breaks after the "+" on phones, matching the hero eyebrow, so the
+             two lines split on the sense rather than at "+ ROBOTIC / DEMOLITION".
+             The space before the <br> is load-bearing: at md+ the break is
+             display:none and the words would otherwise join. -->
         <p class="leonard-eyebrow fw-light fs-7 ls-tight text-uppercase mb-0">
-          Refactory installation + robotic demolition
+          Refactory installation + <br class="d-md-none" />robotic demolition
         </p>
 
         <img
@@ -194,23 +198,31 @@
           height="259"
         />
 
-        <!-- fs-10 (14px), not fs-11 (12px): at 12px this row sits on a dark band
+        <!-- Legal strip. Deliberately NOT a .row: the four items' natural
+             widths run 140–400px, so equal quarter-columns left 200px holes
+             between the short links while the copyright — the longest string
+             and the least important — wrapped onto a second line, and at sm
+             they zig-zagged as a 2x2. It is a wrapping flex strip instead,
+             which sizes each item to its content and folds by itself. See
+             .leonard-legal in _custom.scss.
+
+             fs-10 (14px), not fs-11 (12px): at 12px this sits on a dark band
              in a light weight and reads as blurry rather than small. -->
-        <div class="row gy-2 fw-light fs-10 ls-tight mt-3">
-          <!-- pe-lg-0: at 14px this line needs 397px and a quarter-column gives
-               388. Dropping only its right gutter yields 410 without moving any
-               column's content edge, so the row still aligns to the nav columns
-               above. The next item starts 35px clear. -->
-          <div class="col-12 col-sm-6 col-lg-3 pe-lg-0">
+        <div class="leonard-legal fw-light fs-10 ls-tight mt-3">
+          <!-- The three links are one group, so they are one list. That is the
+               whole fix for "disorganised": previously they were peers of the
+               copyright in a grid, which is not what they are. -->
+          <ul class="leonard-legal__links list-unstyled mb-0">
+            <li><a href="/privacy.html">Privacy Policy</a></li>
+            <li><a href="/terms.html">Terms &amp; Conditions</a></li>
+            <li><a href="#astutely">Website by Astutely</a></li>
+          </ul>
+          <!-- Last, at every width: bottom-right when the strip fits on one
+               line, on its own line beneath when it wraps. No `order` swap, so
+               visual order matches DOM order. -->
+          <p class="leonard-legal__copy mb-0">
             Copyright © 2026 Leonard — All Rights Reserved
-          </div>
-          <div class="col-12 col-sm-6 col-lg-3"><a href="/privacy.html">Privacy Policy</a></div>
-          <div class="col-12 col-sm-6 col-lg-3">
-            <a href="/terms.html">Terms &amp; Conditions</a>
-          </div>
-          <div class="col-12 col-sm-6 col-lg-3">
-            <a href="#astutely">Website by Astutely</a>
-          </div>
+          </p>
         </div>
       </div>
     </div>

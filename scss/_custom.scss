@@ -2960,6 +2960,131 @@ $leonard-rail-gap: 6.2vw;
   background: $leonard-dk-grey-deep;
 }
 
+// ---------------------------------------------------------------------------
+// The band on phones
+// ---------------------------------------------------------------------------
+// On desktop the wordmark IS this band: 212px of a 428px band, half its height.
+// On a phone the same `w-100` lockup is only 51px — it is a 6.5:1 shape, so its
+// height is dictated by the screen width — while the legal block below stacks to
+// 137px, nearly THREE TIMES taller than the logo. The hierarchy inverts: the
+// fine print becomes the biggest thing in the closing statement.
+//
+// Two moves here: let the wordmark run edge to edge so it reads as deliberate,
+// and drop the eyebrow so it stops out-weighing it. The legal strip below it is
+// its own component — see .leonard-legal.
+@include media-breakpoint-down(md) {
+  .leonard-footer-reveal {
+    // A narrower gutter for this band only. 22px each side is a desktop measure
+    // and it cost the copyright a second line — the string needs 340px and a
+    // 329px column forced it to wrap. 16px yields 358 and it sits on one line,
+    // which is a better fix than shrinking the type again. It also brings the
+    // copy closer to the edge-to-edge wordmark, so the block reads as one unit.
+    .container-xxl {
+      --bs-gutter-x: 2rem;
+    }
+
+    // 20px was heading scale, and it wrapped to two lines — taller than the
+    // wordmark it introduces.
+    .leonard-eyebrow {
+      font-size: 0.875rem !important; // 14px
+    }
+
+    // Edge to edge, past the container gutters. `calc(100% + gutter)` rather
+    // than `100vw` so a scrollbar can never make it overflow the page.
+    .leonard-footer-reveal__layer img {
+      width: calc(100% + var(--bs-gutter-x, 2.75rem)) !important;
+      max-width: none;
+      margin-inline: calc(var(--bs-gutter-x, 2.75rem) / -2);
+    }
+  }
+}
+
+// ---------------------------------------------------------------------------
+// Legal strip — policy links + copyright
+// ---------------------------------------------------------------------------
+// This was a four-column `.row`, which is the wrong tool for it. The items'
+// natural widths run 140–400px, so equal quarters left ~200px holes between the
+// short links while the copyright — the longest string, and the only one that
+// isn't a link — was the one forced to wrap. At sm the same grid folded to a
+// 2x2 that read across as "copyright | privacy / terms | website by", i.e. the
+// zig-zag of a broken table. Four peer cells for three links and a sign-off.
+//
+// So: the links are one group (one <ul>), the copyright is separate, and both
+// sit in a wrapping flex row. Each item takes its content width and the strip
+// folds on its own when the viewport can't hold it — there is no column maths
+// to re-measure when the copy or the font changes, which is what the old
+// `pe-lg-0` fudge existed to patch.
+.leonard-legal {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem 2.5rem;
+
+  // Sets the fine print apart from the wordmark above it — the same hairline
+  // the footer accordion and the case rows use.
+  padding-top: 1.25rem;
+  border-top: 1px solid rgba($leonard-lt-grey, 0.2);
+
+  &__links {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.25rem 2.5rem;
+  }
+
+  // Not actionable, so it shouldn't sit at link weight — muted, it reads as the
+  // sign-off rather than a fourth link. `balance` so that if it does wrap on a
+  // narrow phone it splits into two even lines instead of orphaning "Reserved".
+  &__copy {
+    color: var(--bs-secondary-color);
+    text-wrap: balance;
+  }
+}
+
+// NB: there is deliberately no breakpoint that swaps the copyright to the left.
+// The conventional desktop arrangement is copyright-left / links-right, but the
+// swap can only be hung off a width, and the strip starts fitting on one line at
+// ~1050px — a value that moves with the copy and the font, i.e. the same thing
+// that had to be re-measured before. Hang it on xl and 1050–1199 gets one
+// arrangement while 1200+ gets another; hang it on lg and the sign-off lands
+// ABOVE the links on the widths where the strip still wraps.
+//
+// Leaving it out gives one rule that holds everywhere — the copyright is always
+// last, bottom-right when the strip is on one line and bottom-centre-left when
+// it wraps — and keeps visual order matching DOM order for assistive tech.
+//
+// Phones: one link per row rather than a ragged two-then-one wrap. That matches
+// the accordion directly above — a stack of full-width rows — and it turns each
+// link from a 21px line of text into a ~44px touch target.
+@include media-breakpoint-down(sm) {
+  .leonard-legal {
+    gap: 0;
+
+    &__links {
+      display: block;
+      width: 100%;
+    }
+
+    // Padding rather than min-height, because `.leonard-footer a::after` — the
+    // hover rule — is pinned to the bottom of the link box. Height alone would
+    // strand it 11px below the label; padding moves the box and the offset
+    // together, so the rule still sits under the text.
+    &__links a {
+      display: inline-block;
+      padding-block: 0.7rem;
+
+      &::after {
+        bottom: calc(0.7rem - 0.08em);
+      }
+    }
+
+    &__copy {
+      margin-top: 0.75rem;
+    }
+  }
+}
+
 @media (prefers-reduced-motion: no-preference) {
   @supports (animation-timeline: view()) {
     .leonard-footer-reveal {
